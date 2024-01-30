@@ -6,14 +6,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 class WelcomeController {
-    //testing testing againhjj
+
     @GetMapping("/")
     public String welcome() {
-        return "Hello and welcome to COMS 309 CySplore will be the best App!!!";
+        return "Hello and welcome to COMS 309. Go to http://localhost:8080/yipee";
     }
 
     @GetMapping("/{name}")
     public String welcome(@PathVariable String name) {
-        return "Hello and welcome to COMS 309, this person is the best------> " + name;
+        return "Hello and welcome to COMS 309: " + name;
+    }
+
+    @GetMapping("/yippee")
+    public String yippee() {
+        return "YYYYIIIIIIIIIPPPPPPPPPPPPEEEEEEEEEEEEE!!!!!!!!!";
     }
 }
