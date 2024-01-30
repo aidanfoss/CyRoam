@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 class WelcomeController {
-
+    //testing
     @GetMapping("/")
     public String welcome() {
         return "Hello and welcome to COMS 309 CySplore will be the best App!!!";
