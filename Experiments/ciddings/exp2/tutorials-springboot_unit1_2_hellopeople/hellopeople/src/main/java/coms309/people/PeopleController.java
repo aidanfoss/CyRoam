@@ -72,8 +72,18 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
     @PutMapping("/people/{firstName}")
-    public Person updatePerson(@PathVariable String firstName, Person p) {
+    public Person updatePerson(@PathVariable String firstName, String lastName, String address, String telephone, Person p) {
         peopleList.replace(firstName, p);
+        if (lastName != null) {
+            peopleList.replace(lastName, p);
+        }
+        System.out.println(lastName);
+        if (address != null) {
+            peopleList.replace(address, p);
+        }
+        if (telephone != null) {
+            peopleList.replace(telephone, p);
+        }
         return peopleList.get(firstName);
     }
 
@@ -87,6 +97,12 @@ public class PeopleController {
     public HashMap<String, Person> deletePerson(@PathVariable String firstName) {
         peopleList.remove(firstName);
         return peopleList;
+    }
+
+    @DeleteMapping("/people/all")
+    public String deleteAllPeople() {
+        peopleList = new HashMap<>();
+        return "Success";
     }
 }
 
