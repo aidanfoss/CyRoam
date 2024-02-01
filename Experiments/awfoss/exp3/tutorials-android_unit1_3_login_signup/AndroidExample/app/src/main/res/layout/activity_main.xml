@@ -11,52 +11,53 @@
         android:id="@+id/main_msg_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:text="Home Page"
-        android:layout_gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="50dp"
-        android:textSize="30dp"
-        android:textColor="#fc0303">
-    </TextView>
+        android:textColor="#fc0303"
+        android:textSize="20sp"
+        android:visibility="visible"
+        tools:visibility="visible"></TextView>
 
     <TextView
         android:id="@+id/main_username_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="{{username}}"
-        android:layout_gravity="center"
+        android:layout_gravity="center|top"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="100dp"
-        android:textSize="30dp"
-        android:textColor="#000000">
-    </TextView>
-
-
+        android:layout_marginBottom="10dp"
+        android:text="{{username}}"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:visibility="visible"
+        tools:visibility="visible"></TextView>
     <Button
         android:id="@+id/main_login_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Login"
-        android:textSize="20sp"
-        android:textColor="#ffffff">
-    </Button>
-
+        android:textSize="20sp"></Button>
     <Button
         android:id="@+id/main_signup_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Signup"
-        android:textSize="20sp"
-        android:textColor="#ffffff">
-    </Button>
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
+        android:text="Sign Up"
+        android:textSize="20sp"></Button>
+    <Button
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        android:layout_gravity="center"
+        android:text="Show Map"
+        android:textSize="20sp"
+        android:id="@+id/showMap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></Button>
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
