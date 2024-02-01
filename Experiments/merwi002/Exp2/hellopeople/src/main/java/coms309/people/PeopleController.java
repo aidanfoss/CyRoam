@@ -46,7 +46,7 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To CREATE we use POST method
     @PostMapping("/people")
-    public  String createPerson(Person person) {
+    public  String createPerson(@RequestBody Person person) {
         System.out.println(person);
         peopleList.put(person.getFirstName(), person);
         return "New person "+ person.getFirstName() + " Saved";
@@ -72,7 +72,7 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
     @PutMapping("/people/{firstName}")
-    public Person updatePerson(@PathVariable String firstName, Person p) {
+    public Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
         peopleList.replace(firstName, p);
         return peopleList.get(firstName);
     }
@@ -82,11 +82,12 @@ public class PeopleController {
     // We return the entire list -- converted to JSON
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
-    
+
     @DeleteMapping("/people/{firstName}")
     public HashMap<String, Person> deletePerson(@PathVariable String firstName) {
         peopleList.remove(firstName);
         return peopleList;
     }
 }
+
 
