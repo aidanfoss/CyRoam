@@ -87,6 +87,7 @@ public class PeopleController {
         return peopleList.get(points);
     }
 
+
     //returns just information on points
     @GetMapping("/people/{firstName}/getPoints")
     public String getPoints(@PathVariable String firstName) {
