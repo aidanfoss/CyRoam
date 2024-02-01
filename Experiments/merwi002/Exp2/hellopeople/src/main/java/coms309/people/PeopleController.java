@@ -53,6 +53,7 @@ public class PeopleController {
     }
 
 
+
     // THIS IS THE READ OPERATION
     // Springboot gets the PATHVARIABLE from the URL
     // We extract the person from the HashMap.
@@ -76,6 +77,21 @@ public class PeopleController {
     public Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
         peopleList.replace(firstName, p);
         return peopleList.get(firstName);
+    }
+
+    //put method to update points
+    @PutMapping("/people/{firstName}/givePoints/{points}")
+    public Person updatePoints(@PathVariable String points,@PathVariable String firstName) {
+        Person s = peopleList.get(firstName);
+        s.setPoints(points);
+        return peopleList.get(points);
+    }
+
+    //returns just information on points
+    @GetMapping("/people/{firstName}/getPoints")
+    public String getPoints(@PathVariable String firstName) {
+        Person p = peopleList.get(firstName);
+        return p.getPoints();
     }
 
     // THIS IS THE DELETE OPERATION
