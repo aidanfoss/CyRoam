@@ -73,10 +73,18 @@ public class PeopleController {
     // Here we are returning what we sent to the method
     // in this case because of @ResponseBody
     // Note: To UPDATE we use PUT method
-    @PutMapping("/people/{firstName}")
-    public Person updatePerson(@PathVariable String firstName, @RequestBody Person p) {
-        peopleList.replace(firstName, p);
-        return peopleList.get(firstName);
+
+    //added a password requirement if you want to update
+    @PutMapping("/people/{firstName}/{password}")
+    public Person updatePerson(@PathVariable String firstName, @PathVariable String password, @RequestBody Person p) {
+        Person s = peopleList.get(firstName);
+        if (password.equals(s.getPassword())) {
+            peopleList.replace(firstName, p);
+            return peopleList.get(firstName);
+        }
+        else{
+            return null;
+        }
     }
 
     //put method to update points

@@ -19,18 +19,20 @@ public class Person {
 
     private String points;
 
+    private String password;
 
 
     public Person(){
         
     }
 
-    public Person(String firstName, String lastName, String address, String telephone, String points){
+    public Person(String firstName, String lastName, String address, String telephone, String points,String password ){
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.telephone = telephone;
         this.points = points;
+        this.password = password;
 
     }
 
@@ -71,6 +73,14 @@ public class Person {
 
     public void setPoints(String points) {
         this.points = points;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
