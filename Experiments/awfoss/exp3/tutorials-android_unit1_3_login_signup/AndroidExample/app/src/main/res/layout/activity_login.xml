@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".MainActivity"
@@ -28,10 +28,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username: "
-            android:textSize="20dp"
-            android:textColor="#000000">
-        </TextView>
+            android:text="user: "
+            android:textColor="#000000"
+            android:textSize="20dp"></TextView>
 
         <EditText
             android:id="@+id/login_username_edt"
@@ -75,13 +74,12 @@
 
         <Button
             android:id="@+id/login_login_btn"
-            android:layout_width="150dp"
+            android:layout_width="139dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:text="Login"
-            android:textSize="20sp"
-            android:textColor="#ffffff">
-        </Button>
+            android:textColor="#ffffff"
+            android:textSize="20sp"></Button>
 
         <Button
             android:id="@+id/login_signup_btn"
@@ -94,6 +92,12 @@
         </Button>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
