@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 class WelcomeController {
 
+    //Changed welcome message to encourage users to go to yippee page
     @GetMapping("/")
     public String welcome() {
-        return "Hello and welcome to COMS 309. Go to http://localhost:8080/yipee";
+        return "Hello and welcome to COMS 309. Go to http://localhost:8080/yippee";
     }
 
     @GetMapping("/{name}")
@@ -17,6 +18,7 @@ class WelcomeController {
         return "Hello and welcome to COMS 309: " + name;
     }
 
+    //Added new page that says yippee
     @GetMapping("/yippee")
     public String yippee() {
         return "YYYYIIIIIIIIIPPPPPPPPPPPPEEEEEEEEEEEEE!!!!!!!!!";

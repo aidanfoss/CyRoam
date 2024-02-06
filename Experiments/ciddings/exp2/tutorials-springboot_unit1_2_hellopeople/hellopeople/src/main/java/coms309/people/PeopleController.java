@@ -74,6 +74,9 @@ public class PeopleController {
     @PutMapping("/people/{firstName}")
     public Person updatePerson(@PathVariable String firstName, String lastName, String address, String telephone, Person p) {
         peopleList.replace(firstName, p);
+
+        //Added code to allow for editing of one variable at a time. Previously, if only one variable was provided,
+        //the rest would be set to null.
         if (lastName != null) {
             peopleList.replace(lastName, p);
         }
@@ -99,6 +102,7 @@ public class PeopleController {
         return peopleList;
     }
 
+    //Deletes all people
     @DeleteMapping("/people/all")
     public String deleteAllPeople() {
         peopleList = new HashMap<>();
