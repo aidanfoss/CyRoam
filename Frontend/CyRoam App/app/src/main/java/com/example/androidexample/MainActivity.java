@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.main_login_btn);    // link to login button in the Main activity XML
         signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
 
+
         showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
