@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView usernameText;  // define username textview variable
 
     private Button showMap;
-    private Button loginButton;     // define login button variable
-    private Button signupButton;    // define signup button variable
+//    private Button loginButton;     // define login button variable
+//    private Button signupButton;    // define signup button variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,7 @@ public class MainActivity extends AppCompatActivity {
         messageText = findViewById(R.id.main_msg_txt);      // link to message textview in the Main activity XML
         usernameText = findViewById(R.id.main_username_txt);// link to username textview in the Main activity XML
         showMap = findViewById(R.id.showMap);
-        loginButton = findViewById(R.id.main_login_btn);    // link to login button in the Main activity XML
-        signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
+        
 
 
         //TODO correctly ask for location permissions on load
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //TODO move showmap listener to login screen
-            showMap.setOnClickListener(new View.OnClickListener() {
+        showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
@@ -79,31 +78,18 @@ public class MainActivity extends AppCompatActivity {
             //signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
         }
 
-
-        //TODO automatically transition to login screen, having to prompt to login seems pointless.
-        //have signup button be an option on the login screen.
-        /* click listener on login button pressed */
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /* when login button is pressed, use intent to switch to Login Activity */
-               Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        /* click listener on signup button pressed */
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /* when signup button is pressed, use intent to switch to Signup Activity */
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
-        });
+        //Moves to login screen automatically
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
 
 //
     }
 }
+
+
+/* PSEUDOCODE
+oncreate
+    link to mainactivity xml
+    ask for ANDROID_ACCESS_FINE_POSITION permissions
+    move to login screen
+*/
