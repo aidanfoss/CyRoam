@@ -22,6 +22,11 @@ import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    //TODO establish user object to determine what they can and cant do
+    //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
+    //TODO establish pointOfInterest object to allow easier passing of pins
+    //(lat, long, name, desc, unique image??, etc)
+
     GoogleMap gMap;
     FrameLayout map;
     @SuppressLint("MissingInflatedId")
