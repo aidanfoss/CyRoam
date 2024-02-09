@@ -35,7 +35,30 @@ public class MainActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.main_signup_btn);  // link to signup button in the Main activity XML
 
 
-        showMap.setOnClickListener(new View.OnClickListener() {
+        //TODO correctly ask for location permissions on load
+//        private void getLocationPermission() {
+//            /*
+//             * Request location permission, so that we can get the location of the
+//             * device. The result of the permission request is handled by a callback,
+//             * onRequestPermissionsResult.
+//             */
+//            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+//                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                locationPermissionGranted = true;
+//            } else {
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+//                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+//            }
+//        }         GOOGLE RECOMMENDS DOING THIS. at the moment, i have it set to allow fine location
+//                  regardless, but this is needed if we ever deploy to an actual android phone.
+//                  if uncommented, would be broken and unusable. https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
+
+
+
+        //TODO move showmap listener to login screen
+            showMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
@@ -43,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //TODO determine if this is important for later use. Might be useful in the progress screen later
         /* extract data passed into this activity from another activity */
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
@@ -56,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
             //signupButton.setVisibility(View.INVISIBLE);             // set signup button invisible
         }
 
+
+        //TODO automatically transition to login screen, having to prompt to login seems pointless.
+        //have signup button be an option on the login screen.
         /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,24 +104,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        private void getLocationPermission() {
-//            /*
-//             * Request location permission, so that we can get the location of the
-//             * device. The result of the permission request is handled by a callback,
-//             * onRequestPermissionsResult.
-//             */
-//            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                    android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                    == PackageManager.PERMISSION_GRANTED) {
-//                locationPermissionGranted = true;
-//            } else {
-//                ActivityCompat.requestPermissions(this,
-//                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-//                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-//            }
-//        }         GOOGLE RECOMMENDS DOING THIS. at the moment, i have it set to allow fine location
-//                  regardless, but this is needed if we ever deploy to an actual android phone.
-//                  if uncommented, would be broken and unusable. https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
-
+//
     }
 }
