@@ -10,13 +10,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login Example"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="150dp"
-        android:textSize="30dp"
-        android:textColor="#fc0303">
-    </TextView>
+        android:autoText="false"
+        android:text="Login"
+        android:textColor="#000000"
+        android:textSize="80sp"></TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="user: "
+            android:text="username: "
             android:textColor="#000000"
             android:textSize="20dp"></TextView>
 
