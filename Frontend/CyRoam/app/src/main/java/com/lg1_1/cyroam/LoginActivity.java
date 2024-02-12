@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                 intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
                 startActivity(intent);  // go to MainActivity with the key-value data
@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 /* when signup button is pressed, use intent to switch to Signup Activity */
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);  // go to SignupActivity
