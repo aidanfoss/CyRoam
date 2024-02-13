@@ -101,6 +101,8 @@ public class PeopleController {
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
 
+    //test
+
     @DeleteMapping("/people/{firstName}")
     public HashMap<String, Person> deletePerson(@PathVariable String firstName) {
         peopleList.remove(firstName);
