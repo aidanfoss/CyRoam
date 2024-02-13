@@ -1,8 +1,11 @@
 package com.example.androidexample;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -73,5 +76,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+//        private void getLocationPermission() {
+//            /*
+//             * Request location permission, so that we can get the location of the
+//             * device. The result of the permission request is handled by a callback,
+//             * onRequestPermissionsResult.
+//             */
+//            if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+//                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                locationPermissionGranted = true;
+//            } else {
+//                ActivityCompat.requestPermissions(this,
+//                        new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+//                        PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+//            }
+//        }         GOOGLE RECOMMENDS DOING THIS. at the moment, i have it set to allow fine location
+//                  regardless, but this is needed if we ever deploy to an actual android phone.
+//                  if uncommented, would be broken and unusable. https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
+
     }
 }
