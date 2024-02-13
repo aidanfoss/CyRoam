@@ -13,7 +13,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
     private Button loginButton;         // define login button variable
-    private Button signupButton;        // define signup button variable
+
+    //private Button signupButton;        // TODO define signup button variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
