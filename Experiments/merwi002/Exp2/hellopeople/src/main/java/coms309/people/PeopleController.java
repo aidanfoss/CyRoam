@@ -97,7 +97,8 @@ public class PeopleController {
 
     // THIS IS THE DELETE OPERATION
     // Springboot gets the PATHVARIABLE from the URL
-    // We return the entire list -- converted to JSON
+    // We return the entire list -- conv
+    // erted to JSON
     // in this case because of @ResponseBody
     // Note: To DELETE we use delete method
 
