@@ -73,20 +73,19 @@ public class PeopleController {
     // Note: To UPDATE we use PUT method
     @PutMapping("/people/{firstName}")
     public Person updatePerson(@PathVariable String firstName, String lastName, String address, String telephone, Person p) {
-        peopleList.replace(firstName, p);
-
         //Added code to allow for editing of one variable at a time. Previously, if only one variable was provided,
-        //the rest would be set to null.
+        //the rest would be set to null. Does not currently work.
         if (lastName != null) {
-            peopleList.replace(lastName, p);
+            p.setLastName(lastName);
         }
         System.out.println(lastName);
         if (address != null) {
-            peopleList.replace(address, p);
+            p.setAddress(address);
         }
         if (telephone != null) {
-            peopleList.replace(telephone, p);
+            p.setTelephone(telephone);
         }
+        peopleList.replace(firstName, p);
         return peopleList.get(firstName);
     }
 
