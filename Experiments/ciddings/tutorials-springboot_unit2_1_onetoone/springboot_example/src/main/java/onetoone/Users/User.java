@@ -30,6 +30,8 @@ public class User {
     private String emailId;
     private boolean ifActive;
 
+    private int pinsDiscovered;
+
     /*
      * @OneToOne creates a relation between the current entity/table(Laptop) with the entity/table defined below it(User)
      * cascade is responsible propagating all changes, even to children of the class Eg: changes made to laptop within a user object will be reflected
@@ -44,6 +46,7 @@ public class User {
         this.name = name;
         this.emailId = emailId;
         this.ifActive = true;
+        this.pinsDiscovered = 0;
     }
 
     public User() {
@@ -90,5 +93,12 @@ public class User {
     public void setLaptop(Laptop laptop){
         this.laptop = laptop;
     }
-    
+
+    public void discoverPin() {
+        this.pinsDiscovered++;
+    }
+
+    public int getPinsDiscovered() {
+        return this.pinsDiscovered;
+    }
 }

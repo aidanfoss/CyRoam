@@ -88,6 +88,13 @@ public class UserController {
         return success;
     }
 
+    @PutMapping("/users/{userId}/findPin")
+    String pinFound(@PathVariable int userId){
+        User user = userRepository.findById(userId);
+        user.discoverPin();
+        return success;
+    }
+
     @DeleteMapping(path = "/users/{id}")
     String deleteUser(@PathVariable int id){
         userRepository.deleteById(id);
