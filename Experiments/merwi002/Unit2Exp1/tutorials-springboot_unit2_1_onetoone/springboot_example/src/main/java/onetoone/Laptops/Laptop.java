@@ -25,6 +25,8 @@ public class Laptop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    private int model;
     private double cpuClock;
     private int cpuCores;
     private int ram;

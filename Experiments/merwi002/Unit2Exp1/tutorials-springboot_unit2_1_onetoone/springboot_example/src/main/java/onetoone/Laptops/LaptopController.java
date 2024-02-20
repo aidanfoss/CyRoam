@@ -72,4 +72,19 @@ public class LaptopController {
         laptopRepository.deleteById(id);
         return success;
     }
+
+
+    //turing this into a delete model funtion
+   /* @DeleteMapping(path = "/laptops/{id}")
+    String deleteLaptop(@PathVariable int id){
+
+        // Check if there is an object depending on user and then remove the dependency
+        User user = userRepository.findByLaptop_Id(id);
+        user.setLaptop(null);
+        userRepository.save(user);
+
+        // delete the laptop if the changes have not been reflected by the above statement
+        laptopRepository.deleteById(id);
+        return success;
+    }*/
 }
