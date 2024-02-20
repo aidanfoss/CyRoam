@@ -3,7 +3,6 @@ package onetoone.Laptops;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import onetoone.Users.User;
-import onetoone.Users.UserRepository;
 
 /**
  * 
@@ -26,9 +22,6 @@ public class LaptopController {
 
     @Autowired
     LaptopRepository laptopRepository;
-
-    @Autowired
-    UserRepository userRepository;
     
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
@@ -62,29 +55,7 @@ public class LaptopController {
 
     @DeleteMapping(path = "/laptops/{id}")
     String deleteLaptop(@PathVariable int id){
-
-        // Check if there is an object depending on user and then remove the dependency
-        User user = userRepository.findByLaptop_Id(id);
-        user.setLaptop(null);
-        userRepository.save(user);
-
-        // delete the laptop if the changes have not been reflected by the above statement
         laptopRepository.deleteById(id);
         return success;
     }
-
-
-    //turing this into a delete model funtion
-   /* @DeleteMapping(path = "/laptops/{id}")
-    String deleteLaptop(@PathVariable int id){
-
-        // Check if there is an object depending on user and then remove the dependency
-        User user = userRepository.findByLaptop_Id(id);
-        user.setLaptop(null);
-        userRepository.save(user);
-
-        // delete the laptop if the changes have not been reflected by the above statement
-        laptopRepository.deleteById(id);
-        return success;
-    }*/
 }
