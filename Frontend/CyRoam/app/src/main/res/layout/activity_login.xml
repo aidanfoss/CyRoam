@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="274dp"
         android:layout_height="104dp"
-        android:fontFamily="@font/alegreya_sc_bold_italic"
+        android:fontFamily="monospace"
         android:text="CyRoam"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -36,7 +36,8 @@
         android:id="@+id/button"
         android:layout_width="275dp"
         android:layout_height="34dp"
-        android:background="@drawable/roundstyle"
+        android:background="#F1BE48"
+
         android:backgroundTint="#F1BE48"
         android:text="Log in"
         android:textColor="@color/black"
@@ -51,7 +52,8 @@
         android:id="@+id/button2"
         android:layout_width="275dp"
         android:layout_height="34dp"
-        android:background="@drawable/roundstyle"
+        android:background="#F1BE48"
+
         android:backgroundTint="#F1BE48"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,6 +65,12 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
