@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="274dp"
         android:layout_height="104dp"
-        android:fontFamily="monospace"
+        android:fontFamily="@font/alegreya_sc_bold_italic"
         android:text="CyRoam"
         android:textAlignment="center"
         android:textColor="@color/white"
