@@ -36,7 +36,7 @@
         android:id="@+id/loginButton"
         android:layout_width="275dp"
         android:layout_height="34dp"
-        android:background="#F1BE48"
+        android:background="@drawable/roundstyle"
 
         android:backgroundTint="#F1BE48"
         android:text="Log in"
@@ -52,7 +52,7 @@
         android:id="@+id/signupButton"
         android:layout_width="275dp"
         android:layout_height="34dp"
-        android:background="#F1BE48"
+        android:background="@drawable/roundstyle"
 
         android:backgroundTint="#F1BE48"
         android:text="Sign Up"
