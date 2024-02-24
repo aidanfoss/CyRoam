@@ -31,9 +31,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Creating Login Input activity">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="semimade(but needs to be coded) Login Input activity" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -323,7 +321,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708807391354</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="semimade(but needs to be coded) Login Input activity">
+      <option name="closed" value="true" />
+      <created>1708807820312</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1708807820312</updated>
+    </task>
+    <task id="LOCAL-00016" summary="semimade(but needs to be coded) Login Input activity">
+      <option name="closed" value="true" />
+      <created>1708807827666</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1708807827666</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -334,6 +348,7 @@
     <MESSAGE value="Roundstyle addition" />
     <MESSAGE value="Fixing the Button Colors in(Themes)" />
     <MESSAGE value="Creating Login Input activity" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating Login Input activity" />
+    <MESSAGE value="semimade(but needs to be coded) Login Input activity" />
+    <option name="LAST_COMMIT_MESSAGE" value="semimade(but needs to be coded) Login Input activity" />
   </component>
 </project>
