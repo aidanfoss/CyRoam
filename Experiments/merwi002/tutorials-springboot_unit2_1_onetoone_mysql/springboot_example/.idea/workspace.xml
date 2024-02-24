@@ -4,15 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75bca539-1567-4532-9862-748c11f93324" name="Changes" comment="" />
+    <list default="true" id="75bca539-1567-4532-9862-748c11f93324" name="Changes" comment="attempt to set up server with SQL data base, I changed server to java 17">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2cdvcZvDKKhE3OG8aPzJFDCSRzT" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
@@ -28,8 +33,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.Main.executor": "Run",
+    "git-widget-placeholder": "11-create-friends-table",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/merwi/Desktop/Exp/lg1_1/Experiments/merwi002/tutorials-springboot_unit2_1_onetoone_mysql/springboot_example",
+    "last_opened_file_path": "C:/Users/merwi/Desktop/Exp/lg1_1/Backend/CyRoam Backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,6 +81,7 @@
       <option name="presentableId" value="Default" />
       <updated>1708454349574</updated>
       <workItem from="1708454351746" duration="2895000" />
+      <workItem from="1708815064019" duration="151000" />
     </task>
     <servers />
   </component>
