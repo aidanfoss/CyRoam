@@ -24,18 +24,27 @@ import java.util.Map;
 public class LoginInputActivity extends AppCompatActivity {
     private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
 
-    private EditText username;
+    private EditText usernameEditText;
+    private EditText passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_input);
         Button loginButton = findViewById(R.id.Loginbutton);
+
+
+        usernameEditText = findViewById(R.id.editTextTextUsername);
+        passwordEditText = findViewById(R.id.editTextTextPassword);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
                 makeStringReq();
                 //Intent intent = new Intent(LoginInputActivity.this, MapsActivity.class);
+                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+                //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
                 //startActivity(intent);
             }
         });
