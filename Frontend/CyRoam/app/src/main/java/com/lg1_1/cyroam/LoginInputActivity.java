@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginInputActivity extends AppCompatActivity {
+    // This while be the call to which ever table Zack makes
     private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
-
+    //The text in the username/password edittext
     private EditText usernameEditText;
     private EditText passwordEditText;
 
@@ -49,6 +50,14 @@ public class LoginInputActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
+
+
+
+    //this calls the server and checks to see if it correct
     private void makeStringReq() {
 
         StringRequest stringRequest = new StringRequest(
