@@ -43,10 +43,10 @@ public class LoginInputActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 makeStringReq();
-                //Intent intent = new Intent(LoginInputActivity.this, MapsActivity.class);
+                Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
                 //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-                //startActivity(intent);
+                startActivity(intent);
             }
         });
     }
