@@ -31,9 +31,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="ruff draft made(but needs to be coded) Login Input activity">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="adding the makeStringReq">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -349,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708809619103</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="adding the makeStringReq">
+      <option name="closed" value="true" />
+      <created>1708824260415</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1708824260415</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -362,6 +368,7 @@
     <MESSAGE value="Creating Login Input activity" />
     <MESSAGE value="semimade(but needs to be coded) Login Input activity" />
     <MESSAGE value="ruff draft made(but needs to be coded) Login Input activity" />
-    <option name="LAST_COMMIT_MESSAGE" value="ruff draft made(but needs to be coded) Login Input activity" />
+    <MESSAGE value="adding the makeStringReq" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding the makeStringReq" />
   </component>
 </project>
