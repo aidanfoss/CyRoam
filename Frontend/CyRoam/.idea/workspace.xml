@@ -355,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708824260415</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="adding the makeStringReq">
+      <option name="closed" value="true" />
+      <created>1708824342830</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1708824342830</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
