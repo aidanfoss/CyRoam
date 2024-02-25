@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 
 import com.android.volley.Request;
@@ -23,7 +24,7 @@ import java.util.Map;
 public class LoginInputActivity extends AppCompatActivity {
     private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
 
-
+    private EditText username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
