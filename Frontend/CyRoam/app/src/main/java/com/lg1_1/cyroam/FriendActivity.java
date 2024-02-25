@@ -18,6 +18,8 @@ public class FriendActivity extends AppCompatActivity {
 
         backbutton = findViewById(R.id.Backbutton);
         friendsearch =  findViewById(R.id.searchButton);
+
+
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
