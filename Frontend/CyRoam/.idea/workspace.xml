@@ -5,6 +5,11 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_friend.xml">
+        <config>
+          <theme>@style/Theme.AndroidExample</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
@@ -31,12 +36,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="adding the makeStringReq">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_friend.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Friend Screen created and under development">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_friend.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_friend.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +135,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="android.template.205721078">
+      <recent name="com.lg1_1.cyroam" />
+    </key>
+    <key name="android.template.894193740">
       <recent name="com.lg1_1.cyroam" />
     </key>
     <key name="android.template.1768257515">
@@ -367,7 +374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708824342830</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Friend Screen created and under development">
+      <option name="closed" value="true" />
+      <created>1708827604612</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1708827604612</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -381,6 +396,7 @@
     <MESSAGE value="semimade(but needs to be coded) Login Input activity" />
     <MESSAGE value="ruff draft made(but needs to be coded) Login Input activity" />
     <MESSAGE value="adding the makeStringReq" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding the makeStringReq" />
+    <MESSAGE value="Friend Screen created and under development" />
+    <option name="LAST_COMMIT_MESSAGE" value="Friend Screen created and under development" />
   </component>
 </project>
