@@ -17,6 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.lg1_1.cyroam.util.Pin;
 
 import java.util.Objects;
 
@@ -56,6 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            return;
 //        }
 //        try {
+//            boolean locationPermissionGranted = true; //temp solution?
 //            if (locationPermissionGranted) {
 //                gMap.setMyLocationEnabled(true);
 //                gMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -68,21 +70,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        } catch (SecurityException e)  {
 //            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
 //        }
-//    } This is borked atm. Not sure how to check for locationPermissionGranted yet.
+//    } //This is borked atm. Not sure how to check for locationPermissionGranted yet.
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-      //  updateLocationUI();
+        //updateLocationUI();
         //const image = R.drawable.qMark;
         //the following code can be placed into its own class? or whatever its called.
         // want to be able to call New POI (lat, long, name, description, reward, etc)
         //then we can make a standalone temporary app to allow us to post, put, recieve location data
         //to establish our database of points of interest. Make dozens of the following with a few lines and a for loop.
-        LatLng mapIowaState = new LatLng(42.023949, -93.647595);
-        Marker markerAtCollege = this.gMap.addMarker(new MarkerOptions().position(mapIowaState).title("Marker At College"));//.icon(R.drawable.qMark));
+        //LatLng mapIowaState = new LatLng(42.023949, -93.647595);
+
+        Pin IowaState = new Pin(42.023949,-93.647595, "Iowa State Campus");
+        Marker midCampus = this.gMap.addMarker(new MarkerOptions().position(IowaState.getPos()).title(IowaState.getName()));//.icon(R.drawable.qMark));
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapIowaState));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(IowaState.getPos()));
 
         //replace this with a way to call all locations off the database and establish them as new LatLng's
         /* GENERIC PSEUDOCODE (not fully thought through)
