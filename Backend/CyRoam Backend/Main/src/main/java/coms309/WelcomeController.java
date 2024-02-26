@@ -13,10 +13,10 @@ class WelcomeController {
         return "Hello and welcome to COMS 309. Go to http://localhost:8080/yippee";
     }
 
-    @GetMapping("/{name}")
-    public String welcome(@PathVariable String name) {
-        return "Hello and welcome to COMS 309: " + name;
-    }
+//    @GetMapping("/{name}")
+//    public String welcome(@PathVariable String name) {
+//        return "Hello and welcome to COMS 309: " + name;
+//    }
 
     //Added new page that says yippee
     @GetMapping("/yippee")

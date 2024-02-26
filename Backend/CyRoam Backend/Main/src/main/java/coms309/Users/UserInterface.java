@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UserInterface extends JpaRepository<User, Long> {
 
-    User findByUId(int uId);
+    User findByuId(int uId);
 
     void deleteById(int uId);
 
-    User findByLaptop_Id(int uId);
+    //User findByLaptop_Id(int uId);
+
+    User findByUsername(String username);
 }
 
