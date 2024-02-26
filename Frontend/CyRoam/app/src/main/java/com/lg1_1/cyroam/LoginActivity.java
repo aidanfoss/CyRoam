@@ -21,12 +21,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);            // link to Login activity XML
 
         /* initialize UI elements */
-        usernameEditText = findViewById(R.id.login_username_edt);
-        passwordEditText = findViewById(R.id.login_password_edt);
-        loginButton = findViewById(R.id.login_login_btn);    // link to login button in the Login activity XML
-        signupButton = findViewById(R.id.login_signup_btn);  // link to signup button in the Login activity XML
+       //usernameEditText = findViewById(R.id.login_username_edt);
+       //passwordEditText = findViewById(R.id.login_password_edt);
+       loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
+        signupButton = findViewById(R.id.signupButton);  // link to signup button in the Login activity XML
 
-        /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,6 +45,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        /* click listener on login button pressed */
+        //loginButton.setOnClickListener(new View.OnClickListener() {
+          //  @Override
+           // public void onClick(View v) {
+
+                /* grab strings from user inputs */
+               // String username = usernameEditText.getText().toString();
+               // String password = passwordEditText.getText().toString();
+
+               // /* when login button is pressed, use intent to switch to Login Activity */
+              //  Intent intent = new Intent(LoginActivity.this, LoginInputActivity.class);
+             //   intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+              //  intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
+               // startActivity(intent);  // go to MainActivity with the key-value data
+            //}
+       // });
+
         /* click listener on signup button pressed */
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,4 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
