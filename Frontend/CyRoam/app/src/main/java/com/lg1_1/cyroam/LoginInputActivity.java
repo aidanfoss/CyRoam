@@ -8,69 +8,56 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
+
+
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignupActivity extends AppCompatActivity {
+public class LoginInputActivity extends AppCompatActivity {
+    // This while be the call to which ever table Zack makes
     private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
-    private EditText usernameEditText;  // define username edittext variable
-    private EditText passwordEditText;  // define password edittext variable
-    private EditText confirmEditText;   // define confirm edittext variable
-    private Button loginButton;         // define login button variable
-    private Button signupButton;        // define signup button variable
+    //The text in the username/password edittext
+    private EditText usernameEditText;
+    private EditText passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_login_input);
+        Button loginButton = findViewById(R.id.Loginbutton);
 
-        /* initialize UI elements */
-        usernameEditText = findViewById(R.id.signup_username_edt);  // link to username edtext in the Signup activity XML
-        passwordEditText = findViewById(R.id.signup_password_edt);  // link to password edtext in the Signup activity XML
-        confirmEditText = findViewById(R.id.signup_confirm_edt);    // link to confirm edtext in the Signup activity XML
-        loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML
-        signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML
 
-        /* click listener on login button pressed */
+        usernameEditText = findViewById(R.id.editTextTextUsername);
+        passwordEditText = findViewById(R.id.editTextTextPassword);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                startActivity(intent);  // go to LoginActivity
-            }
-        });
-
-        /* click listener on signup button pressed */
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                String confirm = confirmEditText.getText().toString();
-
-                if (password.equals(confirm)){
-                    Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makeStringReq();
-                    Intent intent = new Intent(SignupActivity.this, FriendActivity.class);
-                    startActivity(intent);
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Password don't match", Toast.LENGTH_LONG).show();
-                }
+                makeStringReq();
+                Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+                //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
+                startActivity(intent);
             }
         });
     }
+
+
+
+
+
+
+
+    //this calls the server and checks to see if it correct
     private void makeStringReq() {
 
         StringRequest stringRequest = new StringRequest(
@@ -112,4 +99,5 @@ public class SignupActivity extends AppCompatActivity {
         // Adding request to request queue
         //VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
+
 }
