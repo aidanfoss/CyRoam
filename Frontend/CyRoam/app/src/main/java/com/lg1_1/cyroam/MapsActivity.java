@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -22,6 +23,8 @@ import com.lg1_1.cyroam.util.Pin;
 import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private Button newPinButton;        // define signup button variable
 
     //TODO establish user object to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
