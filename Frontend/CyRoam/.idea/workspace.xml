@@ -5,32 +5,12 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_friend.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_input.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_pin.xml">
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
         </config>
@@ -41,21 +21,29 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Fixed button declaration to floating button">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="automatically did this, not sure what it is or why">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Pin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Progress.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/PointOfInterest/POI.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="module" />
+    </option>
+  </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Copy_of_Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -102,30 +90,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="Nicholas Kirschbaum &lt;nick127k@iastate.edu&gt;" />
-      </list>
-    </option>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/../.." value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
-    <option name="SIGN_OFF_COMMIT" value="true" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2c8ysaUHBESfKgSfkTnG94T2qg9" />
   <component name="ProjectViewState">
@@ -138,21 +108,10 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "13-activitymain",
-    "last_opened_file_path": "C:/Users/nickk/Downloads/lg1_1/Experiments/Nick127k/Exp6/tutorials-android_unit2_2_volley/tutorials-android_unit2_2_volley/AndroidExample"
+    "git-widget-placeholder": "7-create-pin-object",
+    "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="android.template.205721078">
-      <recent name="com.lg1_1.cyroam" />
-    </key>
-    <key name="android.template.894193740">
-      <recent name="com.lg1_1.cyroam" />
-    </key>
-    <key name="android.template.1768257515">
-      <recent name="com.lg1_1.cyroam" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="CyRoam.app.main" />
@@ -231,97 +190,18 @@
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
     </task>
-    <task id="LOCAL-00001" summary="Nicks first commit while branching">
+    <task id="LOCAL-00001" summary="automatically did this, not sure what it is or why">
       <option name="closed" value="true" />
-      <created>1708642583743</created>
+      <created>1708552649957</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1708642583743</updated>
+      <updated>1708552649957</updated>
     </task>
-    <task id="LOCAL-00002" summary="Created a new button on the top left of the map">
-      <option name="closed" value="true" />
-      <created>1708975788380</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1708975788380</updated>
-    </task>
-    <task id="LOCAL-00003" summary="make button go to the NewPinActivity">
-      <option name="closed" value="true" />
-      <created>1708976034960</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1708976034960</updated>
-    </task>
-    <task id="LOCAL-00004" summary="make pin button have a body. activity_new_pin.xml created, as well as edited related class.">
-      <option name="closed" value="true" />
-      <created>1708976978970</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1708976978970</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity.">
-      <option name="closed" value="true" />
-      <created>1708977507720</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1708977507720</updated>
-    </task>
-    <task id="LOCAL-00006" summary="automatic workspace.xml update.">
-      <option name="closed" value="true" />
-      <created>1708978155133</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1708978155133</updated>
-    </task>
-    <task id="LOCAL-00007" summary="removed TODO and replaced it with a comment">
-      <option name="closed" value="true" />
-      <created>1708978243756</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1708978243756</updated>
-    </task>
-    <task id="LOCAL-00008" summary="defined NewPinActivity in AndroidManifest.xml">
-      <option name="closed" value="true" />
-      <created>1708979113495</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1708979113495</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Fixed button declaration to floating button">
-      <option name="closed" value="true" />
-      <created>1708979142752</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1708979142752</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="main" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -333,50 +213,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="automatically did this, not sure what it is or why" />
-    <MESSAGE value="Created a new button on the top left of the map" />
-    <MESSAGE value="make button go to the NewPinActivity" />
-    <MESSAGE value="make pin button have a body. activity_new_pin.xml created, as well as edited related class." />
-    <MESSAGE value="linked xml to class, initialize UI elements" />
-    <MESSAGE value="test" />
-    <MESSAGE value="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
-    <MESSAGE value="automatic workspace.xml update." />
-    <MESSAGE value="removed TODO and replaced it with a comment" />
-    <MESSAGE value="defined NewPinActivity in AndroidManifest.xml" />
-    <MESSAGE value="Fixed button declaration to floating button" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed button declaration to floating button" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>112</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>118</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>119</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="automatically did this, not sure what it is or why" />
   </component>
 </project>
