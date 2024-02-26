@@ -29,8 +29,19 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, LoginInputActivity.class);
-                startActivity(intent);
+
+                /* grab strings from user inputs */
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                /* when login button is pressed, use intent to switch to Login Activity */
+                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+//                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+//                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
+//                intent.putExtra("LONGITUDE", 42.023949);
+//                intent.putExtra("LATITUDE", -93.647595);
+//                intent.putExtra("NAME", "Library");
+                startActivity(intent);  // go to MainActivity with the key-value data
             }
         });
 

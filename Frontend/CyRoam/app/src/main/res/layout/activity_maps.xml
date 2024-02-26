@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+
+
+
+    <androidx.fragment.app.FragmentContainerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,13 +16,16 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
-    tools:context=".MapsActivity"></fragment>
+    tools:context=".MapsActivity">
+</androidx.fragment.app.FragmentContainerView>
 
-
-
-<!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--xmlns:tools="http://schemas.android.com/tools"-->
-
-<!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
-
-<!--tools:context="com.example.currentplacedetailsonmap.MapsActivityCurrentPlace" />-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/newPinButton"
+        layout_height=""
+        layout_width=""
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:clickable="true"
+        android:contentDescription="New Pin Button"
+        tools:src="@tools:sample/avatars" />
+</FrameLayout>
