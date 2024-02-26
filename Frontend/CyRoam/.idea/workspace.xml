@@ -26,12 +26,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Created a bunch of objects. Can fill out more later">
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Created a new button on the top left of the map">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +101,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2c8ysaUHBESfKgSfkTnG94T2qg9" />
   <component name="ProjectViewState">
@@ -206,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708552649957</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created a new button on the top left of the map">
+      <option name="closed" value="true" />
+      <created>1708975788380</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708975788380</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,6 +246,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="automatically did this, not sure what it is or why" />
-    <option name="LAST_COMMIT_MESSAGE" value="automatically did this, not sure what it is or why" />
+    <MESSAGE value="Created a new button on the top left of the map" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a new button on the top left of the map" />
   </component>
 </project>
