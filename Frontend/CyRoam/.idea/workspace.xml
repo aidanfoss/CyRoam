@@ -20,15 +20,19 @@
           <theme>@style/Theme.AndroidExample</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_new_pin.xml">
+        <config>
+          <theme>@style/Theme.AndroidExample</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Created a new button on the top left of the map">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="test">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,6 +94,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="layoutResourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -214,7 +219,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708975788380</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="make button go to the NewPinActivity">
+      <option name="closed" value="true" />
+      <created>1708976034960</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708976034960</updated>
+    </task>
+    <task id="LOCAL-00004" summary="make pin button have a body. activity_new_pin.xml created, as well as edited related class.">
+      <option name="closed" value="true" />
+      <created>1708976978970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1708976978970</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -247,6 +268,10 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="automatically did this, not sure what it is or why" />
     <MESSAGE value="Created a new button on the top left of the map" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created a new button on the top left of the map" />
+    <MESSAGE value="make button go to the NewPinActivity" />
+    <MESSAGE value="make pin button have a body. activity_new_pin.xml created, as well as edited related class." />
+    <MESSAGE value="linked xml to class, initialize UI elements" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
 </project>
