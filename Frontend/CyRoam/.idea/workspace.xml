@@ -31,7 +31,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Fixed button declaration to floating button">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -241,7 +246,39 @@
       <option name="project" value="LOCAL" />
       <updated>1708977507720</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="automatic workspace.xml update.">
+      <option name="closed" value="true" />
+      <created>1708978155133</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708978155133</updated>
+    </task>
+    <task id="LOCAL-00007" summary="removed TODO and replaced it with a comment">
+      <option name="closed" value="true" />
+      <created>1708978243756</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708978243756</updated>
+    </task>
+    <task id="LOCAL-00008" summary="defined NewPinActivity in AndroidManifest.xml">
+      <option name="closed" value="true" />
+      <created>1708979113495</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708979113495</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Fixed button declaration to floating button">
+      <option name="closed" value="true" />
+      <created>1708979142752</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708979142752</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -279,6 +316,41 @@
     <MESSAGE value="linked xml to class, initialize UI elements" />
     <MESSAGE value="test" />
     <MESSAGE value="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
-    <option name="LAST_COMMIT_MESSAGE" value="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
+    <MESSAGE value="automatic workspace.xml update." />
+    <MESSAGE value="removed TODO and replaced it with a comment" />
+    <MESSAGE value="defined NewPinActivity in AndroidManifest.xml" />
+    <MESSAGE value="Fixed button declaration to floating button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed button declaration to floating button" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>108</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>112</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
