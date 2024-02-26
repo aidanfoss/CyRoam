@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //TODO determine if this is important for later use. Might be useful in the progress screen later
-        /* extract data passed into this activity from another activity */
+        //leftover useful code. Used again in MapsActivity to pass new pin data from the new pin activity
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
             messageText.setText("Home Page");
