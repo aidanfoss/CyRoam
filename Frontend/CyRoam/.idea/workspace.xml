@@ -31,9 +31,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="test">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,17 +112,17 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "14-create-temporary-pin-screen-for-creating-a-new-pin",
-    "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;14-create-temporary-pin-screen-for-creating-a-new-pin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="CyRoam.app.main" />
@@ -235,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708976978970</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity.">
+      <option name="closed" value="true" />
+      <created>1708977507720</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708977507720</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -272,6 +278,7 @@
     <MESSAGE value="make pin button have a body. activity_new_pin.xml created, as well as edited related class." />
     <MESSAGE value="linked xml to class, initialize UI elements" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
+    <option name="LAST_COMMIT_MESSAGE" value="Linked new XML to NewPinActivity.&#10;made button pass information to maps activity." />
   </component>
 </project>
