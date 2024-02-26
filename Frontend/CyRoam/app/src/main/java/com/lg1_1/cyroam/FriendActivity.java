@@ -23,7 +23,7 @@ public class FriendActivity extends AppCompatActivity {
 
     private Button friendsearch;
 
-    private boolean found = false;
+    private final boolean found = false;
 
     private TextView outputtext;
     @Override
@@ -48,8 +48,9 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
-                if(found = false){
-                    outputtext.setText("User doesnot exist");
+                makeStringReq();
+                if(!found){
+                    outputtext.setText("User doesnt exist");
                 }
                 else{
                     outputtext.setText("Invite sent");
