@@ -14,15 +14,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uId;
-    private String userName;
+    private String username;
     private String password;
 
     //contructor
-    public User(String userName, String password) {
-        this.userName = userName;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
 
-    }public User() {
+    }
+    public User()
+    {
 
     }
     //getters and setters
@@ -34,12 +36,12 @@ public class User {
         this.uId = uId;
     }
 
-    public String getUserName(){
-        return userName;
+    public String getUsername(){
+        return username;
     }
 
-    public void setName(String userName){
-        this.userName = userName;
+    public void setName(String username){
+        this.username = username;
     }
     public String getPassword(){
         return password;
