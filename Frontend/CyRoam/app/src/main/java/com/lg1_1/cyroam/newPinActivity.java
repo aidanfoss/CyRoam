@@ -33,6 +33,7 @@ public class NewPinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //TODO make the coordinates grab from the device rather than manual input.
                 /* grab coordinates from user inputs */
                 double longitudeIn = longitudeText.getText().length();
                 double latitudeIn = latitudeText.getText().length();
