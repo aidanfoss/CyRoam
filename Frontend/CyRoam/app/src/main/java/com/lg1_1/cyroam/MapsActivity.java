@@ -20,13 +20,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 
 import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private Button newPinButton;        // define signup button variable
+    private FloatingActionButton newPinButton;        // define new pin button variable
 
     //TODO establish user object to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
@@ -38,6 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
         newPinButton = findViewById(R.id.newPinButton);
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,9 +50,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);  // go to NewPinActivity
             }
         });
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
 
         map = findViewById(R.id.map);
 
@@ -97,6 +97,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //then we can make a standalone temporary app to allow us to post, put, recieve location data
         //to establish our database of points of interest. Make dozens of the following with a few lines and a for loop.
         //LatLng mapIowaState = new LatLng(42.023949, -93.647595);
+
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            //pins.Update()
+            //(retrieve all pins from database. maybe later, make this check your location and only recieve ones within a certain distance.
+        } else {
+            //create new pin given the data that was passed
+            Pin newPin = new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), extras.getString("NAME"));
+            Marker newPinMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
+        }
 
         Pin IowaState = new Pin(42.023949,-93.647595, "Iowa State Campus");
         Marker midCampus = this.gMap.addMarker(new MarkerOptions().position(IowaState.getPos()).title(IowaState.getName()));//.icon(R.drawable.qMark));
