@@ -36,7 +36,6 @@ import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    //private final String url = MainActivity.url; // get URL from main activity (might be able to just call it each time individually instead of defining it here)
     private RequestQueue mQueue; // define volley request queue
     private FloatingActionButton newPinButton; // define new pin button variable
 
@@ -54,10 +53,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
-        mQueue = Volley.newRequestQueue(this);
+        mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
+
         newPinButton = findViewById(R.id.newPinButton);
         newPinButton.setOnClickListener(v -> {
-            /* when signup button is pressed, use intent to switch to Signup Activity */
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
             startActivity(intent);  // go to NewPinActivity
         });
@@ -110,61 +109,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.w("volley", "extras != null");
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
         }
-        Log.w("volley, marker", "pre-fill pinVector.size() = " + String.valueOf(pinVector.size()));
         fillPinVector(pinVector);
-        //while(pinVector.size() < 1){};
-        Log.w("volley, marker", "post-fill pinVector.size() = " + String.valueOf(pinVector.size()));
-        for (int i = 0; i < pinVector.size(); i++){
-            MarkerOptions place = new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName());
-            gMap.addMarker(place);
-            Log.w("marker", "created new Marker: ( " + String.valueOf(pinVector.elementAt(i).getLat()) + ", " + String.valueOf(pinVector.elementAt(i).getLong()) + ", " + pinVector.elementAt(i).getName());
-            this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(i).getPos()));
-//          this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
-        }
 
 
-
-        //create pin based on information given in the if statement above. Change this later to only activate when a new pin is created.
-        //Marker ifStatementMarker = this.gMap.addMarker(new MarkerOptions().position(pinVector.lastElement().getPos()).title(pinVector.lastElement().getName()));//.icon(R.drawable.qMark));
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        //this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.lastElement().getPos()));
-        if (pinVector.size() > 1) {
-            this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
-            Log.w("volley", "inside if statement: pinVector<1> = " + pinVector.elementAt(1).getName());
-        }
-        Log.w("volley", "outside if statement: pinVector.size() = " + String.valueOf(pinVector.size()));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
+
 
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
         //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
-        /*
-        shitty hardcoded pin call, delete when no longer needed for copy-paste
-        Pin IowaState = new Pin(42.023949,-93.647595, "Iowa State Campus");
-        Marker midCampus = this.gMap.addMarker(new MarkerOptions().position(IowaState.getPos()).title(IowaState.getName()));//.icon(R.drawable.qMark));
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(IowaState.getPos()));
-        */
-
-
-
-
-
-        //replace this with a way to call all locations off the database and establish them as new LatLng's
-        /* GENERIC PSEUDOCODE (not fully thought through)
-        for (int i = 0; i < (Get Num of Locations); i++) {
-
-            NEW POI (int i)
-            addmarker i
-        }
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13)); //13 is a generic zoom, worked well with testing, not sure what a changed zoom variable would mean
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(CURRENTLOCATION)); //fix CURRENTLOCATION later
-        */
-
-
-
-
     }
-    private void fillPinVector(Vector<Pin> pinVector){
+
+    /*
+    Function that makes a volley request to recieve all pin data. Uses url from MainActivity, and uses the
+    googleMaps gMap declaration from the top of the class.
+    */
+    private void fillPinVector(){
+        fillPinVectorHelper(pinVector);
+    }
+    private void fillPinVectorHelper(Vector<Pin> pinVector){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 response -> {
                     try {
