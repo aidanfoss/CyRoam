@@ -1,15 +1,12 @@
 package com.lg1_1.cyroam;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.android.volley.Request;
@@ -17,12 +14,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.maps.CameraUpdate;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,11 +28,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Objects;
 import java.util.Vector;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private String url = "https://da06e208-ca1d-45e4-ae0d-2c717c4b5c63.mock.pstmn.io/pins";
     private FloatingActionButton newPinButton;        // define new pin button variable
     private RequestQueue mQueue; // define volley request queue
 
@@ -54,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
+        mQueue = Volley.newRequestQueue(this);
         newPinButton = findViewById(R.id.newPinButton);
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,32 +96,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        } catch (SecurityException e)  {
 //            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
 //        }
-//    } //This is borked atm. Not sure how to check for locationPermissionGranted yet.
+//    } //This is fucked atm. Not sure how to check for locationPermissionGranted yet.
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
 
         Bundle extras = getIntent().getExtras(); //call that checks for passed information
-        Pin ifStatement; //declare pin to fill with values below
         if(extras == null) {
-            fillPinVector(pinVector);
-            ifStatement = new Pin(42.023949,-93.647595, "Test Pin");
+            pinVector.add(new Pin(42.023949,-93.647595, "Test Pin"));
 
         } else {
             //create new pin given the data that was passed
-            ifStatement = new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), extras.getString("NAME"));
+            pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + String.valueOf(extras.getDouble("LATITUDE")) + ", " + String.valueOf(extras.getDouble("LONGITUDE")) + ")")));
             //then, call all previously generated pins. (pins.Update or something)
-            //(THESE MIGHT END UP BEING THE SAME THING. CREATE NEW PIN -> SEND TO SERVER -> RECIEVE ALL PINS, INCLUDING NEW ONE)
+            //(THESE MIGHT END UP BEING THE SAME THING. CREATE NEW PIN -> SEND TO SERVER -> RECEIVE ALL PINS, INCLUDING NEW ONE)
         }
 
-        //create pin based on information given in the if statement above. Change this later to only activate when a new pin is created.
-        Marker ifStatementMarker = this.gMap.addMarker(new MarkerOptions().position(ifStatement.getPos()).title(ifStatement.getName()));//.icon(R.drawable.qMark));
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(ifStatement.getPos()));
+        fillPinVector(pinVector);
 
-        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
-        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        //create pin based on information given in the if statement above. Change this later to only activate when a new pin is created.
+        Marker ifStatementMarker = this.gMap.addMarker(new MarkerOptions().position(pinVector.lastElement().getPos()).title(pinVector.lastElement().getName()));//.icon(R.drawable.qMark));
+        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        //this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.lastElement().getPos()));
+
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.lastElement().getPos()));
+
+        //Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
+        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
 
         /*
         shitty hardcoded pin call, delete when no longer needed for copy-paste
@@ -153,17 +153,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     private void fillPinVector(Vector<Pin> pinVector){
-        String url = "";//get the webserver URL
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONArray jsonArray = response.getJSONArray("pins");
+//                            JSONArray jsonArray = response.getJSONArray("pins");
+                            JSONObject jsonArray = response.getJSONObject("pins");
 
                             for(int i =0; i < jsonArray.length(); i++){
-                                JSONObject pin = jsonArray.getJSONObject(i);
+                                //JSONObject pin = jsonArray.getJSONObject(i);
 
                                 int id = pin.getInt("id");
                                 double x = pin.getDouble("x");
@@ -173,13 +172,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 pinVector.add(new Pin(x,y,name,id));
                             }
                         } catch (JSONException e) {
-                            throw new RuntimeException(e);
+                            e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {error.printStackTrace();}
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
         });
+
+        mQueue.add(request);
     }
 }
 
