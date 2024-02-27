@@ -15,7 +15,6 @@ public class NewPinActivity extends AppCompatActivity {
     private EditText latitudeText;
     private EditText longitudeText;
     private EditText nameText;
-
     private Button newPinButton;
 
     @Override
