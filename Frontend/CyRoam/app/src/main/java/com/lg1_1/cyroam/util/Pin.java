@@ -2,6 +2,11 @@ package com.lg1_1.cyroam.util;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/*
+Unfortunately creating a new pin doesn't add it as a marker on the map.
+AFAIK that is not possible, unless I moved all this over to a function underneath the map.
+-bossf
+ */
 public class Pin {
     private double x;
     private double y;
