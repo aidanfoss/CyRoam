@@ -1,15 +1,30 @@
 package com.lg1_1.cyroam;
 
+import static com.lg1_1.cyroam.MainActivity.url;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.lg1_1.cyroam.util.Pin;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class NewPinActivity extends AppCompatActivity {
 
@@ -61,5 +76,28 @@ public class NewPinActivity extends AppCompatActivity {
         });
     }
 
+    /*
+    This is public for now because it might be useful later in the future
+    (like making the new pin button not be a new activity)
+     */
+    public void postPin(Pin pin){
+        RequestQueue mQueue = Volley.newRequestQueue(this);
+        //https://stackoverflow.com/questions/46171093/how-to-use-post-request-in-android-volley-library-with-params-and-header
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new Response.Listener<JSONObject>(){
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject respObj = new JSONObject(String.valueOf(response));
 
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError e){
+                e.printStackTrace();
+            }
+        });
+    }
 }

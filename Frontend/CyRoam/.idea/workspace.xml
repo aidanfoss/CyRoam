@@ -33,13 +33,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out.">
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="cleaned up code a little bit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Pin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Pin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -370,7 +367,47 @@
       <option name="project" value="LOCAL" />
       <updated>1709019325006</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff.">
+      <option name="closed" value="true" />
+      <created>1709024064521</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024064521</updated>
+    </task>
+    <task id="LOCAL-00022" summary="moved marker creation point to the fillPinVector function. Fixed a bunch of issues">
+      <option name="closed" value="true" />
+      <created>1709024210601</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024210601</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added comment about marker creation">
+      <option name="closed" value="true" />
+      <created>1709024370454</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024370454</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added fillPinVectorHelper to clean up the fillPinVector call.">
+      <option name="closed" value="true" />
+      <created>1709024616487</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024616487</updated>
+    </task>
+    <task id="LOCAL-00025" summary="cleaned up code a little bit">
+      <option name="closed" value="true" />
+      <created>1709024769532</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1709024769532</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -396,40 +433,25 @@
     <MESSAGE value="might be useful later. useless ATM" />
     <MESSAGE value="Created fillPinVector function that will grab all pin data once a URL is established" />
     <MESSAGE value="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out." />
-    <option name="LAST_COMMIT_MESSAGE" value="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out." />
+    <MESSAGE value="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff." />
+    <MESSAGE value="moved marker creation point to the fillPinVector function. Fixed a bunch of issues" />
+    <MESSAGE value="added comment about marker creation" />
+    <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
+    <MESSAGE value="cleaned up code a little bit" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up code a little bit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>58</line>
+          <line>54</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>165</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>113</line>
+          <line>107</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>129</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
