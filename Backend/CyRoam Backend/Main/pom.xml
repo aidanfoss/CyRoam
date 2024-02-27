@@ -5,7 +5,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>coms309</groupId>
-  <artifactId>helloworld</artifactId>
+  <artifactId>Main</artifactId>
   <version>1.0.0</version>
 
   <!-- To make it a spring boot project -->
@@ -15,13 +15,13 @@
     <version>3.1.4</version>
   </parent>
 
-  <name>Backend</name>
+  <name>Main</name>
 
   <properties>
 
     <!-- Generic properties -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <!--project.build.sourceEncoding>UTF-8</project.build.sourceEncoding-->
+    <!--project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding-->
 
   </properties>
 
@@ -32,6 +32,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+
     <!-- The H2 database dependency -->
     <dependency>
       <groupId>com.h2database</groupId>
