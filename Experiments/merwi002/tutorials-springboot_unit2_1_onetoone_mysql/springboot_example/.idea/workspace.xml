@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="75bca539-1567-4532-9862-748c11f93324" name="Changes" comment="attempt to set up server with SQL data base, I changed server to java 17" />
+    <list default="true" id="75bca539-1567-4532-9862-748c11f93324" name="Changes" comment="attempt to set up server with SQL data base, I changed server to java 17">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,29 +22,26 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.onetoone [clean,package,java,-jar...].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.onetoone [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.onetoone [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.onetoone [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.onetoone [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Main.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/merwi/Desktop/Exp/lg1_1/Experiments/merwi002/tutorials-springboot_unit2_1_onetoone_mysql/springboot_example&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.onetoone [clean,package,java,-jar...].executor": "Run",
+    "Maven.onetoone [clean].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.Main.executor": "Run",
+    "git-widget-placeholder": "11-create-friends-table",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/merwi/Desktop/Exp/lg1_1/Backend/CyRoam Backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -84,8 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1708454349574</updated>
       <workItem from="1708454351746" duration="2895000" />
-      <workItem from="1708633981431" duration="5926000" />
-      <workItem from="1708809165319" duration="1877000" />
+      <workItem from="1708815064019" duration="151000" />
     </task>
     <task id="LOCAL-00001" summary="attempt to set up server with SQL data base, I changed server to java 17">
       <option name="closed" value="true" />
