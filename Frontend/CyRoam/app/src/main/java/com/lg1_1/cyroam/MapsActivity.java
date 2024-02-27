@@ -158,7 +158,7 @@ to
 Pin new = new Pin(database.x(1), database.y(1), database.name(1))
 
 for (int i = 0; i <= database.Length(); i++){
-    Pin newPin = new Pin(database.x(1), database.y(1), database.name(1), database.ID(1));
+    Pin newPin = new Pin(database.x(i), database.y(i), database.name(i));
     Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));//.icon(R.drawable.qMark));
 }
 
