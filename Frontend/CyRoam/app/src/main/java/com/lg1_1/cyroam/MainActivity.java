@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String url = "https://98ef0421-df15-4c30-a9ae-f412d41aa965.mock.pstmn.io";
 //    private TextView messageText;   // define message textview variable
 //    private TextView usernameText;  // define username textview variable
 
