@@ -1,16 +1,9 @@
-package ProgressTable;
+package coms309.Progress;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import coms309.Pin;
-import coms309.PinRepository;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 @Entity
 public class Progress {
