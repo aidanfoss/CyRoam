@@ -1,14 +1,11 @@
-package coms309;
+package coms309.Pin;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,10 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 class PinController {
 
     @Autowired
-    PinRepository pinRepository;
+    public PinRepository pinRepository;
 
     @GetMapping(path = "/pins")
-    List<Pin> getAllPins() {return pinRepository.findAll();}
+    List<Pin> getAllPins() {
+        Pin lakelaverne = new Pin(42.023949, -93.647595, "Lake LaVerne");
+        Pin zerozero = new Pin(0.005, 0.0, "Zero Zero");
+        pinRepository.save(lakelaverne);
+        pinRepository.save(zerozero);
+        return pinRepository.findAll();
+    }
 
     @GetMapping(path = "/pins/{id}")
     Pin getLaptopById(@PathVariable int id){

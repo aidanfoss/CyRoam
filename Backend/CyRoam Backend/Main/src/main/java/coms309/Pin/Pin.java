@@ -1,4 +1,4 @@
-package coms309;
+package coms309.Pin;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
