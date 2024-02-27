@@ -21,23 +21,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="automatic workspace.xml update, AndroidStudio">
-      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/app/src/test/java/com/example/androidexample/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/app/src/test/java/com/example/androidexample/ExampleUnitTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/AndroidExample/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp4/tutorials-android_unit1_3_login_signup/tutorials-android_unit1_3_login_signup/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/build/intermediates/packaged_res/debug/drawable/roundstyle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/build/intermediates/packaged_res/debug/drawable/roundstyle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/java/com/example/loginscreen/MainActivity3.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/java/com/example/loginscreen/MainActivity3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/font/alegreya_sc_bold_italic.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/font/alegreya_sc_bold_italic.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/font/arima_madurai.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/font/arima_madurai.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Experiments/Nick127k/Exp5/LoginScreen2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="shelving??">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_3_37_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_3_37_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +95,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="main" />
+        <entry key="$PROJECT_DIR$/../.." value="16-add-postman-to-newpin-class" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -124,7 +112,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "16-add-postman-to-newpin-class",
-    "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam",
+    "last_opened_file_path": "C:/Users/Aidan/OneDrive/Documents/lg1_1/Frontend/CyRoam",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
   }
 }]]></component>
@@ -230,7 +218,87 @@
       <option name="project" value="LOCAL" />
       <updated>1708983581482</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="automatic workspace.xml update, AndroidStudio">
+      <option name="closed" value="true" />
+      <created>1709000610328</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000610328</updated>
+    </task>
+    <task id="LOCAL-00005" summary="i have no idea why its doing this tbh">
+      <option name="closed" value="true" />
+      <created>1709000632656</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000632656</updated>
+    </task>
+    <task id="LOCAL-00006" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000645671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000645671</updated>
+    </task>
+    <task id="LOCAL-00007" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000647982</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000647982</updated>
+    </task>
+    <task id="LOCAL-00008" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649050</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649050</updated>
+    </task>
+    <task id="LOCAL-00009" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649655</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649655</updated>
+    </task>
+    <task id="LOCAL-00010" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649844</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649844</updated>
+    </task>
+    <task id="LOCAL-00011" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650006</updated>
+    </task>
+    <task id="LOCAL-00012" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650148</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650148</updated>
+    </task>
+    <task id="LOCAL-00013" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650304</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650304</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -249,6 +317,8 @@
     <MESSAGE value="automatically did this, not sure what it is or why" />
     <MESSAGE value="shelf" />
     <MESSAGE value="automatic workspace.xml update, AndroidStudio" />
-    <option name="LAST_COMMIT_MESSAGE" value="automatic workspace.xml update, AndroidStudio" />
+    <MESSAGE value="i have no idea why its doing this tbh" />
+    <MESSAGE value="shelving??" />
+    <option name="LAST_COMMIT_MESSAGE" value="shelving??" />
   </component>
 </project>
