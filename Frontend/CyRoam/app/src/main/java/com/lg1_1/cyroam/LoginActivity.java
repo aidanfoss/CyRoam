@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,22 +16,34 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);            // link to Login activity XML
 
         /* initialize UI elements */
-       //usernameEditText = findViewById(R.id.login_username_edt);
-       //passwordEditText = findViewById(R.id.login_password_edt);
-       loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
+        usernameEditText = findViewById(R.id.editTextUsername);
+        passwordEditText = findViewById(R.id.editTextPassword);
+        loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
         signupButton = findViewById(R.id.signupButton);  // link to signup button in the Login activity XML
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, LoginInputActivity.class);
-                startActivity(intent);
+
+                /* grab strings from user inputs */
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                /* when login button is pressed, use intent to switch to Login Activity */
+                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+//                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+//                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
+//                intent.putExtra("LONGITUDE", 42.023949);
+//                intent.putExtra("LATITUDE", -93.647595);
+//                intent.putExtra("NAME", "Library");
+                startActivity(intent);  // go to MainActivity with the key-value data
             }
         });
 
