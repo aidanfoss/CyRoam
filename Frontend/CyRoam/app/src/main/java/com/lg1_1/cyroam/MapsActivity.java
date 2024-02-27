@@ -35,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private RequestQueue mQueue; // define volley request queue
     private FloatingActionButton newPinButton; // define new pin button variable
 
-    Vector<Pin> pinVector = new Vector<>();
+//    Vector<Pin> pinVector = new Vector<>();
 
 
     //TODO define user object here to determine what they can and cant do
@@ -109,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
+//        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
 
 
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
@@ -122,9 +122,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     googleMaps gMap declaration from the top of the class.
     */
     private void fillPinVector(){
-        fillPinVectorHelper(pinVector);
-    }
-    private void fillPinVectorHelper(Vector<Pin> pinVector){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
@@ -140,11 +137,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             double y = pin.getDouble("y");
                             String name = pin.getString("name");
 
-                            pinVector.add(new Pin(x,y,name,id));
+//                            pinVector.add(new Pin(x,y,name,id));
                             Log.w("volley", "pinVector added " + name);
-                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
+//                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
 
-                            this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
+//                            this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
