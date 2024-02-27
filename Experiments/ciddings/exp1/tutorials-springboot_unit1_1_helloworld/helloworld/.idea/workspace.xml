@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="847eeb2a-b6f9-4e25-9784-ea674d3a87b3" name="Changes" comment="test">
+      <change beforePath="$PROJECT_DIR$/../../../../../Backend/CyRoam Backend/Main/src/main/java/coms309/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Backend/CyRoam Backend/Main/src/main/java/coms309/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../Backend/CyRoam Backend/Main/src/main/java/coms309/PinController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../Backend/CyRoam Backend/Main/src/main/java/coms309/PinController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/coms309/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/coms309/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/coms309/WelcomeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/coms309/WelcomeController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +38,8 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.Application.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;pin-table&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/caleb/OneDrive/Documents/Iowa_State/coms309/lg1_1/Experiments/ciddings/exp2/tutorials-springboot_unit1_2_hellopeople/hellopeople&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -79,8 +84,13 @@
       <workItem from="1706666768933" duration="50000" />
       <workItem from="1706821226276" duration="91000" />
       <workItem from="1706824784294" duration="1216000" />
-      <workItem from="1708558310595" duration="1023000" />
-      <workItem from="1708562247948" duration="53000" />
+      <workItem from="1708558310595" duration="417000" />
+      <workItem from="1708639520195" duration="151000" />
+      <workItem from="1708644328532" duration="595000" />
+      <workItem from="1708995647910" duration="363000" />
+      <workItem from="1708996105473" duration="75000" />
+      <workItem from="1708996734173" duration="56000" />
+      <workItem from="1708997829790" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <option name="closed" value="true" />
