@@ -1,11 +1,14 @@
 package com.lg1_1.cyroam;
 
+import static com.lg1_1.cyroam.MainActivity.url;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -33,9 +36,9 @@ import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private String url = "https://da06e208-ca1d-45e4-ae0d-2c717c4b5c63.mock.pstmn.io/pins";
-    private FloatingActionButton newPinButton;        // define new pin button variable
+    //private final String url = MainActivity.url; // get URL from main activity (might be able to just call it each time individually instead of defining it here)
     private RequestQueue mQueue; // define volley request queue
+    private FloatingActionButton newPinButton; // define new pin button variable
 
     Vector<Pin> pinVector = new Vector<>();
 
@@ -53,13 +56,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mQueue = Volley.newRequestQueue(this);
         newPinButton = findViewById(R.id.newPinButton);
-        newPinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /* when signup button is pressed, use intent to switch to Signup Activity */
-                Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
-                startActivity(intent);  // go to NewPinActivity
-            }
+        newPinButton.setOnClickListener(v -> {
+            /* when signup button is pressed, use intent to switch to Signup Activity */
+            Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            startActivity(intent);  // go to NewPinActivity
         });
 
         map = findViewById(R.id.map);
@@ -104,27 +104,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Bundle extras = getIntent().getExtras(); //call that checks for passed information
         if(extras == null) {
-            pinVector.add(new Pin(42.023949,-93.647595, "Test Pin"));
+            Log.w("volley", "name == null");
 
         } else {
-            //create new pin given the data that was passed
-            pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + String.valueOf(extras.getDouble("LATITUDE")) + ", " + String.valueOf(extras.getDouble("LONGITUDE")) + ")")));
-            //then, call all previously generated pins. (pins.Update or something)
-            //(THESE MIGHT END UP BEING THE SAME THING. CREATE NEW PIN -> SEND TO SERVER -> RECEIVE ALL PINS, INCLUDING NEW ONE)
+            Log.w("volley", "extras != null");
+            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
+        }
+        Log.w("volley, marker", "pre-fill pinVector.size() = " + String.valueOf(pinVector.size()));
+        fillPinVector(pinVector);
+        while(pinVector.size() < 1){};
+        Log.w("volley, marker", "post-fill pinVector.size() = " + String.valueOf(pinVector.size()));
+        for (int i = 0; i < pinVector.size(); i++){
+            MarkerOptions place = new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName());
+            gMap.addMarker(place);
+            Log.w("marker", "created new Marker: ( " + String.valueOf(pinVector.elementAt(i).getLat()) + ", " + String.valueOf(pinVector.elementAt(i).getLong()) + ", " + pinVector.elementAt(i).getName());
+            this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(i).getPos()));
+//          this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
         }
 
-        fillPinVector(pinVector);
+
 
         //create pin based on information given in the if statement above. Change this later to only activate when a new pin is created.
-        Marker ifStatementMarker = this.gMap.addMarker(new MarkerOptions().position(pinVector.lastElement().getPos()).title(pinVector.lastElement().getName()));//.icon(R.drawable.qMark));
+        //Marker ifStatementMarker = this.gMap.addMarker(new MarkerOptions().position(pinVector.lastElement().getPos()).title(pinVector.lastElement().getName()));//.icon(R.drawable.qMark));
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         //this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.lastElement().getPos()));
+        if (pinVector.size() > 1) {
+            this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
+            Log.w("volley", "inside if statement: pinVector<1> = " + pinVector.elementAt(1).getName());
+        }
+        Log.w("volley", "outside if statement: pinVector.size() = " + String.valueOf(pinVector.size()));
 
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.lastElement().getPos()));
-
-        //Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
-        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
-
+        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
+        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
         /*
         shitty hardcoded pin call, delete when no longer needed for copy-paste
         Pin IowaState = new Pin(42.023949,-93.647595, "Iowa State Campus");
@@ -154,49 +166,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     private void fillPinVector(Vector<Pin> pinVector){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-//                            JSONArray jsonArray = response.getJSONArray("pins");
-                            JSONObject jsonArray = response.getJSONObject("pins");
+                response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("pins");
+                        //JSONObject jsonArray = response.getJSONObject("pins");
+                        Log.w("volley", "request success");
 
-                            for(int i =0; i < jsonArray.length(); i++){
-                                //JSONObject pin = jsonArray.getJSONObject(i);
+                        for(int i =0; i < jsonArray.length(); i++){
+                            JSONObject pin = jsonArray.getJSONObject(i);
 
-                                int id = pin.getInt("id");
-                                double x = pin.getDouble("x");
-                                double y = pin.getDouble("y");
-                                String name = pin.getString("name");
+                            int id = pin.getInt("id");
+                            double x = pin.getDouble("x");
+                            double y = pin.getDouble("y");
+                            String name = pin.getString("name");
 
-                                pinVector.add(new Pin(x,y,name,id));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            pinVector.add(new Pin(x,y,name,id));
+                            Log.w("volley", "pinVector added " + name);
+                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
+                }, Throwable::printStackTrace);
 
         mQueue.add(request);
     }
 }
-
-/*
-TODO create callAllPins function, which will call all pins from database. (recursive?)
-for now, just hardcode a single pin for calling from database. (Library)
-Pin Library = new Pin(42.023949,-93.647595, "Library");
-to
-Pin new = new Pin(database.x(1), database.y(1), database.name(1))
-
-for (int i = 0; i <= database.Length(); i++){
-    Pin newPin = new Pin(database.x(i), database.y(i), database.name(i));
-    Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));//.icon(R.drawable.qMark));
-}
-
-*/
 

@@ -25,6 +25,9 @@ public class Pin {
     public LatLng getPos(){
         return new LatLng(x,y);
     }
+
+    public double getLat() {return x;}
+    public double getLong() {return y;}
     public String getName(){
         return name;
     }

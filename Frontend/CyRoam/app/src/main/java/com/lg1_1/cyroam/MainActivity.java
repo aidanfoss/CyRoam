@@ -22,6 +22,7 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String url = "https://ba96004e-755b-484e-812b-aec8653b90eb.mock.pstmn.io/pins";
 //    private TextView messageText;   // define message textview variable
 //    private TextView usernameText;  // define username textview variable
 
