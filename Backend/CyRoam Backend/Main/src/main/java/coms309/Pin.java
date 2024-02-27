@@ -14,10 +14,17 @@ public class Pin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private double x;
     private double y;
     private String name;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public int getId() {
+        return id;
+    }
     public Pin(double x, double y, String name) {
         this.x = x;
         this.y = y;
@@ -29,7 +36,6 @@ public class Pin {
 
     public void setX(double x) {
         this.x = x;
-        return;
     }
 
     public double getX() {
@@ -38,7 +44,6 @@ public class Pin {
 
     public void setY(double y) {
         this.y = y;
-        return;
     }
 
     public double getY() {
