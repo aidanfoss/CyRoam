@@ -43,16 +43,18 @@
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean package java -jar target/onetoone-1.0.0.jar" />
+      <command value="mvn deploy" />
       <command value="mvn clean" />
+      <command value="mvn compile" />
     </option>
   </component>
   <component name="RunManager">
@@ -83,9 +85,22 @@
       <workItem from="1708454351746" duration="2895000" />
       <workItem from="1708815064019" duration="151000" />
     </task>
+    <task id="LOCAL-00001" summary="attempt to set up server with SQL data base, I changed server to java 17">
+      <option name="closed" value="true" />
+      <created>1708813884288</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1708813884288</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="attempt to set up server with SQL data base, I changed server to java 17" />
+    <option name="LAST_COMMIT_MESSAGE" value="attempt to set up server with SQL data base, I changed server to java 17" />
   </component>
 </project>

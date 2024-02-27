@@ -1,31 +1,45 @@
 package com.lg1_1.cyroam;
 
+import static com.lg1_1.cyroam.MainActivity.url;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
 
-import com.google.android.gms.maps.CameraUpdate;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lg1_1.cyroam.util.Pin;
 
-import java.util.Objects;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Vector;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    //TODO establish user object to determine what they can and cant do
+    private RequestQueue mQueue; // define volley request queue
+    private FloatingActionButton newPinButton; // define new pin button variable
+
+    Vector<Pin> pinVector = new Vector<>();
+
+
+    //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
-    //TODO establish pointOfInterest object to allow easier passing of pins
-    //(lat, long, name, desc, unique image??, etc)
 
     GoogleMap gMap;
     FrameLayout map;
@@ -33,7 +47,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps); //Link to XML
+
+        mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
+
+        newPinButton = findViewById(R.id.newPinButton);
+        newPinButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            startActivity(intent);  // go to NewPinActivity
+        });
 
         map = findViewById(R.id.map);
 
@@ -56,6 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            return;
 //        }
 //        try {
+//            boolean locationPermissionGranted = true; //temp solution?
 //            if (locationPermissionGranted) {
 //                gMap.setMyLocationEnabled(true);
 //                gMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -68,39 +91,67 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        } catch (SecurityException e)  {
 //            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
 //        }
-//    } This is borked atm. Not sure how to check for locationPermissionGranted yet.
+//    } //This is fucked atm. Not sure how to check for locationPermissionGranted yet.
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-      //  updateLocationUI();
-        //const image = R.drawable.qMark;
-        //the following code can be placed into its own class? or whatever its called.
-        // want to be able to call New POI (lat, long, name, description, reward, etc)
-        //then we can make a standalone temporary app to allow us to post, put, recieve location data
-        //to establish our database of points of interest. Make dozens of the following with a few lines and a for loop.
-        LatLng mapIowaState = new LatLng(42.023949, -93.647595);
-        Marker markerAtCollege = this.gMap.addMarker(new MarkerOptions().position(mapIowaState).title("Marker At College"));//.icon(R.drawable.qMark));
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(mapIowaState));
 
-        //replace this with a way to call all locations off the database and establish them as new LatLng's
-        /* GENERIC PSEUDOCODE (not fully thought through)
-        for (int i = 0; i < (Get Num of Locations); i++) {
+        Bundle extras = getIntent().getExtras(); //call that checks for passed information
+        if(extras == null) {
+            Log.w("information", "missing any passed information");
 
-            NEW POI (int i)
-            addmarker i
+        } else {
+            Log.w("volley", "extras != null");
+            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
         }
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13)); //13 is a generic zoom, worked well with testing, not sure what a changed zoom variable would mean
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(CURRENTLOCATION)); //fix CURRENTLOCATION later
-        */
+        fillPinVector();
 
 
+        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
 
 
+        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
+        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
+    }
+
+    /*
+    Function that makes a volley request to recieve all pin data. Uses url from MainActivity, and uses the
+    googleMaps gMap declaration from the top of the class.
+    */
+    private void fillPinVector(){
+        fillPinVectorHelper(pinVector);
+    }
+    private void fillPinVectorHelper(Vector<Pin> pinVector){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
+                response -> {
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("pins");
+                        //JSONObject jsonArray = response.getJSONObject("pins");
+                        Log.w("volley", "request success");
+
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject pin = jsonArray.getJSONObject(i);
+
+                            int id = pin.getInt("id");
+                            double x = pin.getDouble("x");
+                            double y = pin.getDouble("y");
+                            String name = pin.getString("name");
+
+                            pinVector.add(new Pin(x,y,name,id));
+                            Log.w("volley", "pinVector added " + name);
+                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
+
+                            this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }, Throwable::printStackTrace);
+
+        mQueue.add(request);
     }
 }
-
-
-
 
