@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PinController {
+class PinController {
+
     @Autowired
     PinRepository pinRepository;
 
@@ -31,7 +32,7 @@ public class PinController {
             return "Pin creation failed: Pin object given was null";
         }
         pinRepository.save(pin);
-        return "Pin successfully created at " + pin.getX() + ", " + pin.getY();
+        return "Pin with id " + pin.getId() + " created at (" + pin.getX() + ", " + pin.getY() + ")";
     }
 
 }
