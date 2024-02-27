@@ -125,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fillPinVectorHelper(pinVector);
     }
     private void fillPinVectorHelper(Vector<Pin> pinVector){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
                         JSONArray jsonArray = response.getJSONArray("pins");
