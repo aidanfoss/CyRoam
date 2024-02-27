@@ -8,10 +8,13 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
 import com.lg1_1.cyroam.util.Pin;
 
 public class NewPinActivity extends AppCompatActivity {
 
+    private RequestQueue mQueue; // define volley request queue
+    private final String url = MainActivity.url; // get URL from main activity
     private EditText latitudeText;
     private EditText longitudeText;
     private EditText nameText;
