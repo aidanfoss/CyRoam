@@ -34,8 +34,8 @@ public class NewPinActivity extends AppCompatActivity {
 
                 //TODO make the coordinates grab from the device rather than manual input.
                 /* grab coordinates from user inputs */
-                double longitudeIn = longitudeText.getText().length();
-                double latitudeIn = latitudeText.getText().length();
+                double longitudeIn = Double.parseDouble(String.valueOf(longitudeText.getText()));
+                double latitudeIn = Double.parseDouble(String.valueOf(latitudeText.getText()));
                 String name = nameText.getText().toString();
 
                 //todo put post here
