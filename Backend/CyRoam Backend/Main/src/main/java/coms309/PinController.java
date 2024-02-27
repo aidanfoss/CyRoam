@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 class PinController {
 
     @Autowired
-    PinRepository pinRepository;
+    public PinRepository pinRepository;
 
     @GetMapping(path = "/pins")
-    List<Pin> getAllPins() {return pinRepository.findAll();}
+    List<Pin> getAllPins() {
+        Pin lakelaverne = new Pin(42.023949, -93.647595, "Lake LaVerne");
+        Pin zerozero = new Pin(0.005, 0.0, "Zero Zero");
+        pinRepository.save(lakelaverne);
+        pinRepository.save(zerozero);
+        return pinRepository.findAll();
+    }
 
     @GetMapping(path = "/pins/{id}")
     Pin getLaptopById(@PathVariable int id){
