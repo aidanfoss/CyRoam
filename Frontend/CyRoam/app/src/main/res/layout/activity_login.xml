@@ -10,15 +10,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="900dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="100dp"
         android:orientation="vertical"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="128dp"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/alegreya_sc_bold_italic"
+            android:text="CyRoam"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/textUsername"
@@ -49,31 +61,6 @@
             android:textColor="#FFFFFF" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="274dp"
-        android:layout_height="104dp"
-        android:fontFamily="@font/alegreya_sc_bold_italic"
-        android:text="CyRoam"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.525"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="145dp"
-        android:layout_height="127dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/loginButton"
@@ -108,12 +95,6 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
-
-    <ImageView
-        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
