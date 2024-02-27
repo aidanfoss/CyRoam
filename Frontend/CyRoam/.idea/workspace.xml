@@ -5,16 +5,6 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_input.xml">
-        <config>
-          <theme>@style/Theme.AndroidExample</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
@@ -31,12 +21,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="re-added the username password editText boxes. I noticed nick had a seperate XML for the login screen, so i took the code from there. Renamed editTextTextUsername to editTextUsername. Ditto for editTextTextPassword">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="shelving??">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/newPinActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,13 +34,14 @@
   </component>
   <component name="ChangesViewManager">
     <option name="groupingKeys">
+      <option value="directory" />
       <option value="module" />
     </option>
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Aidan\.android\avd\Pixel_6_Pro_API_34.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -105,7 +95,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="main" />
+        <entry key="$PROJECT_DIR$/../.." value="16-add-postman-to-newpin-class" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -121,8 +111,9 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "15-fix-nicks-xml-crash",
-    "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam"
+    "git-widget-placeholder": "16-add-postman-to-newpin-class",
+    "last_opened_file_path": "C:/Users/Aidan/OneDrive/Documents/lg1_1/Frontend/CyRoam",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
   }
 }]]></component>
   <component name="RunManager">
@@ -229,13 +220,85 @@
     </task>
     <task id="LOCAL-00004" summary="automatic workspace.xml update, AndroidStudio">
       <option name="closed" value="true" />
-      <created>1708984507816</created>
+      <created>1709000610328</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1708984507816</updated>
+      <updated>1709000610328</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="i have no idea why its doing this tbh">
+      <option name="closed" value="true" />
+      <created>1709000632656</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000632656</updated>
+    </task>
+    <task id="LOCAL-00006" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000645671</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000645671</updated>
+    </task>
+    <task id="LOCAL-00007" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000647982</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000647982</updated>
+    </task>
+    <task id="LOCAL-00008" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649050</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649050</updated>
+    </task>
+    <task id="LOCAL-00009" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649655</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649655</updated>
+    </task>
+    <task id="LOCAL-00010" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649844</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649844</updated>
+    </task>
+    <task id="LOCAL-00011" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650006</updated>
+    </task>
+    <task id="LOCAL-00012" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650148</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650148</updated>
+    </task>
+    <task id="LOCAL-00013" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650304</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650304</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +317,8 @@
     <MESSAGE value="automatically did this, not sure what it is or why" />
     <MESSAGE value="shelf" />
     <MESSAGE value="automatic workspace.xml update, AndroidStudio" />
-    <MESSAGE value="re-added the username password editText boxes. I noticed nick had a seperate XML for the login screen, so i took the code from there. Renamed editTextTextUsername to editTextUsername. Ditto for editTextTextPassword" />
-    <option name="LAST_COMMIT_MESSAGE" value="re-added the username password editText boxes. I noticed nick had a seperate XML for the login screen, so i took the code from there. Renamed editTextTextUsername to editTextUsername. Ditto for editTextTextPassword" />
+    <MESSAGE value="i have no idea why its doing this tbh" />
+    <MESSAGE value="shelving??" />
+    <option name="LAST_COMMIT_MESSAGE" value="shelving??" />
   </component>
 </project>
