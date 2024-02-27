@@ -16,6 +16,9 @@ public class FriendObj {
     @JoinColumn(name = "uId")
     private User user;
 
+    //needs testing
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
     private String username;
 
     private int friend_uId;
