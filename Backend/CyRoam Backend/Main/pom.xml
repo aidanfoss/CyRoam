@@ -40,7 +40,7 @@
       <version>1.4.200</version>
       <scope>runtime</scope>
     </dependency>
-
+    <!-- Sql connecter should have -j -->
     <!-- The ORM JPA specs/hibernate impl -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
