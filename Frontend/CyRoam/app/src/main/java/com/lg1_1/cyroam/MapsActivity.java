@@ -120,6 +120,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(ifStatement.getPos()));
 
+        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
+        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+
         /*
         shitty hardcoded pin call, delete when no longer needed for copy-paste
         Pin IowaState = new Pin(42.023949,-93.647595, "Iowa State Campus");
