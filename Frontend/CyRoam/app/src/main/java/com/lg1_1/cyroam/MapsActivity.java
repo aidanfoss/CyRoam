@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -23,16 +28,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Objects;
+import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private FloatingActionButton newPinButton;        // define new pin button variable
+    private RequestQueue mQueue; // define volley request queue
 
-    //TODO establish user object to determine what they can and cant do
+    Vector<Pin> pinVector = new Vector<>();
+
+
+    //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
-    //TODO establish pointOfInterest object to allow easier passing of pins
-    //(lat, long, name, desc, unique image??, etc)
 
     GoogleMap gMap;
     FrameLayout map;
@@ -40,7 +52,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps); //Link to XML
+
         newPinButton = findViewById(R.id.newPinButton);
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,22 +103,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-        //updateLocationUI();
-        //const image = R.drawable.qMark;
-        //the following code can be placed into its own class? or whatever its called.
-        // want to be able to call New POI (lat, long, name, description, reward, etc)
-        //then we can make a standalone temporary app to allow us to post, put, recieve location data
-        //to establish our database of points of interest. Make dozens of the following with a few lines and a for loop.
-        //LatLng mapIowaState = new LatLng(42.023949, -93.647595);
 
-        Bundle extras = getIntent().getExtras();
-
+        Bundle extras = getIntent().getExtras(); //call that checks for passed information
         Pin ifStatement; //declare pin to fill with values below
         if(extras == null) {
-            //(pins.Update() or something)
-            //(retrieve all pins from database. maybe later, make this check your location and only recieve ones within a certain distance.
-
-            //this hard-coded pin will only show on the first load. Change this later by calling it from the server, where it should be hard coded.
+            fillPinVector(pinVector);
             ifStatement = new Pin(42.023949,-93.647595, "Test Pin");
 
         } else {
@@ -133,6 +135,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+
+
         //replace this with a way to call all locations off the database and establish them as new LatLng's
         /* GENERIC PSEUDOCODE (not fully thought through)
         for (int i = 0; i < (Get Num of Locations); i++) {
@@ -147,6 +151,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
+    }
+    private void fillPinVector(Vector<Pin> pinVector){
+        String url = "";//get the webserver URL
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("pins");
+
+                            for(int i =0; i < jsonArray.length(); i++){
+                                JSONObject pin = jsonArray.getJSONObject(i);
+
+                                int id = pin.getInt("id");
+                                double x = pin.getDouble("x");
+                                double y = pin.getDouble("y");
+                                String name = pin.getString("name");
+
+                                pinVector.add(new Pin(x,y,name,id));
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {error.printStackTrace();}
+        });
     }
 }
 
