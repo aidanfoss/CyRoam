@@ -112,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Log.w("volley, marker", "pre-fill pinVector.size() = " + String.valueOf(pinVector.size()));
         fillPinVector(pinVector);
-        while(pinVector.size() < 1){};
+        //while(pinVector.size() < 1){};
         Log.w("volley, marker", "post-fill pinVector.size() = " + String.valueOf(pinVector.size()));
         for (int i = 0; i < pinVector.size(); i++){
             MarkerOptions place = new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName());
@@ -135,7 +135,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.w("volley", "outside if statement: pinVector.size() = " + String.valueOf(pinVector.size()));
 
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
-        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
         /*
         shitty hardcoded pin call, delete when no longer needed for copy-paste
@@ -172,7 +172,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         //JSONObject jsonArray = response.getJSONObject("pins");
                         Log.w("volley", "request success");
 
-                        for(int i =0; i < jsonArray.length(); i++){
+                        for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject pin = jsonArray.getJSONObject(i);
 
                             int id = pin.getInt("id");
@@ -183,6 +183,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             pinVector.add(new Pin(x,y,name,id));
                             Log.w("volley", "pinVector added " + name);
                             Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
+
+                            this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
