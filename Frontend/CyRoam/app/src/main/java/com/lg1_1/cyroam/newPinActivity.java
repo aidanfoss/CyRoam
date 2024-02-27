@@ -39,6 +39,9 @@ public class NewPinActivity extends AppCompatActivity {
                 double latitudeIn = latitudeText.getText().length();
                 String name = nameText.getText().toString();
 
+                //todo put post here
+                //send x,y,name in one
+
                 //when new pin is created, send all relevant information to the maps activity
                 //todo maybe pass pin object over to the maps activity, rather than the seperate information
 
