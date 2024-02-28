@@ -48,10 +48,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="fixed potential crash with inputting non-integer into editText">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="&lt;change beforePath&gt; Automatic">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -502,7 +502,47 @@
       <option name="project" value="LOCAL" />
       <updated>1709153499366</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="added ProgressActivity button.">
+      <option name="closed" value="true" />
+      <created>1709154371201</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154371201</updated>
+    </task>
+    <task id="LOCAL-00036" summary="defined discoverButton&#10;removed use of pinVector (might readd later if important)">
+      <option name="closed" value="true" />
+      <created>1709154417000</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154417000</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added button and editText">
+      <option name="closed" value="true" />
+      <created>1709154432723</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154432723</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added intent Switch upon success, back to maps screen">
+      <option name="closed" value="true" />
+      <created>1709154450868</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154450868</updated>
+    </task>
+    <task id="LOCAL-00039" summary="&lt;change beforePath&gt; Automatic">
+      <option name="closed" value="true" />
+      <created>1709154486005</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154486005</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -517,10 +557,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="automatically did this, not sure what it is or why" />
-    <MESSAGE value="automatic workspace.xml update, AndroidStudio" />
-    <MESSAGE value="i have no idea why its doing this tbh" />
-    <MESSAGE value="shelving??" />
     <MESSAGE value="rename issue resolved" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="shelf" />
@@ -541,19 +577,24 @@
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
     <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed potential crash with inputting non-integer into editText" />
+    <MESSAGE value="added ProgressActivity button." />
+    <MESSAGE value="defined discoverButton&#10;removed use of pinVector (might readd later if important)" />
+    <MESSAGE value="added button and editText" />
+    <MESSAGE value="added intent Switch upon success, back to maps screen" />
+    <MESSAGE value="&lt;change beforePath&gt; Automatic" />
+    <option name="LAST_COMMIT_MESSAGE" value="&lt;change beforePath&gt; Automatic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>54</line>
+          <line>57</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>107</line>
+          <line>114</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

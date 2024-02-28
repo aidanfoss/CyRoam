@@ -27,6 +27,7 @@ public class ProgressActivity extends AppCompatActivity {
     //define xml features
     private Button postButton;
     private EditText pinIDText;
+    private Button backButton;
 //    private dropDown pinSelector; //this is a better idea than an edittext but oh well
 
     //define progressVolley class
@@ -40,9 +41,17 @@ public class ProgressActivity extends AppCompatActivity {
 
         pinIDText = findViewById(R.id.pinIDEditText);
         postButton = findViewById(R.id.postButton);
+        backButton = findViewById(R.id.backButton);
 
         volley = new progressVolley(this);
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProgressActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+        });
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
