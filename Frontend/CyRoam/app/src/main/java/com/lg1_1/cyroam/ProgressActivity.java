@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,8 +38,8 @@ public class ProgressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
-//        pinIDText = findViewById(R.id.pinIDEditText);
-//        postButton = findViewById(R.id.postButton);
+        pinIDText = findViewById(R.id.pinIDEditText);
+        postButton = findViewById(R.id.postButton);
 
         volley = new progressVolley(this);
 
@@ -56,6 +57,11 @@ public class ProgressActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(boolean discovered) { //handles success
                                 Log.d(TAG, "Pin Discovered: " + discovered);
+
+                                //return to maps activity
+                                Intent intent = new Intent(ProgressActivity.this, MapsActivity.class);
+                                //add extra returned information here
+                                startActivity(intent);
                             }
 
                             @Override
