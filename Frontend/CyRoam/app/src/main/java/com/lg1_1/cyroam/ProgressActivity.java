@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.volley.progressVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,52 +20,53 @@ import org.json.JSONObject;
 
 public class ProgressActivity extends AppCompatActivity {
 
+    //Debug or Logging stuff
+    private String TAG = "ProgressActivity";
+
+    //define xml features
     private Button postButton;
     private EditText pinIDText;
 //    private dropDown pinSelector; //this is a better idea than an edittext but oh well
+
+    //define progressVolley class
+    private progressVolley volley; //this initializes the progressVolley class i made in the volley package
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
+//        pinIDText = findViewById(R.id.pinIDEditText);
+//        postButton = findViewById(R.id.postButton);
 
-        //todo initialize buttons and editTexts
-//        pinIDText = findViewById()
-        //etc
+        volley = new progressVolley(this);
 
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pinIdString = pinIDText.getText().toString();
+                if (!pinIdString.isEmpty()) {
+                    int pinId = Integer.parseInt(pinIdString);
+                    int userId = 1; //TODO FIX HARDCODED, later get userdata in from extra from maps screen
 
-        //textbox that lets you type in a pin ID
+                    //Call discoverPin method
+                    volley.discoverPin(userId, pinId, new progressVolley.VolleyCallback() {
+                        @Override
+                        public void onSuccess(boolean discovered) { //handles success
+                            Log.d(TAG, "Pin Discovered: " + discovered);
+                        }
 
-    postButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+                        @Override
+                        public void onFailure(String errorMessage) { //handles failure
+                            Log.e(TAG, "Error: " + errorMessage);
+                        }
+                    });
+                } else { //handle empty pin ID
+                    Log.e(TAG, "Pin ID is empty");
+                }
+            }
+        });
 
-        }
-    });
-
-    }
-
-    private void getData(int ID, String progress){
-        String url = MainActivity.url + "/progress"; //sets URL to progress table
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, MainActivity.url+"/progress", null,
-                response -> {
-                    try{
-                        JSONArray jsonArray = response.getJSONArray("progress");
-                        Log.w("volley", "progress request success");
-
-                        //for(int i = 0; i < jsonArray.length(); i++){
-                        JSONObject pinProgress = jsonArray.getJSONObject(ID);
-
-                        int id = pinProgress.getInt("id");
-                        Boolean pinBool = pinProgress.getBoolean("")
-                        //}
-                    } catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }, Throwable::printStackTrace);
-        queue.add(request);
     }
 }
