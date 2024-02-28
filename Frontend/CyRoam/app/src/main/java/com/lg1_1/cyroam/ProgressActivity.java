@@ -9,15 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.volley.progressVolley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ProgressActivity extends AppCompatActivity {
 
@@ -28,7 +20,6 @@ public class ProgressActivity extends AppCompatActivity {
     private Button postButton;
     private EditText pinIDText;
     private Button backButton;
-//    private dropDown pinSelector; //this is a better idea than an edittext but oh well
 
     //define progressVolley class
     private progressVolley volley; //this initializes the progressVolley class i made in the volley package
@@ -52,6 +43,8 @@ public class ProgressActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //uses editText to get pinID, then uses helper class to make a volley post request to the users given Pin, which marks it as discovered.
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +65,6 @@ public class ProgressActivity extends AppCompatActivity {
                                 //add extra returned information here
                                 startActivity(intent);
                             }
-
                             @Override
                             public void onFailure(String errorMessage) { //handles failure
                                 Log.e(TAG, "Error: " + errorMessage);
