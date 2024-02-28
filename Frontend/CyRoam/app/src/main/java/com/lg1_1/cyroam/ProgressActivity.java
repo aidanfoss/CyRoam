@@ -45,7 +45,7 @@ public class ProgressActivity extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pinIdString = pinIDText.getText().toString();
+                String pinIdString = pinIDText.getText().toString().trim(); //trim fixes any spaces, which can cause errors
                 if (!pinIdString.isEmpty()) {
                     int pinId = Integer.parseInt(pinIdString);
                     int userId = 1; //TODO FIX HARDCODED, later get userdata in from extra from maps screen

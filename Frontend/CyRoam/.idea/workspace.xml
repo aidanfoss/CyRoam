@@ -48,10 +48,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -473,7 +470,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709151002630</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="made it so when pressed, the button sends a volley request given the data defined earlier in the class">
+      <option name="closed" value="true" />
+      <created>1709153154644</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153154644</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -509,7 +514,8 @@
     <MESSAGE value="added ProgressActivity to xml file" />
     <MESSAGE value="created ProgressActivity" />
     <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
-    <option name="LAST_COMMIT_MESSAGE" value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
+    <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
+    <option name="LAST_COMMIT_MESSAGE" value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
