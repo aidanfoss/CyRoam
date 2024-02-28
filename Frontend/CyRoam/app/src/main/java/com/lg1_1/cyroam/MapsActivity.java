@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
@@ -52,8 +53,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
 
         newPinButton = findViewById(R.id.newPinButton);
+        discoverButton = findViewById(R.id.discoverButton);
+
         newPinButton.setOnClickListener(v -> {
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            startActivity(intent);  // go to NewPinActivity
+        });
+        discoverButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, ProgressActivity.class);
             startActivity(intent);  // go to NewPinActivity
         });
 
@@ -112,8 +119,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
 
 
-        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
-        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
+        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
     }
 
