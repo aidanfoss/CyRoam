@@ -48,7 +48,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="fixed potential crash with inputting non-integer into editText">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,6 +125,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2c8ysaUHBESfKgSfkTnG94T2qg9" />
   <component name="ProjectViewState">
@@ -478,7 +486,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709153154644</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="fixed potential crash when inputting spaces into the editText">
+      <option name="closed" value="true" />
+      <created>1709153367497</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153367497</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fixed potential crash with inputting non-integer into editText">
+      <option name="closed" value="true" />
+      <created>1709153499366</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153499366</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,7 +539,9 @@
     <MESSAGE value="created ProgressActivity" />
     <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
-    <option name="LAST_COMMIT_MESSAGE" value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
+    <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
+    <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed potential crash with inputting non-integer into editText" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
