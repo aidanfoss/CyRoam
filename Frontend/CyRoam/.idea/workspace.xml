@@ -48,11 +48,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="&lt;change beforePath&gt; Automatic">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="defined and implemented rough discoverButton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -542,7 +540,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709154486005</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="added back button">
+      <option name="closed" value="true" />
+      <created>1709154984082</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154984082</updated>
+    </task>
+    <task id="LOCAL-00041" summary="defined and implemented rough discoverButton">
+      <option name="closed" value="true" />
+      <created>1709155028867</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1709155028867</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -557,8 +571,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rename issue resolved" />
-    <MESSAGE value="initial commit" />
     <MESSAGE value="shelf" />
     <MESSAGE value="auto workspace.xml" />
     <MESSAGE value="might be useful later. useless ATM" />
@@ -582,7 +594,9 @@
     <MESSAGE value="added button and editText" />
     <MESSAGE value="added intent Switch upon success, back to maps screen" />
     <MESSAGE value="&lt;change beforePath&gt; Automatic" />
-    <option name="LAST_COMMIT_MESSAGE" value="&lt;change beforePath&gt; Automatic" />
+    <MESSAGE value="added back button" />
+    <MESSAGE value="defined and implemented rough discoverButton" />
+    <option name="LAST_COMMIT_MESSAGE" value="defined and implemented rough discoverButton" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
