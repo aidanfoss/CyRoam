@@ -48,13 +48,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="commented out not working code.">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +59,6 @@
   </component>
   <component name="ChangesViewManager">
     <option name="groupingKeys">
-      <option value="directory" />
       <option value="module" />
     </option>
   </component>
@@ -438,7 +433,47 @@
       <option name="project" value="LOCAL" />
       <updated>1709070558825</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class.">
+      <option name="closed" value="true" />
+      <created>1709150873813</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1709150873813</updated>
+    </task>
+    <task id="LOCAL-00028" summary="added ProgressActivity to xml file">
+      <option name="closed" value="true" />
+      <created>1709150912434</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1709150912434</updated>
+    </task>
+    <task id="LOCAL-00029" summary="added ProgressActivity to xml file">
+      <option name="closed" value="true" />
+      <created>1709150922473</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1709150922473</updated>
+    </task>
+    <task id="LOCAL-00030" summary="created ProgressActivity">
+      <option name="closed" value="true" />
+      <created>1709150937637</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709150937637</updated>
+    </task>
+    <task id="LOCAL-00031" summary="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after">
+      <option name="closed" value="true" />
+      <created>1709151002630</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1709151002630</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -470,7 +505,11 @@
     <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
     <MESSAGE value="cleaned up code a little bit" />
     <MESSAGE value="commented out not working code." />
-    <option name="LAST_COMMIT_MESSAGE" value="commented out not working code." />
+    <MESSAGE value="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class." />
+    <MESSAGE value="added ProgressActivity to xml file" />
+    <MESSAGE value="created ProgressActivity" />
+    <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
+    <option name="LAST_COMMIT_MESSAGE" value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
