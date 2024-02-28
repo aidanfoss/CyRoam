@@ -7,12 +7,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +26,6 @@ public class progressVolley {
         this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
     }
-
 
     /*
     this function, when given its proper inputs, will set the called pins discover data to true.
@@ -47,8 +44,6 @@ public class progressVolley {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-
-                // Request.Method.POST, url, requestBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
