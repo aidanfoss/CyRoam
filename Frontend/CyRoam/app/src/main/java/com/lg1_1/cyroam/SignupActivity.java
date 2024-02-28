@@ -74,13 +74,16 @@ public class SignupActivity extends AppCompatActivity {
     private void makeStringReq() {
 
         StringRequest stringRequest = new StringRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 URL_STRING_REQ,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Handle the successful response here
                         Log.d("Volley Response", response);
+
+
+
                         //msgResponse.setText(response.toString());
                     }
                 },
