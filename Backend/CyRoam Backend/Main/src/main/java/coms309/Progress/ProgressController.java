@@ -2,6 +2,7 @@ package coms309.Progress;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +25,9 @@ class ProgressController {
     }
 
     @PostMapping(path = "/progress")
-        String discoveredPin(@RequestBody Progress progress) {
+        Progress discoveredPin(@RequestBody Progress progress) {
             progressRepository.save(progress);
-            return "User with id " + progress.getUserId() + " discovered pin " + progress.getPinId();
+            return progress;
         }
 
 }
