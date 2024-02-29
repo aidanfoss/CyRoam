@@ -11,6 +11,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -42,13 +43,13 @@ import org.json.JSONObject;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
+    private final String TAG = "MapsActivityTag"; //debugging tag
     private RequestQueue mQueue; // define volley request queue
 
     //define UI
     private FloatingActionButton newPinButton; // define new pin button variable
     private FloatingActionButton discoverButton; //define discoverButton
-
+    private TextView textView;
 
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
@@ -90,8 +91,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        //define and implement buttons
+        //define and implement UI
         map = findViewById(R.id.map); //defines the map in the UI
+        textView = findViewById(R.id.textView2);
         newPinButton = findViewById(R.id.newPinButton);
         discoverButton = findViewById(R.id.discoverButton);
         newPinButton.setOnClickListener(v -> {
@@ -116,7 +118,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 for (Location location : locationResult.getLocations()) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
+                    Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                     gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
@@ -176,18 +178,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 
-//        Bundle extras = getIntent().getExtras(); //call that checks for passed information
-//        if(extras == null) {
-//            Log.w("extras", "missing any passed information");
-//
-//        } else {
-//            Log.w("extras", "extras != null");
-//            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
-//            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
-//            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
-//        } //Todo repurpose this block of code to recieve login information from nick
         fillPinVector();
 
+        Bundle extras = getIntent().getExtras(); //call that checks for passed information
+        if(extras == null) {
+            Log.i(TAG, "missing any passed information");
+
+        } else {
+            Log.i(TAG, "extras != null");
+            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
+//            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
+//            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
+            if (extras.containsKey("pinId")){
+                textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+            }
+            if (extras.containsKey("LATITUDE")) {
+                textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
+            }
+        } //Todo repurpose this block of code to recieve login information from nick
         //add hardcoded pins here
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
         Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
@@ -202,7 +210,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         only called pinVector because it used to use a vector. can change later.
         */
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
+        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
                         JSONArray jsonArray = response.getJSONArray("pins");
@@ -224,6 +232,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
                         }
+
+                        textView.setText(textView.getText() + "\nCreatedPins");
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

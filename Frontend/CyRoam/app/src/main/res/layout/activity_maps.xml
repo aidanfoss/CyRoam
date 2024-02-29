@@ -35,7 +35,18 @@
         android:layout_width="92dp"
         android:layout_height="132dp"
         android:clickable="true"
-        android:contentDescription="New Pin Button"
+        android:contentDescription="discover Button"
         android:layout_gravity="top|end"
         tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_gravity="bottom|end"
+        android:autoText="true"
+        android:background="#FFFFFF"
+        android:text="@string/textBoxMapTest"
+        tools:text="@string/textBoxMapTest" />
+
 </FrameLayout>
