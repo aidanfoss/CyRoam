@@ -55,6 +55,7 @@ public class pinVolley {
                 callback.onFailure("Error occured: " + error.getMessage());
             }
         });
+        queue.add(request);
     }
 
     /*
