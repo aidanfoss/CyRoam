@@ -28,6 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import java.util.Vector;
 
 
@@ -42,6 +44,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+    private FusedLocationProviderClient fusedLocationClient;
+
+
     GoogleMap gMap;
     FrameLayout map;
     @SuppressLint("MissingInflatedId")
@@ -51,6 +57,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps); //Link to XML
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
+
 
         newPinButton = findViewById(R.id.newPinButton);
         discoverButton = findViewById(R.id.discoverButton);
@@ -106,11 +113,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Bundle extras = getIntent().getExtras(); //call that checks for passed information
         if(extras == null) {
-            Log.w("information", "missing any passed information");
+            Log.w("extras", "missing any passed information");
 
         } else {
-            Log.w("volley", "extras != null");
+            Log.w("extras", "extras != null");
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
+            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
+            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
         }
         fillPinVector();
 
