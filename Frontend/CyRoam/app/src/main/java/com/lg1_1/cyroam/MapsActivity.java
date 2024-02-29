@@ -116,6 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 for (Location location : locationResult.getLocations()) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                     gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
@@ -123,6 +124,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             if (location != null) {
                 LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                 gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             }
         });
@@ -172,37 +174,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
+        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 
-        Bundle extras = getIntent().getExtras(); //call that checks for passed information
-        if(extras == null) {
-            Log.w("extras", "missing any passed information");
-
-        } else {
-            Log.w("extras", "extras != null");
-            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
-            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
-            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
-        }
+//        Bundle extras = getIntent().getExtras(); //call that checks for passed information
+//        if(extras == null) {
+//            Log.w("extras", "missing any passed information");
+//
+//        } else {
+//            Log.w("extras", "extras != null");
+//            //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
+//            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
+//            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
+//        } //Todo repurpose this block of code to recieve login information from nick
         fillPinVector();
 
-
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-//        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
-
-
+        //add hardcoded pins here
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
         Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
-
-
-        //gMap.moveCamera();
     }
 
-    /*
-    Function that makes a volley request to recieve all pin data. Uses url from MainActivity, and uses the
-    googleMaps gMap declaration from the top of the class. only called pinVector because it used to use a vector
-    */
+
     private void fillPinVector(){
+        /*
+        Function that makes a volley request to recieve all pin data.
+        Uses url from MainActivity, and uses the googleMaps gMap declaration
+        from the top of the class.
+
+        only called pinVector because it used to use a vector. can change later.
+        */
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
@@ -231,6 +230,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }, Throwable::printStackTrace);
 
         mQueue.add(request);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startLocationUpdates();
+    }
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+    private void stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 }
 
