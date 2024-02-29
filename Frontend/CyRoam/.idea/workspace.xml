@@ -48,9 +48,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="working on implementing current location as a LatLng">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="cleaned up main, left a comment detailing locationPerms thought process.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,22 +229,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00001" summary="automatically did this, not sure what it is or why">
-      <option name="closed" value="true" />
-      <created>1708552649957</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1708552649957</updated>
-    </task>
-    <task id="LOCAL-00002" summary="shelf">
-      <option name="closed" value="true" />
-      <created>1708983551379</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983551379</updated>
     </task>
     <task id="LOCAL-00003" summary="automatic workspace.xml update, AndroidStudio">
       <option name="closed" value="true" />
@@ -620,7 +606,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709185307695</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709186088015</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1709186088016</updated>
+    </task>
+    <task id="LOCAL-00051" summary="cleaned up main, left a comment detailing locationPerms thought process.">
+      <option name="closed" value="true" />
+      <created>1709187518835</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1709187518835</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -635,7 +637,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added comment about marker creation" />
     <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
     <MESSAGE value="cleaned up code a little bit" />
     <MESSAGE value="commented out not working code." />
@@ -660,27 +661,18 @@
     <MESSAGE value="added logs to pin creation and calls" />
     <MESSAGE value="added locationServices to gradle workspace" />
     <MESSAGE value="working on implementing current location as a LatLng" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on implementing current location as a LatLng" />
+    <MESSAGE value="cleaned up main, left a comment detailing locationPerms thought process." />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up main, left a comment detailing locationPerms thought process." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>156</line>
+          <line>185</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="AndroidRunConfigurationType">
-        <watch expression="pinVector" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>
