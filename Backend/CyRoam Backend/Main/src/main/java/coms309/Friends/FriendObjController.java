@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 public class FriendObjController {
-
+//jj
 
     @Autowired
     public FriendObjInterface friendObjInterface;

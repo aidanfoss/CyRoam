@@ -1,5 +1,7 @@
 package coms309;
 
+import coms309.Friends.FriendObj;
+import coms309.Friends.FriendObjInterface;
 import coms309.Pin.PinController;
 import coms309.Progress.Progress;
 import coms309.Progress.ProgressRepository;
@@ -29,8 +31,21 @@ public class Application {
         return args -> {
             User user1 = new User("bossf", "123");
             User user2 = new User("Jane", "jane@somemail.com");
+
             userInterface.save(user1);
             userInterface.save(user2);
+        };
+    }
+    @Bean
+    CommandLineRunner initFriend(FriendObjInterface friendObjInterface) {
+        return args -> {
+            FriendObj friendObj1 = new FriendObj("bossf", "zach");
+            FriendObj friendObj2 = new FriendObj("Jane", "poop");
+            FriendObj friendObj3 = new FriendObj("bossf", "stinky");
+
+            friendObjInterface.save(friendObj1);
+            friendObjInterface.save(friendObj2);
+            friendObjInterface.save(friendObj3);
         };
     }
 
