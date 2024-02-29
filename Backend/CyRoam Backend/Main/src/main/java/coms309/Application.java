@@ -1,5 +1,7 @@
 package coms309;
 
+import coms309.Friends.FriendObj;
+import coms309.Friends.FriendObjInterface;
 import coms309.Users.User;
 import coms309.Users.UserInterface;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,16 @@ public class Application {
 
             userInterface.save(user1);
             userInterface.save(user2);
+        };
+    }
+    @Bean
+    CommandLineRunner initFriend(FriendObjInterface friendObjInterface) {
+        return args -> {
+            FriendObj friendObj1 = new FriendObj("bossf", "zach");
+            FriendObj friendObj2 = new FriendObj("Jane", "poop");
+
+            friendObjInterface.save(friendObj1);
+            friendObjInterface.save(friendObj2);
         };
     }
 
