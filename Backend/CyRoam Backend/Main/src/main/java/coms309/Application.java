@@ -36,9 +36,11 @@ public class Application {
         return args -> {
             FriendObj friendObj1 = new FriendObj("bossf", "zach");
             FriendObj friendObj2 = new FriendObj("Jane", "poop");
+            FriendObj friendObj3 = new FriendObj("bossf", "stinky");
 
             friendObjInterface.save(friendObj1);
             friendObjInterface.save(friendObj2);
+            friendObjInterface.save(friendObj3);
         };
     }
 
