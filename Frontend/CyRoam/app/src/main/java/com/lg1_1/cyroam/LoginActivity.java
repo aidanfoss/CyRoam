@@ -10,10 +10,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+
+
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                makeStringReq();
+                makeStringReq(username, password);
                 if(confirm){//if confrim is true
                 /* when login button is pressed, use intent to switch to Login Activity */
                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
@@ -89,52 +103,59 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void makeStringReq() {
+    private void makeStringReq(String pass, String user){
+        String url = URL_STRING_REQ + "/login";
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("Username", user);
+            userInfo.put("Password", pass);
 
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.GET,
-                URL_STRING_REQ,
-                new Response.Listener<String>() {
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                userInfo,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        // Handle the successful response here
-                        Log.d("Volley Response", response);
-                        String sndhelpples = "true";
-                        if(response.equals (sndhelpples)){
-                            confirm = true;
-                        }
-
-
-                        //msgResponse.setText(response.toString());
+                    public void onResponse(JSONObject response) {
+                        /*if(response){
+                            checker = true;
+                        }*/
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Handle any errors that occur during the request
-                        Log.e("Volley Error", error.toString());
+                        // tvResponse.setText(error.getMessage());
                     }
                 }
-        ) {
+        ){
             @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-//                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-//                headers.put("Content-Type", "application/json");
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+                //                headers.put("Content-Type", "application/json");
                 return headers;
             }
 
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-//                params.put("param1", "value1");
-//                params.put("param2", "value2");
+                Map<String, String> params = new HashMap<String, String>();
+                //                params.put("param1", "value1");
+                //                params.put("param2", "value2");
                 return params;
             }
         };
 
         // Adding request to request queue
-        //VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
 
 }
