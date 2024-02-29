@@ -4,6 +4,8 @@ import coms309.Users.User;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
+
+//hh
 @Entity
 public class FriendObj {
 

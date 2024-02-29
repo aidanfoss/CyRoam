@@ -63,6 +63,8 @@ public class ProgressActivity extends AppCompatActivity {
                                 //return to maps activity
                                 Intent intent = new Intent(ProgressActivity.this, MapsActivity.class);
                                 //add extra returned information here
+                                intent.putExtra("discovered", discovered);
+                                intent.putExtra("pinId", pinId);
                                 startActivity(intent);
                             }
                             @Override

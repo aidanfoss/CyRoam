@@ -16,9 +16,9 @@ import org.json.JSONObject;
 
 public class progressVolley {
 
-    private static final String TAG = "ProgressRequest";
+    private static final String TAG = "progressVolley";
+//    private static final String BASE_URL = MainActivity.url;
     private static final String BASE_URL = MainActivity.url;
-
     private RequestQueue queue;
     private Context context;
 
@@ -31,7 +31,7 @@ public class progressVolley {
     this function, when given its proper inputs, will set the called pins discover data to true.
      */
     public void discoverPin(int userId, int pinId, final VolleyCallback callback){
-        String url = BASE_URL + "/progress";
+
         JSONObject requestBody = new JSONObject();
         try{
             requestBody.put("userId", userId);
@@ -43,14 +43,17 @@ public class progressVolley {
             return;
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + "/progress", requestBody,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e(TAG, "DISCOVERPIN RESPONSE: " + response.toString());
                         try {
                             boolean discovered = response.getBoolean("discovered");
+                            Log.w(TAG, "respone: " + String.valueOf(discovered));
                             callback.onSuccess(discovered);
                         } catch (JSONException e) {
+                            Log.e(TAG, "Error occured: " + e.getMessage());
                             e.printStackTrace();
                             callback.onFailure("JSONException: " + e.getMessage());
                         }
@@ -62,6 +65,7 @@ public class progressVolley {
                 callback.onFailure("Error occured: " + error.getMessage());
             }
         });
+        queue.add(request);
     }
     public interface VolleyCallback {
         void onSuccess(boolean discovered);

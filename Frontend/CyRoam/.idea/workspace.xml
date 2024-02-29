@@ -48,11 +48,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="automatic">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/PinVolley.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +70,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Pixel_6_Pro_API_34.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -121,7 +124,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="16-add-postman-to-newpin-class" />
+        <entry key="$PROJECT_DIR$/../.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -133,20 +136,21 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "android-custom-viewC:/Users/bossf/AppData/Local/Android/Sdk/sources/android-34/android/view/View.java_SELECTED": "View",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "19-add-progress-screen",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;android-custom-viewC:/Users/bossf/AppData/Local/Android/Sdk/sources/android-34/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewC:/Users/bossf/AppData/Local/Android/Sdk/sources/android-34/android/widget/TextView.java_SELECTED&quot;: &quot;TextView&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;21-make-sure-everything-functions-with-postman&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="android.template.-77531316">
       <recent name="com.lg1_1.cyroam" />
@@ -229,46 +233,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00001" summary="automatically did this, not sure what it is or why">
-      <option name="closed" value="true" />
-      <created>1708552649957</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1708552649957</updated>
-    </task>
-    <task id="LOCAL-00002" summary="shelf">
-      <option name="closed" value="true" />
-      <created>1708983551379</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983551379</updated>
-    </task>
-    <task id="LOCAL-00003" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1708983581482</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983581482</updated>
-    </task>
-    <task id="LOCAL-00004" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1709000610328</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000610328</updated>
-    </task>
-    <task id="LOCAL-00005" summary="i have no idea why its doing this tbh">
-      <option name="closed" value="true" />
-      <created>1709000632656</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000632656</updated>
     </task>
     <task id="LOCAL-00006" summary="shelving??">
       <option name="closed" value="true" />
@@ -582,7 +546,87 @@
       <option name="project" value="LOCAL" />
       <updated>1709157294688</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="finished onSuccess in NewPinActivity. Now it passes relevant information to maps, and creates a new pin with it">
+      <option name="closed" value="true" />
+      <created>1709184278630</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1709184278630</updated>
+    </task>
+    <task id="LOCAL-00046" summary="changed URL to pins postman mock server">
+      <option name="closed" value="true" />
+      <created>1709184295829</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1709184295829</updated>
+    </task>
+    <task id="LOCAL-00047" summary="added logs to pin creation and calls">
+      <option name="closed" value="true" />
+      <created>1709185269375</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185269375</updated>
+    </task>
+    <task id="LOCAL-00048" summary="added locationServices to gradle workspace">
+      <option name="closed" value="true" />
+      <created>1709185286994</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185286994</updated>
+    </task>
+    <task id="LOCAL-00049" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709185307695</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185307695</updated>
+    </task>
+    <task id="LOCAL-00050" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709186088015</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1709186088016</updated>
+    </task>
+    <task id="LOCAL-00051" summary="cleaned up main, left a comment detailing locationPerms thought process.">
+      <option name="closed" value="true" />
+      <created>1709187518835</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1709187518835</updated>
+    </task>
+    <task id="LOCAL-00052" summary="working on GPS locationdata use">
+      <option name="closed" value="true" />
+      <created>1709192634729</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1709192634729</updated>
+    </task>
+    <task id="LOCAL-00053" summary="got PinData to properly fill via postman">
+      <option name="closed" value="true" />
+      <created>1709193731837</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1709193731837</updated>
+    </task>
+    <task id="LOCAL-00054" summary="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later.">
+      <option name="closed" value="true" />
+      <created>1709195684590</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1709195684590</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -597,15 +641,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="might be useful later. useless ATM" />
-    <MESSAGE value="Created fillPinVector function that will grab all pin data once a URL is established" />
-    <MESSAGE value="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out." />
-    <MESSAGE value="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff." />
-    <MESSAGE value="moved marker creation point to the fillPinVector function. Fixed a bunch of issues" />
-    <MESSAGE value="added comment about marker creation" />
-    <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
-    <MESSAGE value="cleaned up code a little bit" />
-    <MESSAGE value="commented out not working code." />
     <MESSAGE value="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class." />
     <MESSAGE value="added ProgressActivity to xml file" />
     <MESSAGE value="created ProgressActivity" />
@@ -622,27 +657,39 @@
     <MESSAGE value="defined and implemented rough discoverButton" />
     <MESSAGE value="trimmed empty space and unused imports" />
     <MESSAGE value="automatic" />
-    <option name="LAST_COMMIT_MESSAGE" value="automatic" />
+    <MESSAGE value="finished onSuccess in NewPinActivity. Now it passes relevant information to maps, and creates a new pin with it" />
+    <MESSAGE value="changed URL to pins postman mock server" />
+    <MESSAGE value="added logs to pin creation and calls" />
+    <MESSAGE value="added locationServices to gradle workspace" />
+    <MESSAGE value="working on implementing current location as a LatLng" />
+    <MESSAGE value="cleaned up main, left a comment detailing locationPerms thought process." />
+    <MESSAGE value="working on GPS locationdata use" />
+    <MESSAGE value="got PinData to properly fill via postman" />
+    <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
+    <option name="LAST_COMMIT_MESSAGE" value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="10" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="18" />
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java</url>
+          <line>32</line>
+          <properties class="com.lg1_1.cyroam.volley.progressVolley" method="discoverPin">
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="AndroidRunConfigurationType">
-        <watch expression="pinVector" language="JAVA" />
-      </configuration>
-    </watches-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.android.volley.RequestQueue" memberName="mSequenceGenerator" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
