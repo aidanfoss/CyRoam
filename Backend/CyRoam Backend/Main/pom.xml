@@ -40,23 +40,17 @@
       <version>1.4.200</version>
       <scope>runtime</scope>
     </dependency>
-<<<<<<< HEAD
 
-=======
->>>>>>> 385f7d989b8250848b436ddd39cb2f0626dc72a8
     <!-- Sql connecter should have -j -->
     <!-- The ORM JPA specs/hibernate impl -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-<<<<<<< HEAD
     <dependency>
       <groupId>com.mysql</groupId>
       <artifactId>mysql-connector-j</artifactId>
     </dependency>
-=======
->>>>>>> 385f7d989b8250848b436ddd39cb2f0626dc72a8
 
   </dependencies>
 
