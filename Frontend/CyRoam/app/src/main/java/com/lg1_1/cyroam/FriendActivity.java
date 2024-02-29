@@ -108,6 +108,8 @@ public class FriendActivity extends AppCompatActivity {
 
                             outputtext.append(friendUser + "\n");
                             Log.i(TAG, output);
+
+
                         }
 
                     }catch (JSONException e){
