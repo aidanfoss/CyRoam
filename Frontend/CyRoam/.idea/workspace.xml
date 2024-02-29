@@ -48,11 +48,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="cleaned up main, left a comment detailing locationPerms thought process.">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="got PinData to properly fill via postman">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,22 +228,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00003" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1708983581482</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983581482</updated>
-    </task>
-    <task id="LOCAL-00004" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1709000610328</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000610328</updated>
     </task>
     <task id="LOCAL-00005" summary="i have no idea why its doing this tbh">
       <option name="closed" value="true" />
@@ -622,7 +605,23 @@
       <option name="project" value="LOCAL" />
       <updated>1709187518835</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="working on GPS locationdata use">
+      <option name="closed" value="true" />
+      <created>1709192634729</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1709192634729</updated>
+    </task>
+    <task id="LOCAL-00053" summary="got PinData to properly fill via postman">
+      <option name="closed" value="true" />
+      <created>1709193731837</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1709193731837</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -637,8 +636,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
-    <MESSAGE value="cleaned up code a little bit" />
     <MESSAGE value="commented out not working code." />
     <MESSAGE value="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class." />
     <MESSAGE value="added ProgressActivity to xml file" />
@@ -662,15 +659,22 @@
     <MESSAGE value="added locationServices to gradle workspace" />
     <MESSAGE value="working on implementing current location as a LatLng" />
     <MESSAGE value="cleaned up main, left a comment detailing locationPerms thought process." />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up main, left a comment detailing locationPerms thought process." />
+    <MESSAGE value="working on GPS locationdata use" />
+    <MESSAGE value="got PinData to properly fill via postman" />
+    <option name="LAST_COMMIT_MESSAGE" value="got PinData to properly fill via postman" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>185</line>
+          <line>188</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
+          <line>197</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

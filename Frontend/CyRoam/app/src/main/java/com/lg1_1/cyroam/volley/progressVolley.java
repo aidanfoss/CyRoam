@@ -16,7 +16,7 @@ import org.json.JSONObject;
 
 public class progressVolley {
 
-    private static final String TAG = "ProgressRequest";
+    private static final String TAG = "progressVolley";
 //    private static final String BASE_URL = MainActivity.url;
     private static final String BASE_URL = MainActivity.url;
     private RequestQueue queue;
@@ -47,6 +47,7 @@ public class progressVolley {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e(TAG, "DISCOVERPIN RESPONSE: " + response.toString());
                         try {
                             boolean discovered = response.getBoolean("discovered");
                             callback.onSuccess(discovered);

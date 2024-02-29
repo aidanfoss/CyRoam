@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .setWaitForAccurateLocation(false)
                 .setMinUpdateIntervalMillis(500)
                 .setMaxUpdateDelayMillis(1000)
-                .build();
+                .build(); //todo repair and use the geolocation code
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -121,13 +121,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         };
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-            if (location != null) {
-                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
-                gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            }
-        });
+//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+//            if (location != null) {
+//                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+//                Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
+//                gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//            }
+//        });
     }
 
 
