@@ -1,13 +1,9 @@
 package com.lg1_1.cyroam;
 
-import com.lg1_1.cyroam.util.Pin;
+import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
 import static com.lg1_1.cyroam.MainActivity.url;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,35 +11,44 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
-import android.Manifest;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lg1_1.cyroam.util.Pin;
+import com.google.android.gms.location.LocationRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-
-import java.util.Objects;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private RequestQueue mQueue; // define volley request queue
+
+    //define UI
     private FloatingActionButton newPinButton; // define new pin button variable
     private FloatingActionButton discoverButton; //define discoverButton
+
 
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
@@ -51,13 +56,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //location & locationPermissions things
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
     private FusedLocationProviderClient fusedLocationClient;
-    private Location lastKnownLocation;
-    private Boolean locationPermissionGranted;
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+//    private Location lastKnownLocation;
+//    private Boolean locationPermissionGranted;
+//    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
 
 
     GoogleMap gMap;
     FrameLayout map;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY, 1000)
+                .setWaitForAccurateLocation(false)
+                .setMinUpdateIntervalMillis(500)
+                .setMaxUpdateDelayMillis(1000)
+                .build();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -78,6 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //define and implement buttons
+        map = findViewById(R.id.map); //defines the map in the UI
         newPinButton = findViewById(R.id.newPinButton);
         discoverButton = findViewById(R.id.discoverButton);
         newPinButton.setOnClickListener(v -> {
@@ -89,59 +103,75 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);  // go to NewPinActivity
         });
 
-        map = findViewById(R.id.map);
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
+        // Initialize location callback to receive location updates
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                }
+            }
+        };
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
+            if (location != null) {
+                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
+        });
     }
-
-
 
 
     //https://github.com/googlemaps-samples/android-samples/blob/588287af6ea872c6098c2b4c727503200de4dc7e/tutorials/java/CurrentPlaceDetailsOnMap/app/src/main/java/com/example/currentplacedetailsonmap/MapsActivityCurrentPlace.java#L267-L282
 
 
-    private void updateLocationUI() { //got this chunk of code from https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
-        if (gMap == null) {
-            return;
-        }
-        try {
-            if (locationPermissionGranted) {
-                gMap.setMyLocationEnabled(true);
-                gMap.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                gMap.setMyLocationEnabled(false);
-                gMap.getUiSettings().setMyLocationButtonEnabled(false);
-                lastKnownLocation = null;
-                getLocationPermission();
-            }
-        } catch (SecurityException e)  {
-            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
-        }
-    }
-
-    private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        }
-    }
+//    private void updateLocationUI() { //got this chunk of code from https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
+//        if (gMap == null) {
+//            return;
+//        }
+//        try {
+//            if (locationPermissionGranted) {
+//                gMap.setMyLocationEnabled(true);
+//                gMap.getUiSettings().setMyLocationButtonEnabled(true);
+//            } else {
+//                gMap.setMyLocationEnabled(false);
+//                gMap.getUiSettings().setMyLocationButtonEnabled(false);
+//                lastKnownLocation = null;
+//                getLocationPermission();
+//            }
+//        } catch (SecurityException e)  {
+//            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
+//        }
+//    }
+//
+//    private void getLocationPermission() {
+//        /*
+//         * Request location permission, so that we can get the location of the
+//         * device. The result of the permission request is handled by a callback,
+//         * onRequestPermissionsResult.
+//         */
+//        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+//                android.Manifest.permission.ACCESS_FINE_LOCATION)
+//                == PackageManager.PERMISSION_GRANTED) {
+//            locationPermissionGranted = true;
+//        } else {
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+//                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+//        }
+//    }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
+        gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
 
         Bundle extras = getIntent().getExtras(); //call that checks for passed information
         if(extras == null) {
@@ -156,21 +186,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fillPinVector();
 
 
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
+        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
 //        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
 
 
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
         Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
+
+
+        //gMap.moveCamera();
     }
 
     /*
     Function that makes a volley request to recieve all pin data. Uses url from MainActivity, and uses the
-    googleMaps gMap declaration from the top of the class.
+    googleMaps gMap declaration from the top of the class. only called pinVector because it used to use a vector
     */
-
-
     private void fillPinVector(){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {

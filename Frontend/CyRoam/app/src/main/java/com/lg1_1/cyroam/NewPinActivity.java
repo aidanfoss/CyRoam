@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,11 +58,12 @@ public class NewPinActivity extends AppCompatActivity {
                         intent.putExtra("NAME", name);
                         intent.putExtra("PINID", idSuccess);
 
+                        Log.w("CreatePin", "CreatePin Success!");
                         startActivity(intent);
                     }
                     @Override
                     public void onFailure(String errorMessage) {
-
+                        Log.e("CreatePin", "CreatePin Failed!");
                     }
                 });
 

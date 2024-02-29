@@ -61,6 +61,7 @@ public class pinVolley {
      */
     public void createPin(double x, double y, String name, final CreatePinCallback callback){
         String url = BASE_URL + "/pins";
+        Log.e(TAG, "Calling URL = " + BASE_URL + "/pins");
         JSONObject requestBody = new JSONObject();
         try{
             requestBody.put("x", x);

@@ -7,8 +7,6 @@ if needed. For now, the login screen doesnt require a valid login.
 
 package com.lg1_1.cyroam;
 
-import static com.lg1_1.cyroam.MapsActivity.LOCATION_PERMISSION_REQUEST_CODE;
-import static com.lg1_1.cyroam.MapsActivity.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;

@@ -17,8 +17,8 @@ import org.json.JSONObject;
 public class progressVolley {
 
     private static final String TAG = "ProgressRequest";
+//    private static final String BASE_URL = MainActivity.url;
     private static final String BASE_URL = MainActivity.url;
-
     private RequestQueue queue;
     private Context context;
 
