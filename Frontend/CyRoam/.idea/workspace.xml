@@ -17,6 +17,11 @@
           <theme>@style/Theme.AndroidExample</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_input.xml">
+        <config>
+          <theme>@style/Theme.AndroidExample</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
@@ -32,6 +37,11 @@
           <theme>@style/Theme.AndroidExample</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml">
+        <config>
+          <theme>@style/Theme.AndroidExample</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
@@ -43,12 +53,14 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="modifying string request">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/SignupActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_maps.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,14 +69,13 @@
   </component>
   <component name="ChangesViewManager">
     <option name="groupingKeys">
-      <option value="directory" />
       <option value="module" />
     </option>
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\nickk\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\bossf\.android\avd\Pixel_3a_API_34_extension_level_7_x86_64.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -118,10 +129,13 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="16-add-postman-to-newpin-class" />
+        <entry key="$PROJECT_DIR$/../.." value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2c8ysaUHBESfKgSfkTnG94T2qg9" />
   <component name="ProjectViewState">
@@ -132,20 +146,18 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;android-custom-viewC:/Users/bossf/AppData/Local/Android/Sdk/sources/android-34/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
+    &quot;android-custom-viewC:/Users/bossf/AppData/Local/Android/Sdk/sources/android-34/android/widget/TextView.java_SELECTED&quot;: &quot;TextView&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;17-improve-friends-communication-table&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/nickk/Downloads/lg1_1/Experiments/Nick127k/Exp7/tutorials-android_unit2_3_volley/tutorials-android_unit2_3_volley/AndroidExample&quot;
+    &quot;git-widget-placeholder&quot;: &quot;21-make-sure-everything-functions-with-postman&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;
   }
 }</component>
   <component name="RecentsManager">
-    <key name="android.template.205721078">
-      <recent name="com.lg1_1.cyroam" />
-    </key>
-    <key name="android.template.894193740">
-      <recent name="com.lg1_1.cyroam" />
-    </key>
-    <key name="android.template.1768257515">
+    <key name="android.template.-77531316">
       <recent name="com.lg1_1.cyroam" />
     </key>
   </component>
@@ -226,46 +238,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00001" summary="automatically did this, not sure what it is or why">
-      <option name="closed" value="true" />
-      <created>1708552649957</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1708552649957</updated>
-    </task>
-    <task id="LOCAL-00002" summary="shelf">
-      <option name="closed" value="true" />
-      <created>1708983551379</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983551379</updated>
-    </task>
-    <task id="LOCAL-00003" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1708983581482</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1708983581482</updated>
-    </task>
-    <task id="LOCAL-00004" summary="automatic workspace.xml update, AndroidStudio">
-      <option name="closed" value="true" />
-      <created>1709000610328</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000610328</updated>
-    </task>
-    <task id="LOCAL-00005" summary="i have no idea why its doing this tbh">
-      <option name="closed" value="true" />
-      <created>1709000632656</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000632656</updated>
     </task>
     <task id="LOCAL-00006" summary="shelving??">
       <option name="closed" value="true" />
@@ -427,39 +399,239 @@
       <option name="project" value="LOCAL" />
       <updated>1709024769532</updated>
     </task>
-    <task id="LOCAL-00026" summary="Adding string req">
+    <task id="LOCAL-00026" summary="commented out not working code.">
       <option name="closed" value="true" />
-      <created>1708982514350</created>
+      <created>1709070558825</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1708982514350</updated>
+      <updated>1709070558825</updated>
     </task>
-    <task id="LOCAL-00027" summary="modifying string request">
+    <task id="LOCAL-00027" summary="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class.">
       <option name="closed" value="true" />
-      <created>1709157714114</created>
+      <created>1709150873813</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1709157714114</updated>
+      <updated>1709150873813</updated>
     </task>
-    <task id="LOCAL-00028" summary="modifying string request">
+    <task id="LOCAL-00028" summary="added ProgressActivity to xml file">
       <option name="closed" value="true" />
-      <created>1709171298305</created>
+      <created>1709150912434</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1709171298305</updated>
+      <updated>1709150912434</updated>
     </task>
-    <task id="LOCAL-00029" summary="modifying string request">
+    <task id="LOCAL-00029" summary="added ProgressActivity to xml file">
       <option name="closed" value="true" />
-      <created>1709174283215</created>
+      <created>1709150922473</created>
       <option name="number" value="00029" />
       <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1709174283215</updated>
+      <updated>1709150922473</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="created ProgressActivity">
+      <option name="closed" value="true" />
+      <created>1709150937637</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1709150937637</updated>
+    </task>
+    <task id="LOCAL-00031" summary="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after">
+      <option name="closed" value="true" />
+      <created>1709151002630</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1709151002630</updated>
+    </task>
+    <task id="LOCAL-00032" summary="made it so when pressed, the button sends a volley request given the data defined earlier in the class">
+      <option name="closed" value="true" />
+      <created>1709153154644</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153154644</updated>
+    </task>
+    <task id="LOCAL-00033" summary="fixed potential crash when inputting spaces into the editText">
+      <option name="closed" value="true" />
+      <created>1709153367497</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153367497</updated>
+    </task>
+    <task id="LOCAL-00034" summary="fixed potential crash with inputting non-integer into editText">
+      <option name="closed" value="true" />
+      <created>1709153499366</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1709153499366</updated>
+    </task>
+    <task id="LOCAL-00035" summary="added ProgressActivity button.">
+      <option name="closed" value="true" />
+      <created>1709154371201</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154371201</updated>
+    </task>
+    <task id="LOCAL-00036" summary="defined discoverButton&#10;removed use of pinVector (might readd later if important)">
+      <option name="closed" value="true" />
+      <created>1709154417000</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154417000</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added button and editText">
+      <option name="closed" value="true" />
+      <created>1709154432723</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154432723</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added intent Switch upon success, back to maps screen">
+      <option name="closed" value="true" />
+      <created>1709154450868</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154450868</updated>
+    </task>
+    <task id="LOCAL-00039" summary="&lt;change beforePath&gt; Automatic">
+      <option name="closed" value="true" />
+      <created>1709154486005</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154486005</updated>
+    </task>
+    <task id="LOCAL-00040" summary="added back button">
+      <option name="closed" value="true" />
+      <created>1709154984082</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1709154984082</updated>
+    </task>
+    <task id="LOCAL-00041" summary="defined and implemented rough discoverButton">
+      <option name="closed" value="true" />
+      <created>1709155028867</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1709155028867</updated>
+    </task>
+    <task id="LOCAL-00042" summary="trimmed empty space and unused imports">
+      <option name="closed" value="true" />
+      <created>1709157247438</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1709157247438</updated>
+    </task>
+    <task id="LOCAL-00043" summary="trimmed empty space and unused imports">
+      <option name="closed" value="true" />
+      <created>1709157286837</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1709157286837</updated>
+    </task>
+    <task id="LOCAL-00044" summary="automatic">
+      <option name="closed" value="true" />
+      <created>1709157294688</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1709157294688</updated>
+    </task>
+    <task id="LOCAL-00045" summary="finished onSuccess in NewPinActivity. Now it passes relevant information to maps, and creates a new pin with it">
+      <option name="closed" value="true" />
+      <created>1709184278630</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1709184278630</updated>
+    </task>
+    <task id="LOCAL-00046" summary="changed URL to pins postman mock server">
+      <option name="closed" value="true" />
+      <created>1709184295829</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1709184295829</updated>
+    </task>
+    <task id="LOCAL-00047" summary="added logs to pin creation and calls">
+      <option name="closed" value="true" />
+      <created>1709185269375</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185269375</updated>
+    </task>
+    <task id="LOCAL-00048" summary="added locationServices to gradle workspace">
+      <option name="closed" value="true" />
+      <created>1709185286994</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185286994</updated>
+    </task>
+    <task id="LOCAL-00049" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709185307695</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185307695</updated>
+    </task>
+    <task id="LOCAL-00050" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709186088015</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1709186088016</updated>
+    </task>
+    <task id="LOCAL-00051" summary="cleaned up main, left a comment detailing locationPerms thought process.">
+      <option name="closed" value="true" />
+      <created>1709187518835</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1709187518835</updated>
+    </task>
+    <task id="LOCAL-00052" summary="working on GPS locationdata use">
+      <option name="closed" value="true" />
+      <created>1709192634729</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1709192634729</updated>
+    </task>
+    <task id="LOCAL-00053" summary="got PinData to properly fill via postman">
+      <option name="closed" value="true" />
+      <created>1709193731837</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1709193731837</updated>
+    </task>
+    <task id="LOCAL-00054" summary="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later.">
+      <option name="closed" value="true" />
+      <created>1709195684590</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1709195684590</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -474,67 +646,55 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="automatically did this, not sure what it is or why" />
-    <MESSAGE value="automatic workspace.xml update, AndroidStudio" />
-    <MESSAGE value="i have no idea why its doing this tbh" />
-    <MESSAGE value="shelving??" />
-    <MESSAGE value="rename issue resolved" />
-    <MESSAGE value="initial commit" />
-    <MESSAGE value="shelf" />
-    <MESSAGE value="auto workspace.xml" />
-    <MESSAGE value="might be useful later. useless ATM" />
-    <MESSAGE value="Created fillPinVector function that will grab all pin data once a URL is established" />
-    <MESSAGE value="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out." />
-    <MESSAGE value="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff." />
-    <MESSAGE value="moved marker creation point to the fillPinVector function. Fixed a bunch of issues" />
-    <MESSAGE value="added comment about marker creation" />
-    <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
-    <MESSAGE value="cleaned up code a little bit" />
-    <MESSAGE value="modifying string request" />
-    <option name="LAST_COMMIT_MESSAGE" value="modifying string request" />
+    <MESSAGE value="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class." />
+    <MESSAGE value="added ProgressActivity to xml file" />
+    <MESSAGE value="created ProgressActivity" />
+    <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
+    <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
+    <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
+    <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
+    <MESSAGE value="added ProgressActivity button." />
+    <MESSAGE value="defined discoverButton&#10;removed use of pinVector (might readd later if important)" />
+    <MESSAGE value="added button and editText" />
+    <MESSAGE value="added intent Switch upon success, back to maps screen" />
+    <MESSAGE value="&lt;change beforePath&gt; Automatic" />
+    <MESSAGE value="added back button" />
+    <MESSAGE value="defined and implemented rough discoverButton" />
+    <MESSAGE value="trimmed empty space and unused imports" />
+    <MESSAGE value="automatic" />
+    <MESSAGE value="finished onSuccess in NewPinActivity. Now it passes relevant information to maps, and creates a new pin with it" />
+    <MESSAGE value="changed URL to pins postman mock server" />
+    <MESSAGE value="added logs to pin creation and calls" />
+    <MESSAGE value="added locationServices to gradle workspace" />
+    <MESSAGE value="working on implementing current location as a LatLng" />
+    <MESSAGE value="cleaned up main, left a comment detailing locationPerms thought process." />
+    <MESSAGE value="working on GPS locationdata use" />
+    <MESSAGE value="got PinData to properly fill via postman" />
+    <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
+    <option name="LAST_COMMIT_MESSAGE" value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.java</url>
-          <line>64</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/FriendActivity.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java</url>
-          <line>149</line>
-          <option name="timeStamp" value="28" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>123</line>
-          <properties class="com.lg1_1.cyroam.MapsActivity" method="fillPinVector">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java</url>
+          <line>32</line>
+          <properties class="com.lg1_1.cyroam.volley.progressVolley" method="discoverPin">
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="24" />
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="com.android.volley.RequestQueue" memberName="mSequenceGenerator" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

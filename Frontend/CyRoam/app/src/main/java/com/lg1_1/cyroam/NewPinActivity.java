@@ -1,7 +1,5 @@
 package com.lg1_1.cyroam;
 
-import static com.lg1_1.cyroam.MainActivity.url;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,20 +9,10 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.lg1_1.cyroam.util.Pin;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import com.lg1_1.cyroam.volley.pinVolley;
 
 public class NewPinActivity extends AppCompatActivity {
 
@@ -34,6 +22,8 @@ public class NewPinActivity extends AppCompatActivity {
     private EditText longitudeText;
     private EditText nameText;
     private Button newPinButton;
+
+    private pinVolley volley; //init pinVolley class
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +36,8 @@ public class NewPinActivity extends AppCompatActivity {
         nameText = findViewById(R.id.pin_name_edt);
         newPinButton = findViewById(R.id.new_pin_btn);    // link to login button in the Login activity XML
 
+        volley = new pinVolley(this);
+
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +49,25 @@ public class NewPinActivity extends AppCompatActivity {
                 String name = nameText.getText().toString();
 
                 //todo put post here
-                //send x,y,name in one
+                volley.createPin(latitudeIn, longitudeIn, name, new pinVolley.CreatePinCallback() {
+                    @Override
+                    public void onSuccess(int idSuccess) {
+                        Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
+                        intent.putExtra("LONGITUDE", latitudeIn);
+                        intent.putExtra("LATITUDE", longitudeIn);
+                        intent.putExtra("NAME", name);
+                        intent.putExtra("PINID", idSuccess);
 
-                //when new pin is created, send all relevant information to the maps activity
-                //todo maybe pass pin object over to the maps activity, rather than the seperate information
+                        Log.w("CreatePin", "CreatePin Success!");
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e("CreatePin", "CreatePin Failed!");
+                    }
+                });
+
+
 
                 Pin newPin = new Pin(longitudeIn,latitudeIn,name);
 
