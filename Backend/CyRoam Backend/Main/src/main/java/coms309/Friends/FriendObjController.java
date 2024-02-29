@@ -16,7 +16,8 @@ public class FriendObjController {
     private String success = "{\"message\":\"success ( :\"}";
     private String failure = "{\"message\":\"failure ) :\"}";
     @GetMapping(path = "/friends")
-    List<FriendObj> requestFriends(@RequestBody String username){
+    List<FriendObj> requestFriends(@RequestBody FriendObj Justusername){
+        String username = Justusername.getCurUsername();
         List<FriendObj> f =friendObjInterface.findByCurUsername(username);
        return f;
     }
