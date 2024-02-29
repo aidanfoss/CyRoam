@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
@@ -34,8 +35,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private RequestQueue mQueue; // define volley request queue
     private FloatingActionButton newPinButton; // define new pin button variable
-
-    Vector<Pin> pinVector = new Vector<>();
+    private FloatingActionButton discoverButton; //define discoverButton
+//    Vector<Pin> pinVector = new Vector<>(); not necessary, commented out to fix errors
 
 
     //TODO define user object here to determine what they can and cant do
@@ -52,8 +53,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
 
         newPinButton = findViewById(R.id.newPinButton);
+        discoverButton = findViewById(R.id.discoverButton);
+
         newPinButton.setOnClickListener(v -> {
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            startActivity(intent);  // go to NewPinActivity
+        });
+        discoverButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, ProgressActivity.class);
             startActivity(intent);  // go to NewPinActivity
         });
 
@@ -109,11 +116,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
+//        this.gMap.moveCamera(CameraUpdateFactory.newLatLng(pinVector.elementAt(1).getPos()));
 
 
-        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero");
-        //Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
+        Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
+        Marker zeroZero = this.gMap.addMarker(new MarkerOptions().position(zeroZeroPin.getPos()).title(zeroZeroPin.getName()));
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(zeroZeroPin.getPos()));
     }
 
@@ -121,10 +128,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Function that makes a volley request to recieve all pin data. Uses url from MainActivity, and uses the
     googleMaps gMap declaration from the top of the class.
     */
+
+
     private void fillPinVector(){
-        fillPinVectorHelper(pinVector);
-    }
-    private void fillPinVectorHelper(Vector<Pin> pinVector){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
@@ -140,11 +146,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             double y = pin.getDouble("y");
                             String name = pin.getString("name");
 
-                            pinVector.add(new Pin(x,y,name,id));
+//                            pinVector.add(new Pin(x,y,name,id));
                             Log.w("volley", "pinVector added " + name);
-                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
+//                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
+                            Pin newPin = new Pin(x,y,name,id);
 
-                            this.gMap.addMarker(new MarkerOptions().position(pinVector.elementAt(i).getPos()).title(pinVector.elementAt(i).getName()));
+                            this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
