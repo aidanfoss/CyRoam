@@ -41,24 +41,24 @@ public class UserController {
 
     //for password/username check
     @GetMapping(path = "/userCheck")
-    Boolean checkUser(@RequestBody User userEntered){
+    String checkUser(@RequestBody User userEntered){
         if (userEntered == null) {
-            return false;
+            return "false";
         }
         String userName = userEntered.getUsername();
 
         if(userInterface.findByUsername(userName)==null){
-            return false;
+            return "false";
         }
         User actual = userInterface.findByUsername(userName);
 
         if(Objects.equals(actual.getPassword(), userEntered.getPassword())){
-            return true;
+            return "true";
             //if returning string
             //return "welcome back "+ actual.getUserName() + "! uId:"+ + actual.getuId();
         }
         else{
-            return false;
+            return "false";
         }
 
         //return userInterface.findByuId(uId);

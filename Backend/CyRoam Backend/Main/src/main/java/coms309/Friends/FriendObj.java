@@ -4,6 +4,7 @@ import coms309.Users.User;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
+@Entity
 public class FriendObj {
 
     @Id
@@ -11,19 +12,44 @@ public class FriendObj {
     private int entry;
 
 
-    //how do I stop this from displaying password/ is there a way to just connect the UID element/username element?
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "uId")
-    private User user;
+   //how do I stop this from displaying password/ is there a way to just connect the UID element/username element?
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "uId")
+//    private User user;
 
     //needs testing
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username")
-    private String username;
+  //  @ManyToOne(cascade = CascadeType.ALL)
+   // @JoinColumn(name = "username")
+    private String curUsername;
 
-    private int friend_uId;
+    //private int friend_uId;
 
-    private String friend_username;
+    private String friendUsername;
 
-    private int friendState;
+    //private int friendState;
+    public FriendObj(String curUsername, String friendUsername) {
+        this.curUsername = curUsername;
+        this.friendUsername = friendUsername;
+
+    }
+    public FriendObj()
+    {
+
+    }
+
+
+    //setters and getters
+
+    public void setCurUsername(String username) {
+        this.curUsername = username;
+    }
+    public String getCurUsername() {
+        return curUsername;
+    }
+    public void setFriendUsername(String username) {
+        this.friendUsername = username;
+    }
+    public String getFriendUsername() {
+        return friendUsername;
+    }
 }
