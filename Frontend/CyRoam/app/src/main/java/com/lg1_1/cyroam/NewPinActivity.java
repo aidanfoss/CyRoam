@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,17 +52,21 @@ public class NewPinActivity extends AppCompatActivity {
                 volley.createPin(latitudeIn, longitudeIn, name, new pinVolley.CreatePinCallback() {
                     @Override
                     public void onSuccess(int idSuccess) {
+                        Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
+                        intent.putExtra("LONGITUDE", latitudeIn);
+                        intent.putExtra("LATITUDE", longitudeIn);
+                        intent.putExtra("NAME", name);
+                        intent.putExtra("PINID", idSuccess);
 
+                        Log.w("CreatePin", "CreatePin Success!");
+                        startActivity(intent);
                     }
                     @Override
                     public void onFailure(String errorMessage) {
-
+                        Log.e("CreatePin", "CreatePin Failed!");
                     }
                 });
-                //send x,y,name in one
 
-                //when new pin is created, send all relevant information to the maps activity
-                //todo maybe pass pin object over to the maps activity, rather than the seperate information
 
 
                 Pin newPin = new Pin(longitudeIn,latitudeIn,name);

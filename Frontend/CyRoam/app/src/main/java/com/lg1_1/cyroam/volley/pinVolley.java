@@ -36,6 +36,7 @@ public class pinVolley {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            Log.e(TAG, "FETCHPIN RESPONSE: " + response.toString());
                             int id = response.getInt("id");
                             double x = response.getDouble("x");
                             double y = response.getDouble("y");
@@ -54,18 +55,22 @@ public class pinVolley {
                 callback.onFailure("Error occured: " + error.getMessage());
             }
         });
+        queue.add(request);
     }
 
     /*
     this function, when given its proper inputs, will set the called pins discover data to true.
      */
     public void createPin(double x, double y, String name, final CreatePinCallback callback){
+        Log.w(TAG, "createPin Called!");
         String url = BASE_URL + "/pins";
+        Log.w(TAG, "Calling URL = " + BASE_URL + "/pins");
         JSONObject requestBody = new JSONObject();
         try{
+            Log.w(TAG, String.valueOf(x) + " " + String.valueOf(y) + " " + name);
             requestBody.put("x", x);
             requestBody.put("y", y);
-            requestBody.put("name", name); //always sets discovered to true when calling this function
+            requestBody.put("name", name);
         } catch (JSONException e){
             e.printStackTrace();
             callback.onFailure("JSONException" + e.getMessage());
@@ -76,10 +81,13 @@ public class pinVolley {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e(TAG, " CREATEPIN RESPONSE: " + response.toString());
                         try {
                             int id = response.getInt("pinId");
+                            Log.w(TAG, "pinId recieved");
                             callback.onSuccess(id);
                         } catch (JSONException e) {
+                            Log.e(TAG, "JSONException: " + e.getMessage());
                             e.printStackTrace();
                             callback.onFailure("JSONException: " + e.getMessage());
                         }
