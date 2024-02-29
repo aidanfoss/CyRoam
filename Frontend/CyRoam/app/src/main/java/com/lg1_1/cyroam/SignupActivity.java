@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,13 +18,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
-    private static final String URL_STRING_REQ = "https://b3062e37-f8be-4dc1-bae2-7baf72c9dc4e.mock.pstmn.io";
+    private String mainURL = MainActivity.url;
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
     private EditText confirmEditText;   // define confirm edittext variable
@@ -76,36 +79,53 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
     private void makeStringReq(String pass, String user){
-        String url = URL_STRING_REQ + "/signin";
+        String url = mainURL + "/friends";
+
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
         try{
+
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("Username", user);
-            userInfo.put("Password", pass);
+            //userInfo.put("curUsername", curUsername);
+
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
                 url,
                 userInfo,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        /*if(response){
-                            checker = true;
-                        }*/
+                response -> {
+                    try{
+                        JSONArray jsonArray = response.getJSONArray("friends");
+                        //Log.i(TAG, "request success");
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            JSONObject friend = jsonArray.getJSONObject(i);
+
+                            String curUser = friend.getString("curUsername");
+                            String friendUser = friend.getString("friendUsername");
+                           // output = curUser + " " + friendUser;
+                           // outputtext.setText(outputtext.getText() + " " + friendUser);
+                           // Log.i(TAG, output);
+                        }
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
                     }
+
+                    // output = response.toString();
+
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       // tvResponse.setText(error.getMessage());
+                        //Log.e(TAG,error.getMessage());
+                        // tvResponse.setText(error.getMessage());
                     }
                 }
         ){
