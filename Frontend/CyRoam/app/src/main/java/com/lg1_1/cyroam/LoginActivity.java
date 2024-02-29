@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -21,6 +22,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -39,7 +42,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
     private boolean confirm = false;
-    private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
+    String output;
+    private TextView textView;
+    private String mainURL = MainActivity.url;
+    private String TAG = "LoginActivity";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,17 +65,28 @@ public class LoginActivity extends AppCompatActivity {
                 /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                makeStringReq(username, password);
-                if(confirm){//if confrim is true
+                makeStringReq(username, password, new VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean isTrue) {
+                        Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+
+                    }
+                });
+               // if(confirm){//if confrim is true
                 /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+               // Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
 //                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
 //                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-                intent.putExtra("LONGITUDE", 42.023949);
-                intent.putExtra("LATITUDE", -93.647595);
-                intent.putExtra("NAME", "Library");
-                startActivity(intent);  // go to MainActivity with the key-value data
-                    }
+                //intent.putExtra("LONGITUDE", 42.023949);
+               // intent.putExtra("LATITUDE", -93.647595);
+               // intent.putExtra("NAME", "Library");
+               // startActivity(intent);  // go to MainActivity with the key-value data
+                  //  }
             }
         });
 
@@ -103,38 +120,48 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void makeStringReq(String pass, String user){
-        String url = URL_STRING_REQ + "/login";
+    private void makeStringReq(String curUsername, String password, final VolleyCallback callback){
+        String url = mainURL + "/userCheck";
+
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
         try{
+
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("Username", user);
-            userInfo.put("Password", pass);
+
+            userInfo.put("username", curUsername);
+            userInfo.put("password", password);
+
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+
+                Request.Method.GET,
                 url,
                 userInfo,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        /*if(response){
-                            checker = true;
-                        }*/
+                response -> {
+                    //Log.i(TAG, "respo success")
+                    try{
+                        Log.i(TAG, "request success");
+                        boolean isTrue = response.getBoolean("isUser");
+                        //return isTrue;
+                        callback.onSuccess(isTrue);
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
                     }
+
+                    // output = response.toString();
+
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // tvResponse.setText(error.getMessage());
-                    }
+                error -> {
+                    Log.e(TAG,error.getMessage());
+                    // tvResponse.setText(error.getMessage());
                 }
         ){
             @Override
@@ -156,6 +183,10 @@ public class LoginActivity extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+    }
+    public interface VolleyCallback{
+        void onSuccess(boolean isTrue);
+        void onFailure(String errorMessage);
     }
 
 }
