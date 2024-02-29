@@ -48,11 +48,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="changed URL to pins postman mock server">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="working on implementing current location as a LatLng">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Pin.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/util/Pin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -598,7 +596,31 @@
       <option name="project" value="LOCAL" />
       <updated>1709184295829</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="added logs to pin creation and calls">
+      <option name="closed" value="true" />
+      <created>1709185269375</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185269375</updated>
+    </task>
+    <task id="LOCAL-00048" summary="added locationServices to gradle workspace">
+      <option name="closed" value="true" />
+      <created>1709185286994</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185286994</updated>
+    </task>
+    <task id="LOCAL-00049" summary="working on implementing current location as a LatLng">
+      <option name="closed" value="true" />
+      <created>1709185307695</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1709185307695</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -613,9 +635,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out." />
-    <MESSAGE value="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff." />
-    <MESSAGE value="moved marker creation point to the fillPinVector function. Fixed a bunch of issues" />
     <MESSAGE value="added comment about marker creation" />
     <MESSAGE value="added fillPinVectorHelper to clean up the fillPinVector call." />
     <MESSAGE value="cleaned up code a little bit" />
@@ -638,19 +657,22 @@
     <MESSAGE value="automatic" />
     <MESSAGE value="finished onSuccess in NewPinActivity. Now it passes relevant information to maps, and creates a new pin with it" />
     <MESSAGE value="changed URL to pins postman mock server" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed URL to pins postman mock server" />
+    <MESSAGE value="added logs to pin creation and calls" />
+    <MESSAGE value="added locationServices to gradle workspace" />
+    <MESSAGE value="working on implementing current location as a LatLng" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on implementing current location as a LatLng" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>64</line>
+          <line>81</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java</url>
-          <line>123</line>
+          <line>156</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
