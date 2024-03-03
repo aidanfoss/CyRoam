@@ -29,11 +29,13 @@ public class Application {
     @Bean
     CommandLineRunner initUser(UserInterface userInterface) {
         return args -> {
+
             User user1 = new User("bossf", "123");
             User user2 = new User("Jane", "jane@somemail.com");
 
             userInterface.save(user1);
             userInterface.save(user2);
+
         };
     }
     @Bean

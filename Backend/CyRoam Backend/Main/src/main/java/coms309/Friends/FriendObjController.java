@@ -19,7 +19,7 @@ public class FriendObjController {
     List<FriendObj> requestFriends(@RequestBody FriendObj Justusername){
         String username = Justusername.getCurUsername();
         List<FriendObj> f =friendObjInterface.findByCurUsername(username);
-       return f;
+        return f;
     }
     @PostMapping(path = "/addFriend")
      String addFriend(@RequestBody FriendObj friendObj){
