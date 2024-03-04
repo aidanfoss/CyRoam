@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
+    private String TAG = "FriendActivity";
     private String mainURL = MainActivity.url;
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
@@ -68,8 +69,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (password.equals(confirm)){
                     Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makeStringReq(username, password);
-                    Intent intent = new Intent(SignupActivity.this, FriendActivity.class);
+                    makePostReq(username, password);
+                    Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                     startActivity(intent);
                 }
                 else {
@@ -78,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-    private void makeStringReq(String pass, String user){
+    private void makePostReq(String pass, String user){
         String url = mainURL + "/friends";
 
         // Convert input to JSONObject
