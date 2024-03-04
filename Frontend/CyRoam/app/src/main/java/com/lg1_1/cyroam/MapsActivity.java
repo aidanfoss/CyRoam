@@ -195,6 +195,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (extras.containsKey("LATITUDE")) {
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
             }
+            if (extras.containsKey("LoginSuccess")) {
+                textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
+            }
         } //Todo repurpose this block of code to recieve login information from nick
         //add hardcoded pins here
         Pin zeroZeroPin = new Pin(0.000,0.005,"Zero Zero Hardcoded pin");
