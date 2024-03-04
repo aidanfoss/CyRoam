@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(boolean isTrue) {
                         Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                        intent.putExtra("LoginSuccess", isTrue);
                         startActivity(intent);
                     }
 
