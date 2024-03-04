@@ -53,6 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FloatingActionButton discoverButton; //define discoverButton
     private TextView textView;
 
+    private pinVolley pinVolley;
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
 
@@ -74,6 +75,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
+
+        this.pinVolley = new pinVolley(this); //defines pinVolley class
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -191,12 +194,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
-            if (extras.containsKey("pinId")){
+            if (extras.containsKey("discovered")){ //discover response
                 textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
-                //GET REQUEST
             }
-            if (extras.containsKey("LATITUDE")) {
+            if (extras.containsKey("LATITUDE")) { //newpin response
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
+                //GET REQUEST
+                int pinID = extras.getInt("PINID");
+                pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
+                    @Override
+                    public void onSuccess(Pin pin) {
+                        textView.append("Pin Data Recieved Via Volley Get Request: " + pin.getDescription());
+                        Log.d(TAG, "Pin Get Req: " + pin.getDescription());
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e(TAG, "fetchPinData error: " + errorMessage);
+                    }
+                });
             }
             if (extras.containsKey("LoginSuccess")) {
                 textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
