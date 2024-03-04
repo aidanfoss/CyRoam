@@ -92,6 +92,7 @@ public class pinVolley {
             requestBody.put("y", y);
             requestBody.put("name", name);
         } catch (JSONException e){
+            Log.e(TAG, "JSONException" + e.getMessage());
             e.printStackTrace();
             callback.onFailure("JSONException" + e.getMessage());
             return;
@@ -113,6 +114,7 @@ public class pinVolley {
                     Log.e(TAG, "Error occured: " + error.getMessage());
                     callback.onFailure("Error occured: " + error.getMessage());
                 });
+        queue.add(request);
     }
     public interface CreatePinCallback {
         void onSuccess(int idSuccess);
