@@ -53,14 +53,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later.">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_29_2024_3_29_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2_29_2024_3_29_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_3_45_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_29_2024_3_45_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-    </list>
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="added get request when creating a new pin" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -237,62 +230,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00006" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000645671</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000645671</updated>
-    </task>
-    <task id="LOCAL-00007" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000647982</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000647982</updated>
-    </task>
-    <task id="LOCAL-00008" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000649050</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000649050</updated>
-    </task>
-    <task id="LOCAL-00009" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000649655</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000649655</updated>
-    </task>
-    <task id="LOCAL-00010" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000649844</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000649844</updated>
-    </task>
-    <task id="LOCAL-00011" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000650006</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000650006</updated>
-    </task>
-    <task id="LOCAL-00012" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000650148</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000650148</updated>
     </task>
     <task id="LOCAL-00013" summary="shelving??">
       <option name="closed" value="true" />
@@ -630,7 +567,63 @@
       <option name="project" value="LOCAL" />
       <updated>1709195684590</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="fixed to jsonArray request rather than object that contains an array">
+      <option name="closed" value="true" />
+      <created>1709594218944</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1709594218944</updated>
+    </task>
+    <task id="LOCAL-00056" summary="added logging and fixed a queue issue">
+      <option name="closed" value="true" />
+      <created>1709594240715</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1709594240715</updated>
+    </task>
+    <task id="LOCAL-00057" summary="changed warning log to debug log">
+      <option name="closed" value="true" />
+      <created>1709594258210</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1709594258210</updated>
+    </task>
+    <task id="LOCAL-00058" summary="added login bypass button for testing">
+      <option name="closed" value="true" />
+      <created>1709594272018</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1709594272018</updated>
+    </task>
+    <task id="LOCAL-00059" summary="shelf">
+      <option name="closed" value="true" />
+      <created>1709594279681</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1709594279681</updated>
+    </task>
+    <task id="LOCAL-00060" summary="added description getter">
+      <option name="closed" value="true" />
+      <created>1709595174275</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1709595174275</updated>
+    </task>
+    <task id="LOCAL-00061" summary="added get request when creating a new pin">
+      <option name="closed" value="true" />
+      <created>1709595312874</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1709595312874</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -645,13 +638,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="made (hopefully) functional helper class for progress table volley post request. Can add more later. This code might also be copy pastable into a larger, central helper class." />
-    <MESSAGE value="added ProgressActivity to xml file" />
-    <MESSAGE value="created ProgressActivity" />
-    <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
-    <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
-    <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
-    <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
     <MESSAGE value="added ProgressActivity button." />
     <MESSAGE value="defined discoverButton&#10;removed use of pinVector (might readd later if important)" />
     <MESSAGE value="added button and editText" />
@@ -670,7 +656,14 @@
     <MESSAGE value="working on GPS locationdata use" />
     <MESSAGE value="got PinData to properly fill via postman" />
     <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
-    <option name="LAST_COMMIT_MESSAGE" value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
+    <MESSAGE value="fixed to jsonArray request rather than object that contains an array" />
+    <MESSAGE value="added logging and fixed a queue issue" />
+    <MESSAGE value="changed warning log to debug log" />
+    <MESSAGE value="added login bypass button for testing" />
+    <MESSAGE value="shelf" />
+    <MESSAGE value="added description getter" />
+    <MESSAGE value="added get request when creating a new pin" />
+    <option name="LAST_COMMIT_MESSAGE" value="added get request when creating a new pin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -687,6 +680,14 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java</url>
+          <line>83</line>
+          <properties class="com.lg1_1.cyroam.volley.pinVolley" method="createPin">
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
