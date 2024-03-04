@@ -58,7 +58,7 @@ public class NewPinActivity extends AppCompatActivity {
                         intent.putExtra("NAME", name);
                         intent.putExtra("PINID", idSuccess);
 
-                        Log.w("CreatePin", "CreatePin Success!");
+                        Log.d("CreatePin", "CreatePin Success!");
                         startActivity(intent);
                     }
                     @Override
