@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 import com.google.android.gms.location.LocationRequest;
+import com.lg1_1.cyroam.volley.pinVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -191,6 +193,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
             if (extras.containsKey("pinId")){
                 textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+                //GET REQUEST
             }
             if (extras.containsKey("LATITUDE")) {
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
@@ -213,12 +216,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         only called pinVector because it used to use a vector. can change later.
         */
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
+        @SuppressLint("SetTextI18n") JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
-                        JSONArray jsonArray = response.getJSONArray("pins");
+                        JSONArray jsonArray = response;
                         //JSONObject jsonArray = response.getJSONObject("pins");
-                        Log.w("volley", "request success");
+                        Log.d("volley", "request success");
 
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject pin = jsonArray.getJSONObject(i);
@@ -229,7 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String name = pin.getString("name");
 
 //                            pinVector.add(new Pin(x,y,name,id));
-                            Log.w("volley", "pinVector added " + name);
+                            Log.d("volley", "pinVector added " + name);
 //                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
                             Pin newPin = new Pin(x,y,name,id);
 
