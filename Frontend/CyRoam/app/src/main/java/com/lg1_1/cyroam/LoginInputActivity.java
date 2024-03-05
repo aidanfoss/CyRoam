@@ -48,11 +48,11 @@ public class LoginInputActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                makeStringReq(username, password, new LoginActivity.VolleyCallback() {
+                /*makeStringReq(username, password, new LoginActivity.VolleyCallback() {
                             @Override
                             public void onSuccess(boolean isTrue) {
                                 Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
-                                intent.putExtra("LoginSuccess", isTrue);
+                                intent.putExtra("Username", username);
                                 startActivity(intent);
                             }
 
@@ -60,11 +60,12 @@ public class LoginInputActivity extends AppCompatActivity {
                             public void onFailure(String errorMessage) {
 
                             }
-                        });
-                Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
-                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+                        });*/
+               Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+               // intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-               startActivity(intent);
+              intent.putExtra("Username", username);
+              startActivity(intent);
             }
         });
     }
