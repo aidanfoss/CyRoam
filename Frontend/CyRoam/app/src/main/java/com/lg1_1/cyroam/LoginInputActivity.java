@@ -20,6 +20,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 
 import org.json.JSONException;
@@ -41,6 +42,7 @@ public class LoginInputActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        queue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_login_input);
         Button loginButton = findViewById(R.id.Loginbutton);
 
@@ -56,7 +58,7 @@ public class LoginInputActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(boolean isTrue) {
                                 Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
-                                intent.putExtra("username", username);
+                                intent.putExtra("Username", username);
                                 startActivity(intent);
                             }
 
@@ -96,33 +98,40 @@ public class LoginInputActivity extends AppCompatActivity {
 
             userInfo.put("username", curUsername);
             userInfo.put("password", password);
+            Log.v(TAG, "userinfo try success " + userInfo.toString());
 
 
         } catch (Exception e){
             e.printStackTrace();
+            Log.e(TAG, "obj error: " + e.getMessage());
         }
 
+        //my name is only here because i ran rebugging for nick
+        //for some reason he cant run a server connection on his laptop.
+        //-aidan
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, userInfo,
                 response -> {
-                    Log.i(TAG, "respo success: " + response.toString());
+                    Log.v(TAG, "respo success: " + response.toString());
                     try{
-                        Log.i(TAG, "request success");
+                        Log.v(TAG, "request success");
                         boolean isTrue = response.getBoolean("isUser");
                         //return isTrue;
                         callback.onSuccess(isTrue);
 
                     }catch (JSONException e){
-                        Log.e(TAG, "error: " + e.getMessage());
+                        Log.e(TAG, "catch error: " + e.getMessage());
                         e.printStackTrace();
+                        callback.onFailure(e.getMessage());
                     }
 
                     // output = response.toString();
 
                 },
                 error -> {
-                    //Log.e(TAG, e.getMessage());
+                    Log.e(TAG, "error lambda error: " + error.getMessage());
                     // tvResponse.setText(error.getMessage());
                 }
+
         ){
 //            @Override
 //            public Map<String, String> getHeaders() throws AuthFailureError {
