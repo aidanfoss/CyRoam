@@ -33,7 +33,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText confirmEditText;   // define confirm edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
-    private boolean checker = false;
+    //private boolean checker = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (password.equals(confirm)){
                     Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makePostReq(username, password);
+                    makePostReq(password, username);
                     Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                     startActivity(intent);
 
@@ -90,8 +90,8 @@ public class SignupActivity extends AppCompatActivity {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("Username", user);
-            userInfo.put("Password", pass);
+            userInfo.put("username", user);
+            userInfo.put("password", pass);
 
 
         } catch (Exception e){
