@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
@@ -61,11 +62,11 @@ public class LoginInputActivity extends AppCompatActivity {
 
                             }
                         });
-               //Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
-               // intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
+               Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+               //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-              //intent.putExtra("Username", username);
-              //startActivity(intent);
+              intent.putExtra("Username", username);
+              startActivity(intent);
             }
         });
     }
