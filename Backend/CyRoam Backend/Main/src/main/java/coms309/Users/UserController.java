@@ -35,12 +35,12 @@ public class UserController {
 
     //Use this when creating a new user, provide username and password via json here
     @PostMapping(path = "/users")
-    String createUser(@RequestBody User user){
+    User createUser(@RequestBody User user){
 
         if (user == null)
-            return failure;
+            return null;
         userInterface.save(user);
-        return success;
+        return user;
     }
 
     //for password/username check
