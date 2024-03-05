@@ -53,10 +53,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="working on two round trips">
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/SignupActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/SignupActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +123,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="main-datapass" />
+        <entry key="$PROJECT_DIR$/../.." value="22-finish-the-two-round-trips" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -147,7 +145,7 @@
     "android-custom-viewC:/Users/nickk/AppData/Local/Android/Sdk/sources/android-34/android/view/View.java_SELECTED": "View",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "22-finish-the-two-round-trips",
+    "git-widget-placeholder": "22-finish-the-two-round-trips-2",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
@@ -235,14 +233,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00013" summary="shelving??">
-      <option name="closed" value="true" />
-      <created>1709000650304</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1709000650304</updated>
     </task>
     <task id="LOCAL-00014" summary="rename issue resolved">
       <option name="closed" value="true" />
@@ -628,7 +618,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709671871556</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="work">
+      <option name="closed" value="true" />
+      <created>1709674663082</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1709674663082</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -643,7 +641,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ProgressActivity to xml file" />
     <MESSAGE value="created ProgressActivity" />
     <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
@@ -668,7 +665,8 @@
     <MESSAGE value="got PinData to properly fill via postman" />
     <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
     <MESSAGE value="working on two round trips" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on two round trips" />
+    <MESSAGE value="work" />
+    <option name="LAST_COMMIT_MESSAGE" value="work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
