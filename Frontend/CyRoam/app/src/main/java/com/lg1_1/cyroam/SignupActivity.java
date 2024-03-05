@@ -52,7 +52,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                 startActivity(intent);  // go to LoginActivity
             }
         });
@@ -81,7 +81,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
     private void makePostReq(String pass, String user){
-        String url = mainURL + "/friends";
+        String url = mainURL + "/users";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
