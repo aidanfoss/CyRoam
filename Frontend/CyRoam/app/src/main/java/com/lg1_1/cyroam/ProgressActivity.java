@@ -18,6 +18,7 @@ public class ProgressActivity extends AppCompatActivity {
 
     //define xml features
     private Button postButton;
+    private Button getButton;
     private EditText pinIDText;
     private Button backButton;
 
@@ -30,12 +31,45 @@ public class ProgressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
 
+        getButton = findViewById(R.id.getButton);
         pinIDText = findViewById(R.id.pinIDEditText);
         postButton = findViewById(R.id.postButton);
         backButton = findViewById(R.id.backButton);
 
         volley = new progressVolley(this);
 
+        getButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String pinIdString = pinIDText.getText().toString().trim();
+                if (!pinIdString.isEmpty()) {
+                    try {
+                        int pinId = Integer.parseInt(pinIdString);
+                        volley.fetchProgress(pinId, new progressVolley.VolleyCallbackGet() {
+                            @Override
+                            public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
+                                Log.d(TAG, "Pin Discovered: " + discovered);
+
+                                //return to maps activity
+                                Intent intent = new Intent(ProgressActivity.this, MapsActivity.class);
+                                //add extra returned information here
+                                intent.putExtra("discovered", discovered);
+                                intent.putExtra("pinId", pinId);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                Log.e(TAG, "Get Error: " + errorMessage);
+                            }
+                        });
+                    } catch (NumberFormatException e) {
+                        Log.e(TAG, "Invalid Input for pinID integer");
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

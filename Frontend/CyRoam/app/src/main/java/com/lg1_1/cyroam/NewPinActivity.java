@@ -15,7 +15,7 @@ import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
 
 public class NewPinActivity extends AppCompatActivity {
-
+    private final String TAG = "CreatePin";
     private RequestQueue mQueue; // define volley request queue
     private final String url = MainActivity.url; // get URL from main activity
     private EditText latitudeText;
@@ -57,13 +57,14 @@ public class NewPinActivity extends AppCompatActivity {
                         intent.putExtra("LATITUDE", longitudeIn);
                         intent.putExtra("NAME", name);
                         intent.putExtra("PINID", idSuccess);
+                        Log.d(TAG, String.valueOf(idSuccess));
 
-                        Log.d("CreatePin", "CreatePin Success!");
+                        Log.d(TAG, "CreatePin Success!");
                         startActivity(intent);
                     }
                     @Override
                     public void onFailure(String errorMessage) {
-                        Log.e("CreatePin", "CreatePin Failed!");
+                        Log.e(TAG, "CreatePin Failed!");
                     }
                 });
 
