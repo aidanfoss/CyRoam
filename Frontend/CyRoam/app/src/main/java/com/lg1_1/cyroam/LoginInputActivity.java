@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -35,6 +36,8 @@ public class LoginInputActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
 
+    private RequestQueue queue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,20 +56,22 @@ public class LoginInputActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(boolean isTrue) {
                                 Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
-                                intent.putExtra("Username", username);
+                                intent.putExtra("username", username);
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onFailure(String errorMessage) {
-
+                                Log.e(TAG, "make string req onFailure " + errorMessage);
                             }
+
                         });
-               Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+
+//                Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-              intent.putExtra("Username", username);
-              startActivity(intent);
+//              intent.putExtra("Username", username);
+//                startActivity(intent);
             }
         });
     }
@@ -97,13 +102,9 @@ public class LoginInputActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
-
-                Request.Method.GET,
-                url,
-                userInfo,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, userInfo,
                 response -> {
-                    //Log.i(TAG, "respo success")
+                    Log.i(TAG, "respo success: " + response.toString());
                     try{
                         Log.i(TAG, "request success");
                         boolean isTrue = response.getBoolean("isUser");
@@ -111,6 +112,7 @@ public class LoginInputActivity extends AppCompatActivity {
                         callback.onSuccess(isTrue);
 
                     }catch (JSONException e){
+                        Log.e(TAG, "error: " + e.getMessage());
                         e.printStackTrace();
                     }
 
@@ -118,29 +120,30 @@ public class LoginInputActivity extends AppCompatActivity {
 
                 },
                 error -> {
-                    Log.e(TAG,error.getMessage());
+                    //Log.e(TAG, e.getMessage());
                     // tvResponse.setText(error.getMessage());
                 }
         ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                //                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                //                params.put("param1", "value1");
-                //                params.put("param2", "value2");
-                return params;
-            }
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+//                //                headers.put("Content-Type", "application/json");
+//                return headers;
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                //                params.put("param1", "value1");
+//                //                params.put("param2", "value2");
+//                return params;
+//            }
         };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        queue.add(request);
+//        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
     public interface VolleyCallback{
         void onSuccess(boolean isTrue);
