@@ -78,19 +78,16 @@ public class pinVolley {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.e(TAG, " CREATEPIN RESPONSE: " + response.toString());
-                        try {
-                            int id = response.getInt("pinId");
-                            Log.w(TAG, "pinId recieved");
-                            callback.onSuccess(id);
-                        } catch (JSONException e) {
-                            Log.e(TAG, "JSONException: " + e.getMessage());
-                            e.printStackTrace();
-                            callback.onFailure("JSONException: " + e.getMessage());
-                        }
+                response -> {
+                    Log.e(TAG, " CREATEPIN RESPONSE: " + response.toString());
+                    try {
+                        int id = response.getInt("pinId");
+                        Log.w(TAG, "pinId recieved");
+                        callback.onSuccess(id);
+                    } catch (JSONException e) {
+                        Log.e(TAG, "JSONException: " + e.getMessage());
+                        e.printStackTrace();
+                        callback.onFailure("JSONException: " + e.getMessage());
                     }
                 }, new Response.ErrorListener() {
             @Override
