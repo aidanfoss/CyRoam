@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,9 +35,11 @@ public class SignupActivity extends AppCompatActivity {
     private EditText confirmEditText;   // define confirm edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
+    private RequestQueue queue;
     //private boolean checker = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
@@ -82,6 +86,7 @@ public class SignupActivity extends AppCompatActivity {
     }
     private void makePostReq(String pass, String user){
         String url = mainURL + "/users";
+        Log.d(TAG,"post req called " + url);
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -92,20 +97,21 @@ public class SignupActivity extends AppCompatActivity {
             // and the fields should match with the object structure of @RequestBody on sb
             userInfo.put("username", user);
             userInfo.put("password", pass);
+            Log.v(TAG, "JSON OBJECT CREATED");
 
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.POST,
                 url,
                 userInfo,
                 response -> {
                     try{
                         JSONArray jsonArray = response.getJSONArray("friends");
-                        //Log.i(TAG, "request success");
+                        Log.d(TAG, "request success");
 
                        /* for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject friend = jsonArray.getJSONObject(i);
@@ -118,18 +124,16 @@ public class SignupActivity extends AppCompatActivity {
                         }*/
 
                     }catch (JSONException e){
+                        Log.e(TAG, "JSONException");
                         e.printStackTrace();
                     }
 
                     // output = response.toString();
 
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Log.e(TAG,error.getMessage());
-                        // tvResponse.setText(error.getMessage());
-                    }
+                error -> {
+                    Log.e(TAG, error.getMessage());
+                    // tvResponse.setText(error.getMessage());
                 }
         ){
             @Override
@@ -150,6 +154,6 @@ public class SignupActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        queue.add(request);
     }
 }
