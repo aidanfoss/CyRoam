@@ -40,6 +40,7 @@ public class FriendActivity extends AppCompatActivity {
     private TextView textView3;
     private EditText usernameEditText;
     String output = null;
+    String usernamestring;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class FriendActivity extends AppCompatActivity {
 
         }
         else{
-            String usernamestring = getIntent().getStringExtra("Username");
+            usernamestring = getIntent().getStringExtra("Username");
             String finallyer = usernamestring + "'s: Friends";
             titletext.setText(finallyer);
             findfriendsReq(usernamestring);
@@ -75,7 +76,8 @@ public class FriendActivity extends AppCompatActivity {
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
                 String username = usernameEditText.getText().toString();
-                findfriendsReq(username);
+                addfriendsReq(usernamestring,username);
+                findfriendsReq(usernamestring);
                 /*if(!found){
                     outputtext.setText(output);
                 }
@@ -103,13 +105,13 @@ public class FriendActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        @SuppressLint("SetTextI18n") JsonArrayRequest request = new JsonArrayRequest(
+        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
-                userInfo.names(),
+                userInfo,
                 response -> {
                     try{
-                        JSONArray jsonArray = response;
+                        JSONArray jsonArray = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         outputtext.setText(curUsername + " Friends:\n");
                         for (int i = 0; i < jsonArray.length(); i++){
@@ -187,7 +189,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
 
-    private void addfriendsReq(String curUsername){
+    private void addfriendsReq(String curUsername,String Newfriend){
         String url = mainURL + "/friends";
 
         // Convert input to JSONObject
@@ -210,21 +212,23 @@ public class FriendActivity extends AppCompatActivity {
                 userInfo,
                 response -> {
                     try{
+
+
                         JSONArray jsonArray = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
-                        outputtext.setText(curUsername + " Friends:\n");
-                        for (int i = 0; i < jsonArray.length(); i++){
-                            JSONObject friend = jsonArray.getJSONObject(i);
+                        //outputtext.setText(curUsername + " Friends:\n");
+                       // for (int i = 0; i < jsonArray.length(); i++){
+                          //  JSONObject friend = jsonArray.getJSONObject(i);
 
-                            String curUser = friend.getString("curUsername");
-                            String friendUser = friend.getString("friendUsername");
-                            output = curUser + " " + friendUser;
+                          //  String curUser = friend.getString("curUsername");
+                           // String friendUser = friend.getString("friendUsername");
+                           // output = curUser + " " + friendUser;
 
-                            outputtext.append(friendUser + "\n");
-                            Log.i(TAG, output);
+                            //outputtext.append(friendUser + "\n");
+                            //Log.i(TAG, output);
 
 
-                        }
+                        //}
 
                     }catch (JSONException e){
                         e.printStackTrace();

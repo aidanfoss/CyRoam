@@ -89,7 +89,8 @@ public class SignupActivity extends AppCompatActivity {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            //userInfo.put("curUsername", curUsername);
+            userInfo.put("Username", user);
+            userInfo.put("Password", pass);
 
 
         } catch (Exception e){
@@ -97,7 +98,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
                 userInfo,
                 response -> {
@@ -105,7 +106,7 @@ public class SignupActivity extends AppCompatActivity {
                         JSONArray jsonArray = response.getJSONArray("friends");
                         //Log.i(TAG, "request success");
 
-                        for (int i = 0; i < jsonArray.length(); i++){
+                       /* for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject friend = jsonArray.getJSONObject(i);
 
                             String curUser = friend.getString("curUsername");
@@ -113,7 +114,7 @@ public class SignupActivity extends AppCompatActivity {
                            // output = curUser + " " + friendUser;
                            // outputtext.setText(outputtext.getText() + " " + friendUser);
                            // Log.i(TAG, output);
-                        }
+                        }*/
 
                     }catch (JSONException e){
                         e.printStackTrace();
