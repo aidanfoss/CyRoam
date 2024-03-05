@@ -24,8 +24,8 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String url = "https://8627db7c-2a59-41f6-9043-0b24f9f5dafa.mock.pstmn.io";
-    //public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";
+    //public static final String url = "https://8627db7c-2a59-41f6-9043-0b24f9f5dafa.mock.pstmn.io";
+    public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -75,8 +75,8 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
-                String username = usernameEditText.getText().toString();
-                addfriendsReq(usernamestring,username);
+                String friendusername = usernameEditText.getText().toString();
+                addfriendsReq(usernamestring,friendusername);
                 findfriendsReq(usernamestring);
                 /*if(!found){
                     outputtext.setText(output);
@@ -190,7 +190,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
     private void addfriendsReq(String curUsername,String Newfriend){
-        String url = mainURL + "/friends";
+        String url = mainURL + "/addfriend";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -200,6 +200,7 @@ public class FriendActivity extends AppCompatActivity {
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
             userInfo.put("curUsername", curUsername);
+            userInfo.put("friendUsername", Newfriend);
 
 
         } catch (Exception e){
@@ -214,7 +215,7 @@ public class FriendActivity extends AppCompatActivity {
                     try{
 
 
-                        JSONArray jsonArray = response.getJSONArray("friends");
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
                        // for (int i = 0; i < jsonArray.length(); i++){
