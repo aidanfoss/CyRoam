@@ -22,28 +22,28 @@ public class FriendObjController {
         return f;
     }
     @PostMapping(path = "/addFriend")
-     String addFriend(@RequestBody FriendObj friendObj){
+    FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
         if (friendUsername == null)
-            return failure;
+            return null;
         friendObjInterface.save(friendObj);
-        return success;
+        return friendObj;
 
     }
     @DeleteMapping(path = "/deleteFriend")
-    String deleteFriend(@RequestBody FriendObj passedFriendObj){
+    FriendObj deleteFriend(@RequestBody FriendObj passedFriendObj){
         String passedfriendUsername = passedFriendObj.getFriendUsername();
         String passedcurUsername = passedFriendObj.getCurUsername();
 
 
         if (passedfriendUsername == null ||passedcurUsername== null) {
-            return failure;
+            return null;
         }
         if(friendObjInterface.findByCurUsername(passedfriendUsername)==null){
-            return failure;
+            return null;
         }
         friendObjInterface.delete(passedFriendObj);
-        return success;
+        return passedFriendObj;
 
     }
 }
