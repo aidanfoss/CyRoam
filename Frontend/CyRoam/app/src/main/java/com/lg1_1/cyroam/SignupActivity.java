@@ -72,6 +72,7 @@ public class SignupActivity extends AppCompatActivity {
                     makePostReq(username, password);
                     Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                     startActivity(intent);
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Password don't match", Toast.LENGTH_LONG).show();
