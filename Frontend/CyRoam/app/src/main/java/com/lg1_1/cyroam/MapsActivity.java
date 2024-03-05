@@ -37,6 +37,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 import com.google.android.gms.location.LocationRequest;
 import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.volley.progressVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private TextView textView;
 
     private pinVolley pinVolley;
+    private progressVolley progressVolley;
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
 
@@ -77,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps); //Link to XML
 
         this.pinVolley = new pinVolley(this); //defines pinVolley class
+        this.progressVolley = new progressVolley(this); //defines progressVolley class
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -196,20 +199,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
             if (extras.containsKey("discovered")){ //discover response
                 textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+                progressVolley.fetchProgress(extras.getInt("pinId"), new progressVolley.VolleyCallbackGet() {
+                    @Override
+                    public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
+                        Log.d(TAG, "Progress Get Req: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
+                        textView.append("\nProgress Data Received Via Volley Get Request: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e(TAG, "fetchProgressData error: " + errorMessage);
+                    }
+                });
             }
             if (extras.containsKey("LATITUDE")) { //newpin response
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
+            }
+            if (extras.containsKey("PINID")) {
                 //GET REQUEST
                 int pinID = extras.getInt("PINID");
                 pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
-                        textView.append("Pin Data Recieved Via Volley Get Request: " + pin.getDescription());
+                        textView.append("\nPin Data Received Via Volley Get Request: " + pin.getDescription());
                         Log.d(TAG, "Pin Get Req: " + pin.getDescription());
                     }
 
                     @Override
                     public void onFailure(String errorMessage) {
+                        textView.append("\n get request failed for pin ID " + String.valueOf(pinID));
                         Log.e(TAG, "fetchPinData error: " + errorMessage);
                     }
                 });

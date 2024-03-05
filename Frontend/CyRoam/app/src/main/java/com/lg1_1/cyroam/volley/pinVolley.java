@@ -102,8 +102,8 @@ public class pinVolley {
                 response -> {
                     Log.d(TAG, " CREATEPIN RESPONSE: " + response.toString());
                     try {
-                        int id = response.getInt("pinId");
-                        Log.v(TAG, "pinId recieved");
+                        int id = response.getInt("id");
+                        Log.v(TAG, "id recieved");
                         callback.onSuccess(id);
                     } catch (JSONException e) {
                         Log.e(TAG, "JSONException: " + e.getMessage());
