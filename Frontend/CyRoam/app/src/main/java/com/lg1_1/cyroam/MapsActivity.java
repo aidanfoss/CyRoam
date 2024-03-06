@@ -7,6 +7,8 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -43,9 +46,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
 
@@ -53,6 +57,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FloatingActionButton newPinButton; // define new pin button variable
     private FloatingActionButton discoverButton; //define discoverButton
     private TextView textView;
+    private BitmapDescriptor smallUndiscoveredIcon;
+    private Bitmap smallUndiscovered;
+
 
     //define volley classes and requestQueue
     private pinVolley pinVolley;
@@ -80,6 +87,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
+
+        //define icons as BitmapDescriptors for the .icon call in Marker Declarations
+        smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
+        smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
 
         this.pinVolley = new pinVolley(this); //defines pinVolley class
         this.progressVolley = new progressVolley(this); //defines progressVolley class
@@ -244,14 +255,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } //Todo repurpose this block of code to recieve login information from nick
 
 
-        //handles click on marker. Uses pin object inside each pins tag
-        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker());
-                return false;
-            }
-        });
     }
 
 
@@ -280,22 +283,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String description = "temporary description";
                             boolean discoveredOut = false;
 
-                            Log.d(TAG + "volley", "pinVector added " + name);
                             Pin newPin = new Pin(x, y, name, description, id, discoveredOut);
-                            if (discoveredOut = false) {
+                            Log.d(TAG + "discover"+"volley", "pin created " + newPin.getDebugDescription() );
+                            if (newPin.isDiscovered()) {
+                                Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
                                         .position(newPin.getPos())
                                         .title(newPin.getName())
                                         .snippet(newPin.getDescription())
-                                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.undiscovered)));
+                                        .icon(BitmapDescriptorFactory.defaultMarker())
+                                );
                                 marker.setTag(newPin);
                             }
-                            else {
-//       change this icon to be discovered                         this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName())..snippet(newPin.getDescription())icon(BitmapDescriptorFactory.fromResource(R.drawable.iowa_state_clipart_4_removebg_preview)));
+                            else{
+                                Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
                                         .position(newPin.getPos())
                                         .title(newPin.getName())
-                                        .snippet(newPin.getDescription()));
+                                        .snippet(newPin.getDescription())
+                                        .icon(smallUndiscoveredIcon)
+                                );
+                                marker.setIcon(smallUndiscoveredIcon);
+                                Log.e(TAG + "discover", "test");
                                 marker.setTag(newPin);
                             }
                         }
@@ -329,6 +338,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
+    }
+
+    //handles click on marker. Uses pin object inside each pins tag
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+        Pin clickPin = (Pin) Objects.requireNonNull(marker.getTag());
+        ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+        //use clickPin information to send discovery information if relevant.
+
+        clickPin.getID();
+        return false;
     }
 }
 
