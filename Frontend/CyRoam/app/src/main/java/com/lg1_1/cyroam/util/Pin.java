@@ -19,7 +19,14 @@ public class Pin {
     private String description;
     private boolean discovered; //default to false in each constructor unless told otherwise
     //todo add pictures? might be out of scope
-
+    public Pin(Pin inPin){
+        this.x = inPin.x;
+        this.y = inPin.y;
+        this.description = inPin.description;
+        this.name = inPin.name;
+        this.ID = inPin.ID;
+        this.discovered = inPin.discovered;
+    }
     public Pin(double x, double y, String name) {
         this.x = x;
         this.y = y;
@@ -44,7 +51,7 @@ public class Pin {
         this.ID = ID;
         this.description = description;
         this.discovered = discovered;
-        Log.v(TAG, "Discovered Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name);
+        Log.i(TAG, "Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name + ". Discover Value: " + discovered);
     }
 
     public LatLng getPos(){
@@ -52,6 +59,7 @@ public class Pin {
         return new LatLng(x,y);
     }
 
+    public int getID(){return ID;}
     public double getLat() {return x;}
     public double getLong() {return y;}
     public String getName(){return name;}
@@ -59,4 +67,6 @@ public class Pin {
     public String getDebugDescription(){
         return "Name: " + name + "(" + x + ", " + y + "). Discovered: " + discovered;
     }
+    public void setTrue(){discovered = true;}
+    public boolean isDiscovered(){return discovered;}
 }
