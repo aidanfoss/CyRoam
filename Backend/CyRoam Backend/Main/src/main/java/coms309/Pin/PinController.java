@@ -1,5 +1,6 @@
 package coms309.Pin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,4 +40,14 @@ public class PinController {
         return tempPin;
     }
 
+    //Deletes all pins given an array of pin id's.
+    @DeleteMapping(path = "/pins")
+    List<Pin> deleteMultiPins(@RequestBody List<Integer> ids) {
+        List<Pin> deletedPins = new ArrayList<>();
+        for (int i : ids) {
+            deletedPins.add(pinRepository.findById(i));
+            pinRepository.deleteById(i);
+        }
+        return deletedPins;
+    }
 }
