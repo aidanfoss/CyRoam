@@ -124,7 +124,7 @@ public class SignupActivity extends AppCompatActivity {
                         }*/
 
                     }catch (JSONException e){
-                        Log.e(TAG, "JSONException");
+                        Log.e(TAG, "JSONException Signup: " + e.getMessage());
                         e.printStackTrace();
                     }
 
