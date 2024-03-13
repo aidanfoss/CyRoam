@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,8 +43,11 @@ public class FriendActivity extends AppCompatActivity {
     private EditText usernameEditText;
     String output = null;
     String usernamestring;
+
+    private RequestQueue queue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
 
@@ -59,7 +64,7 @@ public class FriendActivity extends AppCompatActivity {
             usernamestring = getIntent().getStringExtra("Username");
             String finallyer = usernamestring + "'s: Friends";
             titletext.setText(finallyer);
-            findfriendsReq(usernamestring);
+           // findfriendsReq(usernamestring);
         }
 
 
@@ -77,7 +82,7 @@ public class FriendActivity extends AppCompatActivity {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
                 String friendusername = usernameEditText.getText().toString();
                 addfriendsReq(usernamestring,friendusername);
-                findfriendsReq(usernamestring);
+                //findfriendsReq(usernamestring);
                 /*if(!found){
                     outputtext.setText(output);
                 }
@@ -190,7 +195,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
     private void addfriendsReq(String curUsername,String Newfriend){
-        String url = mainURL + "/addfriend";
+        String url = mainURL + "/addFriend";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -207,7 +212,7 @@ public class FriendActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 userInfo,
@@ -238,6 +243,7 @@ public class FriendActivity extends AppCompatActivity {
                     // output = response.toString();
 
                 },
+
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -264,6 +270,6 @@ public class FriendActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        queue.add(request);
     }
 }

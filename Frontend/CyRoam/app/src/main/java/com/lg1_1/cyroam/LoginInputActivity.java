@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -30,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginInputActivity extends AppCompatActivity {
-    // This while be the call to which ever table Zack makes
+    // This while be the call to which ever table Zach makes
     private String TAG = "FriendActivity";
     private String mainURL = MainActivity.url;
     //The text in the username/password edittext
@@ -69,11 +70,11 @@ public class LoginInputActivity extends AppCompatActivity {
 
                         });
 
-//                Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+              //  Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-//              intent.putExtra("Username", username);
-//                startActivity(intent);
+              //intent.putExtra("Username", username);
+              //  startActivity(intent);
             }
         });
     }
@@ -86,19 +87,20 @@ public class LoginInputActivity extends AppCompatActivity {
 
     //this calls the server and checks to see if it correct
     private void makeStringReq(String curUsername, String password, final LoginActivity.VolleyCallback callback){
+        //private void makeStringReq(String curUsername, String password){
         String url = mainURL + "/userCheck";
 
         // Convert input to JSONObject
-        JSONObject userInfo = new JSONObject();
+        JSONObject userInfo2 = new JSONObject();
         try{
 
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
 
-            userInfo.put("username", curUsername);
-            userInfo.put("password", password);
-            Log.v(TAG, "userinfo try success " + userInfo.toString());
+            userInfo2.put("username", curUsername);
+            userInfo2.put("password", password);
+            Log.v(TAG, "userinfo try success " + userInfo2.toString());
 
 
         } catch (Exception e){
@@ -109,12 +111,19 @@ public class LoginInputActivity extends AppCompatActivity {
         //my name is only here because i ran rebugging for nick
         //for some reason he cant run a server connection on his laptop.
         //-aidan
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, userInfo,
+      //  JsonRequest request = new JsonRequest(
+        // JsonArrayRequest request = new JsonArrayRequest(
+        JsonObjectRequest request1 = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                userInfo2,
+                // so the issue is that its saying that there is an error
+                //Log.v(TAG, "respo success: "),
                 response -> {
                     Log.v(TAG, "respo success: " + response.toString());
                     try{
                         Log.v(TAG, "request success");
-                        boolean isTrue = response.getBoolean("isUser");
+                        boolean isTrue = response.getBoolean("isUSer");
                         //return isTrue;
                         callback.onSuccess(isTrue);
 
@@ -151,7 +160,7 @@ public class LoginInputActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        queue.add(request);
+        queue.add(request1);
 //        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
     public interface VolleyCallback{

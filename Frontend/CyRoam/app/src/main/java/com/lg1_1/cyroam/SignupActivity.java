@@ -105,7 +105,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.GET,
                 url,
                 userInfo,
                 response -> {
