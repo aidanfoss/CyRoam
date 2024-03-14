@@ -47,6 +47,11 @@
           <theme>@style/Theme.AndroidExample</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_portal_screen.xml">
+        <config>
+          <theme>@style/Theme.AndroidExample</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml">
         <config>
           <theme>@style/Theme.AndroidExample</theme>
@@ -63,11 +68,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="new friend screen">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/AddFriends.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_friends.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="new addfriend screen">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/PortalScreenActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_portal_screen.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_friends.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_friends.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +177,9 @@
     <key name="android.template.1269448451">
       <recent name="com.lg1_1.cyroam" />
     </key>
+    <key name="android.template.-442871626">
+      <recent name="com.lg1_1.cyroam" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
@@ -249,22 +258,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00015" summary="initial commit">
-      <option name="closed" value="true" />
-      <created>1709002692944</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1709002692944</updated>
-    </task>
-    <task id="LOCAL-00016" summary="shelf">
-      <option name="closed" value="true" />
-      <created>1709002699331</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1709002699331</updated>
     </task>
     <task id="LOCAL-00017" summary="auto workspace.xml">
       <option name="closed" value="true" />
@@ -642,7 +635,23 @@
       <option name="project" value="LOCAL" />
       <updated>1710293758420</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="new addfriend screen">
+      <option name="closed" value="true" />
+      <created>1710354716437</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1710354716437</updated>
+    </task>
+    <task id="LOCAL-00065" summary="new addfriend screen">
+      <option name="closed" value="true" />
+      <created>1710354866280</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1710354866280</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -657,7 +666,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="created ProgressActivity" />
     <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
@@ -682,7 +690,8 @@
     <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
     <MESSAGE value="working on two round trips" />
     <MESSAGE value="new friend screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="new friend screen" />
+    <MESSAGE value="new addfriend screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="new addfriend screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
