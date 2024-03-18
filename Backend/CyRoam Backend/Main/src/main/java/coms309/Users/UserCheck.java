@@ -1,18 +1,18 @@
 package coms309.Users;
 
 public class UserCheck {
-    private boolean isUSer;
+    private boolean isUser;
 //THIS MIGHT MESS STUFF UP CASUE isUSer IS NOT CAMELCASED CORRECTLY
-    public UserCheck(boolean isUSer){
-        this.isUSer = isUSer;
+    public UserCheck(boolean isUser){
+        this.isUser = isUser;
     }
     public UserCheck(){
-        this.isUSer = false;
+        this.isUser = false;
     }
     public boolean getIsUser() {
-        return isUSer;
+        return isUser;
     }
-    public void setIsUser(boolean isUSer) {
-        this.isUSer = isUSer;
+    public void setIsUser(boolean isUser) {
+        this.isUser = isUser;
     }
 }
