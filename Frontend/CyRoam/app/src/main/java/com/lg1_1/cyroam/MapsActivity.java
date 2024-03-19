@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,6 +36,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 import com.google.android.gms.location.LocationRequest;
+import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.volley.progressVolley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +54,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FloatingActionButton discoverButton; //define discoverButton
     private TextView textView;
 
+    private pinVolley pinVolley;
+    private progressVolley progressVolley;
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
 
@@ -72,6 +77,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
+
+        this.pinVolley = new pinVolley(this); //defines pinVolley class
+        this.progressVolley = new progressVolley(this); //defines progressVolley class
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillPinVector
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -189,11 +197,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
-            if (extras.containsKey("pinId")){
+            if (extras.containsKey("discovered")){ //discover response
                 textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+                progressVolley.fetchProgress(extras.getInt("pinId"), new progressVolley.VolleyCallbackGet() {
+                    @Override
+                    public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
+                        Log.d(TAG, "Progress Get Req: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
+                        textView.append("\nProgress Data Received Via Volley Get Request: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e(TAG, "fetchProgressData error: " + errorMessage);
+                    }
+                });
             }
-            if (extras.containsKey("LATITUDE")) {
+            if (extras.containsKey("LATITUDE")) { //newpin response
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
+            }
+            if (extras.containsKey("PINID")) {
+                //GET REQUEST
+                int pinID = extras.getInt("PINID");
+                pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
+                    @Override
+                    public void onSuccess(Pin pin) {
+                        textView.append("\nPin Data Received Via Volley Get Request: " + pin.getDescription());
+                        Log.d(TAG, "Pin Get Req: " + pin.getDescription());
+                    }
+
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        textView.append("\n get request failed for pin ID " + String.valueOf(pinID));
+                        Log.e(TAG, "fetchPinData error: " + errorMessage);
+                    }
+                });
             }
             if (extras.containsKey("LoginSuccess")) {
                 textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
@@ -213,12 +250,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         only called pinVector because it used to use a vector. can change later.
         */
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url+"/pins", null,
+        @SuppressLint("SetTextI18n") JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url+"/pins", null,
                 response -> {
                     try {
-                        JSONArray jsonArray = response.getJSONArray("pins");
+                        JSONArray jsonArray = response;
                         //JSONObject jsonArray = response.getJSONObject("pins");
-                        Log.w("volley", "request success");
+                        Log.d("volley", "request success");
 
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject pin = jsonArray.getJSONObject(i);
@@ -229,7 +266,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String name = pin.getString("name");
 
 //                            pinVector.add(new Pin(x,y,name,id));
-                            Log.w("volley", "pinVector added " + name);
+                            Log.d("volley", "pinVector added " + name);
 //                            Log.w("volley", "pinVector size: " + String.valueOf(pinVector.size()));
                             Pin newPin = new Pin(x,y,name,id);
 

@@ -1,14 +1,11 @@
 package coms309.Pin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PinController {
@@ -23,7 +20,7 @@ public class PinController {
     }
 
     @GetMapping(path = "/pins/{id}")
-    Pin getLaptopById(@PathVariable int id){
+    Pin getPinById(@PathVariable int id){
         return pinRepository.findById(id);
     }
 
@@ -36,4 +33,21 @@ public class PinController {
         return pin;
     }
 
+    @DeleteMapping(path = "/pins/{id}")
+    Pin deletePinById(@PathVariable int id) {
+        Pin tempPin = pinRepository.findById(id);
+        pinRepository.deleteById(id);
+        return tempPin;
+    }
+
+    //Deletes all pins given an array of pin id's.
+    @DeleteMapping(path = "/pins")
+    List<Pin> deleteMultiPins(@RequestBody List<Integer> ids) {
+        List<Pin> deletedPins = new ArrayList<>();
+        for (int i : ids) {
+            deletedPins.add(pinRepository.findById(i));
+            pinRepository.deleteById(i);
+        }
+        return deletedPins;
+    }
 }
