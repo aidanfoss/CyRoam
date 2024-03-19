@@ -13,10 +13,12 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,15 +28,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
+    private String TAG = "FriendActivity";
     private String mainURL = MainActivity.url;
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
     private EditText confirmEditText;   // define confirm edittext variable
     private Button loginButton;         // define login button variable
     private Button signupButton;        // define signup button variable
-    private boolean checker = false;
+    private RequestQueue queue;
+    //private boolean checker = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
@@ -51,7 +56,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 /* when login button is pressed, use intent to switch to Login Activity */
-                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                 startActivity(intent);  // go to LoginActivity
             }
         });
@@ -68,9 +73,10 @@ public class SignupActivity extends AppCompatActivity {
 
                 if (password.equals(confirm)){
                     Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makeStringReq(username, password);
-                    Intent intent = new Intent(SignupActivity.this, FriendActivity.class);
+                    makePostReq(password, username);
+                    Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                     startActivity(intent);
+
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Password don't match", Toast.LENGTH_LONG).show();
@@ -78,8 +84,9 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-    private void makeStringReq(String pass, String user){
-        String url = mainURL + "/friends";
+    private void makePostReq(String pass, String user){
+        String url = mainURL + "/users";
+        Log.d(TAG,"post req called " + url);
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -88,23 +95,25 @@ public class SignupActivity extends AppCompatActivity {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            //userInfo.put("curUsername", curUsername);
+            userInfo.put("username", user);
+            userInfo.put("password", pass);
+            Log.v(TAG, "JSON OBJECT CREATED");
 
 
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 userInfo,
                 response -> {
                     try{
                         JSONArray jsonArray = response.getJSONArray("friends");
-                        //Log.i(TAG, "request success");
+                        Log.d(TAG, "request success");
 
-                        for (int i = 0; i < jsonArray.length(); i++){
+                       /* for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject friend = jsonArray.getJSONObject(i);
 
                             String curUser = friend.getString("curUsername");
@@ -112,21 +121,19 @@ public class SignupActivity extends AppCompatActivity {
                            // output = curUser + " " + friendUser;
                            // outputtext.setText(outputtext.getText() + " " + friendUser);
                            // Log.i(TAG, output);
-                        }
+                        }*/
 
                     }catch (JSONException e){
+                        Log.e(TAG, "JSONException Signup: " + e.getMessage());
                         e.printStackTrace();
                     }
 
                     // output = response.toString();
 
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Log.e(TAG,error.getMessage());
-                        // tvResponse.setText(error.getMessage());
-                    }
+                error -> {
+                    Log.e(TAG, error.getMessage());
+                    // tvResponse.setText(error.getMessage());
                 }
         ){
             @Override
@@ -147,6 +154,6 @@ public class SignupActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        queue.add(request);
     }
 }
