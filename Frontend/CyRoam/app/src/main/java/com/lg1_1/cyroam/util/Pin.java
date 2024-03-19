@@ -39,7 +39,8 @@ public class Pin {
 
     public double getLat() {return x;}
     public double getLong() {return y;}
-    public String getName(){
-        return name;
+    public String getName(){return name;}
+    public String getDescription(){
+        return "Name: " + name + "(" + x + ", " + y + ")";
     }
 }
