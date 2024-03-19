@@ -68,12 +68,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="new addfriend screen">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/PortalScreenActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_portal_screen.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="new portal screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_friends.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_friends.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/PortalScreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/PortalScreenActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -258,14 +255,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00017" summary="auto workspace.xml">
-      <option name="closed" value="true" />
-      <created>1709002715326</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1709002715326</updated>
     </task>
     <task id="LOCAL-00018" summary="might be useful later. useless ATM">
       <option name="closed" value="true" />
@@ -651,7 +640,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710354866280</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="new portal screen">
+      <option name="closed" value="true" />
+      <created>1710459550326</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1710459550326</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -666,7 +663,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
     <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
@@ -691,7 +687,8 @@
     <MESSAGE value="working on two round trips" />
     <MESSAGE value="new friend screen" />
     <MESSAGE value="new addfriend screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="new addfriend screen" />
+    <MESSAGE value="new portal screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="new portal screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -735,11 +732,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
           <line>115</line>
           <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/SignupActivity.java</url>
-          <line>110</line>
-          <option name="timeStamp" value="85" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java</url>
