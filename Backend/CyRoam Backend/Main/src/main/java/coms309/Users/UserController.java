@@ -44,38 +44,35 @@ public class UserController {
     }
 
     //for password/username check
-    @GetMapping(path = "/userCheck")
-    UserCheck checkUser(@RequestBody User userEntered){
+    //GET requests can not have bodies change it to have information in url
+    @GetMapping(path = "/userCheck/{user}/{password}")
+    UserCheck checkUser(@PathVariable String user, @PathVariable String password){
         UserCheck isUSerT = new UserCheck(true);
         UserCheck isUSerF = new UserCheck(false);
-        if (userEntered == null) {
-            //isUser.clear();
-            //isUser.put("isUser", false);
+        if (user == null) {
+
             return isUSerF;
         }
-        String userName = userEntered.getUsername();
+        //String userName = user.getUsername();
 
-        if(userInterface.findByUsername(userName)==null){
-           // isUser.clear();
-           // isUser.put("isUser", false);
+        if(userInterface.findByUsername(user)==null){
+
             return isUSerF;
         }
-        User actual = userInterface.findByUsername(userName);
+        User actual = userInterface.findByUsername(user);
 
-        if(Objects.equals(actual.getPassword(), userEntered.getPassword())){
-           // isUser.clear();
-            //isUser.put("isUser", true);
+        //test if this actually works
+        if(Objects.equals(actual.getPassword(), password)){
+
             return isUSerT;
-            //if returning string
-            //return "welcome back "+ actual.getUserName() + "! uId:"+ + actual.getuId();
+
         }
         else{
-            //isUser.clear();
-            //isUser.put("isUser", false);
+
             return isUSerF;
         }
 
-        //return userInterface.findByuId(uId);
+
     }
 
 }
