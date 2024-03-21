@@ -284,7 +284,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             boolean discoveredOut = false;
 
                             Pin newPin = new Pin(x, y, name, description, id, discoveredOut);
-                            Log.d(TAG + "discover"+"volley", "pin created " + newPin.getDebugDescription() );
+                            Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription() );
                             if (newPin.isDiscovered()) {
                                 Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
