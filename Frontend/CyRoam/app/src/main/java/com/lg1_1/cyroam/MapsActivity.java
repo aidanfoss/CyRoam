@@ -93,6 +93,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
+    private double lat = 0;
+    private double lng = 0;
 
 
     GoogleMap gMap;
@@ -139,6 +141,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         discoverButton = findViewById(R.id.discoverButton);
         newPinButton.setOnClickListener(v -> {
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            intent.putExtra("lat", lat);
+            intent.putExtra("lng", lng);
             startActivity(intent);  // go to NewPinActivity
         });
         discoverButton.setOnClickListener(v -> {
@@ -159,6 +163,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 for (Location location : locationResult.getLocations()) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
                     //Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                     gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
