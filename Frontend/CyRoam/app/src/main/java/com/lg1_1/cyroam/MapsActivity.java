@@ -2,6 +2,7 @@ package com.lg1_1.cyroam;
 
 import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
 import static com.lg1_1.cyroam.MainActivity.url;
+import static com.lg1_1.cyroam.MainActivity.wsurl;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -41,15 +42,30 @@ import com.lg1_1.cyroam.util.Pin;
 import com.google.android.gms.location.LocationRequest;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
+import com.lg1_1.cyroam.websockets.WebSocketListener;
+import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
+import org.java_websocket.WebSocket;
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.exceptions.InvalidDataException;
+import org.java_websocket.framing.Framedata;
+import org.java_websocket.framing.PingFrame;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.handshake.Handshakedata;
+import org.java_websocket.handshake.ServerHandshake;
+import org.java_websocket.handshake.ServerHandshakeBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.InetSocketAddress;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.ByteBuffer;
 import java.util.Objects;
 
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
 
@@ -72,21 +88,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //location & locationPermissions things
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
     private FusedLocationProviderClient fusedLocationClient;
-//    private Location lastKnownLocation;
+    //    private Location lastKnownLocation;
 //    private Boolean locationPermissionGranted;
 //    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
+    private double lat = 0;
+    private double lng = 0;
 
 
     GoogleMap gMap;
     FrameLayout map;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
+
+        //Nick, todo: define your websocket class here, similar to mine
+        aidanWebSocket aidanClient;
 
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
@@ -112,7 +134,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
 
-
         //define and implement UI
         map = findViewById(R.id.map); //defines the map in the UI
         textView = findViewById(R.id.textView2); //defines debug text screen
@@ -120,6 +141,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         discoverButton = findViewById(R.id.discoverButton);
         newPinButton.setOnClickListener(v -> {
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
+            intent.putExtra("lat", lat);
+            intent.putExtra("lng", lng);
             startActivity(intent);  // go to NewPinActivity
         });
         discoverButton.setOnClickListener(v -> {
@@ -140,62 +163,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 for (Location location : locationResult.getLocations()) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
+                    lat = location.getLatitude();
+                    lng = location.getLongitude();
+                    //Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                     gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 }
             }
         };
-//        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
-//            if (location != null) {
-//                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-//                Log.w("GPS", String.valueOf(location.getLatitude() + "," + location.getLongitude()));
-//                gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//            }
-//        });
+
+        //Make Websocket Connection
+        try {
+            Log.v("Aidan " + TAG, "trying websocket connection");
+            aidanClient = new aidanWebSocket(wsurl, this);
+            aidanClient.connect();
+            //@Nick, todo: add your websocket try here too. Hopefully that works.
+            //You could also make a similar try/catch right below this one, might be a better idea
+        } catch (URISyntaxException e) {
+            Log.e(TAG, "Websocket Error: " + e.toString());
+            Log.e("Aidan WebSocket", "Websocket Error: " + e.toString());
+            e.printStackTrace();
+        }
     }
 
-    public void minimize() {
-        //https://github.com/googlemaps-samples/android-samples/blob/588287af6ea872c6098c2b4c727503200de4dc7e/tutorials/java/CurrentPlaceDetailsOnMap/app/src/main/java/com/example/currentplacedetailsonmap/MapsActivityCurrentPlace.java#L267-L282
-
-
-//    private void updateLocationUI() { //got this chunk of code from https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial#java_4
-//        if (gMap == null) {
-//            return;
-//        }
-//        try {
-//            if (locationPermissionGranted) {
-//                gMap.setMyLocationEnabled(true);
-//                gMap.getUiSettings().setMyLocationButtonEnabled(true);
-//            } else {
-//                gMap.setMyLocationEnabled(false);
-//                gMap.getUiSettings().setMyLocationButtonEnabled(false);
-//                lastKnownLocation = null;
-//                getLocationPermission();
-//            }
-//        } catch (SecurityException e)  {
-//            Log.e("Exception: %s", Objects.requireNonNull(e.getMessage()));
-//        }
-//    }
-//
-//    private void getLocationPermission() {
-//        /*
-//         * Request location permission, so that we can get the location of the
-//         * device. The result of the permission request is handled by a callback,
-//         * onRequestPermissionsResult.
-//         */
-//        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-//                android.Manifest.permission.ACCESS_FINE_LOCATION)
-//                == PackageManager.PERMISSION_GRANTED) {
-//            locationPermissionGranted = true;
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-//                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-//        }
-//    }
-    } //created this so i can minimize the commented code.
-
-    @Override
+    @Override //This gets called when the map initializes. It only happens once, but its seperate from onCreate.
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
@@ -204,18 +194,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         fillMap(); //fills the map with relevant information
 
-        Bundle extras = getIntent().getExtras(); //call that checks for passed information
-        if(extras == null) {
-            Log.i(TAG, "missing any passed information");
 
-        }
-        else {
+        //Following statement and if/else check for user information or any passed pin information.
+        //Its in onMap because of the pin information
+        Bundle extras = getIntent().getExtras(); //call that checks for passed information
+        if (extras == null) {
+            Log.i(TAG, "extras, missing any passed information");
+            //make debug user, likely name aaa, password bbb, any relevant info
+        } else {
             Log.i(TAG, "extras != null");
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
-            if (extras.containsKey("discovered")){ //discover response
-                textView.append("\n Pin with ID " +extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+            if (extras.containsKey("discovered")) { //discover response
+                textView.append("\n Pin with ID " + extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
                 progressVolley.fetchProgress(extras.getInt("pinId"), new progressVolley.VolleyCallbackGet() {
                     @Override
                     public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
@@ -252,13 +244,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (extras.containsKey("LoginSuccess")) {
                 textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
             }
-        } //Todo repurpose this block of code to recieve login information from nick
+        } //Todo repurpose this block of code to receive login information from nick
 
 
     }
 
 
-    private void fillMap(){
+    private void fillMap() {
         /*
         Function that makes a volley request to recieve all pin data.
         Uses url from MainActivity, and uses the googleMaps gMap declaration
@@ -266,14 +258,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         only called pinVector because it used to use a vector. can change later.
         */
-        @SuppressLint("SetTextI18n") JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url+"/pins", null,
+        Log.v(TAG, "fillMap() called");
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins", null,
                 response -> {
                     try {
                         JSONArray jsonArray = response;
                         //JSONObject jsonArray = response.getJSONObject("pins");
                         Log.d(TAG + "volley", "request success");
 
-                        for(int i = 0; i < jsonArray.length(); i++) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject pin = jsonArray.getJSONObject(i);
 
                             int id = pin.getInt("id");
@@ -284,7 +277,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             boolean discoveredOut = false;
 
                             Pin newPin = new Pin(x, y, name, description, id, discoveredOut);
-                            Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription() );
+                            Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
                             if (newPin.isDiscovered()) {
                                 Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
@@ -294,8 +287,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         .icon(BitmapDescriptorFactory.defaultMarker())
                                 );
                                 marker.setTag(newPin);
-                            }
-                            else{
+                            } else {
                                 Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
                                         .position(newPin.getPos())
@@ -312,6 +304,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         textView.setText(textView.getText() + "\nCreatedPins");
 
                     } catch (JSONException e) {
+                        Log.e(TAG + "volley", "JSONException: " + e.toString());
                         e.printStackTrace();
                     }
                 }, Throwable::printStackTrace);
@@ -324,6 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onResume();
         startLocationUpdates();
     }
+
     private void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -331,11 +325,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
+
     @Override
     protected void onPause() {
         super.onPause();
         stopLocationUpdates();
     }
+
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
@@ -351,5 +347,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         clickPin.getID();
         return false;
     }
-}
 
+    @Override
+    public void onPinRecieved(int wsPinIdInput) {
+        pinVolley.fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
+            @Override
+            public void onSuccess(Pin pin) {
+                textView.append("\nPin Data Received Via WebSocket + Volley: " + pin.getDebugDescription());
+                Log.d("Aidan "+ TAG + " Volley Websocket", "Pin Get Req: " + pin.getDebugDescription());
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                textView.append("\n get request failed for pin ID " + String.valueOf(wsPinIdInput));
+                Log.e(TAG, "fetchPinData error: " + errorMessage);
+            }
+        });
+    }
+    @Override
+    public void onFriendRequestRecieved(int id) {
+        //todo nick put shit here
+        //likely just edit the text box,
+        // similar to mine above using textView.append()
+        //you can change the passed information. Right now, its just ID
+        //youd have to change it here, in the webSocketListener, and in nickWebSocket
+    }
+}
