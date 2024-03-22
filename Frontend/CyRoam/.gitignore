@@ -7,4 +7,6 @@
 .externalNativeBuild
 .cxx
 local.properties
-/.idea/*
+.idea/*
+.idea/workspace.xml
+.idea/deploymentTargetDropDown.xml
