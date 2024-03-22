@@ -70,11 +70,11 @@ public class LoginInputActivity extends AppCompatActivity {
 
                         });
 
-              //  Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+                Intent intent = new Intent(LoginInputActivity.this, AddFriends.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
               //intent.putExtra("Username", username);
-              //  startActivity(intent);
+                startActivity(intent);
             }
         });
     }
