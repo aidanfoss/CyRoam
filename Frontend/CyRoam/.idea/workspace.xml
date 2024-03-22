@@ -68,19 +68,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="workspace">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_4_2024_4_26_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_4_2024_4_26_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_3_4_2024_4_37_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_3_4_2024_4_37_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_3_37_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_26_2024_3_37_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="discover feature">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2_26_2024_3_37_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_21_2024_4_26_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_21_2024_4_26_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/automatic_workspace_xml_update__AndroidStudio.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/automatic_workspace_xml_update__AndroidStudio.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/automatic_workspace_xml_update__AndroidStudio1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/automatic_workspace_xml_update__AndroidStudio1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/MapsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NewPinActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/ProgressActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/pinVolley.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_progress.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,13 +137,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/../.." value="25-misc-stuff-before-meeting-tonight" />
+        <entry key="$PROJECT_DIR$/../.." value="28-mess-with-map-try-to-improve-pins" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -171,13 +166,20 @@
     &quot;android-custom-viewC:/Users/nickk/AppData/Local/Android/Sdk/sources/android-34/android/view/View.java_SELECTED&quot;: &quot;View&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;22-finish-the-two-round-trips-2&quot;,
+=======
+    &quot;git-widget-placeholder&quot;: &quot;28-mess-with-map-try-to-improve-pins&quot;,
+>>>>>>> 28-mess-with-map-try-to-improve-pins
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/bossf/Desktop/lg1_1/Frontend/CyRoam&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bossf\Desktop\lg1_1\Frontend\CyRoam\app\src\main\res\drawable" />
+    </key>
     <key name="android.template.-77531316">
       <recent name="com.lg1_1.cyroam" />
     </key>
@@ -266,6 +268,81 @@
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
     </task>
+<<<<<<< HEAD
+=======
+    <task id="LOCAL-00009" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649655</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649655</updated>
+    </task>
+    <task id="LOCAL-00010" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000649844</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000649844</updated>
+    </task>
+    <task id="LOCAL-00011" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650006</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650006</updated>
+    </task>
+    <task id="LOCAL-00012" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650148</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650148</updated>
+    </task>
+    <task id="LOCAL-00013" summary="shelving??">
+      <option name="closed" value="true" />
+      <created>1709000650304</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1709000650304</updated>
+    </task>
+    <task id="LOCAL-00014" summary="rename issue resolved">
+      <option name="closed" value="true" />
+      <created>1709002668038</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709002668038</updated>
+    </task>
+    <task id="LOCAL-00015" summary="initial commit">
+      <option name="closed" value="true" />
+      <created>1709002692944</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709002692944</updated>
+    </task>
+    <task id="LOCAL-00016" summary="shelf">
+      <option name="closed" value="true" />
+      <created>1709002699331</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1709002699331</updated>
+    </task>
+    <task id="LOCAL-00017" summary="auto workspace.xml">
+      <option name="closed" value="true" />
+      <created>1709002715326</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709002715326</updated>
+    </task>
+>>>>>>> 28-mess-with-map-try-to-improve-pins
     <task id="LOCAL-00018" summary="might be useful later. useless ATM">
       <option name="closed" value="true" />
       <created>1709007632013</created>
@@ -562,6 +639,7 @@
       <option name="project" value="LOCAL" />
       <updated>1709195684590</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00055" summary="working on two round trips">
       <option name="closed" value="true" />
       <created>1709515865915</created>
@@ -659,6 +737,33 @@
       <updated>1710459550326</updated>
     </task>
     <option name="localTasksCounter" value="67" />
+=======
+    <task id="LOCAL-00055" summary="demo2 weekly meeting">
+      <option name="closed" value="true" />
+      <created>1709678282814</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1709678282814</updated>
+    </task>
+    <task id="LOCAL-00056" summary="this is throwing a fatal exception due to my casting of onMarkerClickListener&#10;Im going to attempt using a hashmap. (yikes)">
+      <option name="closed" value="true" />
+      <created>1709756878211</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1709756878211</updated>
+    </task>
+    <task id="LOCAL-00057" summary="discover feature">
+      <option name="closed" value="true" />
+      <created>1709762862293</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1709762862293</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
+>>>>>>> 28-mess-with-map-try-to-improve-pins
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -673,6 +778,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+<<<<<<< HEAD
+=======
+    <MESSAGE value="shelf and other misc uncommited things. Not sure why it wants me to commit strings.xml, as nothing changed in the before and after" />
+>>>>>>> 28-mess-with-map-try-to-improve-pins
     <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
     <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
@@ -694,11 +803,18 @@
     <MESSAGE value="working on GPS locationdata use" />
     <MESSAGE value="got PinData to properly fill via postman" />
     <MESSAGE value="added logs, commented out fusedLocationClient code as it was spitting out dozens of errors i didnt understand, and verified that the pins request still works. Need to get other postman posts and gets work later." />
+<<<<<<< HEAD
     <MESSAGE value="working on two round trips" />
     <MESSAGE value="new friend screen" />
     <MESSAGE value="new addfriend screen" />
     <MESSAGE value="new portal screen" />
     <option name="LAST_COMMIT_MESSAGE" value="new portal screen" />
+=======
+    <MESSAGE value="demo2 weekly meeting" />
+    <MESSAGE value="this is throwing a fatal exception due to my casting of onMarkerClickListener&#10;Im going to attempt using a hashmap. (yikes)" />
+    <MESSAGE value="discover feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="discover feature" />
+>>>>>>> 28-mess-with-map-try-to-improve-pins
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
