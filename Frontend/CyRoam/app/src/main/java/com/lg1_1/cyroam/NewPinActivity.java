@@ -49,6 +49,7 @@ public class NewPinActivity extends AppCompatActivity {
 
             longitudeText.setText(String.valueOf(extras.getDouble("lng")));
             latitudeText.setText(String.valueOf(extras.getDouble("lat")));
+            nameText.setText("test");
         }
 
         newPinButton.setOnClickListener(new View.OnClickListener() {
