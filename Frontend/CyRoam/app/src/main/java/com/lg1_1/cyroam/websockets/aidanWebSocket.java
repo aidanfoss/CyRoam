@@ -3,13 +3,17 @@ import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 
 public class aidanWebSocket extends WebSocketClient{
     private final String TAG = "Aidan Websocket";
-    public aidanWebSocket(String serverUri) throws URISyntaxException{
+    private WebSocketListener webSocketListener;
+    public aidanWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException{
         super(new URI(serverUri));
+        this.webSocketListener = listener;
     }
 
     @Override
@@ -19,7 +23,18 @@ public class aidanWebSocket extends WebSocketClient{
 
     @Override
     public void onMessage(String message) {
-        Log.v(TAG, "message recieved");
+        Log.v(TAG, "message recieved: " + message);
+        //hopefully the message will be a JSON
+        try {
+            //convert the message into a json object
+            JSONObject jsonObject = new JSONObject(message);
+            //use json object to get data on the pins ID
+            int pinID = jsonObject.getInt("id");
+            //return pins ID through listener
+            webSocketListener.onPinRecieved(pinID);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -32,3 +47,4 @@ public class aidanWebSocket extends WebSocketClient{
         Log.w(TAG, "aidanWebSocket error: " + ex.toString());
     }
 }
+
