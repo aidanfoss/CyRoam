@@ -25,6 +25,8 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";
+//    public static final String wsurl = "ws://coms-309-008.class.las.iastate.edu:8080";
+    public static final String wsurl = "ws://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
