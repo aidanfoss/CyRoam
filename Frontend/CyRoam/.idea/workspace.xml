@@ -73,13 +73,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="new portal screen">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/NotificationActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_notification.xml" afterDir="false" />
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="addFriends working on creating Noticications">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/AddFriends.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/AddFriends.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -268,14 +263,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Created fillPinVector function that will grab all pin data once a URL is established">
-      <option name="closed" value="true" />
-      <created>1709007656395</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1709007656395</updated>
     </task>
     <task id="LOCAL-00020" summary="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out.">
       <option name="closed" value="true" />
@@ -661,7 +648,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710878563261</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="addFriends working on creating Noticications">
+      <option name="closed" value="true" />
+      <created>1711138814867</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1711138814867</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -676,7 +671,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="made it so when pressed, the button sends a volley request given the data defined earlier in the class" />
     <MESSAGE value="fixed potential crash when inputting spaces into the editText" />
     <MESSAGE value="fixed potential crash with inputting non-integer into editText" />
     <MESSAGE value="added ProgressActivity button." />
@@ -701,7 +695,8 @@
     <MESSAGE value="new friend screen" />
     <MESSAGE value="new addfriend screen" />
     <MESSAGE value="new portal screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="new portal screen" />
+    <MESSAGE value="addFriends working on creating Noticications" />
+    <option name="LAST_COMMIT_MESSAGE" value="addFriends working on creating Noticications" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -730,6 +725,31 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/AddFriends.java</url>
           <line>59</line>
           <option name="timeStamp" value="79" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
+          <line>67</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
+          <line>141</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="85" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="86" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/volley/progressVolley.java</url>
