@@ -73,10 +73,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="addFriends working on creating Noticications">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lg1_1/cyroam/LoginInputActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="059e6610-127a-4d1d-892e-ff309afe7581" name="Changes" comment="addFriends working on creating Noticications" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -263,14 +260,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1707507707493</updated>
-    </task>
-    <task id="LOCAL-00020" summary="hours of hard work. Not sure why the volley request is not working. I need to go into help desk hours to potentially figure this out.">
-      <option name="closed" value="true" />
-      <created>1709019325006</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1709019325006</updated>
     </task>
     <task id="LOCAL-00021" summary="need to make it wait for the volley Request to go through before moving on. Not sure how to do that, as ive created a function that does all the request stuff.">
       <option name="closed" value="true" />
@@ -656,7 +645,15 @@
       <option name="project" value="LOCAL" />
       <updated>1711138814867</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="addFriends working on creating Noticications">
+      <option name="closed" value="true" />
+      <created>1711217992974</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1711217992975</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
