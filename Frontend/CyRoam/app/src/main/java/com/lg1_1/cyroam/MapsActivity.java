@@ -378,9 +378,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //youd have to change it here, in the webSocketListener, and in nickWebSocket
 
 
-        friendVolley.addfriendsReq(name, username, new pinVolley.FetchPinCallback() {
+        friendVolley.addfriendsReq(name, username, new friendVolley.addFriendCallback() {
+
+
             @Override
-            public void onSuccess(Pin pin) {
+            public void onSuccess(User user) {
                 textView.append("\nThis user was added as a friend");
                 Log.d("Nick "+ TAG + " Volley Websocket", "FriendAdd Get Req: ");
             }
