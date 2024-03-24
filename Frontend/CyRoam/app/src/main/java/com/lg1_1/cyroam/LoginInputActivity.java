@@ -70,11 +70,11 @@ public class LoginInputActivity extends AppCompatActivity {
 
                         });
 
-              //  Intent intent = new Intent(LoginInputActivity.this, FriendActivity.class);
+                //Intent intent = new Intent(LoginInputActivity.this, AddFriends.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
               //intent.putExtra("Username", username);
-              //  startActivity(intent);
+                //startActivity(intent);
             }
         });
     }
@@ -88,9 +88,10 @@ public class LoginInputActivity extends AppCompatActivity {
     //this calls the server and checks to see if it correct
     private void makeStringReq(String curUsername, String password, final LoginActivity.VolleyCallback callback){
         //private void makeStringReq(String curUsername, String password){
-        String url = mainURL + "/userCheck";
+        String url = mainURL + "/userCheck/" + curUsername + "/" + password;
 
         // Convert input to JSONObject
+        /*
         JSONObject userInfo2 = new JSONObject();
         try{
 
@@ -107,23 +108,24 @@ public class LoginInputActivity extends AppCompatActivity {
             e.printStackTrace();
             Log.e(TAG, "obj error: " + e.getMessage());
         }
-
+        */
         //my name is only here because i ran rebugging for nick
         //for some reason he cant run a server connection on his laptop.
         //-aidan
       //  JsonRequest request = new JsonRequest(
         // JsonArrayRequest request = new JsonArrayRequest(
-        JsonObjectRequest request1 = new JsonObjectRequest(
-                Request.Method.POST,
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
                 url,
-                userInfo2,
+                null,
+                //userInfo2,
                 // so the issue is that its saying that there is an error
                 //Log.v(TAG, "respo success: "),
                 response -> {
                     Log.v(TAG, "respo success: " + response.toString());
                     try{
                         Log.v(TAG, "request success");
-                        boolean isTrue = response.getBoolean("isUSer");
+                        boolean isTrue = response.getBoolean("isUser");
                         //return isTrue;
                         callback.onSuccess(isTrue);
 
@@ -160,7 +162,7 @@ public class LoginInputActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        queue.add(request1);
+        queue.add(request);
 //        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
     public interface VolleyCallback{
