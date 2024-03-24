@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +44,11 @@ public class PinSocket {
             try {
                 logger.info("Sent to session " + sessions.get(i).getId());
                 sessions.get(i).getBasicRemote().sendText(pin);
+            } catch (EOFException e) {
+                logger.error("EOFException: " + e.getMessage());
+                e.printStackTrace();
             } catch (IOException e) {
-                logger.info("IOException: " + e.getMessage());
+                logger.error("IOException: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -53,7 +57,8 @@ public class PinSocket {
 
     @OnClose
     public void onClose(Session session) {
-        logger.info("Session " + session.getId() + " disconnected");
-        sessions.remove(session);
+            logger.info("Session " + session.getId() + " disconnected");
+            sessions.remove(session);
+            logger.info("Number of sessions: " + sessions.size());
     }
 }
