@@ -40,7 +40,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 import com.google.android.gms.location.LocationRequest;
+import com.lg1_1.cyroam.util.User;
 import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.volley.friendVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
@@ -79,7 +81,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //define volley classes and requestQueue
     private pinVolley pinVolley;
+
+    private friendVolley friendVolley;
     private progressVolley progressVolley;
+    private User username;
     private RequestQueue mQueue; // define volley request queue
 
     //TODO define user object here to determine what they can and cant do
@@ -365,11 +370,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
     @Override
-    public void onFriendRequestRecieved(int id) {
-        //todo nick put shit here
+    public void onfredReqRecieved(String name) {
+        //todo nick put it here
         //likely just edit the text box,
         // similar to mine above using textView.append()
         //you can change the passed information. Right now, its just ID
         //youd have to change it here, in the webSocketListener, and in nickWebSocket
+
+
+        friendVolley.addfriendsReq(name, username, new pinVolley.FetchPinCallback() {
+            @Override
+            public void onSuccess(Pin pin) {
+                textView.append("\nThis user was added as a friend");
+                Log.d("Nick "+ TAG + " Volley Websocket", "FriendAdd Get Req: ");
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                textView.append("\nThis user was unable to be added as a friend");
+                Log.e(TAG, "fetchuseraddData error: " + errorMessage);
+            }
+        });
+
     }
 }
