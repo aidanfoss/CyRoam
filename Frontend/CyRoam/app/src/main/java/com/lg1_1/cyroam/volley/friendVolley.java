@@ -10,7 +10,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
-import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.util.User;
 
 import org.json.JSONArray;
@@ -37,7 +36,7 @@ public class friendVolley {
 
 
 
-    private void addfriendsReq(String curUsername, User Newfriend, final addFriendCallback callback){
+    public void addfriendsReq(String curUsername, User Newfriend, final addFriendCallback callback){
         String url = BASE_URL + "/addFriend";
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -95,7 +94,7 @@ public class friendVolley {
         queue.add(request);
     }
     public interface addFriendCallback {
-        void onSuccess(Pin pin);
+        void onSuccess(User user);
         void onFailure(String errorMessage);
     }
 
