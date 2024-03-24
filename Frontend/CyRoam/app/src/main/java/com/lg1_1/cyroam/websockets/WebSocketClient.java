@@ -6,5 +6,5 @@ public abstract class WebSocketClient {
     public WebSocketClient(URI uri) {
     }
 
-    public abstract void onOpen(ServerHandshake handshakedata);
+
 }

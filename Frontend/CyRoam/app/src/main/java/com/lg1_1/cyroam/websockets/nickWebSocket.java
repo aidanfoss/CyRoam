@@ -3,6 +3,8 @@ package com.lg1_1.cyroam.websockets;
 import android.util.Log;
 
 import org.json.JSONObject;
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
 import java.net.URISyntaxException;
