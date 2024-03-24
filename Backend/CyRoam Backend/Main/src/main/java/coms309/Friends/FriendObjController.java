@@ -15,9 +15,10 @@ public class FriendObjController {
     public FriendObjInterface friendObjInterface;
     private String success = "{\"message\":\"success ( :\"}";
     private String failure = "{\"message\":\"failure ) :\"}";
-    @GetMapping(path = "/friends")
-    List<FriendObj> requestFriends(@RequestBody FriendObj Justusername){
-        String username = Justusername.getCurUsername();
+    //change to contain info in url
+    @GetMapping(path = "/friends/{username}")
+    List<FriendObj> requestFriends(@PathVariable String username){
+        ///String username = Justusername.getCurUsername();
         List<FriendObj> f =friendObjInterface.findByCurUsername(username);
         return f;
     }
