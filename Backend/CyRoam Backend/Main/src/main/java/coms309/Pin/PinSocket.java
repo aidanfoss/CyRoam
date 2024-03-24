@@ -21,21 +21,27 @@ public class PinSocket {
     @Autowired
     public void setPinRepository(PinRepository repo) {pinRepository = repo;}
 
-    private List<Session> sessions = new ArrayList<>();
+    private static List<Session> sessions;
 
     private final Logger logger = LoggerFactory.getLogger(PinSocket.class);
 
     @OnOpen
     public void onOpen(Session session) {
+        if (sessions == null) {
+            sessions = new ArrayList<>();
+        }
         logger.info("onOpen Started");
+        logger.info("Session " + session.getId() + " connected");
         sessions.add(session);
-
+        logger.info("Number of sessions: " + sessions.size());
     }
 
     @OnMessage
     public void onMessage(Session session, String pin) {
+        logger.info("onMessage Started with session " + session.getId());
         for (int i = 0; i < sessions.size(); i++) {
             try {
+                logger.info("Sent to session " + sessions.get(i).getId());
                 sessions.get(i).getBasicRemote().sendText(pin);
             } catch (IOException e) {
                 logger.info("IOException: " + e.getMessage());
@@ -47,6 +53,7 @@ public class PinSocket {
 
     @OnClose
     public void onClose(Session session) {
+        logger.info("Session " + session.getId() + " disconnected");
         sessions.remove(session);
     }
 }
