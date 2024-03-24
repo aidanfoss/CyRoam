@@ -1,16 +1,19 @@
 package com.lg1_1.cyroam.websockets;
 
+import android.content.Context;
+
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-
 import java.net.URI;
+import java.net.URISyntaxException;
 
 public class nickWebSocket extends WebSocketClient {
     private final String TAG = "Nick Websocket";
     private WebSocketListener webSocketListener;
 
-    public nickWebSocket(URI serverUri) {
-        super(serverUri);
+    public nickWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException {
+        super(new URI(serverUri));
+        this.webSocketListener = listener;
     }
 
     @Override

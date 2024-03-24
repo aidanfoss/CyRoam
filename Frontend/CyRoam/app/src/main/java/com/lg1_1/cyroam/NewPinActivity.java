@@ -13,6 +13,7 @@ import com.android.volley.RequestQueue;
 
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.websockets.WebSocketManager;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
 public class NewPinActivity extends AppCompatActivity {
@@ -75,7 +76,11 @@ public class NewPinActivity extends AppCompatActivity {
 
                         Log.v(TAG, "Starting websocket send");
                         Log.d(TAG, "CreatePin Success!");
-                        startActivity(intent);
+
+                        if (WebSocketManager.getInstance().isConnected()) {
+                            WebSocketManager.getInstance().sendAidan(String.valueOf(idSuccess));
+                        }
+                        finish();
                     }
                     @Override
                     public void onFailure(String errorMessage) {
