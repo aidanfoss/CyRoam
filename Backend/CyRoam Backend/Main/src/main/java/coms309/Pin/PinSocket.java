@@ -33,15 +33,12 @@ public class PinSocket {
     }
 
     @OnMessage
-    public void onMessage(Session session, JSONObject pin) {
+    public void onMessage(Session session, String pin) {
         for (int i = 0; i < sessions.size(); i++) {
             try {
-                sessions.get(i).getBasicRemote().sendObject(pin);
+                sessions.get(i).getBasicRemote().sendText(pin);
             } catch (IOException e) {
                 logger.info("IOException: " + e.getMessage());
-                e.printStackTrace();
-            } catch (EncodeException e) {
-                logger.info("EncodeException: " + e.getMessage());
                 e.printStackTrace();
             }
         }
