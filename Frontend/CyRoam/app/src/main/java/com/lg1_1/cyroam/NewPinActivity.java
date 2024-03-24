@@ -73,6 +73,7 @@ public class NewPinActivity extends AppCompatActivity {
                         intent.putExtra("PINID", idSuccess);
                         Log.d(TAG, String.valueOf(idSuccess));
 
+                        Log.v(TAG, "Starting websocket send");
                         Log.d(TAG, "CreatePin Success!");
                         startActivity(intent);
                     }
@@ -83,6 +84,9 @@ public class NewPinActivity extends AppCompatActivity {
                 });
 
                 Pin newPin = new Pin(longitudeIn,latitudeIn,name);
+
+                //todo add websocket broadcast
+
 
                 Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
                 intent.putExtra("LONGITUDE", latitudeIn);
