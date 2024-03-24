@@ -2,7 +2,6 @@ package com.lg1_1.cyroam.websockets;
 
 import android.util.Log;
 
-import org.java_websocket.client.WebSocketClient;
 import org.json.JSONObject;
 
 import java.net.URI;
