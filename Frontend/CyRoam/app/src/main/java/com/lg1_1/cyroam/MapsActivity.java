@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,29 +40,16 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
-import com.google.android.gms.location.LocationRequest;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
-import org.java_websocket.WebSocket;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.exceptions.InvalidDataException;
-import org.java_websocket.framing.Framedata;
-import org.java_websocket.framing.PingFrame;
-import org.java_websocket.handshake.ClientHandshake;
-import org.java_websocket.handshake.Handshakedata;
-import org.java_websocket.handshake.ServerHandshake;
-import org.java_websocket.handshake.ServerHandshakeBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.Objects;
 
 
@@ -100,6 +88,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleMap gMap;
     FrameLayout map;
 
+    //Nick, todo: define your websocket class here, similar to mine
+    public aidanWebSocket aidanClient;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -107,8 +97,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
-        //Nick, todo: define your websocket class here, similar to mine
-        aidanWebSocket aidanClient;
+
 
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
@@ -174,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Make Websocket Connection
         try {
             Log.v("Aidan " + TAG, "trying websocket connection");
-            aidanClient = new aidanWebSocket(wsurl, this);
+            aidanClient = new aidanWebSocket(wsurl + "/pins/socket", this);
             aidanClient.connect();
             //@Nick, todo: add your websocket try here too. Hopefully that works.
             //You could also make a similar try/catch right below this one, might be a better idea
@@ -203,6 +192,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //make debug user, likely name aaa, password bbb, any relevant info
         } else {
             Log.i(TAG, "extras != null");
+            if (extras.containsKey("message")) {
+                textView.append("\n" + String.valueOf(extras.getString("message")));
+            }
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
@@ -240,6 +232,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.e(TAG, "fetchPinData error: " + errorMessage);
                     }
                 });
+                aidanClient.send(String.valueOf(pinID));
             }
             if (extras.containsKey("LoginSuccess")) {
                 textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
