@@ -26,10 +26,8 @@ public class aidanWebSocket extends WebSocketClient{
         Log.v(TAG, "message recieved: " + message);
         //hopefully the message will be a JSON
         try {
-            //convert the message into a json object
-            JSONObject jsonObject = new JSONObject(message);
-            //use json object to get data on the pins ID
-            int pinID = jsonObject.getInt("id");
+            //use string.valueof to get data on the pins ID
+            int pinID = Integer.parseInt(message);
             //return pins ID through listener
             webSocketListener.onPinRecieved(pinID);
         } catch (Exception e) {

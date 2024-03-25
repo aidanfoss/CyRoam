@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import com.lg1_1.cyroam.websockets.aidanWebSocket;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,9 +26,10 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
 
     public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";
-//    public static final String wsurl = "ws://coms-309-008.class.las.iastate.edu:8080";
-    public static final String wsurl = "ws://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self";
+    public static final String wsurl = "ws://coms-309-008.class.las.iastate.edu:8080";
+//    public static final String wsurl = "ws://demo.piesocket.com/v3/channel_123?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self";
 
+    //public aidanWebSocket aidanWebSocket;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
