@@ -23,7 +23,7 @@ public class aidanWebSocket extends WebSocketClient{
 
     @Override
     public void onMessage(String message) {
-        Log.v(TAG, "message recieved: " + message);
+        Log.v(TAG, "message received: " + message);
         //hopefully the message will be a JSON
         try {
             //use string.valueof to get data on the pins ID
