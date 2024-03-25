@@ -2,15 +2,10 @@ package com.lg1_1.cyroam.websockets;
 
 import static com.lg1_1.cyroam.MainActivity.wsurl;
 
-import android.content.Context;
-
-import org.java_websocket.WebSocket;
-
 import java.net.URISyntaxException;
 
 public class WebSocketManager {
     private static WebSocketManager instance;
-    private WebSocket webSocket;
     private boolean isConnected = false;
 
     public aidanWebSocket aidanClient;
@@ -38,7 +33,7 @@ public class WebSocketManager {
     }
 
     public void closeWebSocketConnection() {
-        if (isConnected && webSocket != null){
+        if (isConnected && aidanClient.isOpen() && nickClient.isOpen()){
             aidanClient.close();
             nickClient.close();
 
@@ -52,7 +47,6 @@ public class WebSocketManager {
 
     public void sendAidan(String text){
         aidanClient.send(text);
-        return;
     }
 
     public aidanWebSocket aidanWS(){
