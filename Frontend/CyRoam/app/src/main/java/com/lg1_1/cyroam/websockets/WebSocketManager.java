@@ -32,6 +32,8 @@ public class WebSocketManager {
             aidanClient = new aidanWebSocket(wsurl + "/pins/socket", listener);
             aidanClient.connect();
             nickClient = new nickWebSocket(wsurl + "/friendSocket/" + username, listener);
+            nickClient.connect();
+            isConnected = true;
         }
     }
 
