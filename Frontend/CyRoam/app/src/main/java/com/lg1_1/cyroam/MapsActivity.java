@@ -2,7 +2,6 @@ package com.lg1_1.cyroam;
 
 import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
 import static com.lg1_1.cyroam.MainActivity.url;
-import static com.lg1_1.cyroam.MainActivity.wsurl;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -41,12 +40,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.util.User;
-import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.friendVolley;
+import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.websockets.WebSocketManager;
-import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -59,14 +57,10 @@ import java.util.Objects;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
-    public User user;
+    private User user;
 
-    //define UI
-    private FloatingActionButton newPinButton; // define new pin button variable
-    private FloatingActionButton discoverButton; //define discoverButton
     private TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
-    private Bitmap smallUndiscovered;
 
 
     //define volley classes and requestQueue
@@ -74,7 +68,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private friendVolley friendVolley;
     private progressVolley progressVolley;
-    private User username;
     private RequestQueue mQueue; // define volley request queue
 
     //TODO define user object here to determine what they can and cant do
@@ -95,17 +88,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleMap gMap;
     FrameLayout map;
 
-    //Nick, todo: define your websocket class here, similar to mine
-    WebSocketManager webSocketManager;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
-
-        if (user == null){
-            user = new User("bossf", "123", 1);
-        }
 
         //initialize websocketManager
         try {
@@ -116,11 +103,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
-        smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
+        Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
         smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
 
         this.pinVolley = new pinVolley(this); //defines pinVolley class
         this.progressVolley = new progressVolley(this); //defines progressVolley class
+        this.friendVolley = new friendVolley(this); //defines nicks friendVolley
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillMap
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -142,8 +130,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //define and implement UI
         map = findViewById(R.id.map); //defines the map in the UI
         textView = findViewById(R.id.textView2); //defines debug text screen
-        newPinButton = findViewById(R.id.newPinButton);
-        discoverButton = findViewById(R.id.discoverButton);
+        //define UI
+        // define new pin button variable
+        FloatingActionButton newPinButton = findViewById(R.id.newPinButton);
+        //define discoverButton
+        FloatingActionButton discoverButton = findViewById(R.id.discoverButton);
         newPinButton.setOnClickListener(v -> {
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
             intent.putExtra("lat", lat);
@@ -211,6 +202,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (extras.containsKey("message")) {
                 textView.append("\n" + extras.getString("message"));
             }
+            if (extras.containsKey("username")){
+                user = new User(
+                        extras.getString("username"),
+                        extras.getString("password"),
+                        extras.getInt("userID"));
+            }
+
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
@@ -275,12 +273,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins", null,
                 response -> {
                     try {
-                        JSONArray jsonArray = response;
                         //JSONObject jsonArray = response.getJSONObject("pins");
                         Log.d(TAG + "volley", "request success");
 
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject pin = jsonArray.getJSONObject(i);
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject pin = response.getJSONObject(i);
 
                             int id = pin.getInt("id");
                             double x = pin.getDouble("x");
@@ -299,6 +296,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         .snippet(newPin.getDescription())
                                         .icon(BitmapDescriptorFactory.defaultMarker())
                                 );
+                                assert marker != null;
                                 marker.setTag(newPin);
                             } else {
                                 Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
@@ -314,7 +312,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             }
                         }
 
-                        textView.setText(textView.getText() + "\nCreatedPins");
+                        textView.append("\nCreatedPins");
 
                     } catch (JSONException e) {
                         Log.e(TAG + "volley", "JSONException: " + e);
@@ -393,9 +391,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //youd have to change it here, in the webSocketListener, and in nickWebSocket
 
 
-        friendVolley.addfriendsReq(name, username, new friendVolley.addFriendCallback() {
-
-
+        friendVolley.addfriendsReq(name, user, new friendVolley.addFriendCallback() {
             @Override
             public void onSuccess(User user) {
                 textView.append("\nThis user was added as a friend");

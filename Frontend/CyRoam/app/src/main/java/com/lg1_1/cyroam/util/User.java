@@ -1,15 +1,18 @@
 package com.lg1_1.cyroam.util;
 
 public class User {
-    private int id;
-    private String username;
-    private String password;
+    private final int id;
+    private final String username;
     //we dont want to store the password, unless we deem its easier to verify everything with it later.
 
-    public User(String username, String password, int id){
+    public User(String username, String ignoredPassword, int id){
         this.id = id;
         this.username = username;
-        this.password = password;
+
+        //use password only in this constructor to verify.
+        //if password matches, change a boolean to true or something
+        //password is named  ignoredPassword to prevent warning for lack of use
+        //todo implement password/login verification somewhere
 
         //when creating this, you need to call a volley request to get the userID.
         //pass it into this object, which can be used later for verification.
