@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,37 +40,26 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.util.Pin;
-import com.google.android.gms.location.LocationRequest;
 import com.lg1_1.cyroam.util.User;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.friendVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
+import com.lg1_1.cyroam.websockets.WebSocketManager;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
-import org.java_websocket.WebSocket;
-import org.java_websocket.drafts.Draft;
-import org.java_websocket.exceptions.InvalidDataException;
-import org.java_websocket.framing.Framedata;
-import org.java_websocket.framing.PingFrame;
-import org.java_websocket.handshake.ClientHandshake;
-import org.java_websocket.handshake.Handshakedata;
-import org.java_websocket.handshake.ServerHandshake;
-import org.java_websocket.handshake.ServerHandshakeBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.InetSocketAddress;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.Objects;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
+    public User user;
 
     //define UI
     private FloatingActionButton newPinButton; // define new pin button variable
@@ -105,15 +95,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleMap gMap;
     FrameLayout map;
 
-
+    //Nick, todo: define your websocket class here, similar to mine
+    WebSocketManager webSocketManager;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
-        //Nick, todo: define your websocket class here, similar to mine
-        aidanWebSocket aidanClient;
+        if (user == null){
+            user = new User("bossf", "123", 1);
+        }
+
+        //initialize websocketManager
+        try {
+            Log.v(TAG, "onCreate Websocket Try");
+            WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
@@ -177,17 +177,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         };
 
         //Make Websocket Connection
-        try {
-            Log.v("Aidan " + TAG, "trying websocket connection");
-            aidanClient = new aidanWebSocket(wsurl, this);
-            aidanClient.connect();
-            //@Nick, todo: add your websocket try here too. Hopefully that works.
-            //You could also make a similar try/catch right below this one, might be a better idea
-        } catch (URISyntaxException e) {
-            Log.e(TAG, "Websocket Error: " + e.toString());
-            Log.e("Aidan WebSocket", "Websocket Error: " + e.toString());
-            e.printStackTrace();
-        }
+//        try {
+//            Log.v("Aidan " + TAG, "trying websocket connection");
+//            aidanClient = new aidanWebSocket(wsurl + "/pins/socket", this);
+//            aidanClient.connect();
+//            //@Nick, todo: add your websocket try here too. Hopefully that works.
+//            //You could also make a similar try/catch right below this one, might be a better idea
+//        } catch (URISyntaxException e) {
+//            Log.e(TAG, "Websocket Error: " + e.toString());
+//            Log.e("Aidan WebSocket", "Websocket Error: " + e.toString());
+//            e.printStackTrace();
+//        }
     }
 
     @Override //This gets called when the map initializes. It only happens once, but its seperate from onCreate.
@@ -195,7 +195,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.gMap = googleMap;
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-        gMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
+        gMap.setOnMarkerClickListener(this);
 
         fillMap(); //fills the map with relevant information
 
@@ -208,16 +208,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //make debug user, likely name aaa, password bbb, any relevant info
         } else {
             Log.i(TAG, "extras != null");
+            if (extras.containsKey("message")) {
+                textView.append("\n" + extras.getString("message"));
+            }
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
             if (extras.containsKey("discovered")) { //discover response
-                textView.append("\n Pin with ID " + extras.getInt("pinId") + " discovered: " + String.valueOf(extras.getBoolean("discovered")));
+                textView.append("\n Pin with ID " + extras.getInt("pinId") + " discovered: " + extras.getBoolean("discovered"));
                 progressVolley.fetchProgress(extras.getInt("pinId"), new progressVolley.VolleyCallbackGet() {
                     @Override
                     public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
-                        Log.d(TAG, "Progress Get Req: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
-                        textView.append("\nProgress Data Received Via Volley Get Request: " + String.valueOf(pinId) + " " + String.valueOf(userId) + " " + String.valueOf(discovered));
+                        Log.d(TAG, "Progress Get Req: " + pinId + " " + userId + " " + discovered);
+                        textView.append("\nProgress Data Received Via Volley Get Request: " + pinId + " " + userId + " " + discovered);
                     }
 
                     @Override
@@ -230,8 +233,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
             }
             if (extras.containsKey("PINID")) {
-                //GET REQUEST
                 int pinID = extras.getInt("PINID");
+                if (WebSocketManager.getInstance().isConnected()) {
+                    WebSocketManager.getInstance().aidanWS().send(String.valueOf(pinID));
+                }
+                //GET REQUEST
+
                 pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
@@ -241,10 +248,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     @Override
                     public void onFailure(String errorMessage) {
-                        textView.append("\n get request failed for pin ID " + String.valueOf(pinID));
+                        textView.append("\n get request failed for pin ID " + pinID);
                         Log.e(TAG, "fetchPinData error: " + errorMessage);
                     }
                 });
+                WebSocketManager.getInstance().sendAidan(String.valueOf(pinID));
             }
             if (extras.containsKey("LoginSuccess")) {
                 textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
@@ -309,7 +317,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         textView.setText(textView.getText() + "\nCreatedPins");
 
                     } catch (JSONException e) {
-                        Log.e(TAG + "volley", "JSONException: " + e.toString());
+                        Log.e(TAG + "volley", "JSONException: " + e);
                         e.printStackTrace();
                     }
                 }, Throwable::printStackTrace);
@@ -320,6 +328,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onResume() {
         super.onResume();
+        if (!WebSocketManager.getInstance().isConnected()) {
+            try {
+                WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            }
+        }
         startLocationUpdates();
     }
 
@@ -364,7 +379,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onFailure(String errorMessage) {
-                textView.append("\n get request failed for pin ID " + String.valueOf(wsPinIdInput));
+                textView.append("\n get request failed for pin ID " + wsPinIdInput);
                 Log.e(TAG, "fetchPinData error: " + errorMessage);
             }
         });
