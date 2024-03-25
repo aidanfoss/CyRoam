@@ -1,7 +1,5 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,26 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -40,14 +26,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
-    private Button loginButton;         // define login button variable
-    private Button signupButton;        // define signup button variable
-    private FloatingActionButton bypassLoginButton; //temporary button that bypasses login screen
-    private boolean confirm = false;
+    private final boolean confirm = false;
     String output;
     private TextView textView;
-    private String mainURL = MainActivity.url;
-    private String TAG = "LoginActivity";
+    private final String mainURL = MainActivity.url;
+    private final String TAG = "LoginActivity";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         /* initialize UI elements */
         usernameEditText = findViewById(R.id.editTextUsername);
         passwordEditText = findViewById(R.id.editTextPassword);
-        loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
-        signupButton = findViewById(R.id.signupButton);  // link to signup button in the Login activity XML
-        bypassLoginButton = findViewById(R.id.floatingActionButton);
+        // define login button variable
+        Button loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
+        // define signup button variable
+        Button signupButton = findViewById(R.id.signupButton);  // link to signup button in the Login activity XML
+        //temporary button that bypasses login screen
+        FloatingActionButton bypassLoginButton = findViewById(R.id.floatingActionButton);
 
         bypassLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +91,6 @@ public class LoginActivity extends AppCompatActivity {
                   //  }
             }
         });
-
 
         /* click listener on login button pressed */
         //loginButton.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
                 //                headers.put("Content-Type", "application/json");
                 return headers;
             }
-
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
@@ -204,5 +188,4 @@ public class LoginActivity extends AppCompatActivity {
         void onSuccess(boolean isTrue);
         void onFailure(String errorMessage);
     }
-
 }
