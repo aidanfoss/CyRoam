@@ -12,10 +12,10 @@ AFAIK that is not possible, unless I moved all this over to a function underneat
 public class Pin {
     private final String TAG = "Pin";
 
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
     private int ID;
-    private String name;
+    private final String name;
     private String description;
     private boolean discovered; //default to false in each constructor unless told otherwise
     //todo add pictures? might be out of scope
@@ -40,7 +40,7 @@ public class Pin {
         this.y = y;
         this.name = name;
         this.ID = ID;
-        Log.v(TAG, "Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name);
+        Log.v(TAG, "Pin With ID: " + ID + " Created. Named: " + name);
         discovered = false;
     }
 
@@ -51,11 +51,11 @@ public class Pin {
         this.ID = ID;
         this.description = description;
         this.discovered = discovered;
-        Log.i(TAG, "Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name + ". Discover Value: " + discovered);
+        Log.i(TAG, "Pin With ID: " + ID + " Created. Named: " + name + ". Discover Value: " + discovered);
     }
 
     public LatLng getPos(){
-        Log.w("Pin", "getPos() called, returning LatLng(" + String.valueOf(x)+","+String.valueOf(y)); //delete this later. Kind of fun
+        Log.w("Pin", "getPos() called, returning LatLng(" + x +","+ y); //delete this later. Kind of fun
         return new LatLng(x,y);
     }
 
