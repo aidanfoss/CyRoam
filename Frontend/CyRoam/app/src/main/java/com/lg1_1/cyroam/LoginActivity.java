@@ -47,6 +47,11 @@ public class LoginActivity extends AppCompatActivity {
         //temporary button that bypasses login screen
         FloatingActionButton bypassLoginButton = findViewById(R.id.floatingActionButton);
 
+        /**
+         * @author Aidan
+         * Bypasses the login screen, logging in as an admin user for testing
+         * @param
+         */
         bypassLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
