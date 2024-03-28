@@ -1,4 +1,4 @@
-package coms309.Progress;
+package coms309.Statistics;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Progress {
+public class Statistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +15,13 @@ public class Progress {
     private int pinId;
     private boolean discovered;
 
-    public Progress(int userId, int pinId, boolean discovered) {
+    public Statistics(int userId, int pinId, boolean discovered) {
         this.userId = userId;
         this.pinId = pinId;
         this.discovered = discovered;
     }
 
-    public Progress() {
+    public Statistics() {
 
     }
 
