@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 /**
- * @author Nicholas Kirschbaum
  * This screen holds invites from other people
  * as well as allows you to send invites
  * Add Friends is a screen that is only accessable via friends activity

@@ -1,0 +1,173 @@
+Index: app/src/main/java/com/lg1_1/cyroam/websockets/nickWebSocket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lg1_1.cyroam.websockets;\r\n\r\nimport android.content.Context;\r\n\r\nimport org.java_websocket.client.WebSocketClient;\r\nimport org.java_websocket.handshake.ServerHandshake;\r\nimport java.net.URI;\r\nimport java.net.URISyntaxException;\r\n\r\npublic class nickWebSocket extends WebSocketClient {\r\n\r\n    private final String TAG = \"Nick Websocket\";\r\n    private WebSocketListener webSocketListener;\r\n\r\n    public nickWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException {\r\n        super(new URI(serverUri));\r\n        this.webSocketListener = listener;\r\n    }\r\n\r\n    @Override\r\n    public void onOpen(ServerHandshake handshakedata) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onMessage(String message) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onClose(int code, String reason, boolean remote) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onError(Exception ex) {\r\n\r\n    }\r\n    //do alt enter to fix the bug above. It'll autofill for you each required function\r\n    //do a lot of Log.v(TAG, \"info\")'s\r\n    //look at my onMessage class, implement the onFriendRequestRecieved interface\r\n    //i have the interface at the bottom of mapsActivity for you.\r\n\r\n    public nickWebSocket(String serverUri2, WebSocketListener listener) throws URISyntaxException {\r\n        super(new URI(serverUri2));\r\n        this.webSocketListener = listener;\r\n    }\r\n\r\n    @Override\r\n    public void onOpen(ServerHandshake handshakedata) {\r\n        Log.v(TAG, \"connected\");\r\n    }\r\n\r\n    @Override\r\n    public void onMessage(String name) {\r\n        Log.v(TAG, \"message recieved: \" + name);\r\n        //hopefully the message will be a JSON\r\n        try {\r\n            //convert the message into a json object\r\n            JSONObject jsonObject = new JSONObject(name);\r\n            //use json object to get data on the pins ID\r\n            String invite = jsonObject.getString(\"name\");\r\n            //return pins ID through listener\r\n            webSocketListener.onfredReqRecieved(invite);\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onClose(int code, String reason, boolean remote) {\r\n        Log.v(TAG, \"connection closed\");\r\n    }\r\n\r\n    @Override\r\n    public void onError(Exception ex) {\r\n        Log.w(TAG, \"NickWebSocket error: \" + ex.toString());\r\n    }\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lg1_1/cyroam/websockets/nickWebSocket.java b/app/src/main/java/com/lg1_1/cyroam/websockets/nickWebSocket.java
+--- a/app/src/main/java/com/lg1_1/cyroam/websockets/nickWebSocket.java	
++++ b/app/src/main/java/com/lg1_1/cyroam/websockets/nickWebSocket.java	
+@@ -1,51 +1,40 @@
+ package com.lg1_1.cyroam.websockets;
+ 
+-import android.content.Context;
++
++
++import android.util.Log;
+ 
+ import org.java_websocket.client.WebSocketClient;
+ import org.java_websocket.handshake.ServerHandshake;
++import org.json.JSONObject;
++
+ import java.net.URI;
+ import java.net.URISyntaxException;
+ 
++
++/**
++ *
++ */
+ public class nickWebSocket extends WebSocketClient {
+ 
+     private final String TAG = "Nick Websocket";
+     private WebSocketListener webSocketListener;
+ 
++    /**
++     * @param serverUri
++     * @param listener
++     * @throws URISyntaxException
++     */
+     public nickWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException {
+         super(new URI(serverUri));
+         this.webSocketListener = listener;
+     }
+ 
+-    @Override
+-    public void onOpen(ServerHandshake handshakedata) {
+-
+-    }
+-
+-    @Override
+-    public void onMessage(String message) {
+-
+-    }
+-
+-    @Override
+-    public void onClose(int code, String reason, boolean remote) {
+-
+-    }
+-
+-    @Override
+-    public void onError(Exception ex) {
+-
+-    }
+     //do alt enter to fix the bug above. It'll autofill for you each required function
+     //do a lot of Log.v(TAG, "info")'s
+     //look at my onMessage class, implement the onFriendRequestRecieved interface
+     //i have the interface at the bottom of mapsActivity for you.
+ 
+-    public nickWebSocket(String serverUri2, WebSocketListener listener) throws URISyntaxException {
+-        super(new URI(serverUri2));
+-        this.webSocketListener = listener;
+-    }
+-
+     @Override
+     public void onOpen(ServerHandshake handshakedata) {
+         Log.v(TAG, "connected");
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Fri Feb 09 13:41:50 CST 2024\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-8.2-bin.zip\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	
++++ b/gradle/wrapper/gradle-wrapper.properties	
+@@ -1,6 +1,6 @@
+-#Fri Feb 09 13:41:50 CST 2024
++#Wed Mar 27 19:35:59 CDT 2024
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.4.2-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+Index: app/src/main/java/com/lg1_1/cyroam/AddFriends.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lg1_1.cyroam;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.app.ActivityCompat;\r\nimport androidx.core.app.NotificationCompat;\r\nimport androidx.core.app.NotificationManagerCompat;\r\n\r\nimport android.app.Notification;\r\nimport android.app.NotificationChannel;\r\nimport android.app.NotificationManager;\r\nimport android.app.PendingIntent;\r\nimport android.content.Intent;\r\nimport android.content.pm.PackageManager;\r\nimport android.graphics.Bitmap;\r\nimport android.graphics.BitmapFactory;\r\nimport android.os.Build;\r\nimport android.os.Bundle;\r\nimport android.widget.Button;\r\n\r\npublic class AddFriends extends AppCompatActivity {\r\n    private Button friendSearch;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_add_friends);\r\n\r\n        friendSearch = findViewById(R.id.searchbutton);\r\n        friendSearch.setOnClickListener(view -> {\r\n                    createnotif();\r\n        });\r\n    }\r\n\r\n    private void createnotif() {\r\n        String id = \"Whatch this work\";\r\n        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);\r\n        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {\r\n            NotificationChannel channel = manager.getNotificationChannel(id);\r\n            if (channel == null) {\r\n                channel = new NotificationChannel(id, \"Channel line\", NotificationManager.IMPORTANCE_HIGH);\r\n                channel.setDescription(\"[Channel Discription]\");\r\n                channel.enableVibration(true);\r\n                channel.setVibrationPattern(new long[]{100, 1000, 200, 340});\r\n                channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);\r\n                manager.createNotificationChannel(channel);\r\n            }\r\n\r\n\r\n        }\r\n        Intent notifIntent = new Intent(this, NotificationActivity.class);\r\n        notifIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);\r\n        PendingIntent pendingIntent = null;\r\n        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {\r\n            pendingIntent = PendingIntent.getActivity\r\n                    (this, 0, notifIntent, PendingIntent.FLAG_MUTABLE);\r\n        }\r\n        else\r\n        {\r\n            pendingIntent = PendingIntent.getActivity\r\n                    (this, 0, notifIntent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);\r\n        }\r\n        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)\r\n                .setSmallIcon(R.drawable.iowa_state_clipart_4_removebg_preview)\r\n                .setContentTitle(\"Title\")\r\n                .setContentText(\"text inputreerfeve\")\r\n                .setPriority(NotificationCompat.PRIORITY_HIGH)\r\n                .setVibrate(new long[]{100, 1000, 200, 340})\r\n                .setAutoCancel(false)\r\n                .setTicker(\"Notification\");\r\n        builder.setContentIntent(pendingIntent);\r\n        NotificationManagerCompat m = NotificationManagerCompat.from(getApplicationContext());\r\n        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {\r\n            // TODO: Consider calling\r\n            //    ActivityCompat#requestPermissions\r\n            // here to request the missing permissions, and then overriding\r\n           // public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)\r\n            // to handle the case where the user grants the permission. See the documentation\r\n            // for ActivityCompat#requestPermissions for more details.\r\n            return;\r\n        }\r\n        m.notify(1, builder.build());\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lg1_1/cyroam/AddFriends.java b/app/src/main/java/com/lg1_1/cyroam/AddFriends.java
+--- a/app/src/main/java/com/lg1_1/cyroam/AddFriends.java	
++++ b/app/src/main/java/com/lg1_1/cyroam/AddFriends.java	
+@@ -1,22 +1,20 @@
+ package com.lg1_1.cyroam;
+ 
+-import androidx.appcompat.app.AppCompatActivity;
+-import androidx.core.app.ActivityCompat;
+-import androidx.core.app.NotificationCompat;
+-import androidx.core.app.NotificationManagerCompat;
+-
+ import android.app.Notification;
+ import android.app.NotificationChannel;
+ import android.app.NotificationManager;
+ import android.app.PendingIntent;
+ import android.content.Intent;
+ import android.content.pm.PackageManager;
+-import android.graphics.Bitmap;
+-import android.graphics.BitmapFactory;
+ import android.os.Build;
+ import android.os.Bundle;
+ import android.widget.Button;
+ 
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.core.app.ActivityCompat;
++import androidx.core.app.NotificationCompat;
++import androidx.core.app.NotificationManagerCompat;
++
+ public class AddFriends extends AppCompatActivity {
+     private Button friendSearch;
+ 
+@@ -30,7 +28,11 @@
+                     createnotif();
+         });
+     }
+-
++    /**
++     * @param creates a notification when called
++     * @param Nick127k
++     * @
++     */
+     private void createnotif() {
+         String id = "Whatch this work";
+         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+Index: app/src/main/java/com/lg1_1/cyroam/websockets/WebSocketManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lg1_1.cyroam.websockets;\r\n\r\nimport static com.lg1_1.cyroam.MainActivity.wsurl;\r\n\r\nimport android.content.Context;\r\n\r\nimport org.java_websocket.WebSocket;\r\n\r\nimport java.net.URISyntaxException;\r\n\r\npublic class WebSocketManager {\r\n    private static WebSocketManager instance;\r\n    private WebSocket webSocket;\r\n    private boolean isConnected = false;\r\n\r\n    public aidanWebSocket aidanClient;\r\n    public nickWebSocket nickClient;\r\n\r\n    private WebSocketManager(){\r\n\r\n    }\r\n\r\n    public static WebSocketManager getInstance() {\r\n        if (instance == null) {\r\n            instance = new WebSocketManager();\r\n        }\r\n        return instance;\r\n    }\r\n\r\n    public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {\r\n        if (!isConnected) {\r\n            aidanClient = new aidanWebSocket(wsurl + \"/pins/socket\", listener);\r\n            aidanClient.connect();\r\n            nickClient = new nickWebSocket(wsurl + \"/friendSocket/\" + username, listener);\r\n            nickClient.connect();\r\n            isConnected = true;\r\n        }\r\n    }\r\n\r\n    public void closeWebSocketConnection() {\r\n        if (isConnected && webSocket != null){\r\n            aidanClient.close();\r\n            nickClient.close();\r\n\r\n            isConnected = false;\r\n        }\r\n    }\r\n\r\n    public boolean isConnected() {\r\n        return isConnected;\r\n    }\r\n\r\n    public void sendAidan(String text){\r\n        aidanClient.send(text);\r\n        return;\r\n    }\r\n\r\n    public aidanWebSocket aidanWS(){\r\n        return aidanClient;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lg1_1/cyroam/websockets/WebSocketManager.java b/app/src/main/java/com/lg1_1/cyroam/websockets/WebSocketManager.java
+--- a/app/src/main/java/com/lg1_1/cyroam/websockets/WebSocketManager.java	
++++ b/app/src/main/java/com/lg1_1/cyroam/websockets/WebSocketManager.java	
+@@ -2,8 +2,6 @@
+ 
+ import static com.lg1_1.cyroam.MainActivity.wsurl;
+ 
+-import android.content.Context;
+-
+ import org.java_websocket.WebSocket;
+ 
+ import java.net.URISyntaxException;
+@@ -29,6 +27,7 @@
+ 
+     public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {
+         if (!isConnected) {
++
+             aidanClient = new aidanWebSocket(wsurl + "/pins/socket", listener);
+             aidanClient.connect();
+             nickClient = new nickWebSocket(wsurl + "/friendSocket/" + username, listener);
