@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 /**
- * @author Nicholas Kirschbaum
  * This screen holds invites from other people
  * as well as allows you to send invites
  * Add Friends is a screen that is only accessable via friends activity
@@ -34,7 +33,11 @@ public class AddFriends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
-
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("1", "Notification", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
         friendSearch = findViewById(R.id.searchbutton);
         friendSearch.setOnClickListener(view -> {
                     createnotif();
@@ -92,6 +95,16 @@ public class AddFriends extends AppCompatActivity {
             return;
         }
         m.notify(1, builder.build());
+
+    }
+
+    private void simpleCreatenotif() {
+        final String id = "Whatch_this_work";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
+                .setSmallIcon(R.drawable.iowa_state_clipart_4_removebg_preview);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.notify(1, builder.build());
+
 
     }
 }

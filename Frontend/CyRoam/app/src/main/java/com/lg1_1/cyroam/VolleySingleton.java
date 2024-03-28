@@ -9,7 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 /**
- * im not sure if this does anything anymore but im not going to delete it
+ * im not sure if this does anything anymore but im not going to delete it.
  * @author Nicholas Kirschbaum
  *
  */
