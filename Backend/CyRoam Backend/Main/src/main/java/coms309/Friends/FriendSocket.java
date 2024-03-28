@@ -53,7 +53,7 @@ public class FriendSocket {
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
-        // Handle new messages
+    // Handle new messages
     }
 
     @OnClose
@@ -79,5 +79,3 @@ public class FriendSocket {
     }
 
 }
-
-

@@ -1,14 +1,12 @@
-package coms309.Friends;
-
+package coms309.Pin;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 @Configuration
-public class FriendSocketConfig {
-    @Bean
-    public ServerEndpointExporter serverEndpointExporter() {
+public class PinSocketConfig {
+    /*@Bean
+    public ServerEndpointExporter serverPinEndpointExporter() {
         return new ServerEndpointExporter();
-    }
-
+    }*/
 }
