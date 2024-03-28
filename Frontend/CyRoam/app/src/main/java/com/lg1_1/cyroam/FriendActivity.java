@@ -48,17 +48,29 @@ public class FriendActivity extends AppCompatActivity {
     private Button backbutton;
     /**
      * @author Nicholas Kirschbaum
-     * Is a button that sends invite to the user that is typed
+     * Is a button that takes user
+     *
      */
     private Button friendsearch;
-
     /**
      * @author Nicholas Kirschbaum
-     * one of the
+     * Is a button that sends invite to the user that is typed
+     */
+    private final boolean found = false;
+    /**
+     * @author Nicholas Kirschbaum
+     * title text
      */
     private TextView titletext;
+    /**
+     * @author Nicholas Kirschbaum
+     * outputtext text
+     */
     private TextView outputtext;
-    private TextView textView3;
+    /**
+     * @author Nicholas Kirschbaum
+     * holds the username in text edit to add
+     */
     private EditText usernameEditText;
     String output = null;
     String usernamestring;
@@ -112,6 +124,10 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * puts the friends the user has on the screen
+     * @author Nicholas Kirschbaum
+     */
     private void findfriendsReq(String curUsername){
         String url = mainURL + "/friends/" + curUsername;
     /*
@@ -213,7 +229,10 @@ public class FriendActivity extends AppCompatActivity {
 
 
 
-
+    /**
+     * adds the friend in text box as friend
+     * @author Nicholas Kirschbaum
+     */
     private void addfriendsReq(String curUsername,String Newfriend){
         String url = mainURL + "/addFriend/";
 
