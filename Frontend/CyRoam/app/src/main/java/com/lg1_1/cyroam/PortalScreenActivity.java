@@ -1,15 +1,29 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class PortalScreenActivity extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
+/**
+ * Is esentially the middle man screen that has buttons that
+ * take you to the next screen
+ * @author Nicholas Kirschbaum
+ */
 
+public class PortalScreenActivity extends AppCompatActivity {
+    /**
+     * @author Nicholas Kirschbaum
+     * Friend button takes to friend screen
+     *
+     */
     private Button friendButton;         // define login button variable
+    /**
+     * @author Nicholas Kirschbaum
+     * exit button takes(back) to Map screen
+     *
+     */
     private Button exitButton;
 
     @Override

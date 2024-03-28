@@ -16,10 +16,11 @@ import com.lg1_1.cyroam.util.Pin;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/*
-This class uses interfaces to allow easier use in other classes.
-There is no attached activity or XML.
-Handles volley requests specifically for pin data.
+/**
+ * Handles volley requests specifically for pin data.
+ * @author Aidan Foss
+ * This class uses interfaces to allow easier use in other classes.
+ * There is no attached activity or XML.
  */
 
 public class pinVolley {
@@ -30,23 +31,32 @@ public class pinVolley {
     private RequestQueue queue;
     private Context context;
 
+    /**
+     * constructor for pinVolley.
+     * @author Aidan Foss
+     * @param context uses "this" in all cases
+     */
     public pinVolley(Context context){
         this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
     }
 
-    //TODO create update volley request
     public void updatePinData(int pinId, final UpdatePinCallback callback){
     }
+    /**
+     * Handles errors and passes information when updating pins
+     * @author Aidan Foss
+     */
     public interface UpdatePinCallback {
         void onSuccess(int idSuccess);
         void onFailure(String errorMessage);
     }
 
-
-    /*
-    this function fetches a specific pins object.
-    pinId is likely the built in ID created by SQL
+    /**
+     * @author Aidan Foss
+     * Fetches a specific pin object from the database
+     * @param pinId recieves the pinId either from the user or from other means (onclickhandler, for ex)
+     * @param callback sets up an on success and on error underneath the call for fetchPinData
      */
     public void fetchPinData(int pinId, final FetchPinCallback callback) {
         String url = BASE_URL + "/pins/" + pinId;
@@ -71,6 +81,11 @@ public class pinVolley {
                 });
         queue.add(request);
     }
+
+    /**
+     * Handles errors and passes information when calling pins
+     * @author Aidan Foss
+     */
     public interface FetchPinCallback {
         void onSuccess(Pin pin);
         void onFailure(String errorMessage);
@@ -81,6 +96,15 @@ public class pinVolley {
     server responds with the ID of the pin that's created.
     Then, in onSuccess in MapsActivity, can call get request to initialize it.
     */
+
+    /**
+     *
+     * @param x x coordinate of the pin to be created
+     * @param y y coordinate of the pin to be created
+     * @param name name of the pin to be created
+     * @param callback callback input for in-line handling
+     * Server replies with the ID of the pin thats created
+     */
     public void createPin(double x, double y, String name, final CreatePinCallback callback){
         Log.v(TAG, "createPin Called!");
         String url = BASE_URL + "/pins";
@@ -116,6 +140,11 @@ public class pinVolley {
                 });
         queue.add(request);
     }
+
+    /**
+     * Handles errors and passes information when creating pins
+     * @author Aidan Foss
+     */
     public interface CreatePinCallback {
         void onSuccess(int idSuccess);
         void onFailure(String errorMessage);

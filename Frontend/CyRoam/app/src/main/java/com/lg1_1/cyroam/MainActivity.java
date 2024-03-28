@@ -1,28 +1,15 @@
-/*
-this activity is solely to request permissions and establish internet connection.
-after this, moves directly to the login screen, which can bring you to the signup screen
-if needed. For now, the login screen doesnt require a valid login.
- */
-
-
 package com.lg1_1.cyroam;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.View;
-import com.lg1_1.cyroam.websockets.aidanWebSocket;
-import android.widget.Button;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * Activity that establishes anything used throughout the whole app
+ * Automatically transitions you to the login activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";

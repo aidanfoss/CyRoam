@@ -1,11 +1,12 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import com.lg1_1.cyroam.R;
-
+import androidx.appcompat.app.AppCompatActivity;
+/**
+ * @author Nicholas Kirschbaum
+ * Has not been implemented yet
+ */
 public class NotificationActivity extends AppCompatActivity {
 
     @Override

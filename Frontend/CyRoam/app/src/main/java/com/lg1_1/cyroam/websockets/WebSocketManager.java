@@ -2,15 +2,14 @@ package com.lg1_1.cyroam.websockets;
 
 import static com.lg1_1.cyroam.MainActivity.wsurl;
 
-import android.content.Context;
-
-import org.java_websocket.WebSocket;
-
 import java.net.URISyntaxException;
 
+/**
+ * Manages all relevant WebSockets.
+ * @author Aidan Foss
+ */
 public class WebSocketManager {
     private static WebSocketManager instance;
-    private WebSocket webSocket;
     private boolean isConnected = false;
 
     public aidanWebSocket aidanClient;
@@ -20,12 +19,27 @@ public class WebSocketManager {
 
     }
 
+    /**
+     * @author Aidan Foss
+     * returns the one and only copy of the whole manager
+     * if it doesnt exist yet, creates it.
+     * @return singleton instance of the manager
+     */
     public static WebSocketManager getInstance() {
         if (instance == null) {
             instance = new WebSocketManager();
         }
         return instance;
     }
+
+    /**
+     * @author Aidan Foss
+     * singleton function that opens all relevant websockets, allowing the rest of this
+     * class to handle them.
+     * @param username
+     * @param listener
+     * @throws URISyntaxException
+     */
 
     public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {
         if (!isConnected) {
@@ -37,8 +51,12 @@ public class WebSocketManager {
         }
     }
 
+    /**
+     * @author Aidan Foss
+     * closes all relevant handled websockets at once.
+     */
     public void closeWebSocketConnection() {
-        if (isConnected && webSocket != null){
+        if (isConnected && aidanClient.isOpen() && nickClient.isOpen()){
             aidanClient.close();
             nickClient.close();
 
@@ -46,15 +64,27 @@ public class WebSocketManager {
         }
     }
 
+    /**
+     * @author Aidan Foss
+     * @return boolean if websocket is connected
+     */
     public boolean isConnected() {
         return isConnected;
     }
 
+    /**
+     * @author Aidan Foss
+     * @param text to send through pins websocket
+     * likely to be renamed later to describe the websocket rather than author
+     */
     public void sendAidan(String text){
         aidanClient.send(text);
-        return;
     }
-
+    /**
+     * @author Aidan Foss
+     * @return aidanClient Websocket for more specific use
+     * likely to be renamed later to describe the websocket rather than author
+     */
     public aidanWebSocket aidanWS(){
         return aidanClient;
     }

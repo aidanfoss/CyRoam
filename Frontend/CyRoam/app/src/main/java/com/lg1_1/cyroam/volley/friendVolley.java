@@ -15,15 +15,36 @@ import com.lg1_1.cyroam.util.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/**
+ * Enables user to add friends and recieve notification about friend request.
+ * @Nicholas Kirschbaum
+ */
 public class friendVolley {
-
+    /**
+     * @author Nicholas Kirschbaum
+     * ETags for debugging
+     */
     private static final String TAG = "PinRequest";
+    /**
+     * @author Nicholas Kirschbaum
+     * takes url from main
+     */
     private static final String BASE_URL = MainActivity.url;
-
+    /**
+     * @author Nicholas Kirschbaum
+     * queue for volley
+     */
     private RequestQueue queue;
+    /**
+     * @author Nicholas Kirschbaum
+     * Not sure
+     */
     private Context context;
 
+    /**
+     * @author Nicholas Kirschbaum
+     * friend Volley (tuturial uses this)
+     */
     public friendVolley(Context context){
         this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
@@ -34,7 +55,10 @@ public class friendVolley {
 
 
 
-
+    /**
+     * @author Nicholas Kirschbaum
+     * adds friend to the list of friends they have
+     */
 
     public void addfriendsReq(String curUsername, User Newfriend, final addFriendCallback callback){
         String url = BASE_URL + "/addFriend";

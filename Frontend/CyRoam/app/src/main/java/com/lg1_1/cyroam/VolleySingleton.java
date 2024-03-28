@@ -8,7 +8,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-
+/**
+ * im not sure if this does anything anymore but im not going to delete it
+ * @author Nicholas Kirschbaum
+ *
+ */
 public class VolleySingleton {
 
     private static VolleySingleton instance;

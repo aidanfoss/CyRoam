@@ -1,9 +1,12 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+/**
+ * @deprecated has not been implemented yet
+ * @author Nicholas Kirschbaum
+ */
 public class FriendsActivity extends AppCompatActivity {
 
     @Override
