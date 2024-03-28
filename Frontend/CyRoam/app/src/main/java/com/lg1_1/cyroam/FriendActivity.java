@@ -46,10 +46,16 @@ public class FriendActivity extends AppCompatActivity {
      * Is a button that takes user to portal screen
      */
     private Button backbutton;
-
+    /**
+     * @author Nicholas Kirschbaum
+     * Is a button that sends invite to the user that is typed
+     */
     private Button friendsearch;
 
-    private final boolean found = false;
+    /**
+     * @author Nicholas Kirschbaum
+     * one of the
+     */
     private TextView titletext;
     private TextView outputtext;
     private TextView textView3;
