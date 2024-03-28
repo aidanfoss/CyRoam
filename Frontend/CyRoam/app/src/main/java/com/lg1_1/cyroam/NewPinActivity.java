@@ -18,6 +18,7 @@ import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
 /**
  * Activity that creates a new pin
+ * @author Aidan Foss
  */
 public class NewPinActivity extends AppCompatActivity {
     private final String TAG = "CreatePin";
