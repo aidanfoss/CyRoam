@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 /**
+ * @deprecated has not been implemented yet
  * @author Nicholas Kirschbaum
- * Has not been implemented yet
  */
 public class FriendsActivity extends AppCompatActivity {
 
