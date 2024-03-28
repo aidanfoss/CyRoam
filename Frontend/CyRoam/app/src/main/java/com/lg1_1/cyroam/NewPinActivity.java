@@ -38,8 +38,8 @@ public class NewPinActivity extends AppCompatActivity {
      *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
      *
      *     initializes UI and defines volley variables
-     *     gets bundle information, and displays current location on the
-     *     text boxes
+     *     gets bundle information, and displays current
+     *     location on the text boxes
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
