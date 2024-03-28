@@ -16,8 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * @author Nicholas Kirschbaum
- * Enables user to add friends and recieve notification about friend request
+ * Enables user to add friends and recieve notification about friend request.
+ *
  */
 public class friendVolley {
     /**
