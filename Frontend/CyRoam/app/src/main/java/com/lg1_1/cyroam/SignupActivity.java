@@ -23,9 +23,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * @author Nicholas Kirschbaum
  * Signup Activity creates your account and then takes you to
- *
+ *@author Nicholas Kirschbaum
  *
  */
 public class SignupActivity extends AppCompatActivity {

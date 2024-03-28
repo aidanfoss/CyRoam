@@ -16,8 +16,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 /**
- * @author Nicholas Kirschbaum
  * Is the developed login with getorpost requests working
+ * @author Nicholas Kirschbaum
  */
 public class LoginInputActivity extends AppCompatActivity {
     // This while be the call to which ever table Zach makes

@@ -7,9 +7,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 /**
- * @author Nicholas Kirschbaum
  * Is esentially the middle man screen that has buttons that
  * take you to the next screen
+ * @author Nicholas Kirschbaum
  */
 
 public class PortalScreenActivity extends AppCompatActivity {
