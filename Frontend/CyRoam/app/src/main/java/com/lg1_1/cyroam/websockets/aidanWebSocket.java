@@ -1,17 +1,17 @@
 package com.lg1_1.cyroam.websockets;
+
 import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.framing.CloseFrame;
 import org.java_websocket.handshake.ServerHandshake;
-import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * @author Aidan Foss
  * Handles the Pin Websocket.
+ * @author Aidan Foss
  * recieves pin ID's which are immediately used in MapsActivity to display newly created pins live
  */
 public class aidanWebSocket extends WebSocketClient{

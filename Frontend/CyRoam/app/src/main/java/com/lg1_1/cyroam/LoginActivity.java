@@ -22,6 +22,11 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * handles login requests and passes user information
+ * along when a login succeeds
+ * @author Nicholas Kirschbaum
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;  // define username edittext variable
@@ -48,9 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         FloatingActionButton bypassLoginButton = findViewById(R.id.floatingActionButton);
 
         /**
-         * @author Aidan
+         * @author Aidan Foss
          * Bypasses the login screen, logging in as an admin user for testing
-         * @param
          */
         bypassLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +68,12 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /**
+         * Listens for the login button being pressed, which handles the username
+         * and password from the input boxes. Makes a relevant volley request.
+         * @author Nicholas Kirschbaum
+         */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(boolean isTrue) {
                         Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                         intent.putExtra("LoginSuccess", isTrue);
+                        //todo pass username, password, and userID through as well
                         startActivity(intent);
                     }
 
@@ -114,18 +125,27 @@ public class LoginActivity extends AppCompatActivity {
             //}
        // });
 
-        /* click listener on signup button pressed */
+        /**
+         * Brings user to the signup activity.
+         * @author Aidan Foss
+         */
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
-
                     Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                     startActivity(intent);  // go to SignupActivity
-
             }
         });
     }
+
+    /**
+     * @deprecated a volley string request for a user, but is not formatted correctly. Doesnt Work
+     * @author Nicholas Kirschbaum
+     * @param curUsername username inputted via editText
+     * @param password passwrod inputted via editText
+     * @param callback callback defined below that handles errors and information passing
+     */
     private void makeStringReq(String curUsername, String password, final VolleyCallback callback){
         String url = mainURL + "/userCheck";
 
@@ -189,6 +209,11 @@ public class LoginActivity extends AppCompatActivity {
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
+
+    /**
+     * Handles errors and passes information about Login Information
+     * @author Nicholas Kirschbaum
+     */
     public interface VolleyCallback{
         void onSuccess(boolean isTrue);
         void onFailure(String errorMessage);

@@ -17,7 +17,7 @@ import com.lg1_1.cyroam.websockets.WebSocketManager;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
 /**
- * Activity that creates a new pin
+ * Activity that creates a new pin using user inputs, then stores it in the database.
  * @author Aidan Foss
  */
 public class NewPinActivity extends AppCompatActivity {
