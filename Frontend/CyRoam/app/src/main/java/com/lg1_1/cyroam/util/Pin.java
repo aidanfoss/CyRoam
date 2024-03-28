@@ -4,21 +4,30 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/*
-Unfortunately creating a new pin doesn't add it as a marker on the map.
-AFAIK that is not possible, unless I moved all this over to a function underneath the map.
--bossf
+/**
+ *
+ * Pin object that stores information on individual pins.
+ *
+ * Location, ID, name, description, are global variables
+ * discovered is information for individual users.
+ * @author Aidan Foss
  */
 public class Pin {
     private final String TAG = "Pin";
 
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
     private int ID;
-    private String name;
+    private final String name;
     private String description;
     private boolean discovered; //default to false in each constructor unless told otherwise
     //todo add pictures? might be out of scope
+
+    /**
+     * @author Aidan Foss
+     * Takes pin in as a constructor
+     * @param inPin
+     */
     public Pin(Pin inPin){
         this.x = inPin.x;
         this.y = inPin.y;
@@ -27,6 +36,14 @@ public class Pin {
         this.ID = inPin.ID;
         this.discovered = inPin.discovered;
     }
+
+    /**
+     * @author Aidan Foss
+     * @deprecated
+     * @param x
+     * @param y
+     * @param name
+     */
     public Pin(double x, double y, String name) {
         this.x = x;
         this.y = y;
@@ -35,15 +52,34 @@ public class Pin {
         //might be possible to create marker on gmap from here.
         discovered = false;
     }
+
+    /**
+     * @author Aidan Foss
+     * @deprecated
+     * @param x
+     * @param y
+     * @param name
+     * @param ID
+     */
     public Pin(double x, double y, String name, int ID) {
         this.x = x;
         this.y = y;
         this.name = name;
         this.ID = ID;
-        Log.v(TAG, "Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name);
+        Log.v(TAG, "Pin With ID: " + ID + " Created. Named: " + name);
         discovered = false;
     }
 
+    /**
+     * @author Aidan Foss
+     * Full Constructor for pin information.
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param name name of the location displayed by the pin
+     * @param description description of the location
+     * @param ID internal ID in the SQL database
+     * @param discovered boolean that stores if the pin has been seen before
+     */
     public Pin(double x, double y, String name, String description, int ID, boolean discovered) {
         this.x = x;
         this.y = y;
@@ -51,11 +87,16 @@ public class Pin {
         this.ID = ID;
         this.description = description;
         this.discovered = discovered;
-        Log.i(TAG, "Pin With ID: " + String.valueOf(ID) + " Created. Named: " + name + ". Discover Value: " + discovered);
+        Log.i(TAG, "Pin With ID: " + ID + " Created. Named: " + name + ". Discover Value: " + discovered);
     }
 
+    /**
+     * @author Aidan Foss
+     * returns position for map usage
+     * @return position in LatLng format
+     */
     public LatLng getPos(){
-        Log.w("Pin", "getPos() called, returning LatLng(" + String.valueOf(x)+","+String.valueOf(y)); //delete this later. Kind of fun
+        Log.w("Pin", "getPos() called, returning LatLng(" + x +","+ y); //delete this later. Kind of fun
         return new LatLng(x,y);
     }
 

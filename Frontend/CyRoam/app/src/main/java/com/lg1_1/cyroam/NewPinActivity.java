@@ -16,6 +16,10 @@ import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.websockets.WebSocketManager;
 import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
+/**
+ * Activity that creates a new pin using user inputs, then stores it in the database.
+ * @author Aidan Foss
+ */
 public class NewPinActivity extends AppCompatActivity {
     private final String TAG = "CreatePin";
     private RequestQueue mQueue; // define volley request queue
@@ -28,6 +32,16 @@ public class NewPinActivity extends AppCompatActivity {
     private pinVolley volley; //init pinVolley class
     private aidanWebSocket webSocket;
 
+    /**
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     *     initializes UI and defines volley variables
+     *     gets bundle information, and displays current
+     *     location on the text boxes
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +66,8 @@ public class NewPinActivity extends AppCompatActivity {
             latitudeText.setText(String.valueOf(extras.getDouble("lat")));
             nameText.setText("test");
         }
+
+
 
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override

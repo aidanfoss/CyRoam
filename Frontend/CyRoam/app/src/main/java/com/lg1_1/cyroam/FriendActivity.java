@@ -1,7 +1,5 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,14 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -27,19 +25,52 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author Nicholas Kirschbaum
+ * is the main friends activity for now with both the get and post on it
+ */
 public class FriendActivity extends AppCompatActivity {
     //private static final String URL_STRING_REQ = "https://speeding-space-815350.postman.co/workspace/Pins-and-Progress~dcaccb7e-5ba7-4d56-89e4-759bc8e4bc5d/request/32668124-b299505a-5abb-47b1-bd0f-c0d605462b0e?ctx=documentation";
+    /**
+     * @author Nicholas Kirschbaum
+     * tag for debugging
+     */
     private String TAG = "FriendActivity";
+    /**
+     * @author Nicholas Kirschbaum
+     * Takes url from Main
+     */
     private String mainURL = MainActivity.url;
+    /**
+     * @author Nicholas Kirschbaum
+     * Is a button that takes user to portal screen
+     */
     private Button backbutton;
-
+    /**
+     * @author Nicholas Kirschbaum
+     * Is a button that takes user
+     *
+     */
     private Button friendsearch;
-
+    /**
+     * @author Nicholas Kirschbaum
+     * Is a button that sends invite to the user that is typed
+     */
     private final boolean found = false;
+    /**
+     * @author Nicholas Kirschbaum
+     * title text
+     */
     private TextView titletext;
+    /**
+     * @author Nicholas Kirschbaum
+     * outputtext text
+     */
     private TextView outputtext;
-    private TextView textView3;
+    /**
+     * @author Nicholas Kirschbaum
+     * holds the username in text edit to add
+     */
     private EditText usernameEditText;
     String output = null;
     String usernamestring;
@@ -93,6 +124,10 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * puts the friends the user has on the screen
+     * @author Nicholas Kirschbaum
+     */
     private void findfriendsReq(String curUsername){
         String url = mainURL + "/friends/" + curUsername;
     /*
@@ -194,7 +229,10 @@ public class FriendActivity extends AppCompatActivity {
 
 
 
-
+    /**
+     * adds the friend in text box as friend
+     * @author Nicholas Kirschbaum
+     */
     private void addfriendsReq(String curUsername,String Newfriend){
         String url = mainURL + "/addFriend/";
 
