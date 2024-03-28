@@ -56,7 +56,7 @@ public class UserController {
 
     //for password/username check
     //GET requests can not have bodies change it to have information in url
-    @Operation(summary = "checks entered username and pasword to if they are a user")
+    @Operation(summary = "checks entered username and pasword to see if they are a user")
     @ApiResponse(responseCode = "200", description = "Successfully checked username and password", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Progress.class)) })
     @GetMapping(path = "/userCheck/{user}/{password}")
