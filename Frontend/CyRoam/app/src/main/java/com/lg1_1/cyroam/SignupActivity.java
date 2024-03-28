@@ -1,8 +1,5 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,13 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -26,10 +22,24 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author Nicholas Kirschbaum
+ * Signup Activity creates your account and then takes you to
+ *
+ *
+ */
 public class SignupActivity extends AppCompatActivity {
+
     private String TAG = "FriendActivity";
+    /**
+     * @author Nicholas Kirschbaum
+     * takes url from MainActivity
+     */
     private String mainURL = MainActivity.url;
+    /**
+     * @author Nicholas Kirschbaum
+     * username is a Edi
+     */
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
     private EditText confirmEditText;   // define confirm edittext variable
