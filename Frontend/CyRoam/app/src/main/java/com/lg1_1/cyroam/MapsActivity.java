@@ -88,6 +88,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     GoogleMap gMap;
     FrameLayout map;
 
+    /**
+     * Does multiple things on opening of this activity
+     *      -creates websocket manager and attempts connection
+     *      -creates bitmaps for display on pins
+     *      -creates volley queues for volley requests in the rest of the class
+     *      -creates volley classes for helper use in the rest of the class
+     *      -begins gathering location data.
+     *      -requests location data permissions if they are missing
+     *      -defines gmap and displays it
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +196,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        }
     }
 
+    /**
+     * @author Aidan Foss
+     * Loads map and fills it with all pin data.
+     * Gathers and displays any relevant passed information from other activities
+     * @param googleMap
+     *
+     * other functions are embedded here, which will be moved or depreciated in the future
+     *      - progress fetching from progress activity will be changed to only be in this class.
+     *      - login information will be moved to onOpen()
+     *      - message information can be moved to onOpen()
+     *      - individual pin information can just be recieved via WebSocket after creation.
+     */
     @Override //This gets called when the map initializes. It only happens once, but its seperate from onCreate.
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
@@ -260,15 +287,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-
+    /**
+     * @author Aidan Foss
+     * fills map with markers, and creates relevant pin objects.
+     * adds pin object to tags of marker for onclick listener.
+     *      @link OnMarkerClick
+     *
+     * Function that makes a volley request to recieve all pin data.
+     * Uses url from MainActivity, and uses the googleMaps gMap declaration
+     * from the top of the class.
+     */
     private void fillMap() {
-        /*
-        Function that makes a volley request to recieve all pin data.
-        Uses url from MainActivity, and uses the googleMaps gMap declaration
-        from the top of the class.
-
-        only called pinVector because it used to use a vector. can change later.
-        */
         Log.v(TAG, "fillMap() called");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins", null,
                 response -> {
@@ -321,8 +350,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }, Throwable::printStackTrace);
 
         mQueue.add(request);
-    } //fills map with markers, creates pin objects. adds pin object to tags of marker for onclick listener
+    }
 
+    /**
+     * @author Aidan Foss
+     * Listener that resumes constants when reopening the map after
+     * navigation. Resumes location data and websockets if they paused.
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -336,6 +370,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startLocationUpdates();
     }
 
+    /**
+     * @author Aidan Foss
+     * starts location updates if location permission is allowed
+     */
     private void startLocationUpdates() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -344,17 +382,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
+    /**
+     * @author Aidan Foss
+     * Listener that detects when activity is paused
+     * calls another function that pauses location updates
+     */
     @Override
     protected void onPause() {
         super.onPause();
         stopLocationUpdates();
     }
 
+    /**
+     * @author Aidan Foss
+     * stops location updates
+     */
     private void stopLocationUpdates() {
         fusedLocationClient.removeLocationUpdates(locationCallback);
     }
 
-    //handles click on marker. Uses pin object inside each pins tag
+    /**
+     * @author Aidan Foss
+     * handles click on marker. Uses pin object inside each marker
+     * @param marker
+     *      marker is a google maps object, it stores information on
+     *      the pins that are actually displayed on the map. These
+     *      markers are linked to a "pin" which is my own object, which
+     *      is why this code is written like this. Each marker has an attached
+     *      pin object inside it.
+     */
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
         marker.setIcon(BitmapDescriptorFactory.defaultMarker());
@@ -366,6 +422,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return false;
     }
 
+    /**
+     * @author Aidan Foss
+     * runs whenever a pin is recieved from the pins websocket
+     * fetches relevant pin information and displays it live
+     * @param wsPinIdInput from WebSocketListener
+     */
     @Override
     public void onPinRecieved(int wsPinIdInput) {
         pinVolley.fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
