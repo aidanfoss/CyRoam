@@ -1,10 +1,34 @@
 package com.lg1_1.cyroam.util;
 
+/**
+ * Object that stores user data.
+ * information is gathered and stored when logging in, and cant be
+ * edited unless they log out.
+ *
+ * Information is used for verification
+ */
 public class User {
     private final int id;
     private final String username;
     //we dont want to store the password, unless we deem its easier to verify everything with it later.
 
+    /**
+     * @author Aidan Foss
+     * Constructor that takes in username, password, and ID from
+     * login step and saves it.
+     *
+     * In the future, needs to be singleton to prevent multiple accounts
+     * from being logged in at the same time.
+     *
+     * doesn't store the password in the client
+     *
+     * @param username
+     * @param ignoredPassword
+     * @param id
+     */
+
+    //todo make this singleton
+    //todo make this save on the phone, so you dont need to log in every time
     public User(String username, String ignoredPassword, int id){
         this.id = id;
         this.username = username;
