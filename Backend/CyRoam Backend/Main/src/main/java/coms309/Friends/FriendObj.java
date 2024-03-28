@@ -28,6 +28,8 @@ public class FriendObj {
 
     private String friendUsername;
 
+    //private Boolean accept;
+
     //private int friendState;
     public FriendObj(String curUsername, String friendUsername) {
         this.curUsername = curUsername;

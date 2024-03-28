@@ -1,7 +1,12 @@
 package coms309.Friends;
 
+import coms309.Progress.Progress;
 import coms309.Users.User;
 import coms309.Friends.FriendObjInterface;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,12 +21,18 @@ public class FriendObjController {
     private String success = "{\"message\":\"success ( :\"}";
     private String failure = "{\"message\":\"failure ) :\"}";
     //change to contain info in url
+    @Operation(summary = "Gets a list of all friend objects that have the entered username as the current username")
+    @ApiResponse(responseCode = "200", description = "Successfully returned all friend objects", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = Progress.class)) })
     @GetMapping(path = "/friends/{username}")
     List<FriendObj> requestFriends(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
         List<FriendObj> f =friendObjInterface.findByCurUsername(username);
         return f;
     }
+    @Operation(summary = "creates new friend object")
+    @ApiResponse(responseCode = "200", description = "Successfully Created Object", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = Progress.class)) })
     @PostMapping(path = "/addFriend")
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
@@ -31,6 +42,9 @@ public class FriendObjController {
         return friendObj;
 
     }
+    @Operation(summary = "deletes given friend object from database")
+    @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = Progress.class)) })
     @DeleteMapping(path = "/deleteFriend")
     FriendObj deleteFriend(@RequestBody FriendObj passedFriendObj){
         String passedfriendUsername = passedFriendObj.getFriendUsername();
