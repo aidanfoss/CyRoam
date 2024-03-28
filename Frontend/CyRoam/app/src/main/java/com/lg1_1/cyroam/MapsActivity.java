@@ -291,7 +291,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * @author Aidan Foss
      * fills map with markers, and creates relevant pin objects.
      * adds pin object to tags of marker for onclick listener.
-     *      @link OnMarkerClick
+     *      look at OnMarkerClick for more info
      *
      * Function that makes a volley request to recieve all pin data.
      * Uses url from MainActivity, and uses the googleMaps gMap declaration
