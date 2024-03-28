@@ -9,8 +9,8 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 /**
- * @author Nicholas Kirschbaum
  * nicholas's websocket class
+ * @author Nicholas Kirschbaum
  */
 public class nickWebSocket extends WebSocketClient {
     /**
