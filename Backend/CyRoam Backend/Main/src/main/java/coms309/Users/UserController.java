@@ -1,18 +1,15 @@
 package coms309.Users;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
-import coms309.Progress.Progress;
+import coms309.Statistics.Statistics;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.lang.Object;
 
 @RestController
 public class UserController {
@@ -27,14 +24,14 @@ public class UserController {
     private String failure = "{\"message\":\"failure ) :\"}";
     @Operation(summary = "Gets a list of all users")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend users", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @GetMapping(path = "/users")
     List<User> getAllUsers(){
         return userInterface.findAll();
     }
     @Operation(summary = "Gets user by uId")
     @ApiResponse(responseCode = "200", description = "Successfully returned user", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @GetMapping(path = "/users/{uId}")
     User getUserByUId( @PathVariable int uId){
 
@@ -43,7 +40,7 @@ public class UserController {
 
     @Operation(summary = "create new user")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend objects", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     //Use this when creating a new user, provide username and password via json here
     @PostMapping(path = "/users")
     User createUser(@RequestBody User user){
@@ -58,7 +55,7 @@ public class UserController {
     //GET requests can not have bodies change it to have information in url
     @Operation(summary = "checks entered username and pasword to see if they are a user")
     @ApiResponse(responseCode = "200", description = "Successfully checked username and password", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @GetMapping(path = "/userCheck/{user}/{password}")
     UserCheck checkUser(@PathVariable String user, @PathVariable String password){
         UserCheck isUSerT = new UserCheck(true);

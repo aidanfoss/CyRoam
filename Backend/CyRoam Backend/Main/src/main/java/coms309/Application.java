@@ -2,9 +2,8 @@ package coms309;
 
 import coms309.Friends.FriendObj;
 import coms309.Friends.FriendObjInterface;
-import coms309.Pin.PinController;
-import coms309.Progress.Progress;
-import coms309.Progress.ProgressRepository;
+import coms309.Statistics.Statistics;
+import coms309.Statistics.StatisticsRepository;
 import coms309.Users.User;
 import coms309.Users.UserInterface;
 import coms309.Pin.Pin;
@@ -68,13 +67,13 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner initProgress(ProgressRepository progressRepository) {
+    CommandLineRunner initProgress(StatisticsRepository statisticsRepository) {
         return args -> {
-            if (progressRepository.count() == 0) {
-                Progress example = new Progress(1, 1, false);
-                Progress example2 = new Progress(2, 1, false);
-                progressRepository.save(example);
-                progressRepository.save(example2);
+            if (statisticsRepository.count() == 0) {
+                Statistics example = new Statistics(1, 1, false);
+                Statistics example2 = new Statistics(2, 1, false);
+                statisticsRepository.save(example);
+                statisticsRepository.save(example2);
             }
         };
     }
