@@ -69,14 +69,14 @@ public class Pin {
     }
 
     /**
-     * @Aidan Foss
+     * @author Aidan Foss
      * Full Constructor for pin information.
-     * @param x
-     * @param y
-     * @param name
-     * @param description
-     * @param ID
-     * @param discovered
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param name name of the location displayed by the pin
+     * @param description description of the location
+     * @param ID internal ID in the SQL database
+     * @param discovered boolean that stores if the pin has been seen before
      */
     public Pin(double x, double y, String name, String description, int ID, boolean discovered) {
         this.x = x;
