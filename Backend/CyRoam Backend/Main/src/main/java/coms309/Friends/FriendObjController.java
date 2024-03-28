@@ -1,8 +1,6 @@
 package coms309.Friends;
 
-import coms309.Progress.Progress;
-import coms309.Users.User;
-import coms309.Friends.FriendObjInterface;
+import coms309.Statistics.Statistics;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +21,7 @@ public class FriendObjController {
     //change to contain info in url
     @Operation(summary = "Gets a list of all friend objects that have the entered username as the current username")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend objects", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @GetMapping(path = "/friends/{username}")
     List<FriendObj> requestFriends(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
@@ -32,7 +30,7 @@ public class FriendObjController {
     }
     @Operation(summary = "creates new friend object")
     @ApiResponse(responseCode = "200", description = "Successfully Created Object", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @PostMapping(path = "/addFriend")
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
@@ -44,7 +42,7 @@ public class FriendObjController {
     }
     @Operation(summary = "deletes given friend object from database")
     @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Progress.class)) })
+            schema = @Schema(implementation = Statistics.class)) })
     @DeleteMapping(path = "/deleteFriend")
     FriendObj deleteFriend(@RequestBody FriendObj passedFriendObj){
         String passedfriendUsername = passedFriendObj.getFriendUsername();
