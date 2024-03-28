@@ -1,8 +1,5 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,34 +7,46 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * @author Nicholas Kirschbaum
+ * Is the developed login with getorpost requests working
+ */
 public class LoginInputActivity extends AppCompatActivity {
     // This while be the call to which ever table Zach makes
+    /**
+     * @author Nicholas Kirschbaum
+     * tag for debugging
+     */
     private String TAG = "FriendActivity";
+    /**
+     * @author Nicholas Kirschbaum
+     * url from main activity
+     */
     private String mainURL = MainActivity.url;
-    //The text in the username/password edittext
-    private EditText usernameEditText;
-    private EditText passwordEditText;
 
+    //The text in the username/password edittext
+    /**
+     * @author Nicholas Kirschbaum
+     * textedit for username
+     */
+    private EditText usernameEditText;
+    /**
+     * @author Nicholas Kirschbaum
+     * textedit for password
+     */
+    private EditText passwordEditText;
+    /**
+     * @author Nicholas Kirschbaum
+     * queue
+     */
     private RequestQueue queue;
 
     @Override
@@ -83,7 +92,10 @@ public class LoginInputActivity extends AppCompatActivity {
 
 
 
-
+    /**
+     * @author Nicholas Kirschbaum
+     * get request to login with the username and password they put in
+     */
 
     //this calls the server and checks to see if it correct
     private void makeStringReq(String curUsername, String password, final LoginActivity.VolleyCallback callback){
