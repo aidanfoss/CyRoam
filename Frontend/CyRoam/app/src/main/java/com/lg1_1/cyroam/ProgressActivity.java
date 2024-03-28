@@ -11,6 +11,13 @@ import android.widget.EditText;
 
 import com.lg1_1.cyroam.volley.progressVolley;
 
+/**
+ * @deprecated
+ * Was used to display and get progress information. Can be reused later, to display progress information
+ * relevant to the user.
+ *
+ * It its current state, this is just a test activity.
+ */
 public class ProgressActivity extends AppCompatActivity {
 
     //Debug or Logging stuff

@@ -53,7 +53,10 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
-
+/**
+ * Hub Activity; displays map, pins, info, friend requests and stores most info
+ * @author Aidan Foss
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
