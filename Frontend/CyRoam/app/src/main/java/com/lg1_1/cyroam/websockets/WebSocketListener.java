@@ -1,8 +1,8 @@
 package com.lg1_1.cyroam.websockets;
 
 /**
- * Listener that is implemented in the maps function
- * allows easy websocket handling
+ * Listener that implements WebSocket Handling
+ * @author Aidan Foss
  */
 public interface WebSocketListener {
     void onPinRecieved(int id);

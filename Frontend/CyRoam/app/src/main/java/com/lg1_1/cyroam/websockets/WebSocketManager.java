@@ -4,6 +4,10 @@ import static com.lg1_1.cyroam.MainActivity.wsurl;
 
 import java.net.URISyntaxException;
 
+/**
+ * Manages all relevant WebSockets.
+ * @author Aidan Foss
+ */
 public class WebSocketManager {
     private static WebSocketManager instance;
     private boolean isConnected = false;

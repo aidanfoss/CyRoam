@@ -5,10 +5,12 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * @author Aidan Foss
- * Pin object that stores information on individual pins
+ *
+ * Pin object that stores information on individual pins.
+ *
  * Location, ID, name, description, are global variables
  * discovered is information for individual users.
+ * @author Aidan Foss
  */
 public class Pin {
     private final String TAG = "Pin";
