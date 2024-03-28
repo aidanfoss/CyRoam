@@ -26,8 +26,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * @author Nicholas Kirschbaum
  * is the main friends activity for now with both the get and post on it
+ * @author Nicholas Kirschbaum
  */
 public class FriendActivity extends AppCompatActivity {
     //private static final String URL_STRING_REQ = "https://speeding-space-815350.postman.co/workspace/Pins-and-Progress~dcaccb7e-5ba7-4d56-89e4-759bc8e4bc5d/request/32668124-b299505a-5abb-47b1-bd0f-c0d605462b0e?ctx=documentation";

@@ -93,8 +93,8 @@ public class LoginInputActivity extends AppCompatActivity {
 
 
     /**
-     * @author Nicholas Kirschbaum
      * get request to login with the username and password they put in
+     * @author Nicholas Kirschbaum
      */
 
     //this calls the server and checks to see if it correct
@@ -177,6 +177,9 @@ public class LoginInputActivity extends AppCompatActivity {
         queue.add(request);
 //        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
+    /**
+    *Volley callback for Log in
+     */
     public interface VolleyCallback{
         void onSuccess(boolean isTrue);
         void onFailure(String errorMessage);

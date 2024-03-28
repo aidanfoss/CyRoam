@@ -56,8 +56,8 @@ public class friendVolley {
 
 
     /**
-     * @author Nicholas Kirschbaum
      * adds friend to the list of friends they have
+     * @author Nicholas Kirschbaum
      */
 
     public void addfriendsReq(String curUsername, User Newfriend, final addFriendCallback callback){
@@ -117,6 +117,10 @@ public class friendVolley {
         // Adding request to request queue
         queue.add(request);
     }
+    /**
+     * adds friend callback
+     * @author Nicholas Kirschbaum
+     */
     public interface addFriendCallback {
         void onSuccess(User user);
         void onFailure(String errorMessage);
