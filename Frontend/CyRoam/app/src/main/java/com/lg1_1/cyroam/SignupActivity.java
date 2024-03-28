@@ -29,7 +29,10 @@ import java.util.Map;
  *
  */
 public class SignupActivity extends AppCompatActivity {
-
+    /**
+     * @author Nicholas Kirschbaum
+     * Tags activity for debugging
+     */
     private String TAG = "FriendActivity";
     /**
      * @author Nicholas Kirschbaum
@@ -38,15 +41,39 @@ public class SignupActivity extends AppCompatActivity {
     private String mainURL = MainActivity.url;
     /**
      * @author Nicholas Kirschbaum
-     * username is a Edi
+     * Takes input frim edit text and uses it as Username
      */
     private EditText usernameEditText;  // define username edittext variable
+    /**
+     * @author Nicholas Kirschbaum
+     * Takes input frim edit text and user it as password
+     */
     private EditText passwordEditText;  // define password edittext variable
+    /**
+     * @author Nicholas Kirschbaum
+     * Takes input frim edit text and ckecks to see if password matchs
+     */
     private EditText confirmEditText;   // define confirm edittext variable
+    /**
+     * @author Nicholas Kirschbaum
+     * Takes you to login scren
+     */
     private Button loginButton;         // define login button variable
+    /**
+     * @author Nicholas Kirschbaum
+     * Runs post and takes you to login screen
+     */
     private Button signupButton;        // define signup button variable
+    /**
+     * @author Nicholas Kirschbaum
+     * Is the Request queue
+     */
     private RequestQueue queue;
     //private boolean checker = false;
+    /**
+     * @author Nicholas Kirschbaum
+     * loads the screen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         queue = Volley.newRequestQueue(this);
@@ -94,6 +121,10 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * @author Nicholas Kirschbaum
+     * Contacts the server to create a user using the infromation you provided
+     */
     private void makePostReq(String pass, String user){
         String url = mainURL + "/users";
         Log.d(TAG,"post req called " + url);

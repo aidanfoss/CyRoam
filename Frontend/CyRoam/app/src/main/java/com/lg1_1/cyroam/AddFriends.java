@@ -1,25 +1,35 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+/**
+ * @author Nicholas Kirschbaum
+ * This screen holds invites from other people
+ * as well as allows you to send invites
+ * Add Friends is a screen that is only accessable via friends activity
+ */
 public class AddFriends extends AppCompatActivity {
+    /**
+     * @author Nicholas Kirschbaum
+     * Is a button that sends invite to the user that is typed
+     */
     private Button friendSearch;
-
+    /**
+     * @author Nicholas Kirschbaum
+     * prints out screen with button on it(more in the works)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +40,10 @@ public class AddFriends extends AppCompatActivity {
                     createnotif();
         });
     }
-
+    /**
+     * @author Nicholas Kirschbaum
+     * When called it created a notification
+     */
     private void createnotif() {
         String id = "Whatch this work";
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
