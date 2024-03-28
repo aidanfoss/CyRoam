@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * take you to the next screen
  * @author Nicholas Kirschbaum
  */
-
 public class PortalScreenActivity extends AppCompatActivity {
     /**
      * @author Nicholas Kirschbaum
