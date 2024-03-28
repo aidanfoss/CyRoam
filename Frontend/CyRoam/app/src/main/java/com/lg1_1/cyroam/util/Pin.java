@@ -4,10 +4,11 @@ import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-/*
-Unfortunately creating a new pin doesn't add it as a marker on the map.
-AFAIK that is not possible, unless I moved all this over to a function underneath the map.
--bossf
+/**
+ * @author Aidan Foss
+ * Pin object that stores information on individual pins
+ * Location, ID, name, description, are global variables
+ * discovered is information for individual users.
  */
 public class Pin {
     private final String TAG = "Pin";
@@ -19,6 +20,12 @@ public class Pin {
     private String description;
     private boolean discovered; //default to false in each constructor unless told otherwise
     //todo add pictures? might be out of scope
+
+    /**
+     * @author Aidan Foss
+     * Takes pin in as a constructor
+     * @param inPin
+     */
     public Pin(Pin inPin){
         this.x = inPin.x;
         this.y = inPin.y;
@@ -27,6 +34,14 @@ public class Pin {
         this.ID = inPin.ID;
         this.discovered = inPin.discovered;
     }
+
+    /**
+     * @author Aidan Foss
+     * @deprecated
+     * @param x
+     * @param y
+     * @param name
+     */
     public Pin(double x, double y, String name) {
         this.x = x;
         this.y = y;
@@ -35,6 +50,15 @@ public class Pin {
         //might be possible to create marker on gmap from here.
         discovered = false;
     }
+
+    /**
+     * @author Aidan Foss
+     * @deprecated
+     * @param x
+     * @param y
+     * @param name
+     * @param ID
+     */
     public Pin(double x, double y, String name, int ID) {
         this.x = x;
         this.y = y;
@@ -44,6 +68,16 @@ public class Pin {
         discovered = false;
     }
 
+    /**
+     * @Aidan Foss
+     * Full Constructor for pin information.
+     * @param x
+     * @param y
+     * @param name
+     * @param description
+     * @param ID
+     * @param discovered
+     */
     public Pin(double x, double y, String name, String description, int ID, boolean discovered) {
         this.x = x;
         this.y = y;
@@ -54,6 +88,11 @@ public class Pin {
         Log.i(TAG, "Pin With ID: " + ID + " Created. Named: " + name + ". Discover Value: " + discovered);
     }
 
+    /**
+     * @author Aidan Foss
+     * returns position for map usage
+     * @return position in LatLng format
+     */
     public LatLng getPos(){
         Log.w("Pin", "getPos() called, returning LatLng(" + x +","+ y); //delete this later. Kind of fun
         return new LatLng(x,y);
