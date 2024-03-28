@@ -17,7 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 /**
  * Enables user to add friends and recieve notification about friend request.
- *
+ * @Nicholas Kirschbaum
  */
 public class friendVolley {
     /**
