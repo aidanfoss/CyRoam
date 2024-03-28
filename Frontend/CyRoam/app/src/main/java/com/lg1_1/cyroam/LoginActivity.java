@@ -90,13 +90,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
                // if(confirm){//if confrim is true
                 /* when login button is pressed, use intent to switch to Login Activity */
-               // Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+               //Intent intent = new Intent(LoginActivity.this, AddFriends.class);
 //                intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
 //                intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
                 //intent.putExtra("LONGITUDE", 42.023949);
                // intent.putExtra("LATITUDE", -93.647595);
                // intent.putExtra("NAME", "Library");
-               // startActivity(intent);  // go to MainActivity with the key-value data
+               //startActivity(intent);  // go to MainActivity with the key-value data
                   //  }
             }
         });

@@ -13,6 +13,8 @@ import com.android.volley.RequestQueue;
 
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.websockets.WebSocketManager;
+import com.lg1_1.cyroam.websockets.aidanWebSocket;
 
 public class NewPinActivity extends AppCompatActivity {
     private final String TAG = "CreatePin";
@@ -24,6 +26,7 @@ public class NewPinActivity extends AppCompatActivity {
     private Button newPinButton;
 
     private pinVolley volley; //init pinVolley class
+    private aidanWebSocket webSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,18 @@ public class NewPinActivity extends AppCompatActivity {
         newPinButton = findViewById(R.id.new_pin_btn);    // link to login button in the Login activity XML
 
         volley = new pinVolley(this);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            Log.i(TAG, "extras, missing any passed information");
+            //make debug user, likely name aaa, password bbb, any relevant info
+        } else {
+            Log.i(TAG, "extras != null");
+
+            longitudeText.setText(String.valueOf(extras.getDouble("lng")));
+            latitudeText.setText(String.valueOf(extras.getDouble("lat")));
+            nameText.setText("test");
+        }
 
         newPinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,18 +74,24 @@ public class NewPinActivity extends AppCompatActivity {
                         intent.putExtra("PINID", idSuccess);
                         Log.d(TAG, String.valueOf(idSuccess));
 
+                        Log.v(TAG, "Starting websocket send");
                         Log.d(TAG, "CreatePin Success!");
-                        startActivity(intent);
+
+                        if (WebSocketManager.getInstance().isConnected()) {
+                            WebSocketManager.getInstance().sendAidan(String.valueOf(idSuccess));
+                        }
+                        finish();
                     }
                     @Override
                     public void onFailure(String errorMessage) {
-                        Log.e(TAG, "CreatePin Failed!");
+                        Log.e(TAG, "CreatePin Failed! " + errorMessage);
                     }
                 });
 
-
-
                 Pin newPin = new Pin(longitudeIn,latitudeIn,name);
+
+                //todo add websocket broadcast
+
 
                 Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
                 intent.putExtra("LONGITUDE", latitudeIn);

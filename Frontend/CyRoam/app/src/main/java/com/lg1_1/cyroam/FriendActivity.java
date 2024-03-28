@@ -64,7 +64,7 @@ public class FriendActivity extends AppCompatActivity {
             usernamestring = getIntent().getStringExtra("Username");
             String finallyer = usernamestring + "'s: Friends";
             titletext.setText(finallyer);
-           // findfriendsReq(usernamestring);
+           //findfriendsReq(usernamestring);
         }
 
 
@@ -94,8 +94,8 @@ public class FriendActivity extends AppCompatActivity {
         });
     }
     private void findfriendsReq(String curUsername){
-        String url = mainURL + "/friends";
-
+        String url = mainURL + "/friends/" + curUsername;
+    /*
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
         try{
@@ -109,11 +109,12 @@ public class FriendActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-
+        */
         @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
-                userInfo,
+                null,
+                //userInfo,
                 response -> {
                     try{
                         JSONArray jsonArray = response.getJSONArray("friends");
@@ -165,7 +166,7 @@ public class FriendActivity extends AppCompatActivity {
         };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        queue.add(request);
     }
 
 
@@ -195,7 +196,7 @@ public class FriendActivity extends AppCompatActivity {
 
 
     private void addfriendsReq(String curUsername,String Newfriend){
-        String url = mainURL + "/addFriend";
+        String url = mainURL + "/addFriend/";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
