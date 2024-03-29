@@ -25,6 +25,10 @@ public class PortalScreenActivity extends AppCompatActivity {
      */
     private Button exitButton;
 
+    private Button addButton;
+
+    private Button progress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +36,14 @@ public class PortalScreenActivity extends AppCompatActivity {
 
         friendButton = findViewById(R.id.Friendsbutton);    // L
         exitButton = findViewById(R.id.ExitButton);
+        addButton = findViewById(R.id.trophyButton);
+        progress = findViewById(R.id.progressButton);
 
         friendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //When friend button is clicked it takes you to the friend screen
-                Intent intent = new Intent(PortalScreenActivity.this, FriendsActivity.class);
+                Intent intent = new Intent(PortalScreenActivity.this, FriendActivity.class);
                 startActivity(intent);
             }
 
@@ -47,6 +53,24 @@ public class PortalScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //when exit button is pressed takes you back to the Maps Activity
                 Intent intent = new Intent(PortalScreenActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, AddFriends.class);
+                startActivity(intent);
+            }
+
+        });
+        progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
 

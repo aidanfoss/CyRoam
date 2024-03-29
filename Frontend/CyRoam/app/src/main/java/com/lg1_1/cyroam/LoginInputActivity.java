@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.util.User;
 
 import org.json.JSONException;
 /**
@@ -49,6 +50,8 @@ public class LoginInputActivity extends AppCompatActivity {
      */
     private RequestQueue queue;
 
+    private User inputuser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +82,7 @@ public class LoginInputActivity extends AppCompatActivity {
 
                         });
 
-                //Intent intent = new Intent(LoginInputActivity.this, AddFriends.class);
+               // Intent intent = new Intent(LoginInputActivity.this, PortalScreenActivity.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
               //intent.putExtra("Username", username);
@@ -138,6 +141,10 @@ public class LoginInputActivity extends AppCompatActivity {
                     try{
                         Log.v(TAG, "request success");
                         boolean isTrue = response.getBoolean("isUser");
+                        int i = 0;
+                        inputuser = new User(curUsername, password, i);
+
+
                         //return isTrue;
                         callback.onSuccess(isTrue);
 

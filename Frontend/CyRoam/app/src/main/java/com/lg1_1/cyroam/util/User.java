@@ -43,6 +43,8 @@ public class User {
         //could potentially connect to the websocket at that moment too
     }
 
+
+
     public String getUsername() {return username;}
     public int getID() {return id;}
 
