@@ -1,6 +1,5 @@
 package com.lg1_1.cyroam;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,8 +15,10 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.util.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,17 +77,20 @@ public class FriendActivity extends AppCompatActivity {
     String usernamestring;
 
     private RequestQueue queue;
+
+    private User inputuser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
-
+        //usernamestring = inputuser.getUsername();
         backbutton = findViewById(R.id.Backbutton);
         friendsearch =  findViewById(R.id.searchButton);
         outputtext = findViewById(R.id.Outputtext);
         usernameEditText = findViewById(R.id.usernamesearch);
         titletext = findViewById(R.id.textView3);
+
         Bundle extras = getIntent().getExtras();
         if(extras == null){
 
@@ -95,8 +99,10 @@ public class FriendActivity extends AppCompatActivity {
             usernamestring = getIntent().getStringExtra("Username");
             String finallyer = usernamestring + "'s: Friends";
             titletext.setText(finallyer);
-           //findfriendsReq(usernamestring);
+           findfriendsReq(usernamestring);
         }
+
+
 
 
         backbutton.setOnClickListener(new View.OnClickListener() {
@@ -113,7 +119,7 @@ public class FriendActivity extends AppCompatActivity {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
                 String friendusername = usernameEditText.getText().toString();
                 addfriendsReq(usernamestring,friendusername);
-                //findfriendsReq(usernamestring);
+                findfriendsReq(usernamestring);
                 /*if(!found){
                     outputtext.setText(output);
                 }
@@ -130,36 +136,27 @@ public class FriendActivity extends AppCompatActivity {
      */
     private void findfriendsReq(String curUsername){
         String url = mainURL + "/friends/" + curUsername;
-    /*
-        // Convert input to JSONObject
-        JSONObject userInfo = new JSONObject();
-        try{
 
-            // etRequest should contain a JSON object string as your POST body
-            // similar to what you would have in POSTMAN-body field
-            // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("curUsername", curUsername);
-
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-        */
-        @SuppressLint("SetTextI18n") JsonObjectRequest request = new JsonObjectRequest(
+         //JsonObjectRequest request = new JsonObjectRequest(
+        JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
                 null,
                 //userInfo,
                 response -> {
                     try{
-                        JSONArray jsonArray = response.getJSONArray("friends");
+                        //JSONArray jsonArray = response.getJSONArray(6);
+
+                       // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         outputtext.setText(curUsername + " Friends:\n");
-                        for (int i = 0; i < jsonArray.length(); i++){
-                            JSONObject friend = jsonArray.getJSONObject(i);
+                        for (int i = 0; i < response.length(); i++){
+                            JSONObject friendobj = response.getJSONObject(i);
+                            //JSONObject friend = jsonArray.getJSONObject(i);
 
-                            String curUser = friend.getString("curUsername");
-                            String friendUser = friend.getString("friendUsername");
+
+                            String curUser = friendobj.getString("curUsername");
+                            String friendUser = friendobj.getString("friendUsername");
                             output = curUser + " " + friendUser;
 
                             outputtext.append(friendUser + "\n");
@@ -234,7 +231,7 @@ public class FriendActivity extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      */
     private void addfriendsReq(String curUsername,String Newfriend){
-        String url = mainURL + "/addFriend/";
+        String url = mainURL + "/addFriend";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -252,7 +249,7 @@ public class FriendActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.POST,
                 url,
                 userInfo,
                 response -> {
