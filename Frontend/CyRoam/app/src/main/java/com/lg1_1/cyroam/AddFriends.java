@@ -33,11 +33,11 @@ public class AddFriends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("1", "Notification", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
-        }
+        }*/
         friendSearch = findViewById(R.id.searchbutton);
         friendSearch.setOnClickListener(view -> {
                     createnotif();
@@ -77,8 +77,8 @@ public class AddFriends extends AppCompatActivity {
         }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                 .setSmallIcon(R.drawable.iowa_state_clipart_4_removebg_preview)
-                .setContentTitle("Title")
-                .setContentText("text inputreerfeve")
+                .setContentTitle("Sent!!!")
+                .setContentText("Your Friend Request has been sent")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100, 1000, 200, 340})
                 .setAutoCancel(false)
