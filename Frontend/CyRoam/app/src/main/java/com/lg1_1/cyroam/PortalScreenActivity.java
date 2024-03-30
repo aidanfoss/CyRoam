@@ -43,7 +43,7 @@ public class PortalScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //When friend button is clicked it takes you to the friend screen
-                Intent intent = new Intent(PortalScreenActivity.this, FriendActivity.class);
+                Intent intent = new Intent(PortalScreenActivity.this, FriendsActivity.class);
                 startActivity(intent);
             }
 
