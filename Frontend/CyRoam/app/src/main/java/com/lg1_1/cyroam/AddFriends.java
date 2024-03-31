@@ -6,11 +6,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -25,6 +28,8 @@ public class AddFriends extends AppCompatActivity {
      * Is a button that sends invite to the user that is typed
      */
     private Button friendSearch;
+
+    private Button bybyButton;
     /**
      * @author Nicholas Kirschbaum
      * prints out screen with button on it(more in the works)
@@ -33,14 +38,30 @@ public class AddFriends extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friends);
+        ConstraintLayout constraintLayout = findViewById(R.id.main2);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
         /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel("1", "Notification", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }*/
         friendSearch = findViewById(R.id.searchbutton);
+        bybyButton = findViewById(R.id.addBackButton);
+
         friendSearch.setOnClickListener(view -> {
                     createnotif();
+        });
+        bybyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddFriends.this, PortalScreenActivity.class);
+                startActivity(intent);
+            }
+
+
         });
     }
     /**
