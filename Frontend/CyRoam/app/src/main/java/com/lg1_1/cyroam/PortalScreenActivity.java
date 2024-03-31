@@ -29,6 +29,8 @@ public class PortalScreenActivity extends AppCompatActivity {
 
     private Button progress;
 
+    private Button settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,7 @@ public class PortalScreenActivity extends AppCompatActivity {
         exitButton = findViewById(R.id.ExitButton);
         addButton = findViewById(R.id.trophyButton);
         progress = findViewById(R.id.progressButton);
-
+        settings = findViewById(R.id.settingsButton);
         friendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +73,15 @@ public class PortalScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //when exit button is pressed takes you back to the Maps Activity
                 Intent intent = new Intent(PortalScreenActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, SettingsActivity.class);
                 startActivity(intent);
             }
 
