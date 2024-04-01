@@ -24,14 +24,14 @@ public class UserController {
     private String failure = "{\"message\":\"failure ) :\"}";
     @Operation(summary = "Gets a list of all users")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend users", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = User.class)) })
     @GetMapping(path = "/users")
     List<User> getAllUsers(){
         return userInterface.findAll();
     }
     @Operation(summary = "Gets user by uId")
     @ApiResponse(responseCode = "200", description = "Successfully returned user", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = User.class)) })
     @GetMapping(path = "/users/{uId}")
     User getUserByUId( @PathVariable int uId){
 
@@ -40,7 +40,7 @@ public class UserController {
 
     @Operation(summary = "create new user")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend objects", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = User.class)) })
     //Use this when creating a new user, provide username and password via json here
     @PostMapping(path = "/users")
     User createUser(@RequestBody User user){
@@ -55,7 +55,7 @@ public class UserController {
     //GET requests can not have bodies change it to have information in url
     @Operation(summary = "checks entered username and pasword to see if they are a user")
     @ApiResponse(responseCode = "200", description = "Successfully checked username and password", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = User.class)) })
     @GetMapping(path = "/userCheck/{user}/{password}")
     UserCheck checkUser(@PathVariable String user, @PathVariable String password){
         UserCheck isUSerT = new UserCheck(true);

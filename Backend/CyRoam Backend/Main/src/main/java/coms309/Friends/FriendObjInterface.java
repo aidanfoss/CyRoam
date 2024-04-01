@@ -13,7 +13,7 @@ public interface FriendObjInterface extends JpaRepository<FriendObj, Long> {
 
 
     //may or may not be useful
-    //FriendObj findByCurUsername(String curUsername);
+    FriendObj findByCurUsernameOne(String curUsername);
 
     @Query
     List<FriendObj> findByCurUsername(String curUsername);
