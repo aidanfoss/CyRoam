@@ -28,10 +28,10 @@ public class FriendObj {
 
     private String friendUsername;
 
-    //private Boolean accept;
+    private Boolean friendStatus;
 
     //private int friendState;
-    public FriendObj(String curUsername, String friendUsername) {
+    public FriendObj(String curUsername, String friendUsername, Boolean accept) {
         this.curUsername = curUsername;
         this.friendUsername = friendUsername;
 
@@ -55,5 +55,12 @@ public class FriendObj {
     }
     public String getFriendUsername() {
         return friendUsername;
+    }
+
+    public void setfriendStatus(Boolean friendStatus) {
+        this.friendStatus = friendStatus;
+    }
+    public Boolean getfriendStatus() {
+        return friendStatus;
     }
 }
