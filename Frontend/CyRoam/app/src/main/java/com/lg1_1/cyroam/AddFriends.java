@@ -11,12 +11,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.lg1_1.cyroam.util.Friend;
+import com.lg1_1.cyroam.util.FriendsAddListAdapter;
+
+import java.util.ArrayList;
+
 /**
  * This screen holds invites from other people
  * as well as allows you to send invites
@@ -50,6 +58,19 @@ public class AddFriends extends AppCompatActivity {
         }*/
         friendSearch = findViewById(R.id.searchbutton);
         bybyButton = findViewById(R.id.addBackButton);
+
+        ListView mViewList = (ListView) findViewById(R.id.listView2);
+        ArrayList<Friend> list = new ArrayList<>();
+        Friend one = new Friend("John", 32, 23);
+        Friend two = new Friend("steve", 32, 23);
+        list.add(one);
+        list.add(two);
+
+        //get list of friends here
+        FriendsAddListAdapter friendsListAdapter = new FriendsAddListAdapter(this, R.layout.format2_listview, list);
+        mViewList.setAdapter((ListAdapter) friendsListAdapter);
+
+
 
         friendSearch.setOnClickListener(view -> {
                     createnotif();
