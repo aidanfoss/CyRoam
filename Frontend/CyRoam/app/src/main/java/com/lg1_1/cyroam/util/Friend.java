@@ -1,6 +1,6 @@
 package com.lg1_1.cyroam.util;
 
-public class Friend {
+public class Friend  {
     private String name;
     private int theirScore;
     private int theirId;
