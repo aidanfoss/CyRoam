@@ -34,6 +34,7 @@ public class FriendObj {
     public FriendObj(String curUsername, String friendUsername, Boolean accept) {
         this.curUsername = curUsername;
         this.friendUsername = friendUsername;
+        this.friendStatus = accept;
 
     }
     public FriendObj()

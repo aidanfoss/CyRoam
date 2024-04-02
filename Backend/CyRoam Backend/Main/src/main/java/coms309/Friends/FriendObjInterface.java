@@ -11,9 +11,9 @@ public interface FriendObjInterface extends JpaRepository<FriendObj, Long> {
 
     void deleteByEntry(int entry);
 
-
+    FriendObj findByCurUsernameAndFriendUsername(String curUsername, String friendUsername);
     //may or may not be useful
-    FriendObj findByCurUsernameOne(String curUsername);
+   // FriendObj findByCurUsername(String curUsername);
 
     @Query
     List<FriendObj> findByCurUsername(String curUsername);
