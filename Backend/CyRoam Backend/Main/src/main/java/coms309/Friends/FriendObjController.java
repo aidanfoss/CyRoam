@@ -82,11 +82,18 @@ public class FriendObjController {
         String passedcurUsername = passedFriendObj.getCurUsername();
         Boolean newStatus = passedFriendObj.getfriendStatus();
 
-        friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername,passedfriendUsername).setfriendStatus(newStatus);
-        if(friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername,passedfriendUsername).equals(passedFriendObj)) {
-            return passedFriendObj;
-        }
-        else{
+        FriendObj existingFriendObj = friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername, passedfriendUsername);
+
+        if (existingFriendObj != null) {
+            // Update the status
+            existingFriendObj.setfriendStatus(newStatus);
+
+            // Save the updated object back to the database
+            FriendObj updatedFriendObj = friendObjInterface.save(existingFriendObj);
+
+            return updatedFriendObj;
+        } else {
+            // Handle the case where the object is not found
             return null;
         }
     }
