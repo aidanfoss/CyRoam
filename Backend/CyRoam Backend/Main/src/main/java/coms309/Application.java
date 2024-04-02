@@ -41,9 +41,9 @@ public class Application {
     CommandLineRunner initFriend(FriendObjInterface friendObjInterface) {
         return args -> {
             if (friendObjInterface.count() == 0) {
-                FriendObj friendObj1 = new FriendObj("bossf", "zach");
-                FriendObj friendObj2 = new FriendObj("Jane", "poop");
-                FriendObj friendObj3 = new FriendObj("bossf", "stinky");
+                FriendObj friendObj1 = new FriendObj("bossf", "zach",true);
+                FriendObj friendObj2 = new FriendObj("Jane", "poop",true);
+                FriendObj friendObj3 = new FriendObj("bossf", "stinky",true);
 
                 friendObjInterface.save(friendObj1);
                 friendObjInterface.save(friendObj2);

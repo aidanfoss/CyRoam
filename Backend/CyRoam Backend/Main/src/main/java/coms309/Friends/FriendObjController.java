@@ -26,8 +26,14 @@ public class FriendObjController {
 
     List<FriendObj> requestFriends(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
-        List<FriendObj> f =friendObjInterface.findByCurUsername(username);
-        return f;
+        //List<FriendObj>  trueFriends = null;
+        List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
+        for(int i= 0; i< friends.size(); i++){
+            if(!friends.get(i).getfriendStatus()){
+                friends.remove(i);
+            }
+        }
+        return friends;
     }
 
 
@@ -40,11 +46,14 @@ public class FriendObjController {
         String friendUsername = friendObj.getFriendUsername();
         if (friendUsername == null)
             return null;
+        if(friendObj.getfriendStatus()==null){
+            friendObj.setfriendStatus(true);
+        }
         friendObjInterface.save(friendObj);
         return friendObj;
 
     }
-
+//change to just recive user name in url
     @Operation(summary = "deletes given friend object from database")
     @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = FriendObj.class)) })
@@ -73,8 +82,8 @@ public class FriendObjController {
         String passedcurUsername = passedFriendObj.getCurUsername();
         Boolean newStatus = passedFriendObj.getfriendStatus();
 
-        friendObjInterface.findByCurUsernameOne(passedfriendUsername).setfriendStatus(newStatus);
-        if(friendObjInterface.findByCurUsernameOne(passedfriendUsername).equals(passedFriendObj)) {
+        friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername,passedfriendUsername).setfriendStatus(newStatus);
+        if(friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername,passedfriendUsername).equals(passedFriendObj)) {
             return passedFriendObj;
         }
         else{
