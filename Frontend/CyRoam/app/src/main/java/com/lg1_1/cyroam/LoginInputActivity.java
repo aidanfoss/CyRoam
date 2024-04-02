@@ -13,6 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.util.User;
 
 import org.json.JSONException;
 /**
@@ -49,6 +50,8 @@ public class LoginInputActivity extends AppCompatActivity {
      */
     private RequestQueue queue;
 
+    private User inputuser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,11 +82,11 @@ public class LoginInputActivity extends AppCompatActivity {
 
                         });
 
-                //Intent intent = new Intent(LoginInputActivity.this, AddFriends.class);
+                Intent intent = new Intent(LoginInputActivity.this, PortalScreenActivity.class);
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
               //intent.putExtra("Username", username);
-                //startActivity(intent);
+                 startActivity(intent);
             }
         });
     }
@@ -93,8 +96,8 @@ public class LoginInputActivity extends AppCompatActivity {
 
 
     /**
-     * @author Nicholas Kirschbaum
      * get request to login with the username and password they put in
+     * @author Nicholas Kirschbaum
      */
 
     //this calls the server and checks to see if it correct
@@ -121,11 +124,7 @@ public class LoginInputActivity extends AppCompatActivity {
             Log.e(TAG, "obj error: " + e.getMessage());
         }
         */
-        //my name is only here because i ran rebugging for nick
-        //for some reason he cant run a server connection on his laptop.
-        //-aidan
-      //  JsonRequest request = new JsonRequest(
-        // JsonArrayRequest request = new JsonArrayRequest(
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
@@ -138,6 +137,10 @@ public class LoginInputActivity extends AppCompatActivity {
                     try{
                         Log.v(TAG, "request success");
                         boolean isTrue = response.getBoolean("isUser");
+                        int i = 0;
+                        inputuser = new User(curUsername, password, i);
+
+
                         //return isTrue;
                         callback.onSuccess(isTrue);
 
@@ -177,6 +180,9 @@ public class LoginInputActivity extends AppCompatActivity {
         queue.add(request);
 //        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
     }
+    /**
+    *Volley callback for Log in
+     */
     public interface VolleyCallback{
         void onSuccess(boolean isTrue);
         void onFailure(String errorMessage);

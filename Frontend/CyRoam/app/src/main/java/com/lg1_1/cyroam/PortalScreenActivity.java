@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
  * take you to the next screen
  * @author Nicholas Kirschbaum
  */
-
 public class PortalScreenActivity extends AppCompatActivity {
     /**
      * @author Nicholas Kirschbaum
@@ -26,14 +25,24 @@ public class PortalScreenActivity extends AppCompatActivity {
      */
     private Button exitButton;
 
+    private Button addButton;
+
+    private Button progress;
+    private Button leaderButton;
+
+    private Button settings;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portal_screen);
 
-        friendButton = findViewById(R.id.Friendsbutton);    // L
+        friendButton = findViewById(R.id.Friendsbutton);
+        leaderButton = findViewById(R.id.Leaderboardbutton);// L
         exitButton = findViewById(R.id.ExitButton);
-
+        addButton = findViewById(R.id.trophyButton);
+        progress = findViewById(R.id.progressButton);
+        settings = findViewById(R.id.settingsButton);
         friendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +57,42 @@ public class PortalScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //when exit button is pressed takes you back to the Maps Activity
                 Intent intent = new Intent(PortalScreenActivity.this, MapsActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, AddFriends.class);
+                startActivity(intent);
+            }
+
+        });
+        progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        leaderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, LeaderBoard.class);
                 startActivity(intent);
             }
 

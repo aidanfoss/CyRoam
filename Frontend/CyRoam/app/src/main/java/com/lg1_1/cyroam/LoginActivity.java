@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * handles login requests and passes user information
+ * Handles login requests and passes user information
  * along when a login succeeds
  * @author Nicholas Kirschbaum
  */
