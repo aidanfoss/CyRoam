@@ -13,8 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.lg1_1.cyroam.util.Friend;
 import com.lg1_1.cyroam.util.FriendsListAdapter;
@@ -38,7 +36,7 @@ public class FriendsActivity extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      * tag for debugging
      */
-    private String TAG = "ADDFriendActivity";
+    private String TAG = "FriendzActivity";
     /**
      * Takes url from Main
      * @author Nicholas Kirschbaum
@@ -50,7 +48,7 @@ public class FriendsActivity extends AppCompatActivity {
     private Button toAddFriends;
 
     private RequestQueue queue;
-    ArrayList<Friend> list = new ArrayList<>();
+    private ArrayList<Friend> list2 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +58,15 @@ public class FriendsActivity extends AppCompatActivity {
         toAddFriends= findViewById(R.id.addButton);
 
         ListView mViewList = (ListView) findViewById(R.id.listvire);
+        String curUsername ="bossf";
+        findfriendsReq(curUsername);
 
-        //ArrayList<Friend> list = new ArrayList<>();
+        ArrayList<Friend> list = new ArrayList<>();
         Friend one = new Friend("John", 32, 23);
         Friend two = new Friend("steve", 32, 23);
         list.add(one);
         list.add(two);
-        //String curUsername ="bossf";
-        //findfriends(curUsername);
+
 
         //get list of friends here
         FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format_listview, list);
@@ -96,7 +95,7 @@ public class FriendsActivity extends AppCompatActivity {
 
     }
 
-    private void findfriends(String curUsername){
+    private void findfriendsReq(String curUsername){
         String url = mainURL + "/friends/" + curUsername;
 
         //JsonObjectRequest request = new JsonObjectRequest(
@@ -120,10 +119,10 @@ public class FriendsActivity extends AppCompatActivity {
                             String curUser = friendobj.getString("curUsername");
                             String friendUser = friendobj.getString("friendUsername");
                             //output = curUser + " " + friendUser;
-                            Friend free = new Friend(friendUser, 75, i);
-                            list.add(free);
+                            Friend free = new Friend(friendUser, 223, 23);
+                            list2.add(free);
                             //outputtext.append(friendUser + "\n");
-                            //Log.i(TAG, output);
+                            Log.i(TAG, curUser);
 
 
                         }
@@ -135,12 +134,9 @@ public class FriendsActivity extends AppCompatActivity {
                     // output = response.toString();
 
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG,error.getMessage());
-                        // tvResponse.setText(error.getMessage());
-                    }
+                error -> {
+                    Log.e(TAG,error.getMessage());
+                    // tvResponse.setText(error.getMessage());
                 }
         ){
             @Override

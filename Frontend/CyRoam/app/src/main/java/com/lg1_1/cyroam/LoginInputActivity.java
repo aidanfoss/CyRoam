@@ -86,7 +86,7 @@ public class LoginInputActivity extends AppCompatActivity {
                //intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
                 //intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
               //intent.putExtra("Username", username);
-                startActivity(intent);
+                 startActivity(intent);
             }
         });
     }
@@ -124,11 +124,7 @@ public class LoginInputActivity extends AppCompatActivity {
             Log.e(TAG, "obj error: " + e.getMessage());
         }
         */
-        //my name is only here because i ran rebugging for nick
-        //for some reason he cant run a server connection on his laptop.
-        //-aidan
-      //  JsonRequest request = new JsonRequest(
-        // JsonArrayRequest request = new JsonArrayRequest(
+
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
