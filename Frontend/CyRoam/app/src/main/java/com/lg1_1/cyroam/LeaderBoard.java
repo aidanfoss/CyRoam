@@ -1,106 +1,70 @@
 package com.lg1_1.cyroam;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.util.Friend;
-import com.lg1_1.cyroam.util.FriendsListAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * has been implemented yet
- * @author Nicholas Kirschbaum
- */
-public class FriendsActivity extends AppCompatActivity {
-
-
+public class LeaderBoard extends AppCompatActivity {
     /**
-     *  tag for debugging
      * @author Nicholas Kirschbaum
      * tag for debugging
      */
-    private String TAG = "FriendzActivity";
+    private String TAG = "ADDFriendActivity";
     /**
-     * Takes url from Main
      * @author Nicholas Kirschbaum
-
+     * Takes url from Main
      */
     private String mainURL = MainActivity.url;
-
     private Button backButton2;
-    private Button toAddFriends;
 
+    private TextView outputTextbox;
     private RequestQueue queue;
-    static ArrayList<Friend> list2 = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
-        backButton2 = findViewById(R.id.homeButton);
-        toAddFriends= findViewById(R.id.addButton);
+        queue = Volley.newRequestQueue(this);
+        setContentView(R.layout.activity_leader_board);
+        ConstraintLayout constraintLayout = findViewById(R.id.main3);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
+        backButton2 = findViewById(R.id.Leaderboardout);
+        outputTextbox = findViewById(R.id.LeaderBoardInsertText);
 
-        ListView mViewList = (ListView) findViewById(R.id.listvire);
-        //ArrayList<Friend> list2 = new ArrayList<>();
-        String curUsername ="bossf";
-        findfriendsReq(curUsername);
-
-        //ArrayList<Friend> list = new ArrayList<>();
-        //list = list2.stream().toList();
-        //Friend one = new Friend("John", 32, 23);
-       // Friend two = new Friend("steve", 32, 23);
-        //list.add(one);
-        //list.add(two);
-
-
-        //get list of friends here
-        FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format_listview, list2);
-        mViewList.setAdapter((ListAdapter) friendsListAdapter);
-
-
-
-        //backButton2.findViewById(R.id.);
-        //toAddFriends.findViewById(R.id.AddButton);
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FriendsActivity.this, PortalScreenActivity.class);
+                Intent intent = new Intent(LeaderBoard.this, PortalScreenActivity.class);
                 startActivity(intent);
             }
         });
-
-        toAddFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FriendsActivity.this, AddFriends.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 
-    private void findfriendsReq(String curUsername){
-        String url = mainURL + "/friends/" + curUsername;
+    private void worldChampionReq(){
+        String url = mainURL + "/friends/";
 
         //JsonObjectRequest request = new JsonObjectRequest(
         JsonArrayRequest request = new JsonArrayRequest(
@@ -114,19 +78,18 @@ public class FriendsActivity extends AppCompatActivity {
 
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
-                        //outputtext.setText(curUsername + " Friends:\n");
+                        outputTextbox.setText("World Champions:\n");
                         for (int i = 0; i < response.length(); i++){
                             JSONObject friendobj = response.getJSONObject(i);
                             //JSONObject friend = jsonArray.getJSONObject(i);
 
 
                             String curUser = friendobj.getString("curUsername");
-                            String friendUser = friendobj.getString("friendUsername");
-                            //output = curUser + " " + friendUser;
-                            Friend free = new Friend(friendUser, 0, 10000+i);
-                            list2.add(free);
-                            //outputtext.append(friendUser + "\n");
-                            Log.i(TAG, curUser);
+                            String score = friendobj.getString("friendUsername");
+                            String output = curUser + " " + score;
+
+                            outputTextbox.append(curUser + ": " + score + "\n");
+                            Log.i(TAG, output);
 
 
                         }
@@ -138,9 +101,12 @@ public class FriendsActivity extends AppCompatActivity {
                     // output = response.toString();
 
                 },
-                error -> {
-                    Log.e(TAG,error.getMessage());
-                    // tvResponse.setText(error.getMessage());
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG,error.getMessage());
+                        // tvResponse.setText(error.getMessage());
+                    }
                 }
         ){
             @Override

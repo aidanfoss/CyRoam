@@ -42,8 +42,14 @@ public class User {
         //pass it into this object, which can be used later for verification.
         //could potentially connect to the websocket at that moment too
     }
+    public String getName(){
+        return username;
+    }
+
 
     public String getUsername() {return username;}
+
+
     public int getID() {return id;}
 
     //DO NOT MAKE RETURN PASSWORD unless theres a really good reason later.
