@@ -74,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void removefriend(String curUsername,String Newfriend){
-        String url = mainURL + "/addFriend";
+        String url = mainURL + "/deleteFriend";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();

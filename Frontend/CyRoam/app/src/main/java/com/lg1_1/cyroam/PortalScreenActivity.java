@@ -28,6 +28,7 @@ public class PortalScreenActivity extends AppCompatActivity {
     private Button addButton;
 
     private Button progress;
+    private Button leaderButton;
 
     private Button settings;
 
@@ -36,7 +37,8 @@ public class PortalScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portal_screen);
 
-        friendButton = findViewById(R.id.Friendsbutton);    // L
+        friendButton = findViewById(R.id.Friendsbutton);
+        leaderButton = findViewById(R.id.Leaderboardbutton);// L
         exitButton = findViewById(R.id.ExitButton);
         addButton = findViewById(R.id.trophyButton);
         progress = findViewById(R.id.progressButton);
@@ -82,6 +84,15 @@ public class PortalScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //when exit button is pressed takes you back to the Maps Activity
                 Intent intent = new Intent(PortalScreenActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        leaderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //when exit button is pressed takes you back to the Maps Activity
+                Intent intent = new Intent(PortalScreenActivity.this, LeaderBoard.class);
                 startActivity(intent);
             }
 
