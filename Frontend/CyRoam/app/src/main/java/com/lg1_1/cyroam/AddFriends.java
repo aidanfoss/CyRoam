@@ -21,6 +21,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.util.Friend;
 import com.lg1_1.cyroam.util.FriendsAddListAdapter;
 
@@ -59,6 +60,7 @@ public class AddFriends extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        queue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_add_friends);
         ConstraintLayout constraintLayout = findViewById(R.id.main2);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
