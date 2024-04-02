@@ -16,8 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 /**
- * Enables user to add friends and recieve notification about friend request.
- * @Nicholas Kirschbaum
+ * Enables user to add friends and receive notification about friend request.
+ * @author Nicholas Kirschbaum
  */
 public class friendVolley {
     /**
@@ -42,8 +42,8 @@ public class friendVolley {
     private Context context;
 
     /**
-     * @author Nicholas Kirschbaum
-     * friend Volley (tuturial uses this)
+     *
+     * @param context the class thats running it, (when constructed, always use "this")
      */
     public friendVolley(Context context){
         this.context = context;

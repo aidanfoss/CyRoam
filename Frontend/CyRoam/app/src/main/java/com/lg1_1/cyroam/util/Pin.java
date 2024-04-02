@@ -10,6 +10,8 @@ import com.google.android.gms.maps.model.LatLng;
  *
  * Location, ID, name, description, are global variables
  * discovered is information for individual users.
+ *
+ * pins ARE NOT markers on the map, its just a class i use to store relevant information
  * @author Aidan Foss
  */
 public class Pin {
