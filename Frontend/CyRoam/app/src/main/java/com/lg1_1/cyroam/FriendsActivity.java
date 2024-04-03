@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,7 +48,7 @@ public class FriendsActivity extends AppCompatActivity {
     private Button toAddFriends;
 
     private RequestQueue queue;
-    static ArrayList<Friend> list2 = new ArrayList<>();
+    ArrayList<Friend> list2 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,8 @@ public class FriendsActivity extends AppCompatActivity {
 
 
         //get list of friends here
-        FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format_listview, list2);
-        mViewList.setAdapter((ListAdapter) friendsListAdapter);
+        //FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format_listview, list2);
+        //mViewList.setAdapter((ListAdapter) friendsListAdapter);
 
 
 
@@ -111,7 +110,7 @@ public class FriendsActivity extends AppCompatActivity {
                 response -> {
                     try{
                         //JSONArray jsonArray = response.getJSONArray(6);
-
+                        list2.clear();
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
@@ -130,6 +129,7 @@ public class FriendsActivity extends AppCompatActivity {
 
 
                         }
+                        initializeListAdapter();
 
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -162,5 +162,10 @@ public class FriendsActivity extends AppCompatActivity {
 
         // Adding request to request queue
         queue.add(request);
+    }
+    private void initializeListAdapter() {
+        FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format_listview, list2);
+        ListView mViewList = findViewById(R.id.listvire);
+        mViewList.setAdapter(friendsListAdapter);
     }
 }

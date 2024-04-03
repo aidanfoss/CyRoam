@@ -60,8 +60,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
+                String curUsername = "bossf";
                 String noLongerfriend = removefriend.getText().toString();
-                //removefriend(String curUsername,String noLongerfriend);
+                removefriend(curUsername, noLongerfriend);
 
             }
         });
@@ -92,14 +93,14 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.DELETE,
                 url,
                 userInfo,
                 response -> {
                     try{
 
 
-                        JSONArray jsonArray = response.getJSONArray("addfriend");
+                        JSONArray jsonArray = response.getJSONArray("deleteFriend");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
                         // for (int i = 0; i < jsonArray.length(); i++){
