@@ -2,6 +2,7 @@ package coms309.Comment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Pin.*;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Comment {
@@ -9,18 +10,21 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
+
     private String text;
 
-    private int time;
+    private long time;
 
     @ManyToOne
     @JoinColumn(name = "pin")
     @JsonIgnore
     private Pin pin;
 
-    public Comment(int time, String text) {
+    public Comment(long time, String text, Pin pin) {
         this.time = time;
         this.text = text;
+        this.pin = pin;
     }
 
     public Comment() {

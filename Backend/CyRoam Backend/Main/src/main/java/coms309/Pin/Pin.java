@@ -58,4 +58,11 @@ public class Pin {
         return name;
     }
 
+    public void addComment(Comment comment) {
+         comments.add(comment);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 }
