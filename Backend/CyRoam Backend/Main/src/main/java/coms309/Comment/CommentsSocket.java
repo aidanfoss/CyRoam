@@ -28,7 +28,7 @@ public class CommentsSocket {
     public void setCommentsRepository(CommentsRepository repo) {commentsRepository = repo;}
 
     @Autowired
-    public void setPinRepository(PinRepository pinRepository) {this.pinRepository = pinRepository;}
+    public void setPinRepository(PinRepository repo) {pinRepository = repo;}
 
     private static List<Session> sessions;
     private static List<Integer> ids;
@@ -46,11 +46,9 @@ public class CommentsSocket {
         logger.info("Session " + session.getId() + " connected");
 
         //look through comments for any that have been posted on given pin
-        for (int i = 0; i < commentsRepository.findAll().size(); i++) {
-            if (commentsRepository.findAll().get(i).getPin().getId() == id) {
+        for (int i = 0; i < pinRepository.findById(id).getComments().size(); i++) {
                 //send comments
-                sessions.get(i).getBasicRemote().sendText(commentsRepository.findAll().get(i).getText());
-            }
+                sessions.get(i).getBasicRemote().sendText(pinRepository.findById(id).getComments().get(i).getText());
         }
 
         sessions.add(session);
