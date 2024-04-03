@@ -53,6 +53,8 @@ public class FriendSocket {
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
+
+        // nick could send me friedn object user wants to accept
     // Handle new messages
     }
 

@@ -1,12 +1,10 @@
 package coms309.Users;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import coms309.Friends.FriendObj;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,15 +15,21 @@ public class User {
     private String username;
     private String password;
 
+
+   // @OneToMany
+    //private List<FriendObj> friends;
+
+
     //contructor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+      //  friends = new ArrayList<>();
 
     }
     public User()
     {
-
+        //friends = new ArrayList<>();
     }
     //getters and setters
     public int getuId(){
