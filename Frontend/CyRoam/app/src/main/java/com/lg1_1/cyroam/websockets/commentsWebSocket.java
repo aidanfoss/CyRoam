@@ -6,7 +6,6 @@ import org.java_websocket.WebSocketListener;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
-import java.net.ServerSocket;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -31,7 +30,7 @@ public class commentsWebSocket extends WebSocketClient {
 
         try {
             //parse message as a single comment;
-            webSocketListener.onPreparePing(message);
+//            PingFrame pingFrame = webSocketListener.onCommentRe(message);
         }
         catch (Exception e) {
             e.printStackTrace();

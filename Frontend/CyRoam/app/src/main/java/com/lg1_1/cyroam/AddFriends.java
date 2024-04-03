@@ -9,8 +9,10 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -20,12 +22,24 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.util.Friend;
 import com.lg1_1.cyroam.util.FriendsAddListAdapter;
+import com.lg1_1.cyroam.util.FriendsListAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This screen holds invites from other people
@@ -52,7 +66,10 @@ public class AddFriends extends AppCompatActivity {
     private Button friendSearch;
 
     private Button bybyButton;
+    private EditText usernameEditText;
     private RequestQueue queue;
+
+    ArrayList<Friend> list = new ArrayList<>();
     /**
      * @author Nicholas Kirschbaum
      * prints out screen with button on it(more in the works)
@@ -67,16 +84,16 @@ public class AddFriends extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-        /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("1", "Notification", NotificationManager.IMPORTANCE_HIGH);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }*/
+
+
+
+
         friendSearch = findViewById(R.id.searchbutton);
         bybyButton = findViewById(R.id.addBackButton);
+        usernameEditText = findViewById(R.id.FriendSearch);
 
         ListView mViewList = (ListView) findViewById(R.id.listView2);
-        ArrayList<Friend> list = new ArrayList<>();
+
         Friend one = new Friend("John", 32, 23);
         Friend two = new Friend("steve", 32, 23);
         list.add(one);
@@ -88,8 +105,17 @@ public class AddFriends extends AppCompatActivity {
 
 
 
-        friendSearch.setOnClickListener(view -> {
-                    createnotif();
+
+        friendSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String curUsername ="bossf";
+                String Newfriend = usernameEditText.getText().toString();
+                addfriendsReq(curUsername,Newfriend);
+                createnotif();
+            }
+
+
         });
         bybyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,18 +126,74 @@ public class AddFriends extends AppCompatActivity {
 
 
         });
-        /*
-        mViewList.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<Friend> parent, View view, int position, long l) {
-                String curUsername = "bossf";
-                String Newfriend = parent.toString();
-                addfriends(curUsername, Newfriend);
-            }
-            // handle click here
-        });
-        */
 
+
+    }
+    private void addfriendsReq(String curUsername,String Newfriend){
+        String url = mainURL + "/addFriend";
+
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("curUsername", curUsername);
+            userInfo.put("friendUsername", Newfriend);
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                url,
+                userInfo,
+                response -> {
+                    try{
+
+
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
+                        Log.i(TAG, "request success");
+
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    // output = response.toString();
+
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG,error.getMessage());
+                        // tvResponse.setText(error.getMessage());
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+                //                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //                params.put("param1", "value1");
+                //                params.put("param2", "value2");
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        queue.add(request);
     }
 
     /**
@@ -169,15 +251,12 @@ public class AddFriends extends AppCompatActivity {
 
     }
 
-    private void simpleCreatenotif() {
-        final String id = "Whatch_this_work";
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
-                .setSmallIcon(R.drawable.iowa_state_clipart_4_removebg_preview);
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.notify(1, builder.build());
-
-
+    private void initializeListAdapter() {
+        FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format2_listview, list);
+        ListView mViewList = findViewById(R.id.listView2);
+        mViewList.setAdapter(friendsListAdapter);
     }
+
 
 
 }

@@ -46,7 +46,6 @@ import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.websockets.WebSocketManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -447,6 +446,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    @Override
+    public void onCommentReceived(String comment) {
+
+    }
+
     @Override
     public void onfredReqRecieved(String name) {
         //todo nick put it here
