@@ -21,28 +21,42 @@ public class FriendObjController {
     //change to contain info in url
     @Operation(summary = "Gets a list of all friend objects that have the entered username as the current username")
     @ApiResponse(responseCode = "200", description = "Successfully returned all friend objects", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = FriendObj.class)) })
     @GetMapping(path = "/friends/{username}")
+
     List<FriendObj> requestFriends(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
-        List<FriendObj> f =friendObjInterface.findByCurUsername(username);
-        return f;
+        //List<FriendObj>  trueFriends = null;
+        List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
+        for(int i= 0; i< friends.size(); i++){
+            if(!friends.get(i).getfriendStatus()){
+                friends.remove(i);
+            }
+        }
+        return friends;
     }
+
+
     @Operation(summary = "creates new friend object")
     @ApiResponse(responseCode = "200", description = "Successfully Created Object", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = FriendObj.class)) })
     @PostMapping(path = "/addFriend")
+
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
         if (friendUsername == null)
             return null;
+        if(friendObj.getfriendStatus()==null){
+            friendObj.setfriendStatus(true);
+        }
         friendObjInterface.save(friendObj);
         return friendObj;
 
     }
+//change to just recive user name in url
     @Operation(summary = "deletes given friend object from database")
     @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Statistics.class)) })
+            schema = @Schema(implementation = FriendObj.class)) })
     @DeleteMapping(path = "/deleteFriend")
     FriendObj deleteFriend(@RequestBody FriendObj passedFriendObj){
         String passedfriendUsername = passedFriendObj.getFriendUsername();
@@ -59,4 +73,46 @@ public class FriendObjController {
         return passedFriendObj;
 
     }
+    @Operation(summary = "update friend status ")
+    @ApiResponse(responseCode = "200", description = "Successfully updated status", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = FriendObj.class)) })
+    @PutMapping(path = "/updateStatus")
+    FriendObj updateStatus(@RequestBody FriendObj passedFriendObj){
+        String passedfriendUsername = passedFriendObj.getFriendUsername();
+        String passedcurUsername = passedFriendObj.getCurUsername();
+        Boolean newStatus = passedFriendObj.getfriendStatus();
+
+        FriendObj existingFriendObj = friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername, passedfriendUsername);
+
+        if (existingFriendObj != null) {
+            // Update the status
+            existingFriendObj.setfriendStatus(newStatus);
+
+            // Save the updated object back to the database
+            FriendObj updatedFriendObj = friendObjInterface.save(existingFriendObj);
+
+            return updatedFriendObj;
+        } else {
+            // Handle the case where the object is not found
+            return null;
+        }
+    }
+    @Operation(summary = "returns list of users who want to be friends the the current user")
+    @ApiResponse(responseCode = "200", description = "Successfully sent list", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = FriendObj.class)) })
+    @GetMapping(path = "/friendRequests/{username}")
+    List<FriendObj> friendRequests(@PathVariable String username){
+        ///String username = Justusername.getCurUsername();
+        //List<FriendObj>  trueFriends = null;
+        List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
+        for(int i= 0; i< friends.size(); i++){
+            if(friends.get(i).getfriendStatus()){
+                friends.remove(i);
+            }
+        }
+        return friends;
+    }
+
+
+
 }
