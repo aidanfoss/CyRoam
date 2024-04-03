@@ -16,7 +16,7 @@ public class FriendObj {
 
    //how do I stop this from displaying password/ is there a way to just connect the UID element/username element?
 //    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "uId")
+//@JoinColumn(name = "uId")
 //    private User user;
 
     //needs testing
@@ -28,12 +28,13 @@ public class FriendObj {
 
     private String friendUsername;
 
-    //private Boolean accept;
+    private Boolean friendStatus;
 
     //private int friendState;
-    public FriendObj(String curUsername, String friendUsername) {
+    public FriendObj(String curUsername, String friendUsername, Boolean accept) {
         this.curUsername = curUsername;
         this.friendUsername = friendUsername;
+        this.friendStatus = accept;
 
     }
     public FriendObj()
@@ -55,5 +56,12 @@ public class FriendObj {
     }
     public String getFriendUsername() {
         return friendUsername;
+    }
+
+    public void setfriendStatus(Boolean friendStatus) {
+        this.friendStatus = friendStatus;
+    }
+    public Boolean getfriendStatus() {
+        return friendStatus;
     }
 }
