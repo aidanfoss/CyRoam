@@ -97,4 +97,22 @@ public class FriendObjController {
             return null;
         }
     }
+    @Operation(summary = "returns list of users who want to be friends the the current user")
+    @ApiResponse(responseCode = "200", description = "Successfully sent list", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = FriendObj.class)) })
+    @GetMapping(path = "/friendRequests/{username}")
+    List<FriendObj> friendRequests(@PathVariable String username){
+        ///String username = Justusername.getCurUsername();
+        //List<FriendObj>  trueFriends = null;
+        List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
+        for(int i= 0; i< friends.size(); i++){
+            if(friends.get(i).getfriendStatus()){
+                friends.remove(i);
+            }
+        }
+        return friends;
+    }
+
+
+
 }
