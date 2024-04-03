@@ -30,6 +30,7 @@ public class PinSocket {
     public void onOpen(Session session) {
         if (sessions == null) {
             sessions = new ArrayList<>();
+            pinRepository.save(new Pin(4, 4, "test"));
         }
         logger.info("onOpen Started");
         logger.info("Session " + session.getId() + " connected");

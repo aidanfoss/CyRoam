@@ -22,9 +22,13 @@ import static java.awt.SystemColor.text;
 @ServerEndpoint(value = "/pins/{id}/comments")
 public class CommentsSocket {
     private static CommentsRepository commentsRepository;
+    private static PinRepository pinRepository;
 
     @Autowired
-    public void setCommentsRepositoryRepository(CommentsRepository repo) {commentsRepository = repo;}
+    public void setCommentsRepository(CommentsRepository repo) {commentsRepository = repo;}
+
+    @Autowired
+    public void setPinRepository(PinRepository pinRepository) {this.pinRepository = pinRepository;}
 
     private static List<Session> sessions;
     private static List<Integer> ids;
