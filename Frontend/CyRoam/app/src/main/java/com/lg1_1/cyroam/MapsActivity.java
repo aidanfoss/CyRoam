@@ -175,8 +175,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);  // go to NewPinActivity
         });
         discoverButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, ProgressActivity.class);
-            startActivity(intent);  // go to NewPinActivity
+            Intent intent = new Intent(MapsActivity.this, PortalScreenActivity.class);
+            startActivity(intent);  // go to portal activity
         });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
