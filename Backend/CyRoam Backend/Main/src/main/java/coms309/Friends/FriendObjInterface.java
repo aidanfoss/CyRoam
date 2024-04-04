@@ -18,6 +18,9 @@ public interface FriendObjInterface extends JpaRepository<FriendObj, Long> {
     @Query
     List<FriendObj> findByCurUsername(String curUsername);
 
+    @Query
+    List<FriendObj> findByFriendUsername(String curUsername);
+
 
 
 }
