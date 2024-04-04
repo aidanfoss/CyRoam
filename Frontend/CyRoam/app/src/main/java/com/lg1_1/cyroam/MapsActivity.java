@@ -492,11 +492,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onCommentReceived(String comment) {
-
-    }
-
-    @Override
     public void onfredReqRecieved(String name) {
         //todo nick put it here
         //likely just edit the text box,
