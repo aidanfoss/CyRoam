@@ -4,6 +4,7 @@ import coms309.Comment.*;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class Pin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Comment> comments;
     private double x;
     private double y;
@@ -29,6 +30,7 @@ public class Pin {
         this.x = x;
         this.y = y;
         this.name = name;
+        comments = new ArrayList<>();
     }
 
     public Pin() {

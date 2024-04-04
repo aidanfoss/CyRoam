@@ -2,7 +2,6 @@ package coms309.Comment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Pin.*;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 public class Comment {
@@ -21,10 +20,11 @@ public class Comment {
     @JsonIgnore
     private Pin pin;
 
-    public Comment(long time, String text, Pin pin) {
-        this.time = time;
+    public Comment(String text, Pin pin) {
+        time = System.currentTimeMillis();
         this.text = text;
         this.pin = pin;
+        pin.getComments().add(this);
     }
 
     public Comment() {
