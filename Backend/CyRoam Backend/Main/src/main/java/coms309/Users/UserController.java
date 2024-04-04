@@ -98,8 +98,8 @@ public class UserController {
 
         for(User user : users){
             String username = user.getUsername();
-            //int score = user.getScore(); // change this to grab amount of pins discovered
-            UserScore userScoreObj = new UserScore(username, 5);
+            int score = user.getScore(); // change this to grab amount of pins discovered
+            UserScore userScoreObj = new UserScore(username, score);
             userScoreList.add(userScoreObj);
         }
 
