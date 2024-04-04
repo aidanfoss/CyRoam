@@ -1,13 +1,11 @@
 package coms309.Pin;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import coms309.Comment.*;
+import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonTypeId;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Pin {
@@ -15,6 +13,9 @@ public class Pin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Comment> comments;
     private double x;
     private double y;
     private String name;
@@ -29,6 +30,7 @@ public class Pin {
         this.x = x;
         this.y = y;
         this.name = name;
+        comments = new ArrayList<>();
     }
 
     public Pin() {
@@ -58,4 +60,11 @@ public class Pin {
         return name;
     }
 
+    public void addComment(Comment comment) {
+         comments.add(comment);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
 }
