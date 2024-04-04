@@ -353,11 +353,6 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
     }
 
     @Override
-    public void onCommentReceived(String comment) {
-
-    }
-
-    @Override
     public void onfredReqRecieved(String name) {
         createnotif(name);
     }
