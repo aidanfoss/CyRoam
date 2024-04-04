@@ -47,7 +47,6 @@ import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.websockets.WebSocketManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -72,6 +71,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private pinVolley pinVolley;
 
     private friendVolley friendVolley;
+
+    private AddFriends addFriends;
     private progressVolley progressVolley;
     private RequestQueue mQueue; // define volley request queue
 
@@ -175,8 +176,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);  // go to NewPinActivity
         });
         discoverButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, ProgressActivity.class);
-            startActivity(intent);  // go to NewPinActivity
+            Intent intent = new Intent(MapsActivity.this, PortalScreenActivity.class);
+            startActivity(intent);  // go to portal activity
         });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -360,8 +361,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * from the top of the class.
      */
     private void fillMap() {
+        String useURL = url + "/pins";
         Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins/" + String.valueOf(user.getID()), null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, useURL, null,
             response -> {
                 try {
                     //JSONObject jsonArray = response.getJSONObject("pins");
@@ -376,7 +378,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String name = jsonPin.getString("name");
                         String snippet = "temporary snippet";
                         String description = "temporary description";
-                        boolean discovered = false;
+                        boolean discovered = response.getBoolean(i);
 
                         //progressVolley.fetchProgress();
 
@@ -488,6 +490,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    @Override
+    public void onCommentReceived(String comment) {
+
+    }
+
     @Override
     public void onfredReqRecieved(String name) {
         //todo nick put it here
@@ -495,7 +503,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // similar to mine above using textView.append()
         //you can change the passed information. Right now, its just ID
         //youd have to change it here, in the webSocketListener, and in nickWebSocket
-
 
         friendVolley.addfriendsReq(name, user, new friendVolley.addFriendCallback() {
             @Override
