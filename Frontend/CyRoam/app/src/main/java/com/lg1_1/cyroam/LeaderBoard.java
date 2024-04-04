@@ -64,7 +64,7 @@ public class LeaderBoard extends AppCompatActivity {
     }
 
     private void worldChampionReq(){
-        String url = mainURL + "/friends/";
+        String url = mainURL + "/leaderBoard";
 
         //JsonObjectRequest request = new JsonObjectRequest(
         JsonArrayRequest request = new JsonArrayRequest(
@@ -79,13 +79,13 @@ public class LeaderBoard extends AppCompatActivity {
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         outputTextbox.setText("World Champions:\n");
-                        for (int i = 0; i < response.length(); i++){
+                        for (int i = 0; i < 5; i++){
                             JSONObject friendobj = response.getJSONObject(i);
                             //JSONObject friend = jsonArray.getJSONObject(i);
 
 
-                            String curUser = friendobj.getString("curUsername");
-                            int score = friendobj.getInt("friendUsername");
+                            String curUser = friendobj.getString("user");
+                            int score = friendobj.getInt("score");
                             String output = curUser + " " + score;
 
                             outputTextbox.append(curUser + ": " + score + "\n");

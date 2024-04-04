@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
-                String curUsername = "a";
+                String curUsername = "bossf";
                 String noLongerfriend = removefriend.getText().toString();
                 removefriend(curUsername, noLongerfriend);
 
