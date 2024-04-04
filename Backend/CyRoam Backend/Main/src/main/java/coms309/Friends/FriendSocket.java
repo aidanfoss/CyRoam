@@ -70,7 +70,7 @@ public class FriendSocket {
     private void friendAdded(String sender,String user) {
         try {
 
-            usernameSessionMap.get(user).getBasicRemote().sendText(sender + " added you as a friend!");
+            usernameSessionMap.get(user).getBasicRemote().sendText(sender);
 
         }
         catch (IOException e) {

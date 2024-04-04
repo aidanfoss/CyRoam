@@ -1,6 +1,7 @@
 package coms309.Friends;
 
 import coms309.Statistics.Statistics;
+import coms309.Users.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

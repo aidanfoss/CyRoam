@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -89,9 +91,22 @@ public class UserController {
     @ApiResponse(responseCode = "200", description = "list sent", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = User.class)) })
     @GetMapping(path = "/leaderBoard")
-    List<User> leaderBoard() {
+    List<UserScore> leaderBoard() {
 
-        return userInterface.findAll();
+        List<UserScore> userScoreList = new ArrayList<>();
+        List<User> users = userInterface.findAll();
+
+        for(User user : users){
+            String username = user.getUsername();
+            //int score = user.getScore(); // change this to grab amount of pins discovered
+            UserScore userScoreObj = new UserScore(username, 5);
+            userScoreList.add(userScoreObj);
+        }
+
+        // Sort userScoreList based on scores in descending order
+        userScoreList.sort((u1, u2) -> Integer.compare(u2.getScore(), u1.getScore()));
+
+        return userScoreList;
     }
 
 
