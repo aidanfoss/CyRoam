@@ -300,10 +300,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
 
-        /**
+        /*
          * @author Aidan Foss
          * Detects when a user clicks on a pin for more info
          * This is used for many reasons.
+         * here are the steps:
          * 1) Grab the pin ID
          * 2) send a progress update to the server for logging
          * 3) display the pin as activated (change the icon)
@@ -312,14 +313,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+                //1 grab pin ID (creates temporary pin object)
                 Pin clickPin = (Pin) Objects.requireNonNull(marker.getTag());
-                ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
-                //use clickPin information to send discovery information if relevant.
 
+                //2 send progress update
+                progressVolley.discoverPin(user.getID(), clickPin.getID(), new progressVolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean discovered) {
+                        ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+                    }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
+                    }
+                });
+
+                //3 change the icon on the map
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+
+                //4 move to pinInfoScreen
                 //create intent for more information screen
                 Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
                 intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
+                startActivity(intent);
             }
         });
 
