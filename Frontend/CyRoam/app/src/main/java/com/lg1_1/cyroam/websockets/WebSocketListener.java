@@ -8,6 +8,5 @@ import org.json.JSONObject;
  */
 public interface WebSocketListener {
     void onPinRecieved(int id);
-    void onCommentReceived(String comment);
     void onfredReqRecieved(String name);
 }
