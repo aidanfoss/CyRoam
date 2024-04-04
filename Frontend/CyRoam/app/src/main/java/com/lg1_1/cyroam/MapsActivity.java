@@ -231,7 +231,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.gMap = googleMap;
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-        gMap.setOnMarkerClickListener(this);
 
         fillMap(); //fills the map with relevant information
 
