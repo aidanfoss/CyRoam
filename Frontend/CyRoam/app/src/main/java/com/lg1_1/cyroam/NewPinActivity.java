@@ -14,7 +14,7 @@ import com.android.volley.RequestQueue;
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.websockets.WebSocketManager;
-import com.lg1_1.cyroam.websockets.aidanWebSocket;
+import com.lg1_1.cyroam.websockets.pinWebSocket;
 
 /**
  * Activity that creates a new pin using user inputs, then stores it in the database.
@@ -30,7 +30,7 @@ public class NewPinActivity extends AppCompatActivity {
     private Button newPinButton;
 
     private pinVolley volley; //init pinVolley class
-    private aidanWebSocket webSocket;
+    private pinWebSocket webSocket;
 
     /**
      *

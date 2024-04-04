@@ -11,8 +11,9 @@ import java.net.URISyntaxException;
 public class WebSocketManager {
     private static WebSocketManager instance;
     private boolean isConnected = false;
-
-    public aidanWebSocket aidanClient;
+    boolean isCommentConnected;
+    public pinWebSocket aidanClient;
+    public commentsWebSocket commentsClient;
     public nickWebSocket nickClient;
 
     private WebSocketManager(){
@@ -43,12 +44,24 @@ public class WebSocketManager {
 
     public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {
         if (!isConnected) {
-            aidanClient = new aidanWebSocket(wsurl + "/pins/socket", listener);
+            aidanClient = new pinWebSocket(wsurl + "/pins/socket", listener);
             aidanClient.connect();
             nickClient = new nickWebSocket(wsurl + "/friendSocket/" + username, listener);
             nickClient.connect();
             isConnected = true;
         }
+    }
+
+    public void openCommentConnection(int pinID, CommentListener listener) throws URISyntaxException {
+        if (!isCommentConnected) {
+            commentsClient = new commentsWebSocket(wsurl + "/pins/" + String.valueOf(pinID) + "/comments", listener);
+            commentsClient.connect();
+            isCommentConnected = true;
+        }
+    }
+
+    public void closeCommentConnection(){
+        commentsClient.close();
     }
 
     /**
@@ -85,7 +98,13 @@ public class WebSocketManager {
      * @return aidanClient Websocket for more specific use
      * likely to be renamed later to describe the websocket rather than author
      */
-    public aidanWebSocket aidanWS(){
+    public pinWebSocket aidanWS(){
         return aidanClient;
     }
+
+    /**
+     *
+     * @param text contains the text that is to be sent as a comment
+     */
+    public void sendComment(String text) {commentsClient.send(text);}
 }

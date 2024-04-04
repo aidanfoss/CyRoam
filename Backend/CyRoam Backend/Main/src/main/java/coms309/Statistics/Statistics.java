@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import coms309.Users.User;
+import jakarta.persistence.*;
 
 @Entity
 public class Statistics {
@@ -12,6 +15,11 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "uId")
+    @JsonIgnore
+    private User user;
     private int userId;
     private int numDiscoveredPins;
 
