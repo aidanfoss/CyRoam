@@ -242,6 +242,7 @@ public class FriendActivity extends AppCompatActivity {
             // and the fields should match with the object structure of @RequestBody on sb
             userInfo.put("curUsername", curUsername);
             userInfo.put("friendUsername", Newfriend);
+            //userInfo.put("getfriendStatus", true);
 
 
         } catch (Exception e){
