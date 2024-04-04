@@ -101,6 +101,19 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
                 }
             }
         });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteEditBox.getText() != null) {
+                    int numDel = Integer.parseInt(String.valueOf(deleteEditBox.getText()));
+                    WebSocketManager.getInstance().sendComment("del " + numDel);
+                    commentView.clearComposingText();
+                    WebSocketManager.getInstance().closeCommentConnection();
+                    startActivity(getIntent());
+                }
+            }
+        });
     }
 
     /**
@@ -114,5 +127,4 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         commentView.append(comment + "\n");
     }
     //activity that displays more info on the pin clicked, and has a comments box.
-
 }
