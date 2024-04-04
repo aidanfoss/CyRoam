@@ -1,9 +1,10 @@
 package coms309.Statistics;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import coms309.Pin.Pin;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Statistics {
@@ -12,13 +13,17 @@ public class Statistics {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userId;
-    private int pinId;
-    private boolean discovered;
+    private int numDiscoveredPins;
 
-    public Statistics(int userId, int pinId, boolean discovered) {
+
+    @JoinColumn(name = "pins")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Pin> pins;
+
+    public Statistics(int userId) {
         this.userId = userId;
-        this.pinId = pinId;
-        this.discovered = discovered;
+        this.numDiscoveredPins = 0;
+        pins = new ArrayList<>();
     }
 
     public Statistics() {
@@ -32,14 +37,6 @@ public class Statistics {
         return id;
     }
 
-    public void setDiscovered(boolean discovered) {
-        this.discovered = discovered;
-    }
-
-    public boolean isDiscovered() {
-        return discovered;
-    }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -48,11 +45,5 @@ public class Statistics {
         return userId;
     }
 
-    public void setPinId(int pinId) {
-        this.pinId = pinId;
-    }
 
-    public int getPinId() {
-        return pinId;
-    }
 }

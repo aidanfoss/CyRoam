@@ -1,6 +1,7 @@
 package coms309.Pin;
 
 import coms309.Comment.*;
+import coms309.Statistics.Statistics;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 
@@ -16,6 +17,9 @@ public class Pin {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<Comment> comments;
+
+    @ManyToMany
+    private List<Statistics> statistics;
     private double x;
     private double y;
     private String name;
