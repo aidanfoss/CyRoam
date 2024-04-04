@@ -361,7 +361,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private void fillMap() {
         Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins", null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins/" + String.valueOf(user.getID()), null,
             response -> {
                 try {
                     //JSONObject jsonArray = response.getJSONObject("pins");
@@ -377,6 +377,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String snippet = "temporary snippet";
                         String description = "temporary description";
                         boolean discovered = false;
+
+                        //progressVolley.fetchProgress();
 
                         Pin newPin = new Pin(x, y, name, snippet, description, id, discovered);
                         Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
