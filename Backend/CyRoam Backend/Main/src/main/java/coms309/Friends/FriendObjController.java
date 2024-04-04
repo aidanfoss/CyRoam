@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -27,12 +28,10 @@ public class FriendObjController {
     List<FriendObj> requestFriends(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
         //List<FriendObj>  trueFriends = null;
+
         List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
-        for(int i= 0; i< friends.size(); i++){
-            if(!friends.get(i).getfriendStatus()){
-                friends.remove(i);
-            }
-        }
+        friends.removeIf(friend -> !friend.getfriendStatus());
+
         return friends;
     }
 
@@ -44,11 +43,18 @@ public class FriendObjController {
 
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
-        if (friendUsername == null)
-            return null;
+        String curUsername = friendObj.getCurUsername();
+        FriendObj existingFriend = friendObjInterface.findByCurUsernameAndFriendUsername(curUsername,friendUsername);
         if(friendObj.getfriendStatus()==null){
             friendObj.setfriendStatus(true);
         }
+        if (existingFriend != null) {
+            // If a similar friend already exists, return it without saving a new one
+            return existingFriend;
+        }
+        if (friendUsername == null)
+            return null;
+
         friendObjInterface.save(friendObj);
         return friendObj;
 
@@ -57,20 +63,17 @@ public class FriendObjController {
     @Operation(summary = "deletes given friend object from database")
     @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = FriendObj.class)) })
-    @DeleteMapping(path = "/deleteFriend")
-    FriendObj deleteFriend(@RequestBody FriendObj passedFriendObj){
-        String passedfriendUsername = passedFriendObj.getFriendUsername();
-        String passedcurUsername = passedFriendObj.getCurUsername();
-
-
-        if (passedfriendUsername == null ||passedcurUsername== null) {
+    @DeleteMapping(path = "/deleteFriend/{passedcurUsername}/{passedfriendUsername}")
+    String deleteFriend(@PathVariable String passedcurUsername,@PathVariable String passedfriendUsername){
+       // String passedfriendUsername = passedFriendObj.getFriendUsername();
+       // String passedcurUsername = passedFriendObj.getCurUsername();
+        FriendObj existingFriendObj = friendObjInterface.findByCurUsernameAndFriendUsername(passedcurUsername, passedfriendUsername);
+        if (existingFriendObj == null) {
             return null;
         }
-        if(friendObjInterface.findByCurUsername(passedfriendUsername)==null){
-            return null;
-        }
-        friendObjInterface.delete(passedFriendObj);
-        return passedFriendObj;
+
+        friendObjInterface.delete(existingFriendObj);
+        return "deleted";
 
     }
     @Operation(summary = "update friend status ")
@@ -104,12 +107,9 @@ public class FriendObjController {
     List<FriendObj> friendRequests(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
         //List<FriendObj>  trueFriends = null;
-        List<FriendObj>  friends =friendObjInterface.findByCurUsername(username);
-        for(int i= 0; i< friends.size(); i++){
-            if(friends.get(i).getfriendStatus()){
-                friends.remove(i);
-            }
-        }
+        List<FriendObj>  friends =friendObjInterface.findByFriendUsername(username);
+
+        friends.removeIf(friend -> friend.getfriendStatus());
         return friends;
     }
 
