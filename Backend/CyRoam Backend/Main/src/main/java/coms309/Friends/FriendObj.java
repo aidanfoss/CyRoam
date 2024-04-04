@@ -1,5 +1,6 @@
 package coms309.Friends;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Users.User;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -20,9 +21,12 @@ public class FriendObj {
 //    private User user;
 
     //needs testing
-  //  @ManyToOne(cascade = CascadeType.ALL)
-   // @JoinColumn(name = "username")
-    private String curUsername;
+   @ManyToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "user_u_id")
+   @JsonIgnore
+   private User user;
+
+   private String curUsername;
 
     //private int friend_uId;
 
@@ -64,4 +68,12 @@ public class FriendObj {
     public Boolean getfriendStatus() {
         return friendStatus;
     }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
