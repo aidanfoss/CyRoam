@@ -31,8 +31,8 @@ public class Application {
     CommandLineRunner initUser(UserInterface userInterface) {
         return args -> {
             if (userInterface.count() == 0) {
-                User user1 = new User("bossf", "123");
-                User user2 = new User("Jane", "jane@somemail.com");
+                User user1 = new User("bossf", "123", 3);
+                User user2 = new User("Jane", "jane@somemail.com", 4);
 
                 userInterface.save(user1);
                 userInterface.save(user2);
