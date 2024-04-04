@@ -74,7 +74,6 @@ public class Application {
             if(commentsRepository.count() == 0) {
                 Comment example = new Comment("First!", pinRepository.findById(1));
                 commentsRepository.save(example);
-                pinRepository.findById(1).getComments().add(example);
             }
         };
     }
