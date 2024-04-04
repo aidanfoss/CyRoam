@@ -20,7 +20,6 @@ public class Statistics {
     @JoinColumn(name = "uId")
     @JsonIgnore
     private User user;
-    private int userId;
     private int numDiscoveredPins;
 
 
@@ -28,9 +27,8 @@ public class Statistics {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Pin> pins;
 
-    public Statistics(int userId) {
-        this.userId = userId;
-        this.numDiscoveredPins = 0;
+    public Statistics(int numDiscoveredPins) {
+        this.numDiscoveredPins = numDiscoveredPins;
         pins = new ArrayList<>();
     }
 
@@ -45,12 +43,16 @@ public class Statistics {
         return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public User getUserId() {
+        return user;
     }
 
-    public int getUserId() {
-        return userId;
+    public List<Pin> getPins() {
+        return pins;
+    }
+
+    public void setNumDiscoveredPins(int numDiscoveredPins) {
+        this.numDiscoveredPins = numDiscoveredPins;
     }
 
 

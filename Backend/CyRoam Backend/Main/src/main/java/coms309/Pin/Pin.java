@@ -2,6 +2,7 @@ package coms309.Pin;
 
 import coms309.Comment.*;
 import coms309.Statistics.Statistics;
+import coms309.Users.User;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 
@@ -23,6 +24,9 @@ public class Pin {
     private double x;
     private double y;
     private String name;
+
+    @ManyToMany
+    private List<User> users;
 
     public void setId(int id) {
         this.id = id;

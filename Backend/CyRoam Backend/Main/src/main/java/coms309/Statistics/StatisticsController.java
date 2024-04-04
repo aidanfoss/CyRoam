@@ -2,6 +2,7 @@ package coms309.Statistics;
 
 import java.util.List;
 
+import coms309.Pin.Pin;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -35,6 +36,8 @@ class StatisticsController {
         return statisticsRepository.findById(id);
     }
 
+
+
     @Operation(summary = "Create a Statistics object")
     @ApiResponse(responseCode = "200", description = "Successfully created Statistics object", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Statistics.class)) })
@@ -45,4 +48,5 @@ class StatisticsController {
             return statistics;
         }
 
-}
+
+    }
