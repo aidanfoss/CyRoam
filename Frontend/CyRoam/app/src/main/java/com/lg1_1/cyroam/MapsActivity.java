@@ -377,7 +377,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String name = jsonPin.getString("name");
                         String snippet = "temporary snippet";
                         String description = "temporary description";
-                        boolean discovered = jsonPin.getBoolean("isDiscovered");
+                        boolean discovered = response.getBoolean(i);
 
                         //progressVolley.fetchProgress();
 
