@@ -20,6 +20,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".aidansActivities.PinInformationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MapsActivity"/>
+        </activity>
+        <activity
             android:name=".LeaderBoard"
             android:exported="false" />
         <activity
