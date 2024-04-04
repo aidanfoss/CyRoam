@@ -361,7 +361,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * from the top of the class.
      */
     private void fillMap() {
-        String useURL = url + "/pins";
+        String useURL = url + "/user/1/pins";
         Log.v(TAG, "fillMap() called");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, useURL, null,
             response -> {
