@@ -43,11 +43,18 @@ public class FriendObjController {
 
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
-        if (friendUsername == null)
-            return null;
+        String curUsername = friendObj.getCurUsername();
+        FriendObj existingFriend = friendObjInterface.findByCurUsernameAndFriendUsername(curUsername,friendUsername);
         if(friendObj.getfriendStatus()==null){
             friendObj.setfriendStatus(true);
         }
+        if (existingFriend != null) {
+            // If a similar friend already exists, return it without saving a new one
+            return existingFriend;
+        }
+        if (friendUsername == null)
+            return null;
+
         friendObjInterface.save(friendObj);
         return friendObj;
 
