@@ -338,6 +338,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(intent);
             }
         });
+        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                //gMap.moveCamera(CameraUpdateFactory.newLatLng());
+                //todo fix the weird camera movement when clicking on a pin on the map
+                return false;
+            }
+        });
 
     }
 
