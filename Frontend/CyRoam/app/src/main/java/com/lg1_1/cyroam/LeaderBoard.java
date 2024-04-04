@@ -52,7 +52,7 @@ public class LeaderBoard extends AppCompatActivity {
         animationDrawable.start();
         backButton2 = findViewById(R.id.Leaderboardout);
         outputTextbox = findViewById(R.id.LeaderBoardInsertText);
-
+        worldChampionReq();
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class LeaderBoard extends AppCompatActivity {
 
 
                             String curUser = friendobj.getString("curUsername");
-                            String score = friendobj.getString("friendUsername");
+                            int score = friendobj.getInt("friendUsername");
                             String output = curUser + " " + score;
 
                             outputTextbox.append(curUser + ": " + score + "\n");
