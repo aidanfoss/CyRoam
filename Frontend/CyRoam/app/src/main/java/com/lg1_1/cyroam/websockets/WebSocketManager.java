@@ -12,7 +12,7 @@ public class WebSocketManager {
     private static WebSocketManager instance;
     private boolean isConnected = false;
     boolean isCommentConnected;
-    public aidanWebSocket aidanClient;
+    public pinWebSocket aidanClient;
     public commentsWebSocket commentsClient;
     public nickWebSocket nickClient;
 
@@ -44,7 +44,7 @@ public class WebSocketManager {
 
     public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {
         if (!isConnected) {
-            aidanClient = new aidanWebSocket(wsurl + "/pins/socket", listener);
+            aidanClient = new pinWebSocket(wsurl + "/pins/socket", listener);
             aidanClient.connect();
             nickClient = new nickWebSocket(wsurl + "/friendSocket/" + username, listener);
             nickClient.connect();
@@ -98,7 +98,7 @@ public class WebSocketManager {
      * @return aidanClient Websocket for more specific use
      * likely to be renamed later to describe the websocket rather than author
      */
-    public aidanWebSocket aidanWS(){
+    public pinWebSocket aidanWS(){
         return aidanClient;
     }
 }
