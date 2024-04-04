@@ -1,6 +1,8 @@
 package coms309.Users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Friends.FriendObj;
+import coms309.Pin.Pin;
 import coms309.Statistics.Statistics;
 import jakarta.persistence.*;
 
@@ -23,8 +25,13 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY)
     private List<FriendObj> friends;
 
+    @JsonIgnore
     @OneToOne
     private Statistics stats;
+
+    @JoinColumn(name = "pins")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Pin> pins;
 
     //contructor
     public User(String username, String password, int score) {
@@ -32,7 +39,6 @@ public class User {
         this.password = password;
         this.score = score;
         friends = new ArrayList<>();
-
     }
     public User()
     {
@@ -78,5 +84,15 @@ public class User {
         this.friends.add(phone);
     }
 
+    public Statistics getStatistics() {
+        return stats;
+    }
 
+    public void setStatistics(Statistics stats) {
+        this.stats = stats;
+    }
+
+    public List<Pin> getPins() {
+        return pins;
+    }
 }

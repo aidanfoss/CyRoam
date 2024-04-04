@@ -30,11 +30,14 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
     private final String TAG = "PinInfoActivity";
     private TextView pinInfo;
     private TextView commentView;
-    private Button backButton;
+    private Button deleteButton;
     private Button sendButton;
     private EditText commentSendBox;
+    private EditText deleteEditBox;
     private int passedPinId;
     private pinVolley pinVolley;
+    boolean adminPerms;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,13 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         //define UI
         commentView = findViewById(R.id.pinCommentText);
         pinInfo = findViewById(R.id.pinInfoText);
-        backButton = findViewById(R.id.pinInfoBackButton);
         sendButton = findViewById(R.id.pinInfoSendComment);
         commentSendBox = findViewById(R.id.pinInfoCommentEditText);
+        deleteButton = findViewById(R.id.pinInfoDelComButton);
+        deleteEditBox = findViewById(R.id.pinInfoIDDeleteTextBox);
+
+        deleteButton.setVisibility(View.INVISIBLE);
+        deleteEditBox.setVisibility(View.INVISIBLE);
 
         this.pinVolley = new pinVolley(this);
 
@@ -57,6 +64,13 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         try {
             if (extras != null) {
                 passedPinId = extras.getInt("ID");
+                adminPerms = true;
+
+                if (adminPerms){
+                    deleteButton.setVisibility(View.VISIBLE);
+                    deleteEditBox.setVisibility(View.VISIBLE);
+                }
+
                 pinVolley.fetchPinData(passedPinId, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
@@ -76,14 +90,6 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebSocketManager.getInstance().closeCommentConnection();
-                Intent intent = new Intent(PinInformationActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +98,19 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
                     String comment = String.valueOf(commentSendBox.getText());
                     WebSocketManager.getInstance().sendComment(comment);
                     commentView.append(comment + "\n");
+                }
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (deleteEditBox.getText() != null) {
+                    int numDel = Integer.parseInt(String.valueOf(deleteEditBox.getText()));
+                    WebSocketManager.getInstance().sendComment("del " + numDel);
+                    commentView.clearComposingText();
+                    WebSocketManager.getInstance().closeCommentConnection();
+                    startActivity(getIntent());
                 }
             }
         });
@@ -108,5 +127,4 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         commentView.append(comment + "\n");
     }
     //activity that displays more info on the pin clicked, and has a comments box.
-
 }

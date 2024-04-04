@@ -15,10 +15,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +41,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings2);
+
         backbuttontoportal = findViewById(R.id.settingsbackbutton);
         removeButton =  findViewById(R.id.settingssearchbutton);
         removefriend = findViewById(R.id.settingtextInputEdit);
@@ -60,8 +62,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
+                String curUsername = "bossf";
                 String noLongerfriend = removefriend.getText().toString();
-                //removefriend(String curUsername,String noLongerfriend);
+                removefriend(curUsername, noLongerfriend);
 
             }
         });
@@ -74,10 +77,10 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void removefriend(String curUsername,String Newfriend){
-        String url = mainURL + "/deleteFriend";
+        String url = mainURL + "/deleteFriend/" + curUsername + "/" + Newfriend;
 
         // Convert input to JSONObject
-        JSONObject userInfo = new JSONObject();
+        /*JSONObject userInfo = new JSONObject();
         try{
 
             // etRequest should contain a JSON object string as your POST body
@@ -90,16 +93,16 @@ public class SettingsActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-
+        */
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.DELETE,
                 url,
-                userInfo,
+                null,
                 response -> {
                     try{
 
 
-                        JSONArray jsonArray = response.getJSONArray("addfriend");
+                        JSONArray jsonArray = response.getJSONArray("deleteFriend");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
                         // for (int i = 0; i < jsonArray.length(); i++){
