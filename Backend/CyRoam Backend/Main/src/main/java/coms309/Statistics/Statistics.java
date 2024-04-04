@@ -1,9 +1,13 @@
 package coms309.Statistics;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import coms309.Pin.Pin;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import coms309.Users.User;
+import jakarta.persistence.*;
 
 @Entity
 public class Statistics {
@@ -11,14 +15,21 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int userId;
-    private int pinId;
-    private boolean discovered;
 
-    public Statistics(int userId, int pinId, boolean discovered) {
-        this.userId = userId;
-        this.pinId = pinId;
-        this.discovered = discovered;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "uId")
+    @JsonIgnore
+    private User user;
+    private int numDiscoveredPins;
+
+
+    @JoinColumn(name = "pins")
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Pin> pins;
+
+    public Statistics(int numDiscoveredPins) {
+        this.numDiscoveredPins = numDiscoveredPins;
+        pins = new ArrayList<>();
     }
 
     public Statistics() {
@@ -32,27 +43,17 @@ public class Statistics {
         return id;
     }
 
-    public void setDiscovered(boolean discovered) {
-        this.discovered = discovered;
+    public User getUserId() {
+        return user;
     }
 
-    public boolean isDiscovered() {
-        return discovered;
+    public List<Pin> getPins() {
+        return pins;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setNumDiscoveredPins(int numDiscoveredPins) {
+        this.numDiscoveredPins = numDiscoveredPins;
     }
 
-    public int getUserId() {
-        return userId;
-    }
 
-    public void setPinId(int pinId) {
-        this.pinId = pinId;
-    }
-
-    public int getPinId() {
-        return pinId;
-    }
 }

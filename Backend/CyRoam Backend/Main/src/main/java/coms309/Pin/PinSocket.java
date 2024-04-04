@@ -27,9 +27,10 @@ public class PinSocket {
     private final Logger logger = LoggerFactory.getLogger(PinSocket.class);
 
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session) throws IOException {
         if (sessions == null) {
             sessions = new ArrayList<>();
+            pinRepository.save(new Pin(4, 4, "test"));
         }
         logger.info("onOpen Started");
         logger.info("Session " + session.getId() + " connected");
