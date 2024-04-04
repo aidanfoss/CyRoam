@@ -60,7 +60,7 @@ public class FriendsActivity extends AppCompatActivity {
 
         ListView mViewList = (ListView) findViewById(R.id.listvire);
         //ArrayList<Friend> list2 = new ArrayList<>();
-        String curUsername ="bossf";
+        String curUsername ="a";
         findfriendsReq(curUsername);
 
         //ArrayList<Friend> list = new ArrayList<>();

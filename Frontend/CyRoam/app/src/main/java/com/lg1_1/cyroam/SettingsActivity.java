@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* when signup button is pressed, use intent to switch to Signup Activity */
-                String curUsername = "bossf";
+                String curUsername = "a";
                 String noLongerfriend = removefriend.getText().toString();
                 removefriend(curUsername, noLongerfriend);
 
@@ -77,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
     private void removefriend(String curUsername,String Newfriend){
-        String url = mainURL + "/deleteFriend" + curUsername + "/" + Newfriend;
+        String url = mainURL + "/deleteFriend/" + curUsername + "/" + Newfriend;
 
         // Convert input to JSONObject
         /*JSONObject userInfo = new JSONObject();

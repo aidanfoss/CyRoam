@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
 import com.lg1_1.cyroam.R;
 
@@ -50,7 +51,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend>  {
 
     public View getView(int position, View convert, ViewGroup parent){
 
-
+        queue = Volley.newRequestQueue(this.getContext());
 
 
         String name = getItem(position).getName();
@@ -69,19 +70,21 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend>  {
         //String str1 = Integer.toString(score);
         //String str2 = Integer.toString(Id);
         user.setText("Friend: "+name);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Logic goes here
-                String CurUser = "bossf";
+                String CurUser = "a";
 
-                /*
-                *String CurUser = use.getUsername();
-                */
+
+                //String CurUser = use.getUsername();
+
                 addfriends(CurUser,name);
-                user.setText(":3");
+                //user.setText(":3");
             }
         });
+
 
 
         return convert;

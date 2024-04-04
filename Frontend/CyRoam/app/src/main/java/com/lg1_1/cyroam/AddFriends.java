@@ -27,11 +27,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.util.Friend;
 import com.lg1_1.cyroam.util.FriendsAddListAdapter;
-import com.lg1_1.cyroam.util.FriendsListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,15 +69,16 @@ public class AddFriends extends AppCompatActivity {
     private EditText usernameEditText;
     private RequestQueue queue;
 
-    ArrayList<Friend> list = new ArrayList<>();
+    ArrayList<Friend> list2 = new ArrayList<>();
     /**
      * @author Nicholas Kirschbaum
      * prints out screen with button on it(more in the works)
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         queue = Volley.newRequestQueue(this);
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_friends);
         ConstraintLayout constraintLayout = findViewById(R.id.main2);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
@@ -93,15 +94,17 @@ public class AddFriends extends AppCompatActivity {
         usernameEditText = findViewById(R.id.FriendSearch);
 
         ListView mViewList = (ListView) findViewById(R.id.listView2);
-
-        Friend one = new Friend("John", 32, 23);
-        Friend two = new Friend("steve", 32, 23);
-        list.add(one);
-        list.add(two);
+        //ArrayList<Friend> list = new ArrayList<>();
+        String curUsername ="a";
+        findfriendsReq(curUsername);
+       // Friend one = new Friend("John", 32, 23);
+       // Friend two = new Friend("steve", 32, 23);
+       //list.add(one);
+        //list.add(two);
 
         //get list of friends here
-        FriendsAddListAdapter friendsListAdapter = new FriendsAddListAdapter(this, R.layout.format2_listview, list);
-        mViewList.setAdapter((ListAdapter) friendsListAdapter);
+       // FriendsAddListAdapter friendsListAdapter = new FriendsAddListAdapter(this, R.layout.format2_listview, list);
+       // mViewList.setAdapter((ListAdapter) friendsListAdapter);
 
 
 
@@ -139,8 +142,8 @@ public class AddFriends extends AppCompatActivity {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("curUsername", curUsername);
-            userInfo.put("friendUsername", Newfriend);
+            userInfo.put("curUsername", Newfriend);
+            userInfo.put("friendUsername", curUsername);
 
 
         } catch (Exception e){
@@ -251,10 +254,78 @@ public class AddFriends extends AppCompatActivity {
 
     }
 
-    private void initializeListAdapter() {
-        FriendsListAdapter friendsListAdapter = new FriendsListAdapter(this, R.layout.format2_listview, list);
+    private void findfriendsReq(String curUsername){
+        String url = mainURL + "/friendRequests/" + curUsername;
+
+        //JsonObjectRequest request = new JsonObjectRequest(
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                //userInfo,
+                response -> {
+                    try{
+                        //JSONArray jsonArray = response.getJSONArray(6);
+                        list2.clear();
+                        // List<JSONObject> list = response.getJSONArray("friends");
+                        Log.i(TAG, "request success");
+                        //outputtext.setText(curUsername + " Friends:\n");
+                        Friend nice = new Friend("ryan", 0, 10000);
+                        list2.add(nice);
+                        for (int i = 0; i < response.length(); i++){
+                            JSONObject friendobj = response.getJSONObject(i);
+                            //JSONObject friend = jsonArray.getJSONObject(i);
+
+
+                            String curUser = friendobj.getString("curUsername");
+                            String friendUser = friendobj.getString("friendUsername");
+                            //output = curUser + " " + friendUser;
+                            Friend free = new Friend(friendUser, 0, 10000+i);
+                            list2.add(free);
+                            //outputtext.append(friendUser + "\n");
+                            Log.i(TAG, curUser);
+
+
+                        }
+                        initializeListAddAdapter();
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    // output = response.toString();
+
+                },
+                error -> {
+                    Log.e(TAG,error.getMessage());
+                    // tvResponse.setText(error.getMessage());
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+                //                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //                params.put("param1", "value1");
+                //                params.put("param2", "value2");
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
+    private void initializeListAddAdapter() {
+        FriendsAddListAdapter friendsListAdapter = new FriendsAddListAdapter(this, R.layout.format2_listview, list2);
         ListView mViewList = findViewById(R.id.listView2);
-        mViewList.setAdapter(friendsListAdapter);
+        mViewList.setAdapter((ListAdapter) friendsListAdapter);
     }
 
 
