@@ -30,11 +30,14 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
     private final String TAG = "PinInfoActivity";
     private TextView pinInfo;
     private TextView commentView;
-    private Button backButton;
+    private Button deleteButton;
     private Button sendButton;
     private EditText commentSendBox;
+    private EditText deleteEditBox;
     private int passedPinId;
     private pinVolley pinVolley;
+    boolean adminPerms;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,11 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         pinInfo = findViewById(R.id.pinInfoText);
         sendButton = findViewById(R.id.pinInfoSendComment);
         commentSendBox = findViewById(R.id.pinInfoCommentEditText);
+        deleteButton = findViewById(R.id.pinInfoDelComButton);
+        deleteEditBox = findViewById(R.id.pinInfoIDDeleteTextBox);
+
+        deleteButton.setVisibility(View.INVISIBLE);
+        deleteEditBox.setVisibility(View.INVISIBLE);
 
         this.pinVolley = new pinVolley(this);
 
@@ -56,6 +64,13 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         try {
             if (extras != null) {
                 passedPinId = extras.getInt("ID");
+                adminPerms = true;
+
+                if (adminPerms){
+                    deleteButton.setVisibility(View.VISIBLE);
+                    deleteEditBox.setVisibility(View.VISIBLE);
+                }
+
                 pinVolley.fetchPinData(passedPinId, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
