@@ -176,8 +176,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);  // go to NewPinActivity
         });
         discoverButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, ProgressActivity.class);
-            startActivity(intent);  // go to NewPinActivity
+            Intent intent = new Intent(MapsActivity.this, PortalScreenActivity.class);
+            startActivity(intent);  // go to portal activity
         });
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
@@ -361,8 +361,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * from the top of the class.
      */
     private void fillMap() {
+        String useURL = url + "/pins";
         Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins/" + String.valueOf(user.getID()), null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, useURL, null,
             response -> {
                 try {
                     //JSONObject jsonArray = response.getJSONObject("pins");
@@ -377,7 +378,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String name = jsonPin.getString("name");
                         String snippet = "temporary snippet";
                         String description = "temporary description";
-                        boolean discovered = false;
+                        boolean discovered = response.getBoolean(i);
 
                         //progressVolley.fetchProgress();
 
