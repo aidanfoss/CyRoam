@@ -47,7 +47,6 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         //define UI
         commentView = findViewById(R.id.pinCommentText);
         pinInfo = findViewById(R.id.pinInfoText);
-        backButton = findViewById(R.id.pinInfoBackButton);
         sendButton = findViewById(R.id.pinInfoSendComment);
         commentSendBox = findViewById(R.id.pinInfoCommentEditText);
 
@@ -76,14 +75,6 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WebSocketManager.getInstance().closeCommentConnection();
-                Intent intent = new Intent(PinInformationActivity.this, MapsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
