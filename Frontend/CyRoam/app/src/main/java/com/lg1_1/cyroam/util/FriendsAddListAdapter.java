@@ -272,12 +272,6 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
     public void onPinRecieved(int id) {
 
     }
-
-    @Override
-    public void onCommentReceived(String comment) {
-
-    }
-
     @Override
     public void onfredReqRecieved(String name) {
 
