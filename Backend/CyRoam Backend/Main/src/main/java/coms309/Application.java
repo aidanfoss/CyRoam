@@ -31,8 +31,8 @@ public class Application {
     CommandLineRunner initUser(UserInterface userInterface) {
         return args -> {
             if (userInterface.count() == 0) {
-                User user1 = new User("bossf", "123");
-                User user2 = new User("Jane", "jane@somemail.com");
+                User user1 = new User("bossf", "123", 3);
+                User user2 = new User("Jane", "jane@somemail.com", 4);
 
                 userInterface.save(user1);
                 userInterface.save(user2);
@@ -82,10 +82,10 @@ public class Application {
     CommandLineRunner initStatistics(StatisticsRepository statisticsRepository) {
         return args -> {
             if (statisticsRepository.count() == 0) {
-                Statistics example = new Statistics(1, 1, false);
-                Statistics example2 = new Statistics(2, 1, false);
-                statisticsRepository.save(example);
-                statisticsRepository.save(example2);
+               // Statistics example = new Statistics(1, 1, false);
+                //Statistics example2 = new Statistics(2, 1, false);
+               // statisticsRepository.save(example);
+               // statisticsRepository.save(example2);
             }
         };
     }

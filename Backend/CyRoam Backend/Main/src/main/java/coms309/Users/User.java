@@ -17,6 +17,8 @@ public class User {
     private String username;
     private String password;
 
+    private int score;
+
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<FriendObj> friends;
@@ -25,9 +27,10 @@ public class User {
     private Statistics stats;
 
     //contructor
-    public User(String username, String password) {
+    public User(String username, String password, int score) {
         this.username = username;
         this.password = password;
+        this.score = score;
         friends = new ArrayList<>();
 
     }
@@ -42,6 +45,10 @@ public class User {
 
     public void setId(int uId){
         this.uId = uId;
+    }
+
+    public int getScore(){
+        return score;
     }
 
     public String getUsername(){
