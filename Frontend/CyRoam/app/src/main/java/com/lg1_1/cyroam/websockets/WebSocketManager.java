@@ -101,4 +101,10 @@ public class WebSocketManager {
     public pinWebSocket aidanWS(){
         return aidanClient;
     }
+
+    /**
+     *
+     * @param text contains the text that is to be sent as a comment
+     */
+    public void sendComment(String text) {commentsClient.send(text);}
 }

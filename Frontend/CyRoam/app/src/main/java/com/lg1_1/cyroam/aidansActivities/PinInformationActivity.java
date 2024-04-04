@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,8 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
     private TextView pinInfo;
     private TextView commentView;
     private Button backButton;
+    private Button sendButton;
+    private EditText commentSendBox;
     private int passedPinId;
     private pinVolley pinVolley;
     @SuppressLint("MissingInflatedId")
@@ -38,10 +41,15 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin_info);
 
-        //define text boxes
+        //grab user information
+
+
+        //define UI
         commentView = findViewById(R.id.pinCommentText);
         pinInfo = findViewById(R.id.pinInfoText);
         backButton = findViewById(R.id.pinInfoBackButton);
+        sendButton = findViewById(R.id.pinInfoSendComment);
+        commentSendBox = findViewById(R.id.pinInfoCommentEditText);
 
         this.pinVolley = new pinVolley(this);
 
@@ -76,6 +84,17 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
                 startActivity(intent);
             }
         });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (commentSendBox.getText() != null){
+                    String comment = String.valueOf(commentSendBox.getText());
+                    WebSocketManager.getInstance().sendComment(comment);
+                    commentView.append(comment + "\n");
+                }
+            }
+        });
     }
 
     /**
@@ -86,7 +105,7 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
     @Override
     public void onCommentReceived(String comment) {
         Log.v(TAG,"Comment Received in PinInfoActivity");
-        commentView.append(comment);
+        commentView.append(comment + "\n");
     }
     //activity that displays more info on the pin clicked, and has a comments box.
 
