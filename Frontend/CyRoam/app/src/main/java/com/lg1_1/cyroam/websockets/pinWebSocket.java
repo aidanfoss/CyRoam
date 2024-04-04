@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
  * @author Aidan Foss
  * recieves pin ID's which are immediately used in MapsActivity to display newly created pins live
  */
-public class aidanWebSocket extends WebSocketClient{
+public class pinWebSocket extends WebSocketClient{
     private final String TAG = "Aidan Websocket";
     private WebSocketListener webSocketListener;
 
@@ -25,7 +25,7 @@ public class aidanWebSocket extends WebSocketClient{
      * @param listener import listener (typically will be this)
      * @throws URISyntaxException to prevent errors
      */
-    public aidanWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException{
+    public pinWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException{
         super(new URI(serverUri));
         this.webSocketListener = listener;
     }

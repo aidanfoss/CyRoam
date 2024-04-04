@@ -1,5 +1,7 @@
 package coms309;
 
+import coms309.Comment.Comment;
+import coms309.Comment.CommentsRepository;
 import coms309.Friends.FriendObj;
 import coms309.Friends.FriendObjInterface;
 import coms309.Statistics.Statistics;
@@ -41,9 +43,9 @@ public class Application {
     CommandLineRunner initFriend(FriendObjInterface friendObjInterface) {
         return args -> {
             if (friendObjInterface.count() == 0) {
-                FriendObj friendObj1 = new FriendObj("bossf", "zach");
-                FriendObj friendObj2 = new FriendObj("Jane", "poop");
-                FriendObj friendObj3 = new FriendObj("bossf", "stinky");
+                FriendObj friendObj1 = new FriendObj("bossf", "zach",true);
+                FriendObj friendObj2 = new FriendObj("Jane", "poop",true);
+                FriendObj friendObj3 = new FriendObj("bossf", "stinky",true);
 
                 friendObjInterface.save(friendObj1);
                 friendObjInterface.save(friendObj2);
@@ -67,14 +69,19 @@ public class Application {
     }
 
     @Bean
-    CommandLineRunner initProgress(StatisticsRepository statisticsRepository) {
+    CommandLineRunner initComments(CommentsRepository commentsRepository, PinRepository pinRepository) {
         return args -> {
-            if (statisticsRepository.count() == 0) {
-                Statistics example = new Statistics(1, 1, false);
-                Statistics example2 = new Statistics(2, 1, false);
-                statisticsRepository.save(example);
-                statisticsRepository.save(example2);
+            if(commentsRepository.count() == 0) {
+                Comment example = new Comment("First!", pinRepository.findById(1));
+                commentsRepository.save(example);
             }
+        };
+    }
+
+    @Bean
+    CommandLineRunner initStatistics(StatisticsRepository statisticsRepository) {
+        return args -> {
+
         };
     }
 

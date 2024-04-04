@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.util.User;
 import com.lg1_1.cyroam.volley.friendVolley;
@@ -56,9 +57,10 @@ import java.util.Objects;
  * Hub Activity; displays map, pins, info, friend requests and stores most info
  * @author Aidan Foss
  */
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
+    private Bundle extras;
     private User user;
 
     private TextView textView;
@@ -113,11 +115,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
+        //gather extras
+        extras = getIntent().getExtras();
+        if (extras.containsKey("username")){
+            user = new User(
+                    extras.getString("username"),
+                    extras.getString("password"),
+                    extras.getInt("userID"));
+        } else if (!extras.containsKey("username")){
+            user = new User("failSafe", "failSafe", -1);
+            Log.w(TAG + "USERINFO", "Invalid passed information, using failSafe user");
+        }
+
         //initialize websocketManager
         try {
             Log.v(TAG, "onCreate Websocket Try");
             WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
         } catch (URISyntaxException e) {
+            Log.w(TAG, "onCreate WebSocket Fail");
             throw new RuntimeException(e);
         }
 
@@ -217,21 +232,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.gMap = googleMap;
         gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(12));
-        gMap.setOnMarkerClickListener(this);
 
         fillMap(); //fills the map with relevant information
 
 
         //Following statement and if/else check for user information or any passed pin information.
         //Its in onMap because of the pin information
-        Bundle extras = getIntent().getExtras(); //call that checks for passed information
         if (extras == null) {
             Log.i(TAG, "extras, missing any passed information");
             //make debug user, likely name aaa, password bbb, any relevant info
         } else {
             Log.i(TAG, "extras != null");
             if (extras.containsKey("message")) {
-                textView.append("\n" + extras.getString("message"));
+                textView.append(extras.getString("message")+ "\n");
             }
             if (extras.containsKey("username")){
                 user = new User(
@@ -244,12 +257,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
 //            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
             if (extras.containsKey("discovered")) { //discover response
-                textView.append("\n Pin with ID " + extras.getInt("pinId") + " discovered: " + extras.getBoolean("discovered"));
+                textView.append("Pin with ID " + extras.getInt("pinId") + " discovered: " + extras.getBoolean("discovered")+ "\n");
                 progressVolley.fetchProgress(extras.getInt("pinId"), new progressVolley.VolleyCallbackGet() {
                     @Override
                     public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
                         Log.d(TAG, "Progress Get Req: " + pinId + " " + userId + " " + discovered);
-                        textView.append("\nProgress Data Received Via Volley Get Request: " + pinId + " " + userId + " " + discovered);
+                        textView.append("Progress Data Received Via Volley Get Request: " + pinId + " " + userId + " " + discovered+ "\n");
                     }
 
                     @Override
@@ -259,7 +272,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
             }
             if (extras.containsKey("LATITUDE")) { //newpin response
-                textView.append("\n New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")");
+                textView.append("New Pin Created with values: (" + extras.getString("NAME") + ", " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")\n");
             }
             if (extras.containsKey("PINID")) {
                 int pinID = extras.getInt("PINID");
@@ -271,23 +284,69 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
-                        textView.append("\nPin Data Received Via Volley Get Request: " + pin.getDebugDescription());
+                        textView.append("Pin Data Received Via Volley Get Request: " + pin.getDebugDescription()+ "\n");
                         Log.d(TAG, "Pin Get Req: " + pin.getDebugDescription());
                     }
 
                     @Override
                     public void onFailure(String errorMessage) {
-                        textView.append("\n get request failed for pin ID " + pinID);
+                        textView.append("Get request failed for pin ID " + pinID+ "\n");
                         Log.e(TAG, "fetchPinData error: " + errorMessage);
                     }
                 });
                 WebSocketManager.getInstance().sendAidan(String.valueOf(pinID));
             }
             if (extras.containsKey("LoginSuccess")) {
-                textView.append("\n Login with value (" + extras.getBoolean("LoginSuccess") + ")");
+                textView.append("Login with value (" + extras.getBoolean("LoginSuccess") + ")\n");
             }
-        } //Todo repurpose this block of code to receive login information from nick
+        }
 
+        /*
+         * @author Aidan Foss
+         * Detects when a user clicks on a pin for more info
+         * This is used for many reasons.
+         * here are the steps:
+         * 1) Grab the pin ID
+         * 2) send a progress update to the server for logging
+         * 3) display the pin as activated (change the icon)
+         * 4) go to a more detailed screen for the clicked pin
+         */
+        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(@NonNull Marker marker) {
+                //1 grab pin ID (creates temporary pin object)
+                Pin clickPin = (Pin) Objects.requireNonNull(marker.getTag());
+
+                //2 send progress update
+                progressVolley.discoverPin(user.getID(), clickPin.getID(), new progressVolley.VolleyCallback() {
+                    @Override
+                    public void onSuccess(boolean discovered) {
+                        ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+                    }
+                    @Override
+                    public void onFailure(String errorMessage) {
+                        Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
+                    }
+                });
+
+                //3 change the icon on the map
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+
+                //4 move to pinInfoScreen
+                //create intent for more information screen
+                Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
+                intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
+                startActivity(intent);
+            }
+        });
+        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                //gMap.moveCamera(CameraUpdateFactory.newLatLng());
+                //todo fix the weird camera movement when clicking on a pin on the map
+                return false;
+            }
+        });
 
     }
 
@@ -303,56 +362,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     private void fillMap() {
         Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins", null,
-                response -> {
-                    try {
-                        //JSONObject jsonArray = response.getJSONObject("pins");
-                        Log.d(TAG + "volley", "request success");
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/pins/" + String.valueOf(user.getID()), null,
+            response -> {
+                try {
+                    //JSONObject jsonArray = response.getJSONObject("pins");
+                    Log.d(TAG + "volley", "request success");
 
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject pin = response.getJSONObject(i);
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonPin = response.getJSONObject(i);
 
-                            int id = pin.getInt("id");
-                            double x = pin.getDouble("x");
-                            double y = pin.getDouble("y");
-                            String name = pin.getString("name");
-                            String description = "temporary description";
-                            boolean discoveredOut = false;
+                        int id = jsonPin.getInt("id");
+                        double x = jsonPin.getDouble("x");
+                        double y = jsonPin.getDouble("y");
+                        String name = jsonPin.getString("name");
+                        String snippet = "temporary snippet";
+                        String description = "temporary description";
+                        boolean discovered = false;
 
-                            Pin newPin = new Pin(x, y, name, description, id, discoveredOut);
-                            Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
-                            if (newPin.isDiscovered()) {
-                                Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
-                                Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                        .position(newPin.getPos())
-                                        .title(newPin.getName())
-                                        .snippet(newPin.getDescription())
-                                        .icon(BitmapDescriptorFactory.defaultMarker())
-                                );
-                                assert marker != null;
-                                marker.setTag(newPin);
-                            } else {
-                                Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
-                                Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                        .position(newPin.getPos())
-                                        .title(newPin.getName())
-                                        .snippet(newPin.getDescription())
-                                        .icon(smallUndiscoveredIcon)
-                                );
-                                marker.setIcon(smallUndiscoveredIcon);
-                                Log.e(TAG + "discover", "test");
-                                marker.setTag(newPin);
-                            }
+                        //progressVolley.fetchProgress();
+
+                        Pin newPin = new Pin(x, y, name, snippet, description, id, discovered);
+                        Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
+                        if (newPin.getDiscovered()) {
+                            Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
+                            Marker marker = this.gMap.addMarker(new MarkerOptions()
+                                    .position(newPin.getPos())
+                                    .title(newPin.getName())
+                                    .snippet(newPin.getDescription())
+                                    .icon(BitmapDescriptorFactory.defaultMarker())
+                            );
+                            assert marker != null;
+                            marker.setTag(newPin);
                         }
-
-                        textView.append("\nCreatedPins");
-
-                    } catch (JSONException e) {
-                        Log.e(TAG + "volley", "JSONException: " + e);
-                        e.printStackTrace();
+                        else //create undiscovered pin
+                        {
+                            Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
+                            Marker marker = this.gMap.addMarker(new MarkerOptions()
+                                    .position(newPin.getPos())
+                                    .title(newPin.getName())
+                                    .snippet(newPin.getDescription())
+                                    .icon(smallUndiscoveredIcon)
+                            );
+                            assert marker != null;
+                            marker.setIcon(smallUndiscoveredIcon);
+                            Log.e(TAG + "discover", "test");
+                            marker.setTag(newPin);
+                        }
                     }
-                }, Throwable::printStackTrace);
-
+                    textView.append("CreatedPins\n");
+                } catch (JSONException e) {
+                    Log.e(TAG + "volley", "JSONException: " + e);
+                    e.printStackTrace();
+                }
+            }, Throwable::printStackTrace);
         mQueue.add(request);
     }
 
@@ -407,27 +469,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     /**
      * @author Aidan Foss
-     * handles click on marker. Uses pin object inside each marker
-     * @param marker
-     *      marker is a google maps object, it stores information on
-     *      the pins that are actually displayed on the map. These
-     *      markers are linked to a "pin" which is my own object, which
-     *      is why this code is written like this. Each marker has an attached
-     *      pin object inside it.
-     */
-    @Override
-    public boolean onMarkerClick(@NonNull Marker marker) {
-        marker.setIcon(BitmapDescriptorFactory.defaultMarker());
-        Pin clickPin = (Pin) Objects.requireNonNull(marker.getTag());
-        ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
-        //use clickPin information to send discovery information if relevant.
-
-        clickPin.getID();
-        return false;
-    }
-
-    /**
-     * @author Aidan Foss
      * runs whenever a pin is recieved from the pins websocket
      * fetches relevant pin information and displays it live
      * @param wsPinIdInput from WebSocketListener
@@ -437,13 +478,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         pinVolley.fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
             @Override
             public void onSuccess(Pin pin) {
-                textView.append("\nPin Data Received Via WebSocket + Volley: " + pin.getDebugDescription());
+                textView.append("Pin Data Received Via WebSocket + Volley: " + pin.getDebugDescription() + "\n");
                 Log.d("Aidan "+ TAG + " Volley Websocket", "Pin Get Req: " + pin.getDebugDescription());
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                textView.append("\n get request failed for pin ID " + wsPinIdInput);
+                textView.append("get request failed for pin ID " + wsPinIdInput + "\n");
                 Log.e(TAG, "fetchPinData error: " + errorMessage);
             }
         });
@@ -465,13 +506,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         friendVolley.addfriendsReq(name, user, new friendVolley.addFriendCallback() {
             @Override
             public void onSuccess(User user) {
-                textView.append("\nThis user was added as a friend");
+                textView.append("This user was added as a friend\n");
                 Log.d("Nick "+ TAG + " Volley Websocket", "FriendAdd Get Req: ");
             }
 
             @Override
             public void onFailure(String errorMessage) {
-                textView.append("\nThis user was unable to be added as a friend");
+                textView.append("This user was unable to be added as a friend\n");
                 Log.e(TAG, "fetchuseraddData error: " + errorMessage);
             }
         });

@@ -2,7 +2,6 @@ package com.lg1_1.cyroam.websockets;
 
 import android.util.Log;
 
-import org.java_websocket.WebSocketListener;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -11,11 +10,11 @@ import java.net.URISyntaxException;
 
 public class commentsWebSocket extends WebSocketClient {
     private final String TAG = "Comment Websocket";
-    private WebSocketListener webSocketListener;
+    private CommentListener commentListener;
 
-    public commentsWebSocket(String serverUri, WebSocketListener listener) throws URISyntaxException{
+    public commentsWebSocket(String serverUri, CommentListener listener) throws URISyntaxException{
         super(new URI(serverUri));
-        this.webSocketListener = listener;
+        this.commentListener = listener;
     }
 
     @Override
@@ -30,7 +29,7 @@ public class commentsWebSocket extends WebSocketClient {
 
         try {
             //parse message as a single comment;
-//            PingFrame pingFrame = webSocketListener.onCommentRe(message);
+            commentListener.onCommentReceived(message);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -48,4 +47,4 @@ public class commentsWebSocket extends WebSocketClient {
     }
 }
 
-//id of the comment i want to comment on
+//pass the id of the comment i want to comment on

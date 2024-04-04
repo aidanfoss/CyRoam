@@ -30,16 +30,16 @@ public class FriendSocket {
 
         // Check if anyone has added you as a friend
         while (true) {
-            List<FriendObj> f = friendRepo.findByCurUsername(username);
+            List<FriendObj> wantYouFriend = friendRepo.findByFriendUsername(username);
 
-            for (FriendObj friendObj : f) {
-                String friendUsername = friendObj.getFriendUsername();
+            for (FriendObj friendObj : wantYouFriend) {
+                String sender = friendObj.getCurUsername();
 
                 // Check if this friend has already been notified
-                if (!notifiedFriends.contains(friendUsername)) {
+                if (!notifiedFriends.contains(sender)) {
                     // Notify user about new friend
-                    friendAdded(friendUsername, username);
-                    notifiedFriends.add(friendUsername); // Add friend to notified list
+                    friendAdded(sender, username);
+                    notifiedFriends.add(sender); // Add friend to notified list
                 }
             }
 
@@ -53,6 +53,8 @@ public class FriendSocket {
 
     @OnMessage
     public void onMessage(Session session, String message) throws IOException {
+
+        // nick could send me friedn object user wants to accept
     // Handle new messages
     }
 
@@ -65,10 +67,10 @@ public class FriendSocket {
     public void onError(Session session, Throwable throwable) {
 // Do error handling here
     }
-    private void friendAdded(String friendUsername,String curUsername) {
+    private void friendAdded(String sender,String user) {
         try {
 
-            usernameSessionMap.get(curUsername).getBasicRemote().sendText(friendUsername + " added you as a friend!");
+            usernameSessionMap.get(user).getBasicRemote().sendText(sender);
 
         }
         catch (IOException e) {

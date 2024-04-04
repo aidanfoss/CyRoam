@@ -1,5 +1,6 @@
 package coms309.Friends;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Users.User;
 import jakarta.persistence.*;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -16,24 +17,28 @@ public class FriendObj {
 
    //how do I stop this from displaying password/ is there a way to just connect the UID element/username element?
 //    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "uId")
+//@JoinColumn(name = "uId")
 //    private User user;
 
     //needs testing
-  //  @ManyToOne(cascade = CascadeType.ALL)
-   // @JoinColumn(name = "username")
-    private String curUsername;
+   @ManyToOne(cascade = CascadeType.ALL)
+   @JoinColumn(name = "user_u_id")
+   @JsonIgnore
+   private User user;
+
+   private String curUsername;
 
     //private int friend_uId;
 
     private String friendUsername;
 
-    //private Boolean accept;
+    private Boolean friendStatus;
 
     //private int friendState;
-    public FriendObj(String curUsername, String friendUsername) {
+    public FriendObj(String curUsername, String friendUsername, Boolean accept) {
         this.curUsername = curUsername;
         this.friendUsername = friendUsername;
+        this.friendStatus = accept;
 
     }
     public FriendObj()
@@ -56,4 +61,19 @@ public class FriendObj {
     public String getFriendUsername() {
         return friendUsername;
     }
+
+    public void setfriendStatus(Boolean friendStatus) {
+        this.friendStatus = friendStatus;
+    }
+    public Boolean getfriendStatus() {
+        return friendStatus;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }
