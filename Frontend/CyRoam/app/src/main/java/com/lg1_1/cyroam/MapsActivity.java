@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
 import com.lg1_1.cyroam.util.Pin;
 import com.lg1_1.cyroam.util.User;
 import com.lg1_1.cyroam.volley.friendVolley;
@@ -60,6 +61,7 @@ import java.util.Objects;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
 
+    private Bundle extras;
     private User user;
 
     private TextView textView;
@@ -112,11 +114,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
 
+        //gather extras
+        extras = getIntent().getExtras();
+        if (extras.containsKey("username")){
+            user = new User(
+                    extras.getString("username"),
+                    extras.getString("password"),
+                    extras.getInt("userID"));
+        } else if (!extras.containsKey("username")){
+            user = new User("failSafe", "failSafe", -1);
+            Log.w(TAG + "USERINFO", "Invalid passed information, using failSafe user");
+        }
+
         //initialize websocketManager
         try {
             Log.v(TAG, "onCreate Websocket Try");
             WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
         } catch (URISyntaxException e) {
+            Log.w(TAG, "onCreate WebSocket Fail");
             throw new RuntimeException(e);
         }
 
@@ -223,7 +238,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Following statement and if/else check for user information or any passed pin information.
         //Its in onMap because of the pin information
-        Bundle extras = getIntent().getExtras(); //call that checks for passed information
         if (extras == null) {
             Log.i(TAG, "extras, missing any passed information");
             //make debug user, likely name aaa, password bbb, any relevant info
@@ -288,6 +302,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } //Todo repurpose this block of code to receive login information from nick
 
 
+        /**
+         * Detects when a user clicks on a pin for more info
+         * This is used for many reasons.
+         * 1) Grab the pin ID
+         * 2) send a progress update to the server for logging
+         * 3) display the pin as activated (change the icon)
+         * 4) go to a more detailed screen for the clicked pin
+         */
+        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(@NonNull Marker marker) {
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker());
+                Pin clickPin = (Pin) Objects.requireNonNull(marker.getTag());
+                ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+                //use clickPin information to send discovery information if relevant.
+
+                //create intent for more information screen
+                Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
+                intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
+            }
+        });
+
     }
 
     /**
@@ -309,18 +345,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.d(TAG + "volley", "request success");
 
                         for (int i = 0; i < response.length(); i++) {
-                            JSONObject pin = response.getJSONObject(i);
+                            JSONObject jsonPin = response.getJSONObject(i);
 
-                            int id = pin.getInt("id");
-                            double x = pin.getDouble("x");
-                            double y = pin.getDouble("y");
-                            String name = pin.getString("name");
+                            int id = jsonPin.getInt("id");
+                            double x = jsonPin.getDouble("x");
+                            double y = jsonPin.getDouble("y");
+                            String name = jsonPin.getString("name");
+                            String snippet = "temporary snippet";
                             String description = "temporary description";
-                            boolean discoveredOut = false;
+                            boolean discovered = false;
 
-                            Pin newPin = new Pin(x, y, name, description, id, discoveredOut);
+                            Pin newPin = new Pin(x, y, name, snippet, description, id, discovered);
                             Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
-                            if (newPin.isDiscovered()) {
+                            if (newPin.getDiscovered()) {
                                 Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
                                 Marker marker = this.gMap.addMarker(new MarkerOptions()
                                         .position(newPin.getPos())
