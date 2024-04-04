@@ -32,11 +32,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.util.Friend;
 import com.lg1_1.cyroam.util.FriendsAddListAdapter;
+import com.lg1_1.cyroam.websockets.WebSocketListener;
+import com.lg1_1.cyroam.websockets.WebSocketManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +49,7 @@ import java.util.Map;
  * as well as allows you to send invites
  * Add Friends is a screen that is only accessable via friends activity
  */
-public class AddFriends extends AppCompatActivity {
+public class AddFriends extends AppCompatActivity implements WebSocketListener {
 
 
     /**
@@ -95,8 +98,14 @@ public class AddFriends extends AppCompatActivity {
 
         ListView mViewList = (ListView) findViewById(R.id.listView2);
         //ArrayList<Friend> list = new ArrayList<>();
-        String curUsername ="a";
+        String curUsername ="bossf";
         findfriendsReq(curUsername);
+
+        try {
+            WebSocketManager.getInstance().openWebSocketConnection(curUsername, this);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
        // Friend one = new Friend("John", 32, 23);
        // Friend two = new Friend("steve", 32, 23);
        //list.add(one);
@@ -112,10 +121,16 @@ public class AddFriends extends AppCompatActivity {
         friendSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String curUsername ="bossf";
+
                 String Newfriend = usernameEditText.getText().toString();
                 addfriendsReq(curUsername,Newfriend);
-                createnotif();
+                //createnotif();
+                try {
+                    // send message
+                    WebSocketManager.getInstance().nickClient.send(Newfriend);
+                } catch (Exception e) {
+                    Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                }
             }
 
 
@@ -142,8 +157,9 @@ public class AddFriends extends AppCompatActivity {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("curUsername", Newfriend);
-            userInfo.put("friendUsername", curUsername);
+            userInfo.put("curUsername", curUsername);
+            userInfo.put("friendUsername", Newfriend);
+            userInfo.put("friendStatus", 0);
 
 
         } catch (Exception e){
@@ -203,7 +219,8 @@ public class AddFriends extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      * When called it created a notification
      */
-    private void createnotif() {
+    public void createnotif(String name) {
+        Log.v("Nick Websocket", "message made to createnotif " + name);
         String id = "Whatch this work";
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -233,8 +250,8 @@ public class AddFriends extends AppCompatActivity {
         }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, id)
                 .setSmallIcon(R.drawable.iowa_state_clipart_4_removebg_preview)
-                .setContentTitle("Sent!!!")
-                .setContentText("Your Friend Request has been sent")
+                .setContentTitle("Recieved!!!")
+                .setContentText("Your Recieved a friend request")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[]{100, 1000, 200, 340})
                 .setAutoCancel(false)
@@ -253,6 +270,7 @@ public class AddFriends extends AppCompatActivity {
         m.notify(1, builder.build());
 
     }
+
 
     private void findfriendsReq(String curUsername){
         String url = mainURL + "/friendRequests/" + curUsername;
@@ -277,8 +295,8 @@ public class AddFriends extends AppCompatActivity {
                             //JSONObject friend = jsonArray.getJSONObject(i);
 
 
-                            String curUser = friendobj.getString("curUsername");
-                            String friendUser = friendobj.getString("friendUsername");
+                            String friendUser = friendobj.getString("curUsername");
+                            String curUser = friendobj.getString("friendUsername");
                             //output = curUser + " " + friendUser;
                             Friend free = new Friend(friendUser, 0, 10000+i);
                             list2.add(free);
@@ -329,5 +347,18 @@ public class AddFriends extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPinRecieved(int id) {
 
+    }
+
+    @Override
+    public void onCommentReceived(String comment) {
+
+    }
+
+    @Override
+    public void onfredReqRecieved(String name) {
+        createnotif(name);
+    }
 }

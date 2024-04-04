@@ -4,7 +4,6 @@ import android.util.Log;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
-import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -54,11 +53,12 @@ public class nickWebSocket extends WebSocketClient {
         //hopefully the message will be a JSON
         try {
             //convert the message into a json object
-            JSONObject jsonObject = new JSONObject(name);
+            //JSONObject jsonObject = new JSONObject(name);
             //use json object to get data on the pins ID
-            String invite = jsonObject.getString("name");
+            //String invite = jsonObject.getString("name");
             //return pins ID through listener
-            webSocketListener.onfredReqRecieved(invite);
+            webSocketListener.onfredReqRecieved(name);
+            Log.v(TAG, "message made it through nickWebsocket" + name);
         } catch (Exception e) {
             e.printStackTrace();
         }

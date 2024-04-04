@@ -69,6 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private pinVolley pinVolley;
 
     private friendVolley friendVolley;
+
+    private AddFriends addFriends;
     private progressVolley progressVolley;
     private RequestQueue mQueue; // define volley request queue
 
@@ -459,7 +461,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // similar to mine above using textView.append()
         //you can change the passed information. Right now, its just ID
         //youd have to change it here, in the webSocketListener, and in nickWebSocket
-
 
         friendVolley.addfriendsReq(name, user, new friendVolley.addFriendCallback() {
             @Override
