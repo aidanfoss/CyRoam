@@ -1,14 +1,11 @@
-package coms309.Pin;
-
+package coms309.Comment;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PinRepository extends JpaRepository<Pin, Long> {
-    Pin findById(int id);
+public interface CommentsRepository extends JpaRepository<Comment, Long> {
+    Comment findById(int id);
 
     @Transactional
     void deleteById(int id);
