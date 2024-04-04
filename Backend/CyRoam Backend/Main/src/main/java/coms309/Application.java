@@ -72,8 +72,9 @@ public class Application {
     CommandLineRunner initComments(CommentsRepository commentsRepository, PinRepository pinRepository) {
         return args -> {
             if(commentsRepository.count() == 0) {
-                Comment example = new Comment(System.currentTimeMillis(), "First!", pinRepository.findById(1));
+                Comment example = new Comment("First!", pinRepository.findById(1));
                 commentsRepository.save(example);
+                pinRepository.findById(1).getComments().add(example);
             }
         };
     }
