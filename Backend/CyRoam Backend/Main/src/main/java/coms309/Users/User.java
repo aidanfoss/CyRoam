@@ -1,6 +1,7 @@
 package coms309.Users;
 
 import coms309.Friends.FriendObj;
+import coms309.Statistics.Statistics;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -17,20 +18,22 @@ public class User {
     private String password;
 
 
-   // @OneToMany
-    //private List<FriendObj> friends;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<FriendObj> friends;
 
+    @OneToOne
+    private Statistics stats;
 
     //contructor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-      //  friends = new ArrayList<>();
+        friends = new ArrayList<>();
 
     }
     public User()
     {
-        //friends = new ArrayList<>();
+        friends = new ArrayList<>();
     }
     //getters and setters
     public int getuId(){
@@ -54,6 +57,18 @@ public class User {
 
     public void setPassword(String password){
         this.password = password;
+    }
+
+    public List<FriendObj> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<FriendObj> friends) {
+        this.friends = friends;
+    }
+
+    public void addPhones(FriendObj phone){
+        this.friends.add(phone);
     }
 
 

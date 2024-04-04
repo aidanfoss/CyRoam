@@ -22,9 +22,10 @@ public class FriendObj {
 
     //needs testing
    @ManyToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "username")
+   @JoinColumn(name = "user_u_id")
    @JsonIgnore
    private User user;
+
    private String curUsername;
 
     //private int friend_uId;
