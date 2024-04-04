@@ -81,12 +81,7 @@ public class Application {
     @Bean
     CommandLineRunner initStatistics(StatisticsRepository statisticsRepository) {
         return args -> {
-            if (statisticsRepository.count() == 0) {
-                Statistics example = new Statistics(1);
-                Statistics example2 = new Statistics(2);
-                statisticsRepository.save(example);
-                statisticsRepository.save(example2);
-            }
+
         };
     }
 

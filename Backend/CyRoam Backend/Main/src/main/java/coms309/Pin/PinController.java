@@ -2,9 +2,8 @@ package coms309.Pin;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-import coms309.Comment.CommentsSocket;
+import coms309.Users.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -13,18 +12,37 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
 public class PinController {
 
     @Autowired
     PinRepository pinRepository;
 
+    private static UserInterface userRepository;
+    @Autowired
+    public void setUserRepository(UserInterface repo) {userRepository = repo;}
+
     @Operation(summary = "Get a list of all Pins")
     @ApiResponse(responseCode = "200", description = "Successfully returned all Pins", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Pin.class)) })
-    @GetMapping(path = "/pins")
-    List<Pin> getAllPins() {
-        return pinRepository.findAll();
+    @GetMapping(path = "/user/{id}/pins")
+    List<PinPair> getAllPins(@PathVariable int id) {
+        List<PinPair> listPair = new ArrayList<>();
+        boolean isDiscovered = true;
+        for (int i = 0; i < pinRepository.count(); i++) {
+            if(userRepository.findByuId(id).getPins().contains(pinRepository.findAll().get(i))) {
+                isDiscovered = true;
+            } else {
+                isDiscovered = false;
+            }
+            PinPair temp = new PinPair(pinRepository.findAll().get(i), isDiscovered);
+            listPair.add(temp);
+        }
+
+
+        return listPair;
     }
     @Operation(summary = "Get a Pin by its id")
     @ApiResponse(responseCode = "200", description = "Found the Pin", content = { @Content(mediaType = "json",
