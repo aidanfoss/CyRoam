@@ -11,8 +11,9 @@ import java.net.URISyntaxException;
 public class WebSocketManager {
     private static WebSocketManager instance;
     private boolean isConnected = false;
-
+    boolean isCommentConnected;
     public aidanWebSocket aidanClient;
+    public commentsWebSocket commentsClient;
     public nickWebSocket nickClient;
 
     private WebSocketManager(){
@@ -49,6 +50,18 @@ public class WebSocketManager {
             nickClient.connect();
             isConnected = true;
         }
+    }
+
+    public void openCommentConnection(int pinID, CommentListener listener) throws URISyntaxException {
+        if (!isCommentConnected) {
+            commentsClient = new commentsWebSocket(wsurl + "/pins/" + String.valueOf(pinID) + "/comments", listener);
+            commentsClient.connect();
+            isCommentConnected = true;
+        }
+    }
+
+    public void closeCommentConnection(){
+        commentsClient.close();
     }
 
     /**
