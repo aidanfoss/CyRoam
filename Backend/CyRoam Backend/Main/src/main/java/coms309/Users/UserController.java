@@ -85,5 +85,14 @@ public class UserController {
 
 
     }
+    @Operation(summary = "send list of top 5 users")
+    @ApiResponse(responseCode = "200", description = "list sent", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
+    @GetMapping(path = "/leaderBoard")
+    List<User> leaderBoard() {
+
+        return userInterface.findAll();
+    }
+
 
 }

@@ -1,9 +1,8 @@
 package coms309.Statistics;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import coms309.Users.User;
+import jakarta.persistence.*;
 
 @Entity
 public class Statistics {
@@ -11,6 +10,11 @@ public class Statistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "uId")
+    @JsonIgnore
+    private User user;
     private int userId;
     private int pinId;
     private boolean discovered;
