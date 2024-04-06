@@ -29,7 +29,7 @@ public class User {
 
     //todo make this singleton
     //todo make this save on the phone, so you dont need to log in every time
-    public User(String username, String ignoredPassword, int id){
+    public User(String username, int id){
         this.id = id;
         this.username = username;
 
