@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.objects;
 
 /**
  * Object that stores user data.
@@ -23,7 +23,6 @@ public class User {
      * doesn't store the password in the client
      *
      * @param username
-     * @param ignoredPassword
      * @param id
      */
 
@@ -42,6 +41,21 @@ public class User {
         //pass it into this object, which can be used later for verification.
         //could potentially connect to the websocket at that moment too
     }
+
+    /**
+     * constructor that calls password for no reason.
+     * Logging in should be done through the login manager
+     * @author Aidan Foss
+     * @deprecated
+     * @param username
+     * @param ignoredPassword
+     * @param id
+     */
+    public User(String username, String ignoredPassword, int id){
+        this.id = id;
+        this.username = username;
+    }
+
     public String getName(){
         return username;
     }

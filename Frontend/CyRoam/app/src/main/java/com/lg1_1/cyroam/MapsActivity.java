@@ -2,7 +2,6 @@ package com.lg1_1.cyroam;
 
 import static com.google.android.gms.location.Priority.PRIORITY_HIGH_ACCURACY;
 import static com.lg1_1.cyroam.MainActivity.url;
-import static com.lg1_1.cyroam.volley.pinVolley.*;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -40,12 +39,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
-import com.lg1_1.cyroam.util.LoginManager;
-import com.lg1_1.cyroam.util.Pin;
-import com.lg1_1.cyroam.util.User;
+import com.lg1_1.cyroam.Managers.LoginManager;
+import com.lg1_1.cyroam.objects.Pin;
+import com.lg1_1.cyroam.objects.User;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
-import com.lg1_1.cyroam.websockets.WebSocketManager;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.friendVolley;
 

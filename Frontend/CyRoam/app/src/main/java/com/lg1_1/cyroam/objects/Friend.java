@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.objects;
 
 public class Friend  {
     private String name;
