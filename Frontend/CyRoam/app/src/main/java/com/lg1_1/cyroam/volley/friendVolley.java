@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.AddFriends;
 import com.lg1_1.cyroam.MainActivity;
-import com.lg1_1.cyroam.util.User;
+import com.lg1_1.cyroam.objects.User;
 /**
  * Enables user to add friends and receive notification about friend request.
  * @author Nicholas Kirschbaum

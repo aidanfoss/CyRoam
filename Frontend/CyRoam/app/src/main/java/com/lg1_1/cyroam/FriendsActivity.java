@@ -14,8 +14,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.util.Friend;
-import com.lg1_1.cyroam.util.FriendsListAdapter;
+import com.lg1_1.cyroam.objects.Friend;
+import com.lg1_1.cyroam.objects.FriendsListAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;

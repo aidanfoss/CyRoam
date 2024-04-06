@@ -1,4 +1,6 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.Managers;
+
+import com.lg1_1.cyroam.objects.User;
 
 public class LoginManager {
     //Needs to be singleton

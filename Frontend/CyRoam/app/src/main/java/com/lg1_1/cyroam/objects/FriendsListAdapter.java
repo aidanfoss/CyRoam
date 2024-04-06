@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.objects;
 
 import android.content.Context;
 import android.view.LayoutInflater;

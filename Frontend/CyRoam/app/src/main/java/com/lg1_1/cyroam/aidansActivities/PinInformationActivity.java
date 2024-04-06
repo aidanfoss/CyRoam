@@ -1,7 +1,6 @@
 package com.lg1_1.cyroam.aidansActivities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,17 +10,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lg1_1.cyroam.LeaderBoard;
-import com.lg1_1.cyroam.MapsActivity;
-import com.lg1_1.cyroam.PortalScreenActivity;
 import com.lg1_1.cyroam.R;
-import com.lg1_1.cyroam.util.Pin;
+import com.lg1_1.cyroam.objects.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.websockets.CommentListener;
-import com.lg1_1.cyroam.websockets.WebSocketManager;
-import com.lg1_1.cyroam.websockets.commentsWebSocket;
-
-import org.w3c.dom.Text;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
 
 import java.net.URISyntaxException;
 

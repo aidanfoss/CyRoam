@@ -18,7 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.util.User;
+import com.lg1_1.cyroam.objects.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;

@@ -13,7 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.util.User;
+import com.lg1_1.cyroam.objects.User;
 
 import org.json.JSONException;
 /**
