@@ -5,13 +5,11 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.lg1_1.cyroam.MainActivity;
-import com.lg1_1.cyroam.util.Pin;
+import com.lg1_1.cyroam.objects.Pin;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +25,7 @@ public class pinVolley {
 
     private static final String TAG = "PinRequest";
     private static final String BASE_URL = MainActivity.url;
+    private static pinVolley instance;
 
     private RequestQueue queue;
     private Context context;
@@ -40,9 +39,22 @@ public class pinVolley {
         this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
     }
+    public pinVolley(){
+        this.context = context;
+        queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
+    }
+
+    public static pinVolley getInstance(Context cont) {
+        if (instance == null){
+            instance = new pinVolley(cont);
+        }
+        return instance;
+    }
 
     public void updatePinData(int pinId, final UpdatePinCallback callback){
     }
+
+
     /**
      * Handles errors and passes information when updating pins
      * @author Aidan Foss

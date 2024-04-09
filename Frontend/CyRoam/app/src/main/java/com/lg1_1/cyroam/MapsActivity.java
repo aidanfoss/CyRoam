@@ -39,13 +39,14 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
-import com.lg1_1.cyroam.util.Pin;
-import com.lg1_1.cyroam.util.User;
-import com.lg1_1.cyroam.volley.friendVolley;
-import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.Managers.LoginManager;
+import com.lg1_1.cyroam.objects.Pin;
+import com.lg1_1.cyroam.objects.User;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
-import com.lg1_1.cyroam.websockets.WebSocketManager;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
+import com.lg1_1.cyroam.volley.pinVolley;
+import com.lg1_1.cyroam.volley.friendVolley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,10 +69,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //define volley classes and requestQueue
-    private pinVolley pinVolley;
-
     private friendVolley friendVolley;
-
     private AddFriends addFriends;
     private progressVolley progressVolley;
     private RequestQueue mQueue; // define volley request queue
@@ -117,17 +115,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //gather extras
         extras = getIntent().getExtras();
-        if (extras.containsKey("username")){
-            user = new User(
-                    extras.getString("username"),
-                    extras.getString("password"),
-                    extras.getInt("userID"));
-        } else if (!extras.containsKey("username")){
-            user = new User("failSafe", "failSafe", -1);
-            Log.w(TAG + "USERINFO", "Invalid passed information, using failSafe user");
+
+        //if the user isnt logged on, then kick them back to the login screen.
+        if (LoginManager.getInstance().getUser() == null){
+            Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
+            startActivity(intent);
         }
 
-        //initialize websocketManager
+        //initialize websocketConnections
         try {
             Log.v(TAG, "onCreate Websocket Try");
             WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
@@ -139,10 +134,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
         smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
-
-        this.pinVolley = new pinVolley(this); //defines pinVolley class
-        this.progressVolley = new progressVolley(this); //defines progressVolley class
-        this.friendVolley = new friendVolley(this); //defines nicks friendVolley
 
         mQueue = Volley.newRequestQueue(this); //defines volley queue for fillMap
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -246,12 +237,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (extras.containsKey("message")) {
                 textView.append(extras.getString("message")+ "\n");
             }
-            if (extras.containsKey("username")){
-                user = new User(
-                        extras.getString("username"),
-                        extras.getString("password"),
-                        extras.getInt("userID"));
-            }
+//            if (extras.containsKey("username")){
+//                user = new User(
+//                        extras.getString("username"),
+//                        extras.getInt("userID"));
+//            }
 
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
 //            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
@@ -281,7 +271,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 //GET REQUEST
 
-                pinVolley.fetchPinData(pinID, new pinVolley.FetchPinCallback() {
+                 pinVolley.getInstance(this).fetchPinData(pinID, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
                         textView.append("Pin Data Received Via Volley Get Request: " + pin.getDebugDescription()+ "\n");
@@ -378,7 +368,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String name = jsonPin.getString("name");
                         String snippet = "temporary snippet";
                         String description = "temporary description";
-                        boolean discovered = response.getBoolean(i);
+                        boolean discovered = false;
 
                         //progressVolley.fetchProgress();
 
@@ -476,7 +466,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onPinRecieved(int wsPinIdInput) {
-        pinVolley.fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
+        pinVolley.getInstance(this).fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
             @Override
             public void onSuccess(Pin pin) {
                 textView.append("Pin Data Received Via WebSocket + Volley: " + pin.getDebugDescription() + "\n");

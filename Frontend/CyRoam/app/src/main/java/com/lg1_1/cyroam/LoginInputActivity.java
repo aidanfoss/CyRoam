@@ -13,12 +13,13 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.util.User;
+import com.lg1_1.cyroam.objects.User;
 
 import org.json.JSONException;
 /**
  * Is the developed login with getorpost requests working
  * @author Nicholas Kirschbaum
+ * @deprecated
  */
 public class LoginInputActivity extends AppCompatActivity {
     // This while be the call to which ever table Zach makes
@@ -98,6 +99,7 @@ public class LoginInputActivity extends AppCompatActivity {
     /**
      * get request to login with the username and password they put in
      * @author Nicholas Kirschbaum
+     * @deprecated
      */
 
     //this calls the server and checks to see if it correct

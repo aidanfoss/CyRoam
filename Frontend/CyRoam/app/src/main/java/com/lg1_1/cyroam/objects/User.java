@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.objects;
 
 /**
  * Object that stores user data.
@@ -23,25 +23,28 @@ public class User {
      * doesn't store the password in the client
      *
      * @param username
+     * @param id
+     */
+    public User(String username, int id){
+        this.id = id;
+        this.username = username;
+        //add info that should be accessible to any user about any user (people should be able to see
+    }
+
+    /**
+     * constructor that calls password for no reason.
+     * Logging in should be done through the login manager
+     * @author Aidan Foss
+     * @deprecated
+     * @param username
      * @param ignoredPassword
      * @param id
      */
-
-    //todo make this singleton
-    //todo make this save on the phone, so you dont need to log in every time
     public User(String username, String ignoredPassword, int id){
         this.id = id;
         this.username = username;
-
-        //use password only in this constructor to verify.
-        //if password matches, change a boolean to true or something
-        //password is named  ignoredPassword to prevent warning for lack of use
-        //todo implement password/login verification somewhere
-
-        //when creating this, you need to call a volley request to get the userID.
-        //pass it into this object, which can be used later for verification.
-        //could potentially connect to the websocket at that moment too
     }
+
     public String getName(){
         return username;
     }

@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
 
-import com.lg1_1.cyroam.util.Pin;
+import com.lg1_1.cyroam.objects.Pin;
 import com.lg1_1.cyroam.volley.pinVolley;
-import com.lg1_1.cyroam.websockets.WebSocketManager;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
 import com.lg1_1.cyroam.websockets.pinWebSocket;
 
 /**

@@ -1,6 +1,12 @@
-package com.lg1_1.cyroam.websockets;
+package com.lg1_1.cyroam.Managers;
 
 import static com.lg1_1.cyroam.MainActivity.wsurl;
+
+import com.lg1_1.cyroam.websockets.CommentListener;
+import com.lg1_1.cyroam.websockets.WebSocketListener;
+import com.lg1_1.cyroam.websockets.commentsWebSocket;
+import com.lg1_1.cyroam.websockets.nickWebSocket;
+import com.lg1_1.cyroam.websockets.pinWebSocket;
 
 import java.net.URISyntaxException;
 
