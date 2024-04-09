@@ -25,21 +25,10 @@ public class User {
      * @param username
      * @param id
      */
-
-    //todo make this singleton
-    //todo make this save on the phone, so you dont need to log in every time
     public User(String username, int id){
         this.id = id;
         this.username = username;
-
-        //use password only in this constructor to verify.
-        //if password matches, change a boolean to true or something
-        //password is named  ignoredPassword to prevent warning for lack of use
-        //todo implement password/login verification somewhere
-
-        //when creating this, you need to call a volley request to get the userID.
-        //pass it into this object, which can be used later for verification.
-        //could potentially connect to the websocket at that moment too
+        //add info that should be accessible to any user about any user (people should be able to see
     }
 
     /**

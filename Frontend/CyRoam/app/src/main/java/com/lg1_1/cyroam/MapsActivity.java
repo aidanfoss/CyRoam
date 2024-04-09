@@ -70,7 +70,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //define volley classes and requestQueue
     private friendVolley friendVolley;
-
     private AddFriends addFriends;
     private progressVolley progressVolley;
     private RequestQueue mQueue; // define volley request queue
@@ -272,7 +271,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 //GET REQUEST
 
-                new pinVolley().getInstance(this).fetchPinData(pinID, new pinVolley.FetchPinCallback() {
+                 pinVolley.getInstance(this).fetchPinData(pinID, new pinVolley.FetchPinCallback() {
                     @Override
                     public void onSuccess(Pin pin) {
                         textView.append("Pin Data Received Via Volley Get Request: " + pin.getDebugDescription()+ "\n");
