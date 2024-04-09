@@ -26,6 +26,7 @@ import java.util.Map;
 
 /**
  * has been implemented yet
+ * @deprecated
  * @author Nicholas Kirschbaum
  */
 public class FriendsActivity extends AppCompatActivity {
