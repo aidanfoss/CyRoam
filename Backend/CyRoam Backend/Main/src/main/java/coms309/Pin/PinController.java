@@ -44,6 +44,12 @@ public class PinController {
 
         return listPair;
     }
+
+    @GetMapping(path = "/pins")
+    List<Pin> getAllPins() {
+        return pinRepository.findAll();
+    }
+
     @Operation(summary = "Get a Pin by its id")
     @ApiResponse(responseCode = "200", description = "Found the Pin", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Pin.class)) })
@@ -88,4 +94,21 @@ public class PinController {
         return deletedPins;
     }
 
+    @Operation(summary = "Update splash text of a given Pin")
+    @ApiResponse(responseCode = "200", description = "Updated splash text for the given Pin", content = { @Content(mediaType = "string",
+            schema = @Schema(implementation = Pin.class)) })
+    @PutMapping(path = "/pins/{id}/splash")
+    String setSplashText(@Parameter(description = "id of Pin to be updated") @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The updated splash text") @RequestBody String text) {
+        pinRepository.findById(id).setSplash(text);
+        return text;
+    }
+
+    @Operation(summary = "Update description text of a given Pin")
+    @ApiResponse(responseCode = "200", description = "Updated description text for the given Pin", content = { @Content(mediaType = "string",
+            schema = @Schema(implementation = Pin.class)) })
+    @PutMapping(path = "/pins/{id}/description")
+    String setDescriptionText(@Parameter(description = "id of Pin to be updated") @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The updated description text") @RequestBody String text) {
+        pinRepository.findById(id).setDescription(text);
+        return text;
+    }
 }
