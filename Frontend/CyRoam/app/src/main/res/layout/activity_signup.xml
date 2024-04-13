@@ -5,17 +5,18 @@
     tools:context=".MainActivity"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/signupbackground1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="80dp"
         android:text="Signup"
-        android:textColor="#fc0303"
-        android:textSize="30dp"></TextView>
+        android:textColor="@color/white"
+        android:textSize="35dp"></TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,16 +28,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="username: "
-            android:textSize="20dp"
-            android:textColor="#000000">
-        </TextView>
+            android:text="Username: "
+            android:textColor="@color/white"
+            android:textSize="20dp"></TextView>
 
         <EditText
             android:id="@+id/signup_username_edt"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter Username Here">
+            android:hint="Enter Username Here"
+            android:textColor="@color/white">
         </EditText>
 
     </LinearLayout>
@@ -45,14 +46,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/borderfortextboxwhite">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="password: "
+            android:text="Password: "
             android:textSize="20dp"
-            android:textColor="#000000">
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
@@ -60,7 +62,8 @@
             android:layout_width="wrap_content"
             android:inputType="textPassword"
             android:layout_height="50dp"
-            android:hint="Enter Password Here">
+            android:hint="Enter Password Here"
+            android:textColor="@color/white">
         </EditText>
 
     </LinearLayout>
@@ -74,9 +77,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="70sp"
-            android:text="confirm\npassword: "
+            android:text="Confirm\npassword: "
             android:textSize="20dp"
-            android:textColor="#000000">
+            android:textColor="@color/white">
         </TextView>
 
         <EditText
@@ -84,6 +87,7 @@
             android:layout_width="wrap_content"
             android:inputType="textPassword"
             android:layout_height="70dp"
+            android:textColor="@color/white"
             android:hint="Enter Password Here">
         </EditText>
 
@@ -116,7 +120,44 @@
             android:textColor="#ffffff">
         </Button>
 
+
+
     </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernamethe2nd"
+        android:hint="Username"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/baseline_face_26"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailthe1st"
+        android:hint="Email"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/baseline_email_27"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/passwordthesomething1st"
+        android:hint="Password"
+        android:background="#30ffffff"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:layout_margin="10dp"
+        android:padding="20dp"
+        android:drawableLeft="@drawable/baseline_lock_28"/>
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
