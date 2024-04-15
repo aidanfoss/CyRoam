@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * Automatically transitions you to the login activity.
  */
 public class MainActivity extends AppCompatActivity {
-	//test3
+	//test4
 
     public static final String url = "http://coms-309-008.class.las.iastate.edu:8080";
     public static final String wsurl = "ws://coms-309-008.class.las.iastate.edu:8080";
