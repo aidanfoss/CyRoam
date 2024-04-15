@@ -95,6 +95,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
@@ -106,8 +108,10 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-        tools:layout_editor_absoluteX="25dp" />
+        tools:layout_editor_absoluteX="25dp"
+        android:contentDescription="debug button to login to admin account" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
