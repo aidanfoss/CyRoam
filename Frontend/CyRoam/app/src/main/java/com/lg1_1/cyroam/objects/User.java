@@ -1,5 +1,7 @@
 package com.lg1_1.cyroam.objects;
 
+import org.json.JSONObject;
+
 /**
  * Object that stores user data.
  * information is gathered and stored when logging in, and cant be
@@ -10,6 +12,7 @@ package com.lg1_1.cyroam.objects;
 public class User {
     private final int id;
     private final String username;
+    private JSONObject jsonObject;
     //we dont want to store the password, unless we deem its easier to verify everything with it later.
 
     /**
@@ -24,25 +27,13 @@ public class User {
      *
      * @param username
      * @param id
+     * @param jsonObject Stores the raw input from the server for handling when appropriate
      */
-    public User(String username, int id){
+    public User(String username, int id, JSONObject jsonObject){
         this.id = id;
         this.username = username;
+        this.jsonObject = jsonObject;
         //add info that should be accessible to any user about any user (people should be able to see
-    }
-
-    /**
-     * constructor that calls password for no reason.
-     * Logging in should be done through the login manager
-     * @author Aidan Foss
-     * @deprecated
-     * @param username
-     * @param ignoredPassword
-     * @param id
-     */
-    public User(String username, String ignoredPassword, int id){
-        this.id = id;
-        this.username = username;
     }
 
     public String getName(){
