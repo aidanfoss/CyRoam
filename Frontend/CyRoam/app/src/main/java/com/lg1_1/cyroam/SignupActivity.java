@@ -67,7 +67,12 @@ public class SignupActivity extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      * Is the Request queue
      */
+
     private RequestQueue queue;
+    /**
+     * Stores the users email
+     */
+    private EditText email;
     //private boolean checker = false;
     /**
      * @author Nicholas Kirschbaum
@@ -80,6 +85,10 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         /* initialize UI elements */
+        //email = findViewById(R.id.emailthe1st);
+
+
+        //pleasedosomething
         usernameEditText = findViewById(R.id.signup_username_edt);  // link to username edtext in the Signup activity XML
         passwordEditText = findViewById(R.id.signup_password_edt);  // link to password edtext in the Signup activity XML
         confirmEditText = findViewById(R.id.signup_confirm_edt);    // link to confirm edtext in the Signup activity XML
@@ -106,11 +115,12 @@ public class SignupActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String confirm = confirmEditText.getText().toString();
+                String email_ = email.getText().toString();
 
                 if (password.equals(confirm)){
                     Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makePostReq(password, username);
-                    Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
+                    makePostReq(password, username, email_);
+                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(intent);
 
                 }
@@ -124,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      * Contacts the server to create a user using the infromation you provided
      */
-    private void makePostReq(String pass, String user){
+    private void makePostReq(String pass, String user, String email){
         String url = mainURL + "/users";
         Log.d(TAG,"post req called " + url);
 
@@ -137,6 +147,7 @@ public class SignupActivity extends AppCompatActivity {
             // and the fields should match with the object structure of @RequestBody on sb
             userInfo.put("username", user);
             userInfo.put("password", pass);
+           // userInfo.put("email", email);
             Log.v(TAG, "JSON OBJECT CREATED");
 
 

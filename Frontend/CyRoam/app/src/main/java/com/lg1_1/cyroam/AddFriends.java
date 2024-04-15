@@ -288,8 +288,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
-                        Friend nice = new Friend("ryan", 0, 10000);
-                        list2.add(nice);
+                        //Friend nice = new Friend("ryan", 0, 10000);
+                        //list2.add(nice);
                         for (int i = 0; i < response.length(); i++){
                             JSONObject friendobj = response.getJSONObject(i);
                             //JSONObject friend = jsonArray.getJSONObject(i);
