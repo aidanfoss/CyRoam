@@ -18,9 +18,7 @@ public class FriendObj {
    //how do I stop this from displaying password/ is there a way to just connect the UID element/username element?
 //    @ManyToOne(cascade = CascadeType.ALL)
 //@JoinColumn(name = "uId")
-//    private User user;
-
-
+//    private User user
     //needs testing
    @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "user_u_id")
