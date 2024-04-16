@@ -19,7 +19,6 @@ public class FriendObj {
 //    @ManyToOne(cascade = CascadeType.ALL)
 //@JoinColumn(name = "uId")
 //    private User use
-
     //needs testing
    @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "user_u_id")
