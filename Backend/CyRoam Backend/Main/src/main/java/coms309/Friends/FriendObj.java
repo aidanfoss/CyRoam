@@ -29,6 +29,7 @@ public class FriendObj {
 
    private String curUsername;
 
+
     //private int friend_uId;
 
     private String friendUsername;
