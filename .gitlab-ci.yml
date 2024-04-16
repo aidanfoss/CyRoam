@@ -40,10 +40,10 @@ auto-deploy:
   - springboot_tag      # change to your runner's tag
   script:               # script to run the deployment service you created
     - cd "Backend/CyRoam Backend/Main" 
-    - ls  target      # change 'Backend' to to where you have the pom.xml (do not add / in the beginning)
+    - ls target      # change 'Backend' to to where you have the pom.xml (do not add / in the beginning)
     - sudo mv target/*.jar /target/Main-2.0.0.jar 
-    - sudo systemctl stop system-Main-2.0.0.jar
-    - sudo systemctl start system-Main-2.0.0.jar
+    - sudo systemctl stop system-Main-2.0.0
+    - sudo systemctl start system-Main-2.0.0
   only:
     refs:
       - main            # only to trigger the pipeline when changes are pushed to 'main'
