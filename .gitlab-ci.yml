@@ -41,7 +41,7 @@ auto-deploy:
   script:               # script to run the deployment service you created
     - cd "Backend/CyRoam Backend/Main" 
     - ls target      # change 'Backend' to to where you have the pom.xml (do not add / in the beginning)
-    - sudo mv target/*.jar /target/Main-2.0.0.jar 
+    - sudo mv target/*.jar /home/merwi002/target/Main-2.0.0.jar 
     - sudo systemctl stop system-Main-2.0.0
     - sudo systemctl start system-Main-2.0.0
   only:
