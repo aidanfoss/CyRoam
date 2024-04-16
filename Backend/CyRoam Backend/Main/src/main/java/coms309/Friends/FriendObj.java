@@ -20,6 +20,7 @@ public class FriendObj {
 //@JoinColumn(name = "uId")
 //    private User user;
 
+
     //needs testing
    @ManyToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "user_u_id")
