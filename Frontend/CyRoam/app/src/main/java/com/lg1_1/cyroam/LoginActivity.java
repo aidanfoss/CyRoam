@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                 //makes button login to debug user
-//                LoginManager.getInstance().logIn("bossf", "123", this);
+                LoginManager.getInstance().logIn("bossf", "123", this);
                 //starts map activity. try to stop using startActivity, and in all other cases just return to the pre-existing map activity
                 startActivity(intent);
             }
