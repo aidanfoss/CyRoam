@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.util;
+package com.lg1_1.cyroam.objects;
 
 import android.content.Context;
 import android.util.Log;
@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
 import com.lg1_1.cyroam.R;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
-import com.lg1_1.cyroam.websockets.WebSocketManager;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -272,6 +272,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
     public void onPinRecieved(int id) {
 
     }
+
     @Override
     public void onfredReqRecieved(String name) {
 
