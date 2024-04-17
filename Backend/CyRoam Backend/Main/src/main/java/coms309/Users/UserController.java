@@ -58,23 +58,26 @@ public class UserController {
     @Operation(summary = "checks entered username and pasword to see if they are a user")
     @ApiResponse(responseCode = "200", description = "Successfully checked username and password", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = User.class)) })
-    @GetMapping(path = "/userCheck/{user}/{password}")
-    UserCheck checkUser(@PathVariable String user, @PathVariable String password){
-        UserCheck isUSerT = new UserCheck(true);
-        UserCheck isUSerF = new UserCheck(false);
-        if (user == null) {
+    @PostMapping (path = "/userCheck")
+    UserCheck checkUser(@RequestBody User user){
+        String userN = user.getUsername();
+        String password = user.getPassword();
+        UserCheck isUSerF = new UserCheck();
+        if (userN == null) {
 
             return isUSerF;
         }
-        //String userName = user.getUsername();
 
-        if(userInterface.findByUsername(user)==null){
+
+        if(userInterface.findByUsername(userN)==null){
 
             return isUSerF;
         }
-        User actual = userInterface.findByUsername(user);
+        User actual = userInterface.findByUsername(userN);
+        //permissions needs to be added to the user obj / table
+        UserCheck isUSerT = new UserCheck(actual.getuId(), actual.getUsername(), true, 0, actual.getScore(), "correct");
 
-        //test if this actually works
+
         if(Objects.equals(actual.getPassword(), password)){
 
             return isUSerT;
