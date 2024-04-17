@@ -21,6 +21,7 @@ public class User {
     private String password;
 
     private int score;
+    private int permessions;
 
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -35,10 +36,11 @@ public class User {
     private List<Pin> pins;
 
     //contructor
-    public User(String username, String password, int score) {
+    public User(String username, String password, int score, int permissions) {
         this.username = username;
         this.password = password;
         this.score = score;
+        this.permessions = permissions;
         friends = new ArrayList<>();
     }
     public User()
