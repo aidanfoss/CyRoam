@@ -14,10 +14,10 @@ public class UserCheck {
 
     public UserCheck(){
         message = "incorrect username/passsword";
-        userID = 999999;
-        permissions = 4;
-        username = "abcdsds";
-        score = 100000;
+        userID = -999999;
+        permissions = -999999;
+        username = "notarealuserL";
+        score = -999999;
     }
     public UserCheck(int userID, String username, boolean isUser, int permissions, int score, String message){
         this.username = username;
