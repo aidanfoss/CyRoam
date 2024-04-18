@@ -92,6 +92,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
                 //String CurUser = use.getUsername();
 
                 addfriends(CurUser,name);
+
                 putfriends(CurUser,name);
                 //addfriends(name,CurUser);
                 try {
@@ -200,8 +201,8 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("curUsername", curUsername);
-            userInfo.put("friendUsername", Newfriend);
+            userInfo.put("curUsername", Newfriend);
+            userInfo.put("friendUsername", curUsername);
             userInfo.put("friendStatus", true);
 
 

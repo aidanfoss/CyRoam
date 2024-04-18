@@ -44,6 +44,10 @@ public class LeaderBoard extends AppCompatActivity {
 
     private TextView outputTextbox;
     private RequestQueue queue;
+    /**
+     * This creates a list of users for leader board
+     * @author Nicholas Kirschbaum
+     */
     ArrayList<Friend> list2 = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,11 @@ public class LeaderBoard extends AppCompatActivity {
 
     }
 
+    /**
+     * This is a get request that gets the users with the highest
+     * score and there username and displays them in a list view
+     * @author Nicholas Kirschbaum
+     */
     private void worldChampionReq(){
         String url = mainURL + "/leaderBoard";
 
@@ -136,7 +145,10 @@ public class LeaderBoard extends AppCompatActivity {
         // Adding request to request queue
         queue.add(request);
     }
-
+    /**
+     * This formats the list view with format3 and the list
+     * @author Nicholas Kirschbaum
+     */
     private void initializeListAdapter() {
         LeaderBoardListAdapter friendsListAdapter = new LeaderBoardListAdapter(this, R.layout.format3_listview, list2);
         ListView mViewList = findViewById(R.id.listliar);
