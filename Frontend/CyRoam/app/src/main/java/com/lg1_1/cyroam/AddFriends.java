@@ -31,7 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.objects.Friend;
-import com.lg1_1.cyroam.objects.FriendsAddListAdapter;
+import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
 

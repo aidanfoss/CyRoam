@@ -15,7 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.objects.Friend;
-import com.lg1_1.cyroam.objects.FriendsListAdapter;
+import com.lg1_1.cyroam.NicksAdapters.FriendsListAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * has been implemented yet
- * @deprecated
+ *
  * @author Nicholas Kirschbaum
  */
 public class FriendsActivity extends AppCompatActivity {
