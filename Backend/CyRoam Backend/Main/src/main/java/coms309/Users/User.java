@@ -1,6 +1,7 @@
 package coms309.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import coms309.Discovery.Discovery;
 import coms309.Friends.FriendObj;
 import coms309.Pin.Pin;
 import coms309.Statistics.Statistics;
@@ -31,9 +32,8 @@ public class User {
     @OneToOne
     private Statistics stats;
 
-    @JoinColumn(name = "pins")
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pin> pins;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Discovery> discoveries;
 
     //contructor
     public User(String username, String password, int score, int permissions) {
@@ -95,7 +95,4 @@ public class User {
         this.stats = stats;
     }
 
-    public List<Pin> getPins() {
-        return pins;
-    }
 }

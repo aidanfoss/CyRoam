@@ -23,13 +23,8 @@ public class Statistics {
     private int numDiscoveredPins;
 
 
-    @JoinColumn(name = "pins")
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pin> pins;
-
     public Statistics(int numDiscoveredPins) {
         this.numDiscoveredPins = numDiscoveredPins;
-        pins = new ArrayList<>();
     }
 
     public Statistics() {
@@ -47,9 +42,6 @@ public class Statistics {
         return user;
     }
 
-    public List<Pin> getPins() {
-        return pins;
-    }
 
     public void setNumDiscoveredPins(int numDiscoveredPins) {
         this.numDiscoveredPins = numDiscoveredPins;
