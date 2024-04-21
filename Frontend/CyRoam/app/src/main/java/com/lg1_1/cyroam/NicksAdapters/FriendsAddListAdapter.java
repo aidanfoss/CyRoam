@@ -74,7 +74,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
         btn.setClickable(false);
         //String str1 = Integer.toString(score);
         //String str2 = Integer.toString(Id);
-        user.setText("Friend: "+name);
+        user.setText("Friend: " + name);
         String CurUser = "bossf";
         try {
             WebSocketManager.getInstance().openWebSocketConnection(CurUser, this);
