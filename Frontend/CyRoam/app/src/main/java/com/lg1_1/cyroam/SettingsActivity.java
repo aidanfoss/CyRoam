@@ -1,6 +1,6 @@
 package com.lg1_1.cyroam;
 
-import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -31,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private String mainURL = MainActivity.url;
 
-    private Button backbuttontoportal;
+    //private Button backbuttontoportal;
 
     private Button removeButton;
 
@@ -44,19 +45,25 @@ public class SettingsActivity extends AppCompatActivity {
         queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings2);
+        ConstraintLayout constraintLayout = findViewById(R.id.settingScreenId);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(2500);
+        animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
-        backbuttontoportal = findViewById(R.id.settingsbackbutton);
-        removeButton =  findViewById(R.id.settingssearchbutton);
-        removefriend = findViewById(R.id.settingtextInputEdit);
-
+        //backbuttontoportal = findViewById(R.id.settingsbackbutton);
+        removeButton =  findViewById(R.id.buttonRemoveFriend);
+        removefriend = findViewById(R.id.textViewRemoveFriend);
+        /*
         backbuttontoportal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /* when signup button is pressed, use intent to switch to Signup Activity */
+
                 Intent intent = new Intent(SettingsActivity.this, PortalScreenActivity.class);
                 startActivity(intent);  // go to SignupActivity
             }
-        });
+        }); */
+
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
