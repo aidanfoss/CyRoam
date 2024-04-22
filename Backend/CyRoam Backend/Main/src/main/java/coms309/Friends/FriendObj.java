@@ -21,8 +21,8 @@ public class FriendObj {
 //    private User use
 
     //needs testing
-   @ManyToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "user_u_id")
+   @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+   @JoinColumn(name = "userId")
    @JsonIgnore
    private User user;
 
