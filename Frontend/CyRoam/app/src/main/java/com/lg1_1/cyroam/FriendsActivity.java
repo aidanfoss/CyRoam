@@ -51,6 +51,15 @@ public class FriendsActivity extends AppCompatActivity {
     private RequestQueue queue;
     ArrayList<Friend> list2 = new ArrayList<>();
 
+    /**
+     * Background Used source
+     * <a href="https://www.freepik.com/free-ai-image/graphic-2d-colorful-wallpaper-with-grainy-gradients_94952846.htm#fromView=search&page=3&position=47&uuid=395d76d1-8fc6-4757-a392-f36dc225cd0f">Image by freepik</a>
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         queue = Volley.newRequestQueue(this);

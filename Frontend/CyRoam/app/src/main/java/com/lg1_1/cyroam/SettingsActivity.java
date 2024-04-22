@@ -92,7 +92,12 @@ public class SettingsActivity extends AppCompatActivity {
                leaderBoardReq(username, new LoginActivity.VolleyCallback() {
                     @Override
                     public void onSuccess(boolean isTrue) {
-                        OutputText.setText("You now dont show on the leader board");
+                        if(isTrue == true) {
+                            OutputText.setText("You now dont show on the leader board");
+                        }
+                        else{
+                            OutputText.setText("You now show on the leader board");
+                        }
                     }
 
                     @Override
@@ -157,7 +162,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     /**
-     * get request to login with the username and password they put in
+     * This req removes or add the user to the leader board if they meet the requirements
      * @author Nicholas Kirschbaum
      */
     private void leaderBoardReq(String curUsername, final LoginActivity.VolleyCallback callback){
