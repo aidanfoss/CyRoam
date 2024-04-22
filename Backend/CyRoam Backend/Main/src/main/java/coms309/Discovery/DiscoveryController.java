@@ -1,6 +1,8 @@
 package coms309.Discovery;
 import coms309.Pin.Pin;
+import coms309.Pin.PinRepository;
 import coms309.Users.User;
+import coms309.Users.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,6 +17,12 @@ public class DiscoveryController {
     @Autowired
     DiscoveryRepository discoveryRepository;
 
+    @Autowired
+    PinRepository pinRepository;
+
+    @Autowired
+    UserInterface userInterface;
+
     @Operation(summary = "Get all Pins a User has discovered")
     @ApiResponse(responseCode = "200", description = "Found the Pins", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Discovery.class)) })
@@ -23,12 +31,13 @@ public class DiscoveryController {
         return discoveryRepository.findPinsByUser(id);
     }
 
+
     @Operation(summary = "Create a Discovery")
     @ApiResponse(responseCode = "200", description = "Created the Discovery", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Pin.class)) })
-    @PostMapping(path = "/discovery")
-    Discovery createDiscovery(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "User and Pin that the User discovered") @RequestBody Pin pin, User user) {
-        Discovery discovery = new Discovery(user, pin);
+    @PostMapping(path = "/users/{uId}/discovery/{pId}")
+    Discovery createDiscovery(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Pin") @PathVariable int pId) {
+        Discovery discovery = new Discovery(userInterface.findByuId(uId), pinRepository.findById(pId));
         discoveryRepository.save(discovery);
         return discovery;
     }
