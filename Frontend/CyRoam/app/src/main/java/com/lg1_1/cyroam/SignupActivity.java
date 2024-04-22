@@ -82,6 +82,10 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         queue = Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
+        /**
+         * Background is from
+         * <a href="http://www.freepik.com">Designed by rawpixel.com / Freepik</a>
+         */
         setContentView(R.layout.activity_signup);
 
         /* initialize UI elements */
