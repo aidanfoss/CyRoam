@@ -71,10 +71,13 @@ public class UserController {
 
             return isUSerF;
         }
+
         User actual = userInterface.findByUsername(userN);
         //permissions needs to be added to the user obj / table
-        UserCheck isUSerT = new UserCheck(actual.getuId(), actual.getUsername(), true, 0, actual.getScore(), "correct");
-
+        UserCheck isUSerT = new UserCheck(actual.getuId(), actual.getUsername(), true, actual.getPermissions(), actual.getScore(), "correct");
+        if(userInterface.findByUsername(userN).getPermissions()==-2){
+            return new UserCheck(actual.getuId(), actual.getUsername(), false, actual.getPermissions(), actual.getScore(), "banned User");
+        }
 
         if(Objects.equals(actual.getPassword(), password)){
 
@@ -99,9 +102,11 @@ public class UserController {
 
         for(User user : users){
             String username = user.getUsername();
-            int score = user.getScore(); // change this to grab amount of pins discovered
-            UserScore userScoreObj = new UserScore(username, score);
-            userScoreList.add(userScoreObj);
+            if(user.getPermissions()>=0) {
+                int score = user.getScore(); // change this to grab amount of pins discovered
+                UserScore userScoreObj = new UserScore(username, score);
+                userScoreList.add(userScoreObj);
+            }
         }
 
         // Sort userScoreList based on scores in descending order
@@ -110,11 +115,11 @@ public class UserController {
         return userScoreList;
     }
 
-    @Operation(summary = "promote user to specified level")
+    @Operation(summary = "promote/demote user to specified level")
     @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = User.class)) })
 
-    @PutMapping(path = "/userPromote")
+    @PutMapping(path = "/userPerms")
     User setPermissions(@RequestBody ObjectNode objectNode){
         String username = objectNode.get("username").asText();
         int promotion = objectNode.get("promotion").asInt();
@@ -122,6 +127,22 @@ public class UserController {
             return null;
         User s = userInterface.findByUsername(username);
         s.setPermissions(promotion);
+        userInterface.save(s);
+        //userInterface.save(user);
+        return userInterface.findByUsername(username);
+    }
+    @Operation(summary = "set user score")
+    @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
+
+    @PutMapping(path = "/setScore")
+    User setScore(@RequestBody ObjectNode objectNode){
+        String username = objectNode.get("username").asText();
+        int score = objectNode.get("score").asInt();
+        if (username == null)
+            return null;
+        User s = userInterface.findByUsername(username);
+        s.setScore(score);
         userInterface.save(s);
         //userInterface.save(user);
         return userInterface.findByUsername(username);
