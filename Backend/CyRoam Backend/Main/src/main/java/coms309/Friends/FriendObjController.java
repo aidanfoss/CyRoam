@@ -1,6 +1,7 @@
 package coms309.Friends;
 
 import coms309.Statistics.Statistics;
+import coms309.Users.User;
 import coms309.Users.UserInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -45,6 +46,8 @@ public class FriendObjController {
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
         String curUsername = friendObj.getCurUsername();
+        //User ff;
+        //friendObj.setUser(findByUsername(curUsername));
         FriendObj existingFriend = friendObjInterface.findByCurUsernameAndFriendUsername(curUsername,friendUsername);
         if(friendObj.getfriendStatus()==null){
             friendObj.setfriendStatus(true);
@@ -60,7 +63,10 @@ public class FriendObjController {
         return friendObj;
 
     }
-//change to just recive user name in url
+
+
+
+    //change to just recive user name in url
     @Operation(summary = "deletes given friend object from database")
     @ApiResponse(responseCode = "200", description = "Successfully deleted object", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = FriendObj.class)) })

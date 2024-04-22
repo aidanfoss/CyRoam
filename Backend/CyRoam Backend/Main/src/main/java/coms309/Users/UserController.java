@@ -1,5 +1,6 @@
 package coms309.Users;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import coms309.Statistics.Statistics;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -8,10 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 public class UserController {
@@ -58,23 +56,29 @@ public class UserController {
     @Operation(summary = "checks entered username and pasword to see if they are a user")
     @ApiResponse(responseCode = "200", description = "Successfully checked username and password", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = User.class)) })
-    @GetMapping(path = "/userCheck/{user}/{password}")
-    UserCheck checkUser(@PathVariable String user, @PathVariable String password){
-        UserCheck isUSerT = new UserCheck(true);
-        UserCheck isUSerF = new UserCheck(false);
-        if (user == null) {
+    @PostMapping (path = "/userCheck")
+    UserCheck checkUser(@RequestBody User user){
+        String userN = user.getUsername();
+        String password = user.getPassword();
+        UserCheck isUSerF = new UserCheck();
+        if (userN == null) {
 
             return isUSerF;
         }
-        //String userName = user.getUsername();
 
-        if(userInterface.findByUsername(user)==null){
+
+        if(userInterface.findByUsername(userN)==null){
 
             return isUSerF;
         }
-        User actual = userInterface.findByUsername(user);
 
-        //test if this actually works
+        User actual = userInterface.findByUsername(userN);
+        //permissions needs to be added to the user obj / table
+        UserCheck isUSerT = new UserCheck(actual.getuId(), actual.getUsername(), true, actual.getPermissions(), actual.getScore(), "correct");
+        if(userInterface.findByUsername(userN).getPermissions()==-2){
+            return new UserCheck(actual.getuId(), actual.getUsername(), false, actual.getPermissions(), actual.getScore(), "banned User");
+        }
+
         if(Objects.equals(actual.getPassword(), password)){
 
             return isUSerT;
@@ -98,9 +102,11 @@ public class UserController {
 
         for(User user : users){
             String username = user.getUsername();
-            int score = user.getScore(); // change this to grab amount of pins discovered
-            UserScore userScoreObj = new UserScore(username, score);
-            userScoreList.add(userScoreObj);
+            if(user.getPermissions()>=0) {
+                int score = user.getScore(); // change this to grab amount of pins discovered
+                UserScore userScoreObj = new UserScore(username, score);
+                userScoreList.add(userScoreObj);
+            }
         }
 
         // Sort userScoreList based on scores in descending order
@@ -109,5 +115,36 @@ public class UserController {
         return userScoreList;
     }
 
+    @Operation(summary = "promote/demote user to specified level")
+    @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
 
+    @PutMapping(path = "/userPerms")
+    User setPermissions(@RequestBody ObjectNode objectNode){
+        String username = objectNode.get("username").asText();
+        int promotion = objectNode.get("promotion").asInt();
+        if (username == null)
+            return null;
+        User s = userInterface.findByUsername(username);
+        s.setPermissions(promotion);
+        userInterface.save(s);
+        //userInterface.save(user);
+        return userInterface.findByUsername(username);
+    }
+    @Operation(summary = "set user score")
+    @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
+
+    @PutMapping(path = "/setScore")
+    User setScore(@RequestBody ObjectNode objectNode){
+        String username = objectNode.get("username").asText();
+        int score = objectNode.get("score").asInt();
+        if (username == null)
+            return null;
+        User s = userInterface.findByUsername(username);
+        s.setScore(score);
+        userInterface.save(s);
+        //userInterface.save(user);
+        return userInterface.findByUsername(username);
+    }
 }
