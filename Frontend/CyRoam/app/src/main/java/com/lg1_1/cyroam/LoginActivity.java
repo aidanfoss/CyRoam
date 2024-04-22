@@ -15,6 +15,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lg1_1.cyroam.Managers.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -61,9 +62,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                 //makes button login to debug user
-                intent.putExtra("password", "123");
-                intent.putExtra("username", "bossf");
-                intent.putExtra("userID", 0);
+//                LoginManager.getInstance().logIn("bossf", "123");
                 //starts map activity. try to stop using startActivity, and in all other cases just return to the pre-existing map activity
                 startActivity(intent);
             }

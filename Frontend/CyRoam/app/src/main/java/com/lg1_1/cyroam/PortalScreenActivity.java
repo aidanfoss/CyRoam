@@ -8,8 +8,10 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 /**
  * Is esentially the middle man screen that has buttons that
+ * @deprecated
  * take you to the next screen
  * @author Nicholas Kirschbaum
+ * @deprecated
  */
 public class PortalScreenActivity extends AppCompatActivity {
     /**
