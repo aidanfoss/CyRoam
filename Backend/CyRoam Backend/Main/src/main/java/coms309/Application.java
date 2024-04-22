@@ -2,6 +2,7 @@ package coms309;
 
 import coms309.Comment.Comment;
 import coms309.Comment.CommentsRepository;
+import coms309.Discovery.DiscoveryRepository;
 import coms309.Friends.FriendObj;
 import coms309.Friends.FriendObjInterface;
 import coms309.Statistics.Statistics;
