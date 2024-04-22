@@ -57,6 +57,9 @@ public class User {
     public void setId(int uId){
         this.uId = uId;
     }
+    public void setScore(int score){
+        this.score = score;
+    }
 
     public int getScore(){
         return score;
@@ -85,9 +88,7 @@ public class User {
         this.friends = friends;
     }
 
-    public void addPhones(FriendObj phone){
-        this.friends.add(phone);
-    }
+
 
     public Statistics getStatistics() {
         return stats;
