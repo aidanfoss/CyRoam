@@ -6,13 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-
-
-
     <androidx.fragment.app.FragmentContainerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
@@ -21,32 +15,80 @@
 </androidx.fragment.app.FragmentContainerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/newPinButton"
-        layout_height=""
-        layout_width=""
+        android:id="@+id/portalButton5"
         android:layout_width="92dp"
         android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
         android:clickable="true"
-        android:contentDescription="New Pin Button"
-        tools:src="@tools:sample/avatars" />
+        android:focusable="true"
+        android:translationX="100dp"
+        android:translationY="-200dp"
+        android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/discoverButton"
+        android:id="@+id/portalButton4"
         android:layout_width="92dp"
         android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
         android:clickable="true"
-        android:contentDescription="discover Button"
-        android:layout_gravity="top|end"
-        tools:src="@tools:sample/avatars" />
+        android:focusable="true"
+        android:translationX="-100dp"
+        android:translationY="-200dp"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/portalButton3"
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:translationX="100dp"
+        android:translationY="-100dp"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/portalButton2"
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:translationX="0dp"
+        android:translationY="-150dp"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/portalButton1"
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:translationX="-100dp"
+        android:translationY="-100dp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:layout_gravity="bottom|end"
-        android:autoText="true"
+        android:layout_gravity="top|end"
         android:background="#FFFFFF"
         android:text="@string/textBoxMapTest"
+        android:visibility="invisible"
         tools:text="@string/textBoxMapTest" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/portalButton"
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom|center|center_vertical"
+        android:clickable="true"
+        android:contentDescription="@string/opens_the_portal_overlay"
+        android:translationY="-10dp"
+        app:backgroundTint="#F44336"
+        android:focusable="true" />
 
 </FrameLayout>

@@ -140,8 +140,8 @@ public class LoginInputActivity extends AppCompatActivity {
                         Log.v(TAG, "request success");
                         boolean isTrue = response.getBoolean("isUser");
                         int i = 0;
-                        inputuser = new User(curUsername, password, i);
-
+//                        inputuser = new User(curUsername, password, i);
+                        //I changed the user construtor, this whole function wont makea  user obj anymore! -bossf
 
                         //return isTrue;
                         callback.onSuccess(isTrue);

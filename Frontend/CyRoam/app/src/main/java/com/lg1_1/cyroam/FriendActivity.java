@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 /**
  * is the main friends activity for now with both the get and post on it
+ * @deprecated
  * @author Nicholas Kirschbaum
  */
 public class FriendActivity extends AppCompatActivity {

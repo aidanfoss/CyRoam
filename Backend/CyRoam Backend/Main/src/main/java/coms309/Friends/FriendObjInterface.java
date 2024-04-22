@@ -1,6 +1,7 @@
 package coms309.Friends;
 
 import coms309.Friends.FriendObj;
+import coms309.Users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

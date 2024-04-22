@@ -31,7 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.objects.Friend;
-import com.lg1_1.cyroam.objects.FriendsAddListAdapter;
+import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
 
@@ -288,8 +288,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
-                        Friend nice = new Friend("ryan", 0, 10000);
-                        list2.add(nice);
+                        //Friend nice = new Friend("ryan", 0, 10000);
+                        //list2.add(nice);
                         for (int i = 0; i < response.length(); i++){
                             JSONObject friendobj = response.getJSONObject(i);
                             //JSONObject friend = jsonArray.getJSONObject(i);

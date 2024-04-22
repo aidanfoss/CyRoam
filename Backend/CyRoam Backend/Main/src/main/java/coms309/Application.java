@@ -2,6 +2,7 @@ package coms309;
 
 import coms309.Comment.Comment;
 import coms309.Comment.CommentsRepository;
+import coms309.Discovery.DiscoveryRepository;
 import coms309.Friends.FriendObj;
 import coms309.Friends.FriendObjInterface;
 import coms309.Statistics.Statistics;
@@ -31,8 +32,8 @@ public class Application {
     CommandLineRunner initUser(UserInterface userInterface) {
         return args -> {
             if (userInterface.count() == 0) {
-                User user1 = new User("bossf", "123", 3);
-                User user2 = new User("Jane", "jane@somemail.com", 4);
+                User user1 = new User("bossf", "123", 3, 0);
+                User user2 = new User("Jane", "jane@somemail.com", 4,0);
 
                 userInterface.save(user1);
                 userInterface.save(user2);

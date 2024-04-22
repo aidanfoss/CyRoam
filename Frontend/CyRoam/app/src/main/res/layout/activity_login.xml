@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="316dp"
         android:layout_marginEnd="100dp"
         android:orientation="vertical"
         android:visibility="visible"
@@ -67,10 +67,9 @@
         android:layout_width="275dp"
         android:layout_height="48dp"
         android:background="@drawable/roundstyle"
-
         android:backgroundTint="#F1BE48"
         android:text="Log in"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.546"
@@ -83,7 +82,7 @@
         android:layout_width="275dp"
         android:layout_height="48dp"
         android:background="@drawable/roundstyle"
-
+        android:textColor="@color/white"
         android:backgroundTint="#F1BE48"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,9 +94,12 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview" />
+        app:srcCompat="@drawable/iowa_state_clipart_4_removebg_preview"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -106,8 +108,10 @@
         android:layout_marginTop="16dp"
         android:clickable="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/common_google_signin_btn_icon_disabled"
-        tools:layout_editor_absoluteX="25dp" />
+        tools:layout_editor_absoluteX="25dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
