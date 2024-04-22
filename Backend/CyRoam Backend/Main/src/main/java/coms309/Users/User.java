@@ -13,18 +13,20 @@ import java.util.List;
 @Entity
 public class User {
 	//hello caleb todo remove this line :3
+    //@OneToMany
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uId;
 
+    @Column(unique = true)
     private String username;
     private String password;
 
     private int score;
-    private int permessions;
+    private int permissions;
 
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
     private List<FriendObj> friends;
 
     @JsonIgnore
@@ -40,7 +42,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.score = score;
-        this.permessions = permissions;
+        this.permissions = permissions;
         friends = new ArrayList<>();
     }
     public User()
@@ -97,5 +99,14 @@ public class User {
 
     public List<Pin> getPins() {
         return pins;
+    }
+
+
+    public void setPermissions(int permissions) {
+        this.permissions = permissions;
+    }
+
+    public int getPermissions() {
+        return permissions;
     }
 }

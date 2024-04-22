@@ -1,5 +1,6 @@
 package coms309.Users;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import coms309.Statistics.Statistics;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -8,10 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 public class UserController {
@@ -112,5 +110,20 @@ public class UserController {
         return userScoreList;
     }
 
+    @Operation(summary = "promote user to specified level")
+    @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
 
+    @PutMapping(path = "/userPromote")
+    User setPermissions(@RequestBody ObjectNode objectNode){
+        String username = objectNode.get("username").asText();
+        int promotion = objectNode.get("promotion").asInt();
+        if (username == null)
+            return null;
+        User s = userInterface.findByUsername(username);
+        s.setPermissions(promotion);
+        userInterface.save(s);
+        //userInterface.save(user);
+        return userInterface.findByUsername(username);
+    }
 }
