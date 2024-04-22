@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +19,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.NicksAdapters.LeaderBoardListAdapter;
+import com.lg1_1.cyroam.objects.Friend;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,6 +44,11 @@ public class LeaderBoard extends AppCompatActivity {
 
     private TextView outputTextbox;
     private RequestQueue queue;
+    /**
+     * This creates a list of users for leader board
+     * @author Nicholas Kirschbaum
+     */
+    ArrayList<Friend> list2 = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +61,7 @@ public class LeaderBoard extends AppCompatActivity {
         animationDrawable.start();
         backButton2 = findViewById(R.id.Leaderboardout);
         outputTextbox = findViewById(R.id.LeaderBoardInsertText);
+        ListView mViewList = (ListView) findViewById(R.id.listliar);
         worldChampionReq();
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +73,11 @@ public class LeaderBoard extends AppCompatActivity {
 
     }
 
+    /**
+     * This is a get request that gets the users with the highest
+     * score and there username and displays them in a list view
+     * @author Nicholas Kirschbaum
+     */
     private void worldChampionReq(){
         String url = mainURL + "/leaderBoard";
 
@@ -75,10 +90,10 @@ public class LeaderBoard extends AppCompatActivity {
                 response -> {
                     try{
                         //JSONArray jsonArray = response.getJSONArray(6);
-
+                        list2.clear();
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
-                        outputTextbox.setText("World Champions:\n");
+                        //outputTextbox.setText("World Champions:\n");
                         for (int i = 0; i < 5; i++){
                             JSONObject friendobj = response.getJSONObject(i);
                             //JSONObject friend = jsonArray.getJSONObject(i);
@@ -87,13 +102,14 @@ public class LeaderBoard extends AppCompatActivity {
                             String curUser = friendobj.getString("user");
                             int score = friendobj.getInt("score");
                             String output = curUser + " " + score;
-
+                            Friend free = new Friend(curUser, score, 0);
+                            list2.add(free);
                             outputTextbox.append(curUser + ": " + score + "\n");
                             Log.i(TAG, output);
 
 
                         }
-
+                        initializeListAdapter();
                     }catch (JSONException e){
                         e.printStackTrace();
                     }
@@ -128,5 +144,14 @@ public class LeaderBoard extends AppCompatActivity {
 
         // Adding request to request queue
         queue.add(request);
+    }
+    /**
+     * This formats the list view with format3 and the list
+     * @author Nicholas Kirschbaum
+     */
+    private void initializeListAdapter() {
+        LeaderBoardListAdapter friendsListAdapter = new LeaderBoardListAdapter(this, R.layout.format3_listview, list2);
+        ListView mViewList = findViewById(R.id.listliar);
+        mViewList.setAdapter(friendsListAdapter);
     }
 }
