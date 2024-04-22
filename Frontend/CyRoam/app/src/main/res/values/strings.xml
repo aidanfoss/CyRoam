@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">AndroidExample</string>
     <string name="textBoxMapTest">\n</string>
+    <string name="username">Username</string>
+    <string name="score">Score</string>
+    <string name="change_score">Change Score</string>
+    <string name="banned">BANNED</string>
+    <string name="if_you_wish_to_manually_change_their_score_put_in_the_score_and_press_enter">If you wish to manually change their score put in the score and press enter:</string>
+    <string name="enter_the_username_of_the_user_in_question">Enter the Username of the user in Question:</string>
+    <string name="admin_leaderboard">Admin LeaderBoard</string>
 </resources>
