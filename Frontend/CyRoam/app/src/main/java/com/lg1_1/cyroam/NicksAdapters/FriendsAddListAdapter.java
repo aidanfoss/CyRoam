@@ -1,4 +1,4 @@
-package com.lg1_1.cyroam.objects;
+package com.lg1_1.cyroam.NicksAdapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,6 +18,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
 import com.lg1_1.cyroam.R;
+import com.lg1_1.cyroam.objects.Friend;
+import com.lg1_1.cyroam.objects.User;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
 
@@ -72,7 +74,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
         btn.setClickable(false);
         //String str1 = Integer.toString(score);
         //String str2 = Integer.toString(Id);
-        user.setText("Friend: "+name);
+        user.setText("Friend: " + name);
         String CurUser = "bossf";
         try {
             WebSocketManager.getInstance().openWebSocketConnection(CurUser, this);
@@ -90,6 +92,7 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
                 //String CurUser = use.getUsername();
 
                 addfriends(CurUser,name);
+
                 putfriends(CurUser,name);
                 //addfriends(name,CurUser);
                 try {
@@ -198,8 +201,8 @@ public class FriendsAddListAdapter extends ArrayAdapter<Friend> implements WebSo
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            userInfo.put("curUsername", curUsername);
-            userInfo.put("friendUsername", Newfriend);
+            userInfo.put("curUsername", Newfriend);
+            userInfo.put("friendUsername", curUsername);
             userInfo.put("friendStatus", true);
 
 
