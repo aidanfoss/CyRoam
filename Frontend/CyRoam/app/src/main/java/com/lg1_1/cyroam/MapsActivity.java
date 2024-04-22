@@ -10,8 +10,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -117,7 +119,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         extras = getIntent().getExtras();
 
         //if the user isnt logged on, then kick them back to the login screen.
-        if (LoginManager.getInstance().getUser() == null){
+        if (LoginManager.getInstance().getUser() == null) {
             Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
             startActivity(intent);
         }
@@ -131,18 +133,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             throw new RuntimeException(e);
         }
 
+
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
         smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
 
-        mQueue = Volley.newRequestQueue(this); //defines volley queue for fillMap
+        //defines volley queue for fillMap todo remove this and put it in pinvolley
+        mQueue = Volley.newRequestQueue(this);
+
+        //define variables used for grabbing user location information
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = new LocationRequest.Builder(PRIORITY_HIGH_ACCURACY, 1000)
                 .setWaitForAccurateLocation(false)
                 .setMinUpdateIntervalMillis(500)
                 .setMaxUpdateDelayMillis(1000)
-                .build(); //todo repair and use the geolocation code
+                .build();
 
+        //check for permissions and ask for them
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -151,26 +158,82 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LOCATION_PERMISSION_REQUEST_CODE);
             return;
         }
-
-        //define and implement UI
+        /*
+          todo set visibility of buttons and UI based on users permission value.
+           If the user has no permissions, only initialize
+           buttons related to score and friends
+        */
+        //define all UI elements
         map = findViewById(R.id.map); //defines the map in the UI
         textView = findViewById(R.id.textView2); //defines debug text screen
-        //define UI
-        // define new pin button variable
-        FloatingActionButton newPinButton = findViewById(R.id.newPinButton);
-        //define discoverButton
-        FloatingActionButton discoverButton = findViewById(R.id.discoverButton);
-        newPinButton.setOnClickListener(v -> {
+
+        FloatingActionButton portalButton = findViewById(R.id.portalButton);
+        FloatingActionButton portalButton1 = findViewById(R.id.portalButton1); //Friends
+        FloatingActionButton portalButton2 = findViewById(R.id.portalButton2); //new Pin
+        FloatingActionButton portalButton3 = findViewById(R.id.portalButton3); //progress
+        FloatingActionButton portalButton4 = findViewById(R.id.portalButton4); //leaderboard
+        FloatingActionButton portalButton5 = findViewById(R.id.portalButton5); //settings
+
+
+        //check users permission value and change function of anything relevant based on that
+        switch (LoginManager.getInstance().getPermission()){
+            case 0: //basic user
+                //turnOnFog();
+                portalButton.setOnClickListener(v-> {
+                    portalButton1.setVisibility(View.VISIBLE);
+                    portalButton3.setVisibility(View.VISIBLE);
+                    portalButton4.setVisibility(View.VISIBLE);
+                    portalButton5.setVisibility(View.VISIBLE);
+                });
+                break;
+            case 1: //pin creator
+                //turnOnFog();
+                portalButton.setOnClickListener(v-> {
+                    portalButton1.setVisibility(View.VISIBLE);
+                    portalButton2.setVisibility(View.VISIBLE);
+                    portalButton3.setVisibility(View.VISIBLE);
+                    portalButton4.setVisibility(View.VISIBLE);
+                    portalButton5.setVisibility(View.VISIBLE);
+                });
+                break;
+            case 2: //admin
+                //dont turn on fog, admins shouldnt see it
+                portalButton.setOnClickListener(v-> {
+                    portalButton1.setVisibility(View.VISIBLE);
+                    portalButton2.setVisibility(View.VISIBLE);
+                    portalButton3.setVisibility(View.VISIBLE);
+                    portalButton4.setVisibility(View.VISIBLE);
+                    portalButton5.setVisibility(View.VISIBLE);
+                });
+                textView.setVisibility(View.VISIBLE);
+                break;
+        }
+
+
+        //implement buttons
+        portalButton1.setOnClickListener(v -> {
+            Intent intent = new Intent(MapsActivity.this, FriendActivity.class);
+        });
+        portalButton2.setOnClickListener(v -> { //newPinButton
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
             intent.putExtra("lat", lat);
             intent.putExtra("lng", lng);
             startActivity(intent);  // go to NewPinActivity
         });
-        discoverButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, PortalScreenActivity.class);
-            startActivity(intent);  // go to portal activity
+        portalButton3.setOnClickListener(v -> { //progress Activity
+//            Intent intent = new Intent(MapsActivity.this, progressActivity.class);
+        });
+        portalButton4.setOnClickListener(v-> {
+            Intent intent = new Intent(MapsActivity.this, LeaderBoard.class);
+            startActivity(intent);
+        });
+        portalButton5.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
+//            Intent intent = new Intent(MapsActivity.this, settingsActivity.class);
+//            startActivity(intent);
         });
 
+
+        //map fragment info
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
@@ -178,10 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Initialize location callback to receive location updates
         locationCallback = new LocationCallback() {
             @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
+            public void onLocationResult(@NonNull LocationResult locationResult) {
                 for (Location location : locationResult.getLocations()) {
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     lat = location.getLatitude();
