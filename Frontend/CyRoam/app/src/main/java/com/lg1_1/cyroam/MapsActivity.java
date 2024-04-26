@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,15 +39,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
 import com.lg1_1.cyroam.Managers.LoginManager;
+import com.lg1_1.cyroam.Managers.WebSocketManager;
+import com.lg1_1.cyroam.aidansActivities.PinInformationActivity;
 import com.lg1_1.cyroam.objects.Pin;
 import com.lg1_1.cyroam.objects.User;
+import com.lg1_1.cyroam.volley.friendVolley;
+import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.volley.progressVolley;
 import com.lg1_1.cyroam.websockets.WebSocketListener;
-import com.lg1_1.cyroam.Managers.WebSocketManager;
-import com.lg1_1.cyroam.volley.pinVolley;
-import com.lg1_1.cyroam.volley.friendVolley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,8 +64,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Bundle extras;
     private User user;
-
-    private TextView textView;
+    private boolean testBool = false;
+    protected TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
 
 
@@ -74,25 +73,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private friendVolley friendVolley;
     private AddFriends addFriends;
     private progressVolley progressVolley;
-    private RequestQueue mQueue; // define volley request queue
+    protected RequestQueue mQueue; // define volley request queue
 
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
 
     //location & locationPermissions things
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
-    private FusedLocationProviderClient fusedLocationClient;
+    protected static FusedLocationProviderClient fusedLocationClient;
     //    private Location lastKnownLocation;
 //    private Boolean locationPermissionGranted;
 //    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private LocationRequest locationRequest;
+    protected LocationRequest locationRequest;
     private LocationCallback locationCallback;
-    private double lat = 0;
-    private double lng = 0;
+    protected double lat = 0;
+    protected double lng = 0;
 
 
     GoogleMap gMap;
     FrameLayout map;
+
+    public static void setFusedLocationProviderClient(FusedLocationProviderClient mockFusedLocationClient) {
+        fusedLocationClient = mockFusedLocationClient;
+    }
 
     /**
      * Does multiple things on opening of this activity
@@ -119,6 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         extras = getIntent().getExtras();
 
         //if the user isnt logged on, then kick them back to the login screen.
+        LoginManager.getInstance().setUser();
         if (LoginManager.getInstance().getUser() == null) {
             Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -127,6 +131,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize websocketConnections
         try {
             Log.v(TAG, "onCreate Websocket Try");
+            user = LoginManager.getInstance().setUser();
             WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
         } catch (URISyntaxException e) {
             Log.w(TAG, "onCreate WebSocket Fail");
@@ -173,7 +178,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FloatingActionButton portalButton3 = findViewById(R.id.portalButton3); //progress
         FloatingActionButton portalButton4 = findViewById(R.id.portalButton4); //leaderboard
         FloatingActionButton portalButton5 = findViewById(R.id.portalButton5); //settings
-
 
         //check users permission value and change function of anything relevant based on that
         switch (LoginManager.getInstance().getPermission()){
@@ -265,6 +269,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            e.printStackTrace();
 //        }
     }
+
 
     /**
      * @author Aidan Foss
@@ -515,7 +520,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * stops location updates
      */
     private void stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback);
+        if (locationCallback != null && fusedLocationClient != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback)
+                    .addOnSuccessListener(aVoid -> Log.d(TAG, "Location updates stopped successfully."))
+                    .addOnFailureListener(e -> Log.e(TAG, "Failed to stop location updates.", e));
+        }
     }
 
     /**
@@ -529,8 +538,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         pinVolley.getInstance(this).fetchPinData(wsPinIdInput, new pinVolley.FetchPinCallback() {
             @Override
             public void onSuccess(Pin pin) {
-                textView.append("Pin Data Received Via WebSocket + Volley: " + pin.getDebugDescription() + "\n");
-                Log.d("Aidan "+ TAG + " Volley Websocket", "Pin Get Req: " + pin.getDebugDescription());
+                textView = findViewById(R.id.textView2);  // Ensure this ID matches your layout
+                if (textView != null) {
+                    textView.append("Pin Data Received Via WebSocket + Volley: " + pin.getDebugDescription() + "\nSuccess!\n");
+                    Log.d("Aidan "+ TAG + " Volley Websocket", "Pin Get Req: " + pin.getDebugDescription());
+                } else {
+                    Log.e("MapsActivity", "TextView not initialized");
+                }
+                Marker marker = gMap.addMarker(new MarkerOptions()
+                        .position(pin.getPos())
+                        .title(pin.getName())
+                        .snippet(pin.getDescription())
+                        .icon(BitmapDescriptorFactory.defaultMarker())
+                );
+                assert marker != null;
+                marker.setTag(pin);
+                testBool = true;
             }
 
             @Override
@@ -563,5 +586,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+    }
+
+
+    //for testing, will end up being deprecated
+    public void setFusedLocationClient(FusedLocationProviderClient mockFusedLocationClient) {
+        fusedLocationClient = mockFusedLocationClient;
     }
 }
