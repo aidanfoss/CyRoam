@@ -22,6 +22,7 @@ public class LoginManager {
     boolean isLoggedIn;
     private int score;
     private int permission;
+    private int id;
 
     /*
     * 0 is basic user
@@ -33,6 +34,22 @@ public class LoginManager {
         //pretty sure this is supposed to be empty
         //get request for score
     }
+    public User setUser(){
+        //bypass function to ensure always logged into bossf
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", "bossf");
+            jsonObject.put("isUser", true);
+            jsonObject.put("message", "correct");
+            jsonObject.put("userID", 1);
+            jsonObject.put("permissions", 2);
+            jsonObject.put("score", 123);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        user = new User("bossf",1,jsonObject);
+        return user;
+    }
 
     public static LoginManager getInstance() {
         if (instance == null) {
@@ -40,7 +57,24 @@ public class LoginManager {
         }
         return instance;
     }
-
+    public boolean logInBypass(String username, String password, Context context){
+        JSONObject jsonObject = new JSONObject();
+        id = 1;
+        permission = 2;
+        try {
+            jsonObject.put("username", username);
+            jsonObject.put("isUser", true);
+            jsonObject.put("message", "correct");
+            jsonObject.put("userID", 1);
+            jsonObject.put("permissions", 2);
+            jsonObject.put("score", 123);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        //store hardcoded user as logged in user
+        user = new User(username, id, jsonObject);
+        return true;
+    }
     public void logIn(String username, String password, Context context) {
         try {
             if (!isLoggedIn) {
