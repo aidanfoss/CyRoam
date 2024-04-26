@@ -60,7 +60,7 @@ public class LeaderBoard extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
         backButton2 = findViewById(R.id.Leaderboardout);
-        outputTextbox = findViewById(R.id.LeaderBoardInsertText);
+        //outputTextbox = findViewById(R.id.LeaderBoardInsertText);
         ListView mViewList = (ListView) findViewById(R.id.listliar);
         worldChampionReq();
         backButton2.setOnClickListener(new View.OnClickListener() {
