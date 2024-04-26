@@ -70,6 +70,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
 
     private Button bybyButton;
     private EditText usernameEditText;
+
+    Boolean checker = false;
     private RequestQueue queue;
 
     ArrayList<Friend> list2 = new ArrayList<>();
@@ -138,7 +140,7 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
         bybyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddFriends.this, PortalScreenActivity.class);
+                Intent intent = new Intent(AddFriends.this, FriendsActivity.class);
                 startActivity(intent);
             }
 
@@ -173,7 +175,7 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
                 response -> {
                     try{
 
-
+                        checker = true;
                         JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
 

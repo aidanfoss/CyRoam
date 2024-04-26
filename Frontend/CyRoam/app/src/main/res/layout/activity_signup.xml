@@ -9,12 +9,13 @@
     android:background="@drawable/signupbackground1">
 
     <TextView
+        android:id="@+id/textView12log"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
-        android:text="Signup"
+        android:text="SignUp"
         android:textColor="@color/white"
         android:textSize="35dp" />
 
@@ -83,28 +84,29 @@
         <Button
             android:id="@+id/signup_login_btn"
             android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginRight="10dp"
+            android:background="@drawable/roundstyle"
             android:backgroundTint="#F1BE48"
             android:text="Login"
             android:textColor="#ffffff"
-            android:background="@drawable/roundstyle"
             android:textSize="20sp" />
 
         <Button
             android:id="@+id/signup_signup_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:layout_width="153dp"
+            android:layout_height="64dp"
             android:layout_marginLeft="10dp"
+            android:background="@drawable/roundstyle"
             android:backgroundTint="#F1BE48"
             android:text="Signup"
             android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:background="@drawable/roundstyle" />
-
+            android:textSize="20sp" />
 
 
     </LinearLayout>
+
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

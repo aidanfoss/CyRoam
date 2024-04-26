@@ -5,107 +5,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="18dp"
-    android:background="@drawable/animation_creation"
+
     android:id="@+id/mainlayout"
     tools:context=".ProfileActivity">
+
 
     <TextView
         android:id="@+id/profileTitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="Profile"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054" />
 
-    <Button
-        android:id="@+id/backButtonProfileScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="483dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="1.0">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.749"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165"
-        tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textViewUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+            <TextView
+                android:id="@+id/ScoreTextiew"
+                android:layout_width="315dp"
+                android:layout_height="50dp"
+                android:layout_margin="50dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="@drawable/backgound_white_textbox"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textViewScoreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Score:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+            <TextView
+                android:id="@+id/distanceTextView"
+                android:layout_width="315dp"
+                android:layout_height="50dp"
+                android:layout_margin="50dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="@drawable/backgound_white_textbox"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/pinTextView"
+                android:layout_width="315dp"
+                android:layout_height="50dp"
+                android:layout_margin="50dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="@drawable/backgound_white_textbox"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/rankingTextView"
+                android:layout_width="315dp"
+                android:layout_height="50dp"
+                android:layout_margin="50dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:background="@drawable/backgound_white_textbox"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/textViewScoreOutput"
-        android:layout_width="139dp"
-        android:layout_height="30dp"
-        android:text="UserScore"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+        </LinearLayout>
+    </ScrollView>
 
-    <TextView
-        android:id="@+id/textViewPinsTitle"
-        android:layout_width="68dp"
-        android:layout_height="38dp"
-        android:text="Pins:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
-
-    <TextView
-        android:id="@+id/textViewPinsCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PinsAquired"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,6 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,9 +17,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONObject;
 
 public class AdminLeaderBoardControl extends AppCompatActivity {
     /**
@@ -55,7 +52,7 @@ public class AdminLeaderBoardControl extends AppCompatActivity {
      */
     private EditText scoreEditText;
 
-    private RequestQueue queue;
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,17 +94,118 @@ public class AdminLeaderBoardControl extends AppCompatActivity {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    void setScore(String curUsername, int score){
+        String url = mainURL + "/setScore";
+
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("username", curUsername);
+            userInfo.put("score", score);
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                userInfo,
+                response -> {
+                    try{
+
+
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
+                        Log.i(TAG, "request success");
+                        //outputtext.setText(curUsername + " Friends:\n");
+
+                        //}
+
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                    }
+
+                    // output = response.toString();
+
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e(TAG,error.getMessage());
+                        // tvResponse.setText(error.getMessage());
+                    }
+                }
+        ){
+
+        };
+
+        // Adding request to request queue
+        queue.add(request);
+    }
+
     private void leaderBoardBan(String curUsername){
-        String url = mainURL + "/deleteFriend/" + curUsername;
+        String url = mainURL + "/userPerms";
+
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("username", curUsername);
+            userInfo.put("promotion", -1);
+
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.DELETE,
+                Request.Method.PUT,
                 url,
-                null,
+                userInfo,
                 response -> {
                     try{
-                        JSONArray jsonArray = response.getJSONArray("leaderBoardBan");
+
+
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
+                        //outputtext.setText(curUsername + " Friends:\n");
+
+                        //}
 
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -125,60 +223,11 @@ public class AdminLeaderBoardControl extends AppCompatActivity {
                     }
                 }
         ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
+
         };
+
         // Adding request to request queue
         queue.add(request);
     }
-    private void setScore(String curUsername,int score){
-        String url = mainURL + "/setScore/" + curUsername + "/" + score;
 
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.DELETE,
-                url,
-                null,
-                response -> {
-                    try{
-                        JSONArray jsonArray = response.getJSONArray("setScore");
-                        Log.i(TAG, "request success");
-
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-
-                    // output = response.toString();
-
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG,error.getMessage());
-                        // tvResponse.setText(error.getMessage());
-                    }
-                }
-        ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
-        // Adding request to request queue
-        queue.add(request);
-    }
 }
