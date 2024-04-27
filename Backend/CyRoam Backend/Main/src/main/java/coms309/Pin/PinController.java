@@ -91,4 +91,14 @@ public class PinController {
         pinRepository.save(pinRepository.findById(id));
         return text;
     }
+
+    @Operation(summary = "Update image path of a given Pin")
+    @ApiResponse(responseCode = "200", description = "Updated image path for the given Pin", content = { @Content(mediaType = "string",
+            schema = @Schema(implementation = Pin.class)) })
+    @PutMapping(path = "/pins/{id}/imagePath")
+    String setImagePath(@Parameter(description = "id of Pin to be updated") @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The updated image path") @RequestBody String text) {
+        pinRepository.findById(id).setImagePath(text);
+        pinRepository.save(pinRepository.findById(id));
+        return text;
+    }
 }
