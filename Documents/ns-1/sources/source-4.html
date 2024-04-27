@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > PinSocket</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">coms309.Pin</a>
+</div>
+
+<h1>Coverage Summary for Class: PinSocket (coms309.Pin)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PinSocket</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.5%
+  </span>
+  <span class="absValue">
+    (3/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package coms309.Pin;
+&nbsp;import jakarta.websocket.*;
+&nbsp;import jakarta.websocket.server.ServerEndpoint;
+&nbsp;import org.json.JSONObject;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Controller;
+&nbsp;
+&nbsp;import java.io.EOFException;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.function.Consumer;
+&nbsp;
+&nbsp;@Controller
+&nbsp;@ServerEndpoint(value = &quot;/pins/socket&quot;)
+<b class="fc">&nbsp;public class PinSocket {</b>
+&nbsp;
+&nbsp;    private static PinRepository pinRepository;
+&nbsp;
+&nbsp;    @Autowired
+<b class="fc">&nbsp;    public void setPinRepository(PinRepository repo) {pinRepository = repo;}</b>
+&nbsp;
+&nbsp;    private static List&lt;Session&gt; sessions;
+&nbsp;
+<b class="fc">&nbsp;    private final Logger logger = LoggerFactory.getLogger(PinSocket.class);</b>
+&nbsp;
+&nbsp;    @OnOpen
+&nbsp;    public void onOpen(Session session) throws IOException {
+<b class="nc">&nbsp;        if (sessions == null) {</b>
+<b class="nc">&nbsp;            sessions = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;            pinRepository.save(new Pin(4, 4, &quot;test&quot;));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        logger.info(&quot;onOpen Started&quot;);</b>
+<b class="nc">&nbsp;        logger.info(&quot;Session &quot; + session.getId() + &quot; connected&quot;);</b>
+<b class="nc">&nbsp;        sessions.add(session);</b>
+<b class="nc">&nbsp;        logger.info(&quot;Number of sessions: &quot; + sessions.size());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnMessage
+&nbsp;    public void onMessage(Session session, String pin) {
+<b class="nc">&nbsp;        logger.info(&quot;onMessage Started with session &quot; + session.getId());</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; sessions.size(); i++) {</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                logger.info(&quot;Sent to session &quot; + sessions.get(i).getId());</b>
+<b class="nc">&nbsp;                sessions.get(i).getBasicRemote().sendText(pin);</b>
+<b class="nc">&nbsp;            } catch (EOFException e) {</b>
+<b class="nc">&nbsp;                logger.error(&quot;EOFException: &quot; + e.getMessage());</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            } catch (IOException e) {</b>
+<b class="nc">&nbsp;                logger.error(&quot;IOException: &quot; + e.getMessage());</b>
+<b class="nc">&nbsp;                e.printStackTrace();</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @OnClose
+&nbsp;    public void onClose(Session session) {
+<b class="nc">&nbsp;            logger.info(&quot;Session &quot; + session.getId() + &quot; disconnected&quot;);</b>
+<b class="nc">&nbsp;            sessions.remove(session);</b>
+<b class="nc">&nbsp;            logger.info(&quot;Number of sessions: &quot; + sessions.size());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-23 21:34</div>
+</div>
+</body>
+</html>
