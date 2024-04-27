@@ -22,11 +22,11 @@ public class NickAdminLBCTest {
     @Test
     public void LeaderBoardControlTest() {
         String testString = "NickTextCase";
-        String password = "123";
+        int password = 123;
         String success = "success";
         onView(withId(R.id.signup_username_edt)).perform(typeText(testString));
-        onView(withId(R.id.emailthe43t1st)).perform(typeText(testString));
-        onView(withId(R.id.adminscorebutton)).perform(click());
+
+        onView(withId(R.id.bannedbutton)).perform(click());
 
         //onView(withId(R.id.checker)).check(matches(matchesBoolean(true)));
         //onView(withId(R.id.submit)).perform(click());
