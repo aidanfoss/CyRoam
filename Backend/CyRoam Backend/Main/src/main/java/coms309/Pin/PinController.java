@@ -78,6 +78,7 @@ public class PinController {
     @PutMapping(path = "/pins/{id}/splash")
     String setSplashText(@Parameter(description = "id of Pin to be updated") @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The updated splash text") @RequestBody String text) {
         pinRepository.findById(id).setSplash(text);
+        pinRepository.save(pinRepository.findById(id));
         return text;
     }
 
@@ -87,6 +88,7 @@ public class PinController {
     @PutMapping(path = "/pins/{id}/description")
     String setDescriptionText(@Parameter(description = "id of Pin to be updated") @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The updated description text") @RequestBody String text) {
         pinRepository.findById(id).setDescription(text);
+        pinRepository.save(pinRepository.findById(id));
         return text;
     }
 }
