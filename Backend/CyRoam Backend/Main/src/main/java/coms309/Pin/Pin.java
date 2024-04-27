@@ -101,4 +101,8 @@ public class Pin {
     public void setImagePath(String path) {
         imagePath = path;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
 }
