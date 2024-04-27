@@ -27,6 +27,13 @@ public class Pin {
     private double y;
     private String name;
 
+    private String splash;
+
+    private String description;
+
+    @ManyToMany
+    private List<User> users;
+
     public void setId(int id) {
         this.id = id;
     }
@@ -73,5 +80,21 @@ public class Pin {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSplash() {
+        return splash;
+    }
+
+    public void setSplash(String splash) {
+        this.splash = splash;
     }
 }

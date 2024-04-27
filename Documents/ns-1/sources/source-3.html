@@ -1,0 +1,196 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > PinController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">coms309.Pin</a>
+</div>
+
+<h1>Coverage Summary for Class: PinController (coms309.Pin)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PinController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (16/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package coms309.Pin;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import coms309.Users.UserInterface;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.Parameter;
+&nbsp;import io.swagger.v3.oas.annotations.media.Content;
+&nbsp;import io.swagger.v3.oas.annotations.media.Schema;
+&nbsp;import io.swagger.v3.oas.annotations.responses.ApiResponse;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class PinController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    PinRepository pinRepository;
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Get all Pins&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Found the Pins&quot;, content = { @Content(mediaType = &quot;json&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @GetMapping(path = &quot;/pins&quot;)
+&nbsp;    List&lt;Pin&gt; getAllPins(){
+<b class="nc">&nbsp;        return pinRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Get a Pin by its id&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Found the Pin&quot;, content = { @Content(mediaType = &quot;json&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @GetMapping(path = &quot;/pins/{id}&quot;)
+&nbsp;    Pin getPinById(@Parameter(description = &quot;id of Pin to be searched&quot;) @PathVariable int id){
+<b class="fc">&nbsp;        return pinRepository.findById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Create a Pin&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Created the Pin&quot;, content = { @Content(mediaType = &quot;json&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @PostMapping(path = &quot;/pins&quot;)
+&nbsp;    Pin createPin(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = &quot;x, y, and name of Pin to be created&quot;) @RequestBody Pin pin) {
+<b class="fc">&nbsp;        if (pin == null) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        pinRepository.save(pin);</b>
+<b class="fc">&nbsp;        return pin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Delete a Pin&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Deleted the Pin&quot;, content = { @Content(mediaType = &quot;json&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @DeleteMapping(path = &quot;/pins/{id}&quot;)
+&nbsp;    Pin deletePinById(@Parameter(description = &quot;id of Pin to be deleted&quot;) @PathVariable int id) {
+<b class="fc">&nbsp;        Pin tempPin = pinRepository.findById(id);</b>
+<b class="fc">&nbsp;        pinRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        return tempPin;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //Deletes all pins given an array of pin id&#39;s.
+&nbsp;    @Operation(summary = &quot;Delete all Pins in a given array&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Deleted the given Pins&quot;, content = { @Content(mediaType = &quot;json&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @DeleteMapping(path = &quot;/pins&quot;)
+&nbsp;    List&lt;Pin&gt; deleteMultiPins(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = &quot;Array of the ids of the Pins to be deleted&quot;) @RequestBody List&lt;Integer&gt; ids) {
+<b class="fc">&nbsp;        List&lt;Pin&gt; deletedPins = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (int i : ids) {</b>
+<b class="fc">&nbsp;            deletedPins.add(pinRepository.findById(i));</b>
+<b class="fc">&nbsp;            pinRepository.deleteById(i);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return deletedPins;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Update splash text of a given Pin&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Updated splash text for the given Pin&quot;, content = { @Content(mediaType = &quot;string&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @PutMapping(path = &quot;/pins/{id}/splash&quot;)
+&nbsp;    String setSplashText(@Parameter(description = &quot;id of Pin to be updated&quot;) @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = &quot;The updated splash text&quot;) @RequestBody String text) {
+<b class="fc">&nbsp;        pinRepository.findById(id).setSplash(text);</b>
+<b class="fc">&nbsp;        return text;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Update description text of a given Pin&quot;)
+&nbsp;    @ApiResponse(responseCode = &quot;200&quot;, description = &quot;Updated description text for the given Pin&quot;, content = { @Content(mediaType = &quot;string&quot;,
+&nbsp;            schema = @Schema(implementation = Pin.class)) })
+&nbsp;    @PutMapping(path = &quot;/pins/{id}/description&quot;)
+&nbsp;    String setDescriptionText(@Parameter(description = &quot;id of Pin to be updated&quot;) @PathVariable int id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = &quot;The updated description text&quot;) @RequestBody String text) {
+<b class="nc">&nbsp;        pinRepository.findById(id).setDescription(text);</b>
+<b class="nc">&nbsp;        return text;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-23 21:34</div>
+</div>
+</body>
+</html>
