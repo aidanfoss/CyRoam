@@ -10,8 +10,6 @@ import java.util.List;
 
 @Repository
 public interface DiscoveryRepository extends JpaRepository<Discovery, Long> {
-
-
     @Query("SELECT d.pin FROM Discovery d WHERE d.user.uId = :user_id")
     List<Pin> findPinsByUser(@Param("user_id") long user_id);
 }
