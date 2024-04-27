@@ -2,6 +2,7 @@ package coms309.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Discovery.Discovery;
+import coms309.FogDiscovery.FogDiscovery;
 import coms309.Friends.FriendObj;
 import coms309.Pin.Pin;
 import coms309.Statistics.Statistics;
@@ -36,6 +37,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.LAZY)
     private List<Discovery> discoveries;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<FogDiscovery> fogDiscoveries;
 
     //contructor
     public User(String username, String password, int score, int permissions) {

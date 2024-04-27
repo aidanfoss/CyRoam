@@ -2,10 +2,8 @@ package coms309.Pin;
 
 import coms309.Comment.*;
 import coms309.Discovery.Discovery;
-import coms309.Statistics.Statistics;
 import coms309.Users.User;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +28,8 @@ public class Pin {
     private String splash;
 
     private String description;
+
+    private String imagePath;
 
     @ManyToMany
     private List<User> users;
@@ -96,5 +96,13 @@ public class Pin {
 
     public void setSplash(String splash) {
         this.splash = splash;
+    }
+
+    public void setImagePath(String path) {
+        imagePath = path;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }
