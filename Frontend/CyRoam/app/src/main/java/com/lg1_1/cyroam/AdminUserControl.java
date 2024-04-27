@@ -68,7 +68,7 @@ public class AdminUserControl extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String curUsername = usernameEditText.getText().toString();
-                banRequest(curUsername);
+                //banRequest(curUsername);
             }
         });
     }
