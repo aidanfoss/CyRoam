@@ -136,9 +136,9 @@ public class pinVolley {
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
                 response -> {
-                    Log.e(TAG, " CREATEPIN RESPONSE: " + response.toString());
+                    Log.v(TAG, " CREATEPIN RESPONSE: " + response.toString());
                     try {
-                        int id = response.getInt("pinId");
+                        int id = response.getInt("id");
                         Log.w(TAG, "pinId recieved");
                         callback.onSuccess(id);
                     } catch (JSONException e) {

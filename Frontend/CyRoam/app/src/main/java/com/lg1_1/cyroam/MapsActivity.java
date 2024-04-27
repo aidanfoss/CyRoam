@@ -64,7 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private Bundle extras;
     private User user;
-    private boolean testBool = false;
+    private boolean portalOpen = false;
     protected TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
 
@@ -184,34 +184,58 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             case 0: //basic user
                 //turnOnFog();
                 portalButton.setOnClickListener(v-> {
-                    portalButton1.setVisibility(View.VISIBLE);
-                    portalButton3.setVisibility(View.VISIBLE);
-                    portalButton4.setVisibility(View.VISIBLE);
-                    portalButton5.setVisibility(View.VISIBLE);
+                    if(portalButton1.getVisibility() == View.INVISIBLE) {
+                        portalButton1.setVisibility(View.VISIBLE);
+                        portalButton3.setVisibility(View.VISIBLE);
+                        portalButton4.setVisibility(View.VISIBLE);
+                        portalButton5.setVisibility(View.VISIBLE);
+                    } else {
+                        portalButton1.setVisibility(View.INVISIBLE);
+                        portalButton3.setVisibility(View.INVISIBLE);
+                        portalButton4.setVisibility(View.INVISIBLE);
+                        portalButton5.setVisibility(View.INVISIBLE);
+                    }
                 });
                 break;
             case 1: //pin creator
                 //turnOnFog();
                 portalButton.setOnClickListener(v-> {
-                    portalButton1.setVisibility(View.VISIBLE);
-                    portalButton2.setVisibility(View.VISIBLE);
-                    portalButton3.setVisibility(View.VISIBLE);
-                    portalButton4.setVisibility(View.VISIBLE);
-                    portalButton5.setVisibility(View.VISIBLE);
+                    if(portalButton1.getVisibility() == View.INVISIBLE) {
+                        portalButton1.setVisibility(View.VISIBLE);
+                        portalButton3.setVisibility(View.VISIBLE);
+                        portalButton2.setVisibility(View.VISIBLE);
+                        portalButton4.setVisibility(View.VISIBLE);
+                        portalButton5.setVisibility(View.VISIBLE);
+                    } else {
+                        portalButton1.setVisibility(View.INVISIBLE);
+                        portalButton3.setVisibility(View.INVISIBLE);
+                        portalButton2.setVisibility(View.INVISIBLE);
+                        portalButton4.setVisibility(View.INVISIBLE);
+                        portalButton5.setVisibility(View.INVISIBLE);
+                    }
                 });
                 break;
             case 2: //admin
                 //dont turn on fog, admins shouldnt see it
                 portalButton.setOnClickListener(v-> {
-                    portalButton1.setVisibility(View.VISIBLE);
-                    portalButton2.setVisibility(View.VISIBLE);
-                    portalButton3.setVisibility(View.VISIBLE);
-                    portalButton4.setVisibility(View.VISIBLE);
-                    portalButton5.setVisibility(View.VISIBLE);
+                    if(portalButton1.getVisibility() == View.INVISIBLE) {
+                        portalButton1.setVisibility(View.VISIBLE);
+                        portalButton3.setVisibility(View.VISIBLE);
+                        portalButton2.setVisibility(View.VISIBLE);
+                        portalButton4.setVisibility(View.VISIBLE);
+                        portalButton5.setVisibility(View.VISIBLE);
+                    } else {
+                        portalButton1.setVisibility(View.INVISIBLE);
+                        portalButton3.setVisibility(View.INVISIBLE);
+                        portalButton2.setVisibility(View.INVISIBLE);
+                        portalButton4.setVisibility(View.INVISIBLE);
+                        portalButton5.setVisibility(View.INVISIBLE);
+                    }
                 });
                 textView.setVisibility(View.VISIBLE);
                 break;
         }
+
 
 
         //implement buttons
@@ -268,6 +292,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Log.e("Aidan WebSocket", "Websocket Error: " + e.toString());
 //            e.printStackTrace();
 //        }
+    }
+
+    private void toggleUserButtons() {
+
     }
 
 
@@ -553,7 +581,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 );
                 assert marker != null;
                 marker.setTag(pin);
-                testBool = true;
             }
 
             @Override

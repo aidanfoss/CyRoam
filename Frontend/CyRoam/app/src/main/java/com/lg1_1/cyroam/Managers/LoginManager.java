@@ -129,6 +129,8 @@ public class LoginManager {
     }
 
     public int getPermission(){
+        //hardcode in admin perms here
+        permission = 2;
         return permission;
     }
 
