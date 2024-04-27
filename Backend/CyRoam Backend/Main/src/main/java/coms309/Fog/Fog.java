@@ -29,11 +29,11 @@ public class Fog {
 
     }
 
-    void setImagePath(String path) {
-        imagePath = path;
+    public void setImagePath(String imagePathpath) {
+        this.imagePath = imagePath;
     }
 
-    void setX(double x) {
+    public void setX(double x) {
         this.x = x;
     }
 
@@ -49,7 +49,7 @@ public class Fog {
         return y;
     }
 
-    String getImagePath() {
+    public String getImagePath() {
         return imagePath;
     }
 }
