@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -30,10 +28,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.objects.Friend;
-import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
-import com.lg1_1.cyroam.websockets.WebSocketListener;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
+import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
+import com.lg1_1.cyroam.objects.Friend;
+import com.lg1_1.cyroam.websockets.WebSocketListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -85,12 +83,14 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_friends);
+        /**
+         * //Gradient Background
         ConstraintLayout constraintLayout = findViewById(R.id.main2);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-
+        */
 
 
 
