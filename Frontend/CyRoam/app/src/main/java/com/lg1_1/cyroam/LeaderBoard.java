@@ -104,7 +104,7 @@ public class LeaderBoard extends AppCompatActivity {
                             String output = curUser + " " + score;
                             Friend free = new Friend(curUser, score, 0);
                             list2.add(free);
-                            outputTextbox.append(curUser + ": " + score + "\n");
+                            //outputTextbox.append(curUser + ": " + score + "\n");
                             Log.i(TAG, output);
 
 
