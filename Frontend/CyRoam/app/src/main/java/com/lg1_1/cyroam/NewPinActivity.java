@@ -10,10 +10,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
-
-import com.lg1_1.cyroam.objects.Pin;
-import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
+import com.lg1_1.cyroam.volley.pinVolley;
 import com.lg1_1.cyroam.websockets.pinWebSocket;
 
 /**
@@ -75,19 +73,25 @@ public class NewPinActivity extends AppCompatActivity {
 
                 //TODO make the coordinates grab from the device rather than manual input.
                 /* grab coordinates from user inputs */
-                double longitudeIn = Double.parseDouble(String.valueOf(longitudeText.getText()));
-                double latitudeIn = Double.parseDouble(String.valueOf(latitudeText.getText()));
+                double longitudeIn = 0;
+                double latitudeIn = 0;
+                try {
+                    longitudeIn = Double.parseDouble(longitudeText.getText().toString());
+                    latitudeIn = Double.parseDouble(latitudeText.getText().toString());
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "Invalid number format", e);
+                    //Toast.makeText(this, "Please enter valid coordinates", Toast.LENGTH_SHORT).show();
+                    return; // Stop further execution
+                }
                 String name = nameText.getText().toString();
 
+
                 //todo put post here
+                double finalLongitudeIn = longitudeIn;
+                double finalLatitudeIn = latitudeIn;
                 volley.createPin(latitudeIn, longitudeIn, name, new pinVolley.CreatePinCallback() {
                     @Override
                     public void onSuccess(int idSuccess) {
-                        Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
-                        intent.putExtra("LONGITUDE", latitudeIn);
-                        intent.putExtra("LATITUDE", longitudeIn);
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("PINID", idSuccess);
                         Log.d(TAG, String.valueOf(idSuccess));
 
                         Log.v(TAG, "Starting websocket send");
@@ -96,6 +100,11 @@ public class NewPinActivity extends AppCompatActivity {
                         if (WebSocketManager.getInstance().isConnected()) {
                             WebSocketManager.getInstance().sendAidan(String.valueOf(idSuccess));
                         }
+                        Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
+                        intent.putExtra("LONGITUDE", finalLatitudeIn);
+                        intent.putExtra("LATITUDE", finalLongitudeIn);
+                        intent.putExtra("NAME", name);
+                        startActivity(intent);
                         finish();
                     }
                     @Override
@@ -104,19 +113,7 @@ public class NewPinActivity extends AppCompatActivity {
                     }
                 });
 
-                Pin newPin = new Pin(longitudeIn,latitudeIn,name);
-
-                //todo add websocket broadcast
-
-
-                Intent intent = new Intent(NewPinActivity.this, MapsActivity.class);
-                intent.putExtra("LONGITUDE", latitudeIn);
-                intent.putExtra("LATITUDE", longitudeIn);
-                intent.putExtra("NAME", name);
-
-                //intent.putExtra("PIN", newPin);
-
-                startActivity(intent);  // go to MainActivity with the key-value data
+                //Pin newPin = new Pin(longitudeIn,latitudeIn,name);
             }
         });
     }
