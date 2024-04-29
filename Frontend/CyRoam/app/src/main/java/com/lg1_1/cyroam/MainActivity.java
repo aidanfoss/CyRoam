@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.lg1_1.cyroam.Managers.LoginManager;
+
 /**
  * Activity that establishes anything used throughout the whole app
  * Automatically transitions you to the login activity.
@@ -26,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         /*For the time being, im going to call for the location permissions in the mapActivity.
         Theres a reason google says to call it in main, but it doesnt seem to matter
         at the moment so im just going to do it there until i run into that issue*/
-
+        LoginManager.getInstance().logInBypass("bossf", "123", this);
         //Moves to login screen automatically
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
