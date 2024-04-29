@@ -7,10 +7,10 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
 import com.lg1_1.cyroam.objects.User;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class userVolley {
@@ -18,20 +18,21 @@ public class userVolley {
     private final String BASE_URL = MainActivity.url;
     @SuppressLint("StaticFieldLeak")
     private static userVolley instance;
-    private RequestQueue queue;
+    private final RequestQueue queue;
     private Context context;
 
     /**
      * userVolley constructor, should likely stay empty.
      * @author Aidan Foss
      */
-    private userVolley(Context context){
-
+    private userVolley(){
+        queue = Volley.newRequestQueue(context);
     }
 
-    public static userVolley getInstance(Context context) {
+    public userVolley getInstance(Context context) {
         if (instance == null) {
-            instance = new userVolley(context);
+            this.setContext(context);
+            instance = new userVolley();
         }
         return instance;
     }
@@ -58,7 +59,7 @@ public class userVolley {
                     if(response.getString("username").equals(username)){
                         if(response.getBoolean("success")){ //if the server verifies the login information
                             int id = response.getInt("userID");
-                            Log.v(TAG, "UserID Received " +  String.valueOf(response.getInt("userID")));
+                            Log.v(TAG, "UserID Received " + response.getInt("userID"));
                             User outUser = new User(username, id, response);
                             callback.loggedIn(outUser);
                         }
@@ -77,6 +78,10 @@ public class userVolley {
         queue.add(request);
     }
 
+    private void setContext(Context context) {
+        this.context = context;
+    }
+
     public interface logInCallback {
         void loggedIn(User user);
         void logInFailure(String failResponse);
@@ -85,11 +90,11 @@ public class userVolley {
 
     /**
      * Might be useful if we ever want to implement updating a username
-     * @param oldUser
-     * @param newUser
-     * @param password
-     * @param ID
-     * @param callback
+     * @param oldUser old username
+     * @param newUser new username
+     * @param password current password
+     * @param ID current id
+     * @param callback handler
      */
     public void updateUsername(String oldUser, String newUser, String password, int ID, final updateCallback callback){
         Log.v(TAG, "updateUsername called!");
