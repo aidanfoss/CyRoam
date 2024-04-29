@@ -25,10 +25,9 @@ public class pinVolley {
 
     private static final String TAG = "PinRequest";
     private static final String BASE_URL = MainActivity.url;
-    private static pinVolley instance;
+    private pinVolley instance;
 
-    private RequestQueue queue;
-    private Context context;
+    private final RequestQueue queue;
 
     /**
      * constructor for pinVolley.
@@ -36,15 +35,10 @@ public class pinVolley {
      * @param context uses "this" in all cases
      */
     public pinVolley(Context context){
-        this.context = context;
-        queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
-    }
-    public pinVolley(){
-        this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
     }
 
-    public static pinVolley getInstance(Context cont) {
+    public pinVolley getInstance(Context cont) {
         if (instance == null){
             instance = new pinVolley(cont);
         }
