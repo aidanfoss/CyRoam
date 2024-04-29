@@ -23,12 +23,9 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
     private final String TAG = "PinInfoActivity";
     private TextView pinInfo;
     private TextView commentView;
-    private Button deleteButton;
-    private Button sendButton;
     private EditText commentSendBox;
     private EditText deleteEditBox;
     private int passedPinId;
-    private pinVolley pinVolley;
     boolean adminPerms;
 
     @SuppressLint("MissingInflatedId")
@@ -43,15 +40,15 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
         //define UI
         commentView = findViewById(R.id.pinCommentText);
         pinInfo = findViewById(R.id.pinInfoText);
-        sendButton = findViewById(R.id.pinInfoSendComment);
+        Button sendButton = findViewById(R.id.pinInfoSendComment);
         commentSendBox = findViewById(R.id.pinInfoCommentEditText);
-        deleteButton = findViewById(R.id.pinInfoDelComButton);
+        Button deleteButton = findViewById(R.id.pinInfoDelComButton);
         deleteEditBox = findViewById(R.id.pinInfoIDDeleteTextBox);
 
         deleteButton.setVisibility(View.INVISIBLE);
         deleteEditBox.setVisibility(View.INVISIBLE);
 
-        this.pinVolley = new pinVolley(this);
+        com.lg1_1.cyroam.volley.pinVolley pinVolley = new pinVolley(this);
 
         Bundle extras = getIntent().getExtras();
         try {
@@ -70,8 +67,8 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
                         Log.w(TAG, "Fetch Pin in PinInfoActivity Success: " + pin.getDebugDescription());
                         pinInfo.append("Name: " + pin.getName() + "\n");
                         pinInfo.append("Description: " + pin.getDescription() + "\n");
-                        pinInfo.append("Latitude: " +String.valueOf(pin.getLat()) + "\n");
-                        pinInfo.append("Longitude: " + String.valueOf(pin.getLong()) + "\n");
+                        pinInfo.append("Latitude: " + pin.getLat() + "\n");
+                        pinInfo.append("Longitude: " + pin.getLong() + "\n");
                     }
                     @Override
                     public void onFailure(String errorMessage) {
@@ -84,27 +81,21 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
             throw new RuntimeException(e);
         }
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (commentSendBox.getText() != null){
-                    String comment = String.valueOf(commentSendBox.getText());
-                    WebSocketManager.getInstance().sendComment(comment);
-                    commentView.append(comment + "\n");
-                }
+        sendButton.setOnClickListener(v -> {
+            if (commentSendBox.getText() != null){
+                String comment = String.valueOf(commentSendBox.getText());
+                WebSocketManager.getInstance().sendComment(comment);
+                commentView.append(comment + "\n");
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (deleteEditBox.getText() != null) {
-                    int numDel = Integer.parseInt(String.valueOf(deleteEditBox.getText()));
-                    WebSocketManager.getInstance().sendComment("del " + numDel);
-                    commentView.clearComposingText();
-                    WebSocketManager.getInstance().closeCommentConnection();
-                    startActivity(getIntent());
-                }
+        deleteButton.setOnClickListener(v -> {
+            if (deleteEditBox.getText() != null) {
+                int numDel = Integer.parseInt(String.valueOf(deleteEditBox.getText()));
+                WebSocketManager.getInstance().sendComment("del " + numDel);
+                commentView.clearComposingText();
+                WebSocketManager.getInstance().closeCommentConnection();
+                startActivity(getIntent());
             }
         });
     }
