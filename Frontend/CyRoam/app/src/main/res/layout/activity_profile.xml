@@ -5,27 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="18dp"
-
-    android:id="@+id/mainlayout"
+    android:background="@drawable/animation_creation2"
+    android:id="@+id/mainlayoutforProfile"
     tools:context=".ProfileActivity">
 
 
-    <TextView
-        android:id="@+id/profileTitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Profile"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
-
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="483dp"
+        android:layout_width="417dp"
+        android:layout_height="731dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,53 +22,77 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/profileTitleTextiew"
+                android:layout_width="340dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/background_red_textbox"
+
+                android:fontFamily="@font/alegreya_sc_bold_italic"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/ScoreTextiew"
                 android:layout_width="315dp"
                 android:layout_height="50dp"
-                android:layout_margin="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_people_24"
+                android:gravity="center"
+                android:text="Rank:         "
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="@drawable/backgound_white_textbox"
-                android:text="TextView" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/distanceTextView"
                 android:layout_width="315dp"
                 android:layout_height="50dp"
-                android:layout_margin="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_price_change_24"
+                android:gravity="center"
+                android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="@drawable/backgound_white_textbox"
-                android:text="TextView" />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/pinTextView"
                 android:layout_width="315dp"
                 android:layout_height="50dp"
-                android:layout_margin="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_hiking_24"
+                android:gravity="center"
+                android:text="Distance:"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="@drawable/backgound_white_textbox"
-                android:text="TextView" />
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/rankingTextView"
                 android:layout_width="315dp"
                 android:layout_height="50dp"
-                android:layout_margin="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:gravity="center"
+                android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:gravity="center"
-                android:textSize="20sp"
-                android:background="@drawable/backgound_white_textbox"
-                android:text="TextView" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>
