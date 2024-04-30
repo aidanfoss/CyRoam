@@ -17,20 +17,13 @@ public class Fog {
     private double x;
     private double y;
 
-    private String imagePath;
-
-    public Fog(double x, double y, String imagePath) {
+    public Fog(double x, double y) {
         this.x = x;
         this.y = y;
-        this.imagePath = imagePath;
     }
 
     public Fog() {
 
-    }
-
-    public void setImagePath(String imagePathpath) {
-        this.imagePath = imagePath;
     }
 
     public void setX(double x) {
@@ -57,7 +50,4 @@ public class Fog {
         this.id = id;
     }
 
-    public String getImagePath() {
-        return imagePath;
-    }
 }
