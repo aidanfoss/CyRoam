@@ -1,6 +1,9 @@
 package coms309.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import coms309.Discovery.Discovery;
+import coms309.FogDiscovery.FogDiscovery;
 import coms309.Friends.FriendObj;
 import coms309.Pin.Pin;
 import coms309.Statistics.Statistics;
@@ -9,7 +12,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class User {
 	//hello caleb todo remove this line :3
@@ -26,16 +29,19 @@ public class User {
     private int permissions;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "friendUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<FriendObj> friends;
 
     @JsonIgnore
     @OneToOne
     private Statistics stats;
 
-    @JoinColumn(name = "pins")
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Pin> pins;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Discovery> discoveries;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<FogDiscovery> fogDiscoveries;
 
     //contructor
     public User(String username, String password, int score, int permissions) {
@@ -97,11 +103,6 @@ public class User {
     public void setStatistics(Statistics stats) {
         this.stats = stats;
     }
-
-    public List<Pin> getPins() {
-        return pins;
-    }
-
 
     public void setPermissions(int permissions) {
         this.permissions = permissions;

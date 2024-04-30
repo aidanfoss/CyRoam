@@ -1,10 +1,9 @@
 package coms309.Pin;
 
 import coms309.Comment.*;
-import coms309.Statistics.Statistics;
+import coms309.Discovery.Discovery;
 import coms309.Users.User;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +18,18 @@ public class Pin {
     @OneToMany(fetch = FetchType.EAGER)
     private List<Comment> comments;
 
-    @ManyToMany
-    private List<Statistics> statistics;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Discovery> discoveries;
+
     private double x;
     private double y;
     private String name;
+
+    private String splash;
+
+    private String description;
+
+    private String imagePath;
 
     @ManyToMany
     private List<User> users;
@@ -74,5 +80,29 @@ public class Pin {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getSplash() {
+        return splash;
+    }
+
+    public void setSplash(String splash) {
+        this.splash = splash;
+    }
+
+    public void setImagePath(String path) {
+        imagePath = path;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 }
