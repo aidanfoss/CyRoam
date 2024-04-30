@@ -17,9 +17,10 @@
         android:textSize="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <EditText
         android:id="@+id/admin2_username_edt"
@@ -72,7 +73,7 @@
 
         <Button
             android:id="@+id/adminc_BAN_btn"
-            android:layout_width="150dp"
+            android:layout_width="143dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:background="@drawable/roundstyle"

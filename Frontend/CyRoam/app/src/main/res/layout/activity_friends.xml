@@ -8,23 +8,31 @@
     tools:context=".FriendsActivity">
 
     <Button
+        android:layout_marginRight="12dp"
         android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#F1BE48"
         android:shadowColor="@color/white"
-        android:text="Add Friend"
+        android:text="Friends"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.916"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.051" />
 
     <Button
+        android:layout_marginLeft="12dp"
         android:id="@+id/homeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:text="Back"
+        android:textColor="@color/white"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="#F1BE48"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
@@ -34,16 +42,18 @@
 
     <TextView
         android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Friends"
+        android:layout_width="114dp"
+        android:layout_height="53dp"
+        android:layout_marginLeft="12dp"
+        android:text="FRIENDS"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintVertical_bias="0.05" />
 
     <LinearLayout
         android:layout_width="415dp"

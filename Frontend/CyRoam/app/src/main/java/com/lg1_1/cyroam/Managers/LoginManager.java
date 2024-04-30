@@ -15,7 +15,7 @@ import org.json.JSONObject;
  * @author Aidan Foss
  */
 
-public class LoginManager {
+public class  LoginManager {
     private static String TAG = "LoginManager";
     private static LoginManager instance;
     private User user; //stores username and ID. likely not useful tbh besides storing username and ID.

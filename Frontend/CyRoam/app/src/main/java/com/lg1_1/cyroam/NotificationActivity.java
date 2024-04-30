@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 /**
  * Has not been implemented yet
+ * @deprecated
  * @author Nicholas Kirschbaum
  */
 public class NotificationActivity extends AppCompatActivity {

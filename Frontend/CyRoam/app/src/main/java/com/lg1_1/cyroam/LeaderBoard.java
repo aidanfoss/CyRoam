@@ -60,7 +60,7 @@ public class LeaderBoard extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
         backButton2 = findViewById(R.id.Leaderboardout);
-        outputTextbox = findViewById(R.id.LeaderBoardInsertText);
+        //outputTextbox = findViewById(R.id.LeaderBoardInsertText);
         ListView mViewList = (ListView) findViewById(R.id.listliar);
         worldChampionReq();
         backButton2.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +104,7 @@ public class LeaderBoard extends AppCompatActivity {
                             String output = curUser + " " + score;
                             Friend free = new Friend(curUser, score, 0);
                             list2.add(free);
-                            outputTextbox.append(curUser + ": " + score + "\n");
+                            //outputTextbox.append(curUser + ": " + score + "\n");
                             Log.i(TAG, output);
 
 
