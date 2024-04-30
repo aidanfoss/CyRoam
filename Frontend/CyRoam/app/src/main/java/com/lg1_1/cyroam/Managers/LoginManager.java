@@ -15,14 +15,12 @@ import org.json.JSONObject;
  * @author Aidan Foss
  */
 
-public class  LoginManager {
-    private static String TAG = "LoginManager";
+public class LoginManager {
+    private static final String TAG = "LoginManager";
     private static LoginManager instance;
     private User user; //stores username and ID. likely not useful tbh besides storing username and ID.
     boolean isLoggedIn;
-    private int score;
     private int permission;
-    private int id;
 
     /*
     * 0 is basic user
@@ -57,9 +55,8 @@ public class  LoginManager {
         }
         return instance;
     }
-    public boolean logInBypass(String username, String password, Context context){
+    public void logInBypass(String username, String ignoredPassword, Context ignoredContext){
         JSONObject jsonObject = new JSONObject();
-        id = 1;
         permission = 2;
         try {
             jsonObject.put("username", username);
@@ -72,8 +69,7 @@ public class  LoginManager {
             throw new RuntimeException(e);
         }
         //store hardcoded user as logged in user
-        user = new User(username, id, jsonObject);
-        return true;
+        user = new User(username, 1, jsonObject);
     }
     public void logIn(String username, String password, Context context) {
         try {
@@ -109,7 +105,6 @@ public class  LoginManager {
 
                 user = new User(username, id, receivedJson);
                 permission = receivedPermission;
-                score = 0;
             } else {
                 //this means they are already logged in, which shouldn't be possible to attempt.
                 Log.w(TAG, "Attempt to log in despite already being logged in");

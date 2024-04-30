@@ -24,6 +24,9 @@ public class NewPinActivity extends AppCompatActivity {
     private final String url = MainActivity.url; // get URL from main activity
     private EditText latitudeText;
     private EditText longitudeText;
+    private EditText splashText;
+    private EditText descriptionText;
+    private EditText imagePathText;
     private EditText nameText;
     private Button newPinButton;
 
@@ -48,6 +51,10 @@ public class NewPinActivity extends AppCompatActivity {
         /* initialize UI elements */
         longitudeText = findViewById(R.id.longitude_edt);
         latitudeText = findViewById(R.id.latitude_edt);
+        splashText = findViewById(R.id.splashTextBox);
+        descriptionText = findViewById(R.id.descriptionTextBox);
+        imagePathText = findViewById(R.id.imagePathTextBox);
+
         nameText = findViewById(R.id.pin_name_edt);
         newPinButton = findViewById(R.id.new_pin_btn);    // link to login button in the Login activity XML
 
@@ -75,9 +82,15 @@ public class NewPinActivity extends AppCompatActivity {
                 /* grab coordinates from user inputs */
                 double longitudeIn = 0;
                 double latitudeIn = 0;
+                String splash = null;
+                String description = null;
+                String imagePath = null;
                 try {
                     longitudeIn = Double.parseDouble(longitudeText.getText().toString());
                     latitudeIn = Double.parseDouble(latitudeText.getText().toString());
+                    splash = splashText.getText().toString();
+                    description = descriptionText.getText().toString();
+                    imagePath = imagePathText.getText().toString();
                 } catch (NumberFormatException e) {
                     Log.e(TAG, "Invalid number format", e);
                     //Toast.makeText(this, "Please enter valid coordinates", Toast.LENGTH_SHORT).show();
@@ -89,7 +102,7 @@ public class NewPinActivity extends AppCompatActivity {
                 //todo put post here
                 double finalLongitudeIn = longitudeIn;
                 double finalLatitudeIn = latitudeIn;
-                volley.createPin(latitudeIn, longitudeIn, name, new pinVolley.CreatePinCallback() {
+                volley.createPin(latitudeIn, longitudeIn, name, splash, description, imagePath, new pinVolley.CreatePinCallback() {
                     @Override
                     public void onSuccess(int idSuccess) {
                         Log.d(TAG, String.valueOf(idSuccess));
