@@ -46,6 +46,10 @@ public class User {
 
     public int getID() {return id;}
 
+    public JSONObject getJsonObject() {
+        return jsonObject;
+    }
+
     //DO NOT MAKE RETURN PASSWORD unless theres a really good reason later.
     //(maybe if websocket connection is lost then use it to reconnect?)
     //Aidan, 3/4/2024
