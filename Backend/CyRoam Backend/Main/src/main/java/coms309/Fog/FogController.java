@@ -26,16 +26,11 @@ public class FogController {
     @ApiResponse(responseCode = "200", description = "Created the Fog", content = { @Content(mediaType = "json",
             schema = @Schema(implementation = Fog.class)) })
     @PostMapping(path = "/fog")
-    Fog createFog(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "x, y, and imagePath of Fog to be created") @RequestBody Fog fog) {
+    Fog createFog(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "x, y of Fog to be created") @RequestBody Fog fog) {
         if (fog == null) {
             return null;
         }
         fogRepository.save(fog);
         return fog;
-    }
-
-    @GetMapping(path = "/fog/{id}/imagePath")
-    String getImagePath(@PathVariable int id) {
-        return fogRepository.findById(id).getImagePath();
     }
 }
