@@ -3,6 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#30ffffff"
     android:weightSum="100">
 
 
@@ -13,10 +14,15 @@
         android:layout_weight="66"
         android:gravity="center"
         android:text="User: "
+        android:textColor="@color/white"
+        android:textSize="16sp"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/buttonProblem"
+        android:backgroundTint="#F1BE48"
+        android:shadowColor="@color/white"
+        android:textColor="@color/white"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_weight="34"

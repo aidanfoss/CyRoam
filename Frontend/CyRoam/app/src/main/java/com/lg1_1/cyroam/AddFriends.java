@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +16,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -30,10 +28,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.objects.Friend;
-import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
-import com.lg1_1.cyroam.websockets.WebSocketListener;
+import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
+import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
+import com.lg1_1.cyroam.objects.Friend;
+import com.lg1_1.cyroam.websockets.WebSocketListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +69,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
 
     private Button bybyButton;
     private EditText usernameEditText;
+
+    Boolean checker = false;
     private RequestQueue queue;
 
     ArrayList<Friend> list2 = new ArrayList<>();
@@ -83,12 +84,14 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_friends);
+        /**
+         * //Gradient Background
         ConstraintLayout constraintLayout = findViewById(R.id.main2);
         AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-
+        */
 
 
 
@@ -98,7 +101,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
 
         ListView mViewList = (ListView) findViewById(R.id.listView2);
         //ArrayList<Friend> list = new ArrayList<>();
-        String curUsername ="bossf";
+
+        String curUsername = LoginManager.getInstance().getUser().getUsername();
         findfriendsReq(curUsername);
 
         try {
@@ -138,7 +142,7 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
         bybyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddFriends.this, PortalScreenActivity.class);
+                Intent intent = new Intent(AddFriends.this, FriendsActivity.class);
                 startActivity(intent);
             }
 
@@ -173,7 +177,7 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
                 response -> {
                     try{
 
-
+                        checker = true;
                         JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
 

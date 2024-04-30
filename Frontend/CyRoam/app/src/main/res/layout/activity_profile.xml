@@ -5,107 +5,136 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbarSize="18dp"
-    android:background="@drawable/animation_creation"
-    android:id="@+id/mainlayout"
+    android:background="@drawable/animation_creation2"
+    android:id="@+id/mainlayoutforProfile"
     tools:context=".ProfileActivity">
 
-    <TextView
-        android:id="@+id/profileTitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
 
-    <Button
-        android:id="@+id/backButtonProfileScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.749"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165"
-        tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+            <TextView
+                android:id="@+id/profileTitleTextiew"
+                android:layout_width="340dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/background_red_textbox"
+                android:fontFamily="@font/alegreya_sc_bold_italic"
+                android:padding="30dp"
+                android:text="TextView"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textViewScoreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Score:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+            <TextView
+                android:id="@+id/rankTextiew"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_leaderboard_24"
+                android:gravity="center"
+                android:text="Rank:         "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textViewScoreOutput"
-        android:layout_width="139dp"
-        android:layout_height="30dp"
-        android:text="UserScore"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497" />
+            <TextView
+                android:id="@+id/scoreTextView"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_price_change_24"
+                android:gravity="center"
+                android:text="Score: "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textViewPinsTitle"
-        android:layout_width="68dp"
-        android:layout_height="38dp"
-        android:text="Pins:"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
+            <TextView
+                android:id="@+id/distanceTextView"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:drawableLeft="@drawable/baseline_hiking_24"
+                android:gravity="center"
+                android:text="Distance:"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textViewPinsCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PinsAquired"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.592" />
+            <TextView
+                android:id="@+id/rankingTextView"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:gravity="center"
+                android:drawableLeft="@drawable/baseline_cloud_off_24"
+                android:text="Fog Expelled: "
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/pinTextView23"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:gravity="center"
+                android:text="Friends collected:"
+                android:textAlignment="center"
+                android:drawableLeft="@drawable/baseline_people_24"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/rankingTextView23"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:gravity="center"
+                android:text="Pins collected:"
+                android:textAlignment="center"
+                android:drawableLeft="@drawable/baseline_location_pin_24"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/TextView23"
+                android:layout_width="315dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/backgound_white_textbox"
+                android:gravity="center"
+                android:text="Pins collected:"
+                android:textAlignment="center"
+                android:drawableLeft="@drawable/baseline_location_pin_24"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

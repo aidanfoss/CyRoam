@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/LogInTitleView"
         android:layout_width="274dp"
         android:layout_height="104dp"
         android:fontFamily="@font/alegreya_sc_bold_italic"

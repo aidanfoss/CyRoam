@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -73,6 +74,7 @@ public class SignupActivity extends AppCompatActivity {
      * Stores the users email
      */
     private EditText email;
+    private TextView test;
     //private boolean checker = false;
     /**
      * @author Nicholas Kirschbaum
@@ -98,12 +100,12 @@ public class SignupActivity extends AppCompatActivity {
         confirmEditText = findViewById(R.id.signup_confirm_edt);    // link to confirm edtext in the Signup activity XML
         loginButton = findViewById(R.id.signup_login_btn);    // link to login button in the Signup activity XML
         signupButton = findViewById(R.id.signup_signup_btn);  // link to signup button in the Signup activity XML
-
+        test = findViewById(R.id.textView12log);
         /* click listener on login button pressed */
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //test.setText("success");
                 /* when login button is pressed, use intent to switch to Login Activity */
                 Intent intent = new Intent(SignupActivity.this, LoginInputActivity.class);
                 startActivity(intent);  // go to LoginActivity
@@ -114,7 +116,7 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                test.setText("success");
                 /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
@@ -141,7 +143,7 @@ public class SignupActivity extends AppCompatActivity {
     private void makePostReq(String pass, String user, String email){
         String url = mainURL + "/users";
         Log.d(TAG,"post req called " + url);
-
+        test.setText("success");
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
         try{
@@ -168,6 +170,7 @@ public class SignupActivity extends AppCompatActivity {
                     try{
                         JSONArray jsonArray = response.getJSONArray("friends");
                         Log.d(TAG, "request success");
+
 
                        /* for (int i = 0; i < jsonArray.length(); i++){
                             JSONObject friend = jsonArray.getJSONObject(i);
