@@ -174,7 +174,7 @@ public class AdminLeaderBoardControl extends AppCompatActivity {
     }
 
     private void leaderBoardBan(String curUsername){
-        String url = mainURL + "/userPerms";
+        String url = mainURL + "/userPermsAdmin";
 
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
@@ -184,7 +184,7 @@ public class AdminLeaderBoardControl extends AppCompatActivity {
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
             userInfo.put("username", curUsername);
-            userInfo.put("promotion", -1);
+            userInfo.put("promotion", -3);
 
 
 

@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.Managers.WebSocketManager;
 import com.lg1_1.cyroam.NicksAdapters.FriendsAddListAdapter;
 import com.lg1_1.cyroam.objects.Friend;
@@ -100,7 +101,8 @@ public class AddFriends extends AppCompatActivity implements WebSocketListener {
 
         ListView mViewList = (ListView) findViewById(R.id.listView2);
         //ArrayList<Friend> list = new ArrayList<>();
-        String curUsername ="bossf";
+
+        String curUsername = LoginManager.getInstance().getUser().getUsername();
         findfriendsReq(curUsername);
 
         try {

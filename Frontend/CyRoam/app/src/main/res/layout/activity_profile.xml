@@ -28,18 +28,17 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="40dp"
                 android:background="@drawable/background_red_textbox"
-
-                android:padding="30dp"
                 android:fontFamily="@font/alegreya_sc_bold_italic"
+                android:padding="30dp"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/ScoreTextiew"
+                android:id="@+id/rankTextiew"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
@@ -51,9 +50,9 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/distanceTextView"
+                android:id="@+id/scoreTextView"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
@@ -65,9 +64,9 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/pinTextView"
+                android:id="@+id/distanceTextView"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
@@ -81,7 +80,7 @@
             <TextView
                 android:id="@+id/rankingTextView"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
@@ -91,10 +90,11 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
             <TextView
-                android:id="@+id/rankingTextView23"
+                android:id="@+id/pinTextView23"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
@@ -104,32 +104,34 @@
                 android:drawableLeft="@drawable/baseline_people_24"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <TextView
-                android:id="@+id/rankingTextView234"
+                android:id="@+id/rankingTextView23"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="Pins collected:"
                 android:textAlignment="center"
+                android:drawableLeft="@drawable/baseline_location_pin_24"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
-
             <TextView
-                android:id="@+id/rankingTextView2345"
+                android:id="@+id/TextView23"
                 android:layout_width="315dp"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="Pins collected:"
                 android:textAlignment="center"
+                android:drawableLeft="@drawable/baseline_location_pin_24"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
+
+
 
         </LinearLayout>
     </ScrollView>
