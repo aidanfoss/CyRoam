@@ -55,9 +55,12 @@
         android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
+        android:scaleType="center"
+        android:src="@drawable/pluscircle"
         android:translationX="0dp"
         android:translationY="-150dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/portalButton1"

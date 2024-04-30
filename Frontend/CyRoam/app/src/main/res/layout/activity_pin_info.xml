@@ -13,29 +13,65 @@
         android:orientation="vertical"
         android:translationY="20dp">
 
-        <TextView
-            android:id="@+id/pinInfoTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pin Information"
-            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/pinInfoText"
-            android:layout_width="379dp"
-            android:layout_height="179dp"
-            android:background="#B6B5B5"
-            android:gravity="center"
-            android:text=""
-            android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/pinInfoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pin Information"
+                    android:textSize="24sp"
+                    android:translationX="25dp" />
+
+                <TextView
+                    android:id="@+id/pinInfoText"
+                    android:layout_width="201dp"
+                    android:layout_height="183dp"
+                    android:background="#B6B5B5"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="20sp"
+                    android:translationX="5dp" />
+
+                <Button
+                    android:id="@+id/pinInfoDelComButton2"
+                    android:layout_width="213dp"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.328"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.976" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="197dp"
+                android:layout_height="262dp"
+                android:src="@drawable/background2" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
         android:id="@+id/pinCommentTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:text="Comments"
         android:textSize="24sp"
+        android:translationY="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,8 +81,8 @@
 
     <TextView
         android:id="@+id/pinCommentText"
-        android:layout_width="382dp"
-        android:layout_height="293dp"
+        android:layout_width="379dp"
+        android:layout_height="240dp"
         android:background="#A3A2A2"
         android:gravity="center"
         android:text=""
@@ -75,6 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.328"
@@ -103,6 +140,7 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:inputType="number"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.003"

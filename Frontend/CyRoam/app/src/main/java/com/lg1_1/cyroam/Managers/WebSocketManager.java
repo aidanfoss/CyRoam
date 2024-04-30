@@ -43,9 +43,9 @@ public class WebSocketManager {
      * @author Aidan Foss
      * singleton function that opens all relevant websockets, allowing the rest of this
      * class to handle them.
-     * @param username
-     * @param listener
-     * @throws URISyntaxException
+     * @param username opens websocket for given username
+     * @param listener creates and manages listener for websocket message handling
+     * @throws URISyntaxException error handler
      */
 
     public void openWebSocketConnection(String username, WebSocketListener listener) throws URISyntaxException {
@@ -60,7 +60,7 @@ public class WebSocketManager {
 
     public void openCommentConnection(int pinID, CommentListener listener) throws URISyntaxException {
         if (!isCommentConnected) {
-            commentsClient = new commentsWebSocket(wsurl + "/pins/" + String.valueOf(pinID) + "/comments", listener);
+            commentsClient = new commentsWebSocket(wsurl + "/pins/" + pinID + "/comments", listener);
             commentsClient.connect();
             isCommentConnected = true;
         }
