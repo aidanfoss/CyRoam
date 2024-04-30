@@ -9,6 +9,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.lg1_1.cyroam.MainActivity;
+import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.objects.Pin;
 
 import org.json.JSONException;
@@ -148,12 +149,37 @@ public class pinVolley {
         queue.add(request);
     }
 
+    public void deletePin(int pId, final DeletePinCallback callback){
+        if (LoginManager.getInstance().getUser().getPermission() != 2){
+            return;
+        }
+        else{
+            Log.v(TAG, "deletePin Called!");
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.DELETE, BASE_URL + "/pins/" + pId, null,
+                    response -> {
+                        Log.v(TAG, " DELETEPIN RESPONSE: " + response.toString());
+                        callback.onSuccess();
+                    }, error -> {
+                Log.e(TAG, "Error occured: " + error.getMessage());
+                callback.onFailure("Error occured: " + error.getMessage());
+            });
+            queue.add(request);
+        }
+    }
     /**
      * Handles errors and passes information when creating pins
      * @author Aidan Foss
      */
     public interface CreatePinCallback {
         void onSuccess(int idSuccess);
+        void onFailure(String errorMessage);
+    }
+    /**
+     * Handles errors and passes information when deleting pins
+     * @author Aidan Foss
+     */
+    public interface DeletePinCallback {
+        void onSuccess();
         void onFailure(String errorMessage);
     }
 }
