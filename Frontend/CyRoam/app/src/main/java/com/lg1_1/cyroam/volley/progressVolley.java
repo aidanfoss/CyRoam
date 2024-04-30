@@ -8,13 +8,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.MainActivity;
+import com.lg1_1.cyroam.Managers.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Handles volley requests specifically for pin data.
- * @deprecated
  * @author Aidan Foss
  */
 public class progressVolley {
@@ -23,15 +23,21 @@ public class progressVolley {
     private static final String BASE_URL = MainActivity.url;
     private RequestQueue queue;
     private Context context;
+    private static progressVolley instance;
 
     /**
      * Constructor for the progressVolley object, allowing other classes to call
      * functions defined in this class.
-     * @param context should always be constructed with "this"
      */
-    public progressVolley(Context context){
+    private progressVolley(Context context){
         this.context = context;
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
+    }
+    public static progressVolley getInstance(Context context) {
+        if (instance == null){
+            instance = new progressVolley(context);
+        }
+        return instance;
     }
 
     /**
@@ -40,17 +46,15 @@ public class progressVolley {
      * Uses volley to store that information in the database
      *
      * @author Aidan Foss
-     * @param userId the user ID of the player
      * @param pinId the pin ID of the pin they are discovering
      * @param callback callback that handles errors and passes information
      */
-    public void discoverPin(int userId, int pinId, final VolleyCallback callback){
+    public void discoverPin(int pinId, final VolleyCallback callback){
 
         JSONObject requestBody = new JSONObject();
         try{
-            requestBody.put("userId", userId);
-            requestBody.put("pinId", pinId);
-            requestBody.put("discovered", true); //always sets discovered to true when calling this function
+            requestBody.put("uId", LoginManager.getInstance().getUser().getID());
+            requestBody.put("pId", pinId);
         } catch (JSONException e){
             e.printStackTrace();
             Log.e(TAG, "RequestBody JSONException occurred: " + e.getMessage());
@@ -58,18 +62,10 @@ public class progressVolley {
             return;
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + "/progress", requestBody,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + "/users/" + LoginManager.getInstance().getUser().getID() + "/discovery/" + pinId, requestBody,
                 response -> {
-                    Log.e(TAG, "DISCOVERPIN RESPONSE: " + response.toString());
-                    try {
-                        boolean discovered = response.getBoolean("discovered");
-                        Log.i(TAG, "response: " + String.valueOf(discovered));
-                        callback.onSuccess(discovered);
-                    } catch (JSONException e) {
-                        Log.e(TAG, "JSONException occurred: " + e.getMessage());
-                        e.printStackTrace();
-                        callback.onFailure("JSONException: " + e.getMessage());
-                    }
+                    Log.v(TAG, "DISCOVERPIN RESPONSE: " + response.toString());
+                    callback.onSuccess();
                 }, error -> {
                     Log.e(TAG, "Error occurred: " + error.getMessage());
                     callback.onFailure("Error occurred: " + error.getMessage());
@@ -77,29 +73,29 @@ public class progressVolley {
         queue.add(request);
     }
 
+
+
     /**
      * Handles errors and passes information when discovering pins
      * @author Aidan Foss
      */
     public interface VolleyCallback {
-        void onSuccess(boolean discovered);
+        void onSuccess();
         void onFailure(String errorMessage);
     }
 
     /**
-     * @deprecated because we've moved away from individual progress objects for each user and pin.
-     * @param progressId the ID of the progress object stored in the server.
      * @param callback handles errors and passes information
      */
-    public void fetchProgress(int progressId, final VolleyCallbackGet callback){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, BASE_URL + "/progress/" + String.valueOf(progressId), null,
+    public void fetchProgress(final VolleyCallbackGet callback){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, BASE_URL + "/users/" + LoginManager.getInstance().getUser().getID() + "/discovery", null,
                 response -> {
                     Log.i(TAG, "FETCHPIN RESPONSE: " + response.toString());
                     try {
                         int userId = response.getInt("userId");
                         int pinId = response.getInt("pinId");
                         boolean discovered = response.getBoolean("discovered");
-                        callback.onSuccess(pinId,userId,discovered,progressId);
+                        callback.onSuccess(pinId,userId,discovered,userId);
                     } catch (JSONException e) {
                         Log.e(TAG, "Error occured: " + e.getMessage());
                         e.printStackTrace();
@@ -113,7 +109,6 @@ public class progressVolley {
     }
 
     /**
-     * @deprecated
      * Handles errors and passes information when calling pin discovery information
      * @author Aidan Foss
      */
