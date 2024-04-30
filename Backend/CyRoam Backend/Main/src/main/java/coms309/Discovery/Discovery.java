@@ -40,4 +40,12 @@ public class Discovery {
     public User getUser() {
         return user;
     }
+
+    public void setPin(Pin pin) {
+        this.pin = pin;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
