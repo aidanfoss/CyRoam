@@ -12,11 +12,54 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="50dp"
         android:autoText="false"
         android:text="New Pin"
         android:textColor="#000000"
         android:textSize="80sp"></TextView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pin Name: "
+            android:textColor="#000000"
+            android:textSize="20dp"></TextView>
+
+        <EditText
+            android:id="@+id/pin_name_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:hint="Enter Pin Name Here"
+            android:inputType=""></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude "
+            android:textColor="#000000"
+            android:textSize="20dp"></TextView>
+
+        <EditText
+            android:id="@+id/latitude_edt"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:hint="Enter Latitude Here"></EditText>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -50,15 +93,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Latitude "
+            android:text="Splash: "
             android:textColor="#000000"
             android:textSize="20dp"></TextView>
 
         <EditText
-            android:id="@+id/latitude_edt"
+            android:id="@+id/splashTextBox"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Enter Latitude Here"></EditText>
+            android:hint="Enter Pin Name Here"
+            android:inputType=""></EditText>
 
     </LinearLayout>
 
@@ -71,18 +115,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pin Name: "
-            android:textSize="20dp"
-            android:textColor="#000000">
-        </TextView>
+            android:text="Description:"
+            android:textColor="#000000"
+            android:textSize="20dp"></TextView>
 
         <EditText
-            android:id="@+id/pin_name_edt"
+            android:id="@+id/descriptionTextBox"
             android:layout_width="wrap_content"
-            android:inputType=""
             android:layout_height="50dp"
-            android:hint="Enter Pin Name Here">
-        </EditText>
+            android:hint="Enter Pin Name Here"
+            android:inputType=""></EditText>
 
     </LinearLayout>
 
@@ -90,18 +132,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ImagePath:"
+            android:textColor="#000000"
+            android:textSize="20dp"></TextView>
+
+        <EditText
+            android:id="@+id/imagePathTextBox"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:hint="Enter Pin Name Here"
+            android:inputType=""></EditText>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/new_pin_btn"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="0dp"
             android:text="New Pin"
-            android:textSize="20sp"
-            android:textColor="#ffffff">
-        </Button>
+            android:textColor="#ffffff"
+            android:textSize="20sp"></Button>
 
     </LinearLayout>
 

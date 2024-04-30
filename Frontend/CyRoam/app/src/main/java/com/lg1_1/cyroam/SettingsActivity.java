@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.Managers.LoginManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -76,7 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 /* This removes the fridn that is in the EditText */
-                String curUsername = "bossf";
+                String curUsername = LoginManager.getInstance().getUser().getUsername();
                 String noLongerfriend = removefriend.getText().toString();
                 removefriend(curUsername, noLongerfriend);
 
@@ -88,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
         leaderboardPermissionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username ="er";
+                String username = LoginManager.getInstance().getUser().getUsername();;
                leaderBoardReq(username, new LoginActivity.VolleyCallback() {
                     @Override
                     public void onSuccess(boolean isTrue) {

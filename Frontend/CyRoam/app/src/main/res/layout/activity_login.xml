@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textViewTitleMainLogin"
             android:layout_width="128dp"
             android:layout_height="52dp"
             android:layout_gravity="center"

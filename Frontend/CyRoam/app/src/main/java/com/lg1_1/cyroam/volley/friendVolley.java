@@ -13,32 +13,16 @@ import com.lg1_1.cyroam.objects.User;
  * @author Nicholas Kirschbaum
  */
 public class friendVolley {
-    /**
-     * @author Nicholas Kirschbaum
-     * ETags for debugging
-     */
     private static final String TAG = "PinRequest";
-    /**
-     * @author Nicholas Kirschbaum
-     * takes url from main
-     */
     private static final String BASE_URL = MainActivity.url;
     private AddFriends addFriends;
-    /**
-     * @author Nicholas Kirschbaum
-     * queue for volley
-     */
     private RequestQueue queue;
-    /**
-     * @author Nicholas Kirschbaum
-     * Not sure
-     */
     private Context context;
 
 
     /**
      *
-     * @param context the class thats running it, (when constructed, always use "this")
+     * @param context the class that's running it, (when constructed, always use "this")
      */
     public friendVolley(Context context){
         this.context = context;
