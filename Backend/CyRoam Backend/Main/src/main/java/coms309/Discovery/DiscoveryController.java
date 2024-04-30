@@ -37,6 +37,13 @@ public class DiscoveryController {
     @ApiResponse(responseCode = "200", description = "Created the Discovery")
     @PostMapping(path = "/users/{uId}/discovery/{pId}")
     String createDiscovery(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Pin") @PathVariable int pId) {
+        List<Pin> discovered = discoveryRepository.findPinsByUser(uId);
+        for (int i = 0; i < discovered.size(); i++) {
+            if (discovered.get(i).getId() == pId) {
+                return "User " + uId + " has already discovered Pin " + pId;
+            }
+        }
+
         Discovery discovery = new Discovery(userInterface.findByuId(uId), pinRepository.findById(pId));
         discoveryRepository.save(discovery);
         return "User " + uId + " has discovered Pin " + pId;
