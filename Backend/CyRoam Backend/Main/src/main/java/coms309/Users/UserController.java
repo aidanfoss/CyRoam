@@ -130,6 +130,7 @@ public class UserController {
         if(promotion>=0 && s.getPermissions()==-3){
             return null;
         }
+
         s.setPermissions(promotion);
         userInterface.save(s);
         //userInterface.save(user);
