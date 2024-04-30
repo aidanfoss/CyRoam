@@ -16,7 +16,8 @@ import java.util.List;
 @RestController
 public class FriendObjController {
 //jj
-
+    @Autowired
+    public UserInterface userInterface;
     @Autowired
     public FriendObjInterface friendObjInterface;
     private String success = "{\"message\":\"success ( :\"}";
@@ -46,9 +47,15 @@ public class FriendObjController {
     FriendObj addFriend(@RequestBody FriendObj friendObj){
         String friendUsername = friendObj.getFriendUsername();
         String curUsername = friendObj.getCurUsername();
+
+        //adds user of person recieving the request to the friends table
+        User friendUser = userInterface.findByUsername(friendUsername);
+        FriendObj realF = friendObj;
+        realF.setFriendUser(friendUser);
         //User ff;
         //friendObj.setUser(findByUsername(curUsername));
         FriendObj existingFriend = friendObjInterface.findByCurUsernameAndFriendUsername(curUsername,friendUsername);
+        //if im sent friend obj withoutt specified status makes it true
         if(friendObj.getfriendStatus()==null){
             friendObj.setfriendStatus(true);
         }
@@ -59,8 +66,8 @@ public class FriendObjController {
         if (friendUsername == null)
             return null;
 
-        friendObjInterface.save(friendObj);
-        return friendObj;
+        friendObjInterface.save(realF);
+        return realF;
 
     }
 
@@ -114,7 +121,7 @@ public class FriendObjController {
     List<FriendObj> friendRequests(@PathVariable String username){
         ///String username = Justusername.getCurUsername();
         //List<FriendObj>  trueFriends = null;
-        List<FriendObj>  friends =friendObjInterface.findByFriendUsername(username);
+        List<FriendObj>  friends = friendObjInterface.findByFriendUsername(username);
 
         friends.removeIf(friend -> friend.getfriendStatus());
         return friends;

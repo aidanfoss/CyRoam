@@ -1,6 +1,7 @@
 package coms309.Users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import coms309.Discovery.Discovery;
 import coms309.FogDiscovery.FogDiscovery;
 import coms309.Friends.FriendObj;
@@ -11,7 +12,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class User {
 	//hello caleb todo remove this line :3
@@ -28,7 +29,8 @@ public class User {
     private int permissions;
 
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "friendUser", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<FriendObj> friends;
 
     @JsonIgnore
