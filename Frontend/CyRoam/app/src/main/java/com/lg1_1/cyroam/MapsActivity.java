@@ -491,16 +491,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         double x = jsonPin.getDouble("x");
                         double y = jsonPin.getDouble("y");
                         String name = jsonPin.getString("name");
-                        if (name.contains("test") || name.contains("Test")){
-                            continue;
-                        }
+//                        if (name.contains("test") || name.contains("Test")){
+//                            continue;
+//                        }
                         String splash = jsonPin.getString("splash");
                         String description = jsonPin.getString("description");
+                        String imagePath = jsonPin.getString("imagePath");
                         boolean discovered = false;
 
                         //progressVolley.fetchProgress();
 
-                        Pin newPin = new Pin(x, y, name, splash, description, id, discovered);
+                        Pin newPin = new Pin(x, y, name, splash, description, imagePath, id, discovered);
                         Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
                         if (newPin.getDiscovered()) {
                             Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
@@ -554,11 +555,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             String name = jsonPin.getString("name");
                             String splash = jsonPin.getString("splash");
                             String description = jsonPin.getString("description");
+                            String imagePath = jsonPin.getString("imagePath");
                             boolean discovered = false;
 
                             //progressVolley.fetchProgress();
 
-                            Pin newPin = new Pin(x, y, name, splash, description, id, discovered);
+                            Pin newPin = new Pin(x, y, name, splash, description,imagePath, id, discovered);
                             Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
                             if (newPin.getDiscovered()) {
                                 Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());

@@ -20,7 +20,8 @@ public class Pin {
     private int ID;
     private final String name;
     private String description;
-    private String snippet;
+    private String splash;
+    private String imageUrl;
     private boolean discovered; //default to false in each constructor unless told otherwise
     //todo add pictures? might be out of scope
 
@@ -33,7 +34,7 @@ public class Pin {
         this.x = inPin.x;
         this.y = inPin.y;
         this.description = inPin.description;
-        this.snippet = inPin.snippet;
+        this.splash = inPin.splash;
         this.name = inPin.name;
         this.ID = inPin.ID;
         this.discovered = inPin.discovered;
@@ -82,14 +83,15 @@ public class Pin {
      * @param ID internal ID in the SQL database
      * @param discovered boolean that stores if the pin has been seen before
      */
-    public Pin(double x, double y, String name, String snippet, String description, int ID, boolean discovered) {
+    public Pin(double x, double y, String name, String splash, String description, String imageUrl, int ID, boolean discovered) {
         this.x = x;
         this.y = y;
         this.name = name;
         this.ID = ID;
         this.description = description;
-        this.snippet = snippet;
+        this.splash = splash;
         this.discovered = discovered;
+        this.imageUrl = imageUrl;
         Log.i(TAG, "Pin With ID: " + ID + " Created. Named: " + name + ". Discover Value: " + discovered);
     }
 
@@ -108,10 +110,14 @@ public class Pin {
     public double getLong() {return y;}
     public String getName(){return name;}
     public String getDescription(){return description;}
-//    public String getSnippet(){return snippet;}
+    public String getSplash(){return splash;}
     public String getDebugDescription(){
         return "Name: " + name + "(" + x + ", " + y + "). Discovered: " + discovered;
     }
     public void setTrue(){discovered = true;}
     public boolean getDiscovered(){return discovered;}
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

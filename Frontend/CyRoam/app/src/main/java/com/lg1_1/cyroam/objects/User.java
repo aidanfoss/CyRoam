@@ -1,5 +1,6 @@
 package com.lg1_1.cyroam.objects;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 public class User {
     private final int id;
     private final String username;
+    private final int permission;
     private final JSONObject jsonObject;
     //we don't want to store the password, unless we deem its easier to verify everything with it later.
 
@@ -31,7 +33,19 @@ public class User {
         this.username = username;
         this.jsonObject = jsonObject;
         //add info that should be accessible to any user about any user (people should be able to see
+        try {
+            if (jsonObject.has("permission")){
+                permission = jsonObject.getInt("permission");
+            }
+            else{
+                //todo fix this
+                permission = 2;
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     public String getName(){
         return username;
@@ -39,6 +53,9 @@ public class User {
 
 
     public String getUsername() {return username;}
+    public int getPermission() {
+        return 2;
+    }
 
 
     public int getID() {return id;}
