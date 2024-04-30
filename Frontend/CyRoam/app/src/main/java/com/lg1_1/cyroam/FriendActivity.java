@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.objects.User;
 
 import org.json.JSONArray;
@@ -92,16 +93,7 @@ public class FriendActivity extends AppCompatActivity {
         usernameEditText = findViewById(R.id.usernamesearch);
         titletext = findViewById(R.id.textView3);
 
-        Bundle extras = getIntent().getExtras();
-        if(extras == null){
-
-        }
-        else{
-            usernamestring = getIntent().getStringExtra("Username");
-            String finallyer = usernamestring + "'s: Friends";
-            titletext.setText(finallyer);
-           findfriendsReq(usernamestring);
-        }
+        String username = LoginManager.getInstance().getUser().getUsername();
 
 
 

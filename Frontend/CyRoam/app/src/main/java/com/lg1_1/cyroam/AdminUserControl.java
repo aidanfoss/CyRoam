@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AdminUserControl extends AppCompatActivity {
     /**
@@ -73,16 +74,38 @@ public class AdminUserControl extends AppCompatActivity {
         });
     }
     private void banRequest(String curUsername){
-        String url = mainURL + "/setScore/" + curUsername + "/";
+        String url = mainURL + "/userPerms";
+
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("username", curUsername);
+            userInfo.put("promotion", -2);
+
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.DELETE,
+                Request.Method.PUT,
                 url,
-                null,
+                userInfo,
                 response -> {
                     try{
-                        JSONArray jsonArray = response.getJSONArray("setScore");
+
+
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
+                        //outputtext.setText(curUsername + " Friends:\n");
+
+                        //}
 
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -101,22 +124,44 @@ public class AdminUserControl extends AppCompatActivity {
                 }
         ){
 
-
         };
+
         // Adding request to request queue
         queue.add(request);
     }
     private void promoteReq(String curUsername){
-        String url = mainURL + "/setScore/" + curUsername + "/";
+        String url = mainURL + "/userPerms";
+
+        // Convert input to JSONObject
+        JSONObject userInfo = new JSONObject();
+        try{
+
+            // etRequest should contain a JSON object string as your POST body
+            // similar to what you would have in POSTMAN-body field
+            // and the fields should match with the object structure of @RequestBody on sb
+            userInfo.put("username", curUsername);
+            userInfo.put("promotion", 1);
+
+
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.DELETE,
+                Request.Method.PUT,
                 url,
-                null,
+                userInfo,
                 response -> {
                     try{
-                        JSONArray jsonArray = response.getJSONArray("setScore");
+
+
+                        JSONArray jsonArray = response.getJSONArray("addfriend");
                         Log.i(TAG, "request success");
+                        //outputtext.setText(curUsername + " Friends:\n");
+
+                        //}
 
                     }catch (JSONException e){
                         e.printStackTrace();
@@ -136,6 +181,7 @@ public class AdminUserControl extends AppCompatActivity {
         ){
 
         };
+
         // Adding request to request queue
         queue.add(request);
     }

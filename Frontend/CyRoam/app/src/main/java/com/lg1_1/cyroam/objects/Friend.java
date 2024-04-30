@@ -1,9 +1,9 @@
 package com.lg1_1.cyroam.objects;
 
 public class Friend  {
-    private String name;
-    private int theirScore;
-    private int theirId;
+    private final String name;
+    private final int theirScore;
+    private final int theirId;
     public Friend(String username, int score, int Id){
         this.name = username;
         theirScore = score;
