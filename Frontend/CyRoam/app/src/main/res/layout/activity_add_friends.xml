@@ -5,8 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main2"
-    android:background="@drawable/animation_creation"
+    android:background="@drawable/background2"
     tools:context=".AddFriends">
+
+    <TextView
+        android:id="@+id/sendInvite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Invite:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.13" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -29,31 +43,38 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Friend Invitation"
+        android:text="Friend Invitations:"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.011"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.245" />
+        app:layout_constraintVertical_bias="0.27" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/FriendSearch"
         android:layout_width="253dp"
         android:layout_height="53dp"
         android:hint="Search"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.101"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165" />
+        app:layout_constraintVertical_bias="0.165"
+        />
 
     <Button
         android:id="@+id/searchbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="106dp"
+        android:layout_height="68dp"
         android:text="Button"
+        android:backgroundTint="#F1BE48"
+        android:shadowColor="@color/white"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.922"
@@ -63,6 +84,8 @@
 
     <TextView
         android:id="@+id/TitletextView"
+        android:textColor="@color/white"
+        android:textSize="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send Friend Invite"
@@ -76,6 +99,10 @@
         android:id="@+id/addBackButton"
         android:layout_width="66dp"
         android:layout_height="59dp"
+
+        android:backgroundTint="#F1BE48"
+        android:shadowColor="@color/white"
+        android:textColor="@color/white"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"

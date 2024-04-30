@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.objects.Friend;
 import com.lg1_1.cyroam.NicksAdapters.FriendsListAdapter;
 
@@ -70,7 +71,19 @@ public class FriendsActivity extends AppCompatActivity {
 
         ListView mViewList = (ListView) findViewById(R.id.listvire);
         //ArrayList<Friend> list2 = new ArrayList<>();
-        String curUsername ="bossf";
+        String curUsername = LoginManager.getInstance().getUser().getUsername();;
+        /*
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+
+        }
+        else{
+            usernamestring = getIntent().getStringExtra("Username");
+            String finallyer = usernamestring + "'s: Friends";
+            titletext.setText(finallyer);
+           findfriendsReq(usernamestring);
+        }
+         */
         findfriendsReq(curUsername);
 
         //ArrayList<Friend> list = new ArrayList<>();
@@ -125,17 +138,18 @@ public class FriendsActivity extends AppCompatActivity {
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
                         for (int i = 0; i < response.length(); i++){
-                            JSONObject friendobj = response.getJSONObject(i);
-                            //JSONObject friend = jsonArray.getJSONObject(i);
+                            JSONObject friendObj = response.getJSONObject(i);
 
-
-                            String curUser = friendobj.getString("curUsername");
-                            String friendUser = friendobj.getString("friendUsername");
+                            JSONObject friendUserObj = friendObj.getJSONObject("friendUser");
+                            int userId = friendUserObj.getInt("uId");
+                            String friendUsername = friendUserObj.getString("username");
+                            int score = friendUserObj.getInt("score");
+                            //int score = Integer.parseInt(friendobj.getString("score"));
                             //output = curUser + " " + friendUser;
-                            Friend free = new Friend(friendUser, 0, 10000+i);
+                            Friend free = new Friend(friendUsername, score, userId);
                             list2.add(free);
                             //outputtext.append(friendUser + "\n");
-                            Log.i(TAG, curUser);
+                            Log.i(TAG, friendUsername);
 
 
                         }
