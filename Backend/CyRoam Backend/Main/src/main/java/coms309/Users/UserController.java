@@ -125,7 +125,29 @@ public class UserController {
         int promotion = objectNode.get("promotion").asInt();
         if (username == null)
             return null;
+
         User s = userInterface.findByUsername(username);
+        if(promotion>=0 && s.getPermissions()==-3){
+            return null;
+        }
+        s.setPermissions(promotion);
+        userInterface.save(s);
+        //userInterface.save(user);
+        return userInterface.findByUsername(username);
+    }
+    @Operation(summary = "promote/demote user to specified level as a admin")
+    @ApiResponse(responseCode = "200", description = "user promoted", content = { @Content(mediaType = "json",
+            schema = @Schema(implementation = User.class)) })
+
+    @PutMapping(path = "/userPermsAdmin")
+    User setPermissionsAdmin(@RequestBody ObjectNode objectNode){
+        String username = objectNode.get("username").asText();
+        int promotion = objectNode.get("promotion").asInt();
+        if (username == null)
+            return null;
+
+        User s = userInterface.findByUsername(username);
+
         s.setPermissions(promotion);
         userInterface.save(s);
         //userInterface.save(user);
