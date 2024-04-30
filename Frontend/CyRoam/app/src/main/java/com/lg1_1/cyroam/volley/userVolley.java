@@ -25,14 +25,14 @@ public class userVolley {
      * userVolley constructor, should likely stay empty.
      * @author Aidan Foss
      */
-    private userVolley(){
+    private userVolley(Context context){
+        this.context = context;
         queue = Volley.newRequestQueue(context);
     }
 
-    public userVolley getInstance(Context context) {
+    public static userVolley getInstance(Context context) {
         if (instance == null) {
-            this.setContext(context);
-            instance = new userVolley();
+            instance = new userVolley(context);
         }
         return instance;
     }
@@ -72,8 +72,8 @@ public class userVolley {
                     throw new RuntimeException(e);
                 }
             }, error -> {
-                Log.e(TAG, "Error occured: " + error.getMessage());
-                callback.systemFailure("Error occured: " + error.getMessage());
+                Log.e(TAG, "Error occurred: " + error.getMessage());
+                callback.systemFailure("Error occurred: " + error.getMessage());
             });
         queue.add(request);
     }
@@ -116,8 +116,8 @@ public class userVolley {
                     callback.onFailure("JSONException: " + e.getMessage());
                 }
             }, error -> {
-            Log.e(TAG, "Error occured: " + error.getMessage());
-            callback.onFailure("Error occured: " + error.getMessage());
+            Log.e(TAG, "Error occurred: " + error.getMessage());
+            callback.onFailure("Error occurred: " + error.getMessage());
         });
     }
     public interface updateCallback {

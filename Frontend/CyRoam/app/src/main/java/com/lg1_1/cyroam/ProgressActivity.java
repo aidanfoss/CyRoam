@@ -1,13 +1,13 @@
 package com.lg1_1.cyroam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.lg1_1.cyroam.volley.progressVolley;
 
@@ -43,7 +43,7 @@ public class ProgressActivity extends AppCompatActivity {
         postButton = findViewById(R.id.postButton);
         backButton = findViewById(R.id.backButton);
 
-        volley = new progressVolley(this);
+        volley = progressVolley.getInstance(this);
 
         getButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class ProgressActivity extends AppCompatActivity {
                 if (!pinIdString.isEmpty()) {
                     try {
                         int pinId = Integer.parseInt(pinIdString);
-                        volley.fetchProgress(pinId, new progressVolley.VolleyCallbackGet() {
+                        volley.fetchProgress(new progressVolley.VolleyCallbackGet() {
                             @Override
                             public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
                                 Log.d(TAG, "Pin Discovered: " + discovered);
@@ -93,18 +93,17 @@ public class ProgressActivity extends AppCompatActivity {
                 if (!pinIdString.isEmpty()) {
                     try {
                         int pinId = Integer.parseInt(pinIdString);
-                        int userId = 1; //TODO FIX HARDCODED, later get userdata in from extra from maps screen
 
                         //Call discoverPin method
-                        volley.discoverPin(userId, pinId, new progressVolley.VolleyCallback() {
+                        volley.discoverPin(pinId, new progressVolley.VolleyCallback() {
                             @Override
-                            public void onSuccess(boolean discovered) { //handles success
-                                Log.d(TAG, "Pin Discovered: " + discovered);
+                            public void onSuccess() { //handles success
+                                Log.d(TAG, "Pin Discovered");
 
                                 //return to maps activity
                                 Intent intent = new Intent(ProgressActivity.this, MapsActivity.class);
                                 //add extra returned information here
-                                intent.putExtra("discovered", discovered);
+                                intent.putExtra("discovered", true);
                                 intent.putExtra("pinId", pinId);
                                 startActivity(intent);
                             }

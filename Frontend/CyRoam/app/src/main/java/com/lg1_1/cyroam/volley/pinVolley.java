@@ -25,7 +25,7 @@ public class pinVolley {
 
     private static final String TAG = "PinRequest";
     private static final String BASE_URL = MainActivity.url;
-    private pinVolley instance;
+    private static pinVolley instance;
 
     private final RequestQueue queue;
 
@@ -38,7 +38,7 @@ public class pinVolley {
         queue = Volley.newRequestQueue(context); //tutorial said to do this, but not sure why. couldn't it just be (this) for context?
     }
 
-    public pinVolley getInstance(Context cont) {
+    public static pinVolley getInstance(Context cont) {
         if (instance == null){
             instance = new pinVolley(cont);
         }
@@ -111,16 +111,17 @@ public class pinVolley {
      * @param callback callback input for in-line handling
      * Server replies with the ID of the pin thats created
      */
-    public void createPin(double x, double y, String name, final CreatePinCallback callback){
+    public void createPin(double x, double y, String name, String splash, String description, String url, final CreatePinCallback callback){
         Log.v(TAG, "createPin Called!");
-        String url = BASE_URL + "/pins";
-        Log.d(TAG, "Calling URL = " + BASE_URL + "/pins");
         JSONObject requestBody = new JSONObject();
         try{
             Log.d(TAG, String.valueOf(x) + " " + String.valueOf(y) + " " + name);
             requestBody.put("x", x);
             requestBody.put("y", y);
             requestBody.put("name", name);
+            requestBody.put("splash", splash);
+            requestBody.put("description", description);
+            requestBody.put("imagePath", url);
         } catch (JSONException e){
             Log.e(TAG, "JSONException" + e.getMessage());
             e.printStackTrace();
@@ -128,12 +129,12 @@ public class pinVolley {
             return;
         }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + "/pins", requestBody,
                 response -> {
                     Log.v(TAG, " CREATEPIN RESPONSE: " + response.toString());
                     try {
                         int id = response.getInt("id");
-                        Log.w(TAG, "pinId recieved");
+                        //Log.w(TAG, "pinId recieved");
                         callback.onSuccess(id);
                     } catch (JSONException e) {
                         Log.e(TAG, "JSONException: " + e.getMessage());
