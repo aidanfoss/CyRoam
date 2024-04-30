@@ -49,8 +49,9 @@ public class DiscoveryController {
         return getPinByUser(uId).contains(pinRepository.findById(pId));
     }
 
+    @Operation(summary = "Finds all Pins a User has not discovered")
     @GetMapping(path = "/users/{uId}/hasNotDiscovered")
-    List<Pin> isNotDiscovered(@PathVariable int uId) {
+    List<Pin> isNotDiscovered(@Parameter(description = "Id of the User") @PathVariable int uId) {
         List<Pin> undiscovered = new ArrayList<>();
         List<Pin> discovered = discoveryRepository.findPinsByUser(uId);
         List<Pin> all = pinRepository.findAll();
