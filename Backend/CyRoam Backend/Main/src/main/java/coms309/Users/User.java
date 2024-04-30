@@ -37,10 +37,10 @@ public class User {
     @OneToOne
     private Statistics stats;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Discovery> discoveries;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FogDiscovery> fogDiscoveries;
 
     //contructor

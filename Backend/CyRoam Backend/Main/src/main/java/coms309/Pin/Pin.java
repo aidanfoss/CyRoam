@@ -15,10 +15,10 @@ public class Pin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Discovery> discoveries;
 
     private double x;
@@ -30,9 +30,6 @@ public class Pin {
     private String description;
 
     private String imagePath;
-
-    @ManyToMany
-    private List<User> users;
 
     public void setId(int id) {
         this.id = id;
