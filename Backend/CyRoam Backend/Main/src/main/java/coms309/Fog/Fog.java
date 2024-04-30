@@ -49,6 +49,14 @@ public class Fog {
         return y;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getImagePath() {
         return imagePath;
     }
