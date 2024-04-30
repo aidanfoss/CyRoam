@@ -39,7 +39,7 @@ public class LeaderBoardListAdapter extends ArrayAdapter<Friend> {
         //TextView Id = (TextView) convert.findViewById(R.id.textView3);
         //String str1 = Integer.toString(score);
         //String str2 = Integer.toString(Id);
-        user.setText("Friend: "+name);
+        user.setText("User: "+name);
         score.setText("Score " + theirScore);
         //Id.setText("Id: " + theirId);
 
