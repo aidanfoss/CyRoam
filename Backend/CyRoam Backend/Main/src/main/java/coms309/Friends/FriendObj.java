@@ -23,8 +23,8 @@ public class FriendObj {
     //needs testing
    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
    @JoinColumn(name = "userId")
-   @JsonIgnore
-   private User user;
+
+   private User friendUser;
 
    private String curUsername;
 
@@ -69,12 +69,12 @@ public class FriendObj {
     public Boolean getfriendStatus() {
         return friendStatus;
     }
-    public User getUser() {
-        return user;
+    public User getFriendUser() {
+        return friendUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setFriendUser(User friendUser) {
+        this.friendUser = friendUser;
     }
 
 }
