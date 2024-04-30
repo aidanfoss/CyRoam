@@ -33,12 +33,18 @@ public class DiscoveryController {
 
 
     @Operation(summary = "Create a Discovery")
-    @ApiResponse(responseCode = "200", description = "Created the Discovery", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = Pin.class)) })
+    @ApiResponse(responseCode = "200", description = "Created the Discovery")
     @PostMapping(path = "/users/{uId}/discovery/{pId}")
     Discovery createDiscovery(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Pin") @PathVariable int pId) {
         Discovery discovery = new Discovery(userInterface.findByuId(uId), pinRepository.findById(pId));
         discoveryRepository.save(discovery);
         return discovery;
+    }
+
+    @Operation(summary = "Checks if a User has discovered a specific Pin")
+    @ApiResponse(responseCode = "200", description = "Returned successfully")
+    @GetMapping(path = "/users/{uId}/hasDiscovered/{pId}")
+    Boolean isDiscovered(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Pin") @PathVariable int pId) {
+        return getPinByUser(uId).contains(pinRepository.findById(pId));
     }
 }
