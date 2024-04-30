@@ -30,20 +30,25 @@ public class FogDiscoveryController {
     UserInterface userInterface;
 
     @Operation(summary = "Get all Fog a User has cleared")
-    @ApiResponse(responseCode = "200", description = "Found the Fog", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = FogDiscovery.class)) })
+    @ApiResponse(responseCode = "200", description = "Found the Fog")
     @GetMapping(path = "/users/{id}/fog")
     List<Fog> getFogByUser(@Parameter(description = "id of the User") @PathVariable long id){
         return fogDiscoveryRepository.findFogByUser(id);
     }
 
     @Operation(summary = "Create a fogDiscovery (Clear this fog for a User)")
-    @ApiResponse(responseCode = "200", description = "Created the fogDiscovery", content = { @Content(mediaType = "json",
-            schema = @Schema(implementation = FogDiscovery.class)) })
+    @ApiResponse(responseCode = "200", description = "Created the fogDiscovery")
     @PostMapping(path = "/users/{uId}/fogDiscovery/{fId}")
-    FogDiscovery createFogDiscovery(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Fog") @PathVariable int fId) {
+    String createFogDiscovery(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Fog") @PathVariable int fId) {
         FogDiscovery discovery = new FogDiscovery(userInterface.findByuId(uId), fogRepository.findById(fId));
         fogDiscoveryRepository.save(discovery);
-        return discovery;
+        return "User " + uId + " has cleared Fog " + fId;
+    }
+
+    @Operation(summary = "Checks if a User has cleared a specific Fog")
+    @ApiResponse(responseCode = "200", description = "Returned successfully")
+    @GetMapping(path = "/users/{uId}/hasCleared/{fId}")
+    Boolean hasCleared(@Parameter(description = "Id of the User") @PathVariable int uId, @Parameter(description = "Id of the Fog") @PathVariable int fId) {
+        return getFogByUser(uId).contains(fogRepository.findById(fId));
     }
 }
