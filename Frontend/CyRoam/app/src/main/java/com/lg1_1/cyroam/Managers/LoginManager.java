@@ -32,7 +32,7 @@ public class LoginManager {
     private LoginManager(){
         //pretty sure this is supposed to be empty
         //get request for score
-
+        //
         //
     }
     public User setUser(){
