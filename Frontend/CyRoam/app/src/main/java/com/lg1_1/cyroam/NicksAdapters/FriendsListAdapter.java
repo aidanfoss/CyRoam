@@ -52,8 +52,10 @@ public class FriendsListAdapter extends ArrayAdapter<Friend> {
             public void onClick(View view) {
                 // Handle click event here
                 // For example, you might want to open a new activity with details of the clicked friend
+                String idstring = Integer.toString(friend.getTheirId());
                 Intent intent = new Intent(context1, ProfileActivity.class);
-                intent.putExtra("friendId", friend.getTheirId());
+                intent.putExtra("friendId", idstring);
+                intent.putExtra("friendName", friend.getName());
                 context1.startActivity(intent);
             }
         });

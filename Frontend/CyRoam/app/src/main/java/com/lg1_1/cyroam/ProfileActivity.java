@@ -61,9 +61,28 @@ public class ProfileActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-        String curUsername = LoginManager.getInstance().getUser().getUsername();;
-        int id = LoginManager.getInstance().getUser().getID();;
-        String idstring = Integer.toString(id);
+
+
+        /**
+         * Set up credientals
+         */
+        String curUsername;
+        int id = 0;
+        String idstring;
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            curUsername = LoginManager.getInstance().getUser().getUsername();
+            id = LoginManager.getInstance().getUser().getID();
+            idstring = Integer.toString(id);
+
+        }
+        else{
+            curUsername = getIntent().getStringExtra("friendName");
+            idstring = getIntent().getStringExtra("friendId");
+            id = Integer.parseInt(idstring);
+            //findfriendsReq(usernamestring);
+        }
+
         titlemain = findViewById(R.id.profileTitleTextiew);
 
         rankOutput = findViewById(R.id.rankTextiew);
@@ -102,11 +121,11 @@ public class ProfileActivity extends AppCompatActivity {
                             int score = response.getInt("score");
                             scoreOutput.setText("Score: " + score);
                             int numPins = response.getInt("numDiscoveredPins");
-                            pinOutput.setText("Pins Discovered: " + numPins + "100");
+                            pinOutput.setText("Pins Discovered: " + numPins + "/" +"100");
                             int rank = response.getInt("rank");
                             rankOutput.setText("Rank: " + rank);
                             int forDiscore = response.getInt("fogDiscovered");
-                            fogOutput.setText("Fog Discover: " + forDiscore);
+                            fogOutput.setText("Fog Cleared: " + forDiscore + "%");
 
                             //int score = Integer.parseInt(friendobj.getString("score"));
 
