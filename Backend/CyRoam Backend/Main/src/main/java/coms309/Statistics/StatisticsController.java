@@ -99,10 +99,11 @@ class StatisticsController {
             stats.setFogDiscovered(fogs);
 
             //set score
-            stats.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
-            user.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
+           // stats.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
+           // user.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
         }
-
+        stats.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
+        user.setScore(stats.getFogDiscovered()/5 + stats.getNumDiscoveredPins()*5);
         statisticsRepository.save(stats);
 
         return statisticsRepository.findByUser(user);
