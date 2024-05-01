@@ -37,6 +37,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,6 +57,7 @@ import org.json.JSONObject;
 
 import java.net.URISyntaxException;
 import java.util.Objects;
+import java.util.Vector;
 
 /**
  * Hub Activity; displays map, pins, info, friend requests and stores most info
@@ -63,20 +65,25 @@ import java.util.Objects;
  */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, WebSocketListener {
     private final String TAG = "MapsActivityTag"; //debugging tag
-
+    private final LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
+    Vector<Marker> fogVector;
     private Bundle extras;
     private User user;
-    private boolean portalOpen = false;
+    private final boolean portalOpen = false;
     protected TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
     private BitmapDescriptor bitmapUserIcon;
     private BitmapDescriptor smallDiscoveredIcon;
+    private BitmapDescriptor smallFogIcon;
 
     //define volley classes and requestQueue
     private friendVolley friendVolley;
     private AddFriends addFriends;
     private progressVolley progressVolley;
     protected RequestQueue mQueue; // define volley request queue
+
+    private final LatLng swBounds = new LatLng(42.02221344519929, -93.65174685767133);
+    private final LatLng neBounds = new LatLng(42.03296498762718, -93.64322212670656);
 
     //TODO define user object here to determine what they can and cant do
     //this can also change what does and doest display (ex:no fog on admin account, no distance limit etc)
@@ -123,8 +130,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
-        progressVolley = progressVolley.getInstance(this);
-
+        progressVolley = com.lg1_1.cyroam.volley.progressVolley.getInstance(this);
+        fogVector = new Vector<Marker>();
         //gather extras
         extras = getIntent().getExtras();
 
@@ -149,10 +156,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
         Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
         smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
-        Bitmap userIcon = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.circle), 128, 128, false);
+        Bitmap userIcon = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.circle), 64, 64, false);
         bitmapUserIcon = BitmapDescriptorFactory.fromBitmap(userIcon);
         Bitmap smallDiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.discovered), 128, 128, false);
         smallDiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallDiscovered);
+        Bitmap fogIcon = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fog), 640, 640, false);
+        smallFogIcon = BitmapDescriptorFactory.fromBitmap(fogIcon);
 
         //defines volley queue for fillMap todo remove this and put it in pinvolley
         mQueue = Volley.newRequestQueue(this);
@@ -285,11 +294,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     lat = location.getLatitude();
                     lng = location.getLongitude();
+                    //gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
                     //Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
                     //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     if (userMarker!= null){
                         userMarker.setPosition(latLng);
 //                        userMarker.setIcon();
+                    }
+
+                    //Here is
+
+                    for(int i=0; i < fogVector.size();i++){
+                        Pin inPin = (Pin) fogVector.get(i).getTag();
+                        if (inPin != null && inPin.isFog()) {
+                            double tolerance = 0.0025;
+                            LatLng markerPos = fogVector.get(i).getPosition();
+                            if (Math.abs(markerPos.latitude - latLng.latitude) <= tolerance) {
+                                if (Math.abs(markerPos.longitude - latLng.longitude) <= tolerance+0.0015) {
+                                    com.lg1_1.cyroam.volley.progressVolley.getInstance(MapsActivity.this).clearFog(inPin.getID(), new progressVolley.ClearFogCallback() {
+                                        @Override
+                                        public void onSuccess(boolean discovered) {
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(String errorMessage) {
+
+                                        }
+                                    });
+                                    //marker.setPosition(new LatLng(0,0));
+                                    fogVector.get(i).setVisible(false);
+                                    fogVector.get(i).remove();
+//                                    Log.v(TAG + " clear fog", "Cleared Fog!");
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -324,13 +363,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override //This gets called when the map initializes. It only happens once, but its seperate from onCreate.
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.gMap = googleMap;
-        gMap.getUiSettings().setAllGesturesEnabled(false); //disables being able to move camera around
+        googleMap.setLatLngBoundsForCameraTarget(new LatLngBounds(swBounds,neBounds));
+        googleMap.setMinZoomPreference(15f);
+        googleMap.setMaxZoomPreference(16f);
+        gMap.getUiSettings().setAllGesturesEnabled(true); //disables being able to move camera around
 //        gMap.getUiSettings().
-        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(14));
-        LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
+        this.gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
-        fillMap(); //fills the map with relevant information
-        userMarker = this.gMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).icon(bitmapUserIcon));
+
+        fillMap(); //fills the map with undiscovered pins
+        fillMapDiscovered(); //fills the map with pins that have already been discovered
+        fillMapFog(); //fills with fog
+
+        //create the users icon
+        userMarker = this.gMap.addMarker(new MarkerOptions().position(new LatLng(0,0)).icon(bitmapUserIcon).zIndex(5.0f).anchor(0.5f,0.5f));
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
@@ -367,7 +414,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 textView.append("Pin with ID " + extras.getInt("pinId") + " discovered: " + extras.getBoolean("discovered")+ "\n");
                 progressVolley.fetchProgress(new progressVolley.VolleyCallbackGet() {
                     @Override
-                    public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
+                    public void onSuccess(int pinId, int userId, boolean discovered) {
                         Log.d(TAG, "Progress Get Req: " + pinId + " " + userId + " " + discovered);
                         textView.append("Progress Data Received Via Volley Get Request: " + pinId + " " + userId + " " + discovered+ "\n");
                     }
@@ -425,16 +472,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Pin clickPin = (Pin) marker.getTag();
 
                 //2 send progress update
-                progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
-                    @Override
-                    public void onSuccess() {
-                        ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
-                    }
-                    @Override
-                    public void onFailure(String errorMessage) {
-                        Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
-                    }
-                });
+                if (clickPin != null) {
+                    progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
+                        @Override
+                        public void onSuccess() {
+                            ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+                        }
+                        @Override
+                        public void onFailure(String errorMessage) {
+                            Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
+                        }
+                    });
+                }
 
                 //3 change the icon on the map
                 marker.setIcon(smallDiscoveredIcon);
@@ -449,36 +498,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
-                gMap.moveCamera(CameraUpdateFactory.zoomTo(14));
+                gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
                 LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
-                gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
+                //gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
+                createFogFull(latLng.latitude, latLng.longitude);
+//                Marker newMarker = gMap.addMarker(new MarkerOptions().position(latLng).icon(smallFogIcon));
             }
         });
-        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                gMap.moveCamera(CameraUpdateFactory.zoomTo(16));
-                //marker.setIcon(smallDiscoveredIcon);
-                return false;
-            }
-        });
+//        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(@NonNull Marker marker) {
+//                Pin inPin = (Pin) marker.getTag();
+//
+//
+//                //marker.setIcon(smallDiscoveredIcon);
+//                return false;
+//            }
+//        });
 
     }
 
     /**
      * @author Aidan Foss
-     * fills map with markers, and creates relevant pin objects.
-     * adds pin object to tags of marker for onclick listener.
-     *      look at OnMarkerClick for more info
-     *
-     * Function that makes a volley request to recieve all pin data.
-     * Uses url from MainActivity, and uses the googleMaps gMap declaration
-     * from the top of the class.
+     * Fills the map with pins that have not been discovered by the user yet
      */
     private void fillMap() {
         String useURL = url + "/pins";
         Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, useURL, null,
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/users/" + LoginManager.getInstance().getUser().getID() + "/hasNotDiscovered", null,
             response -> {
                 try {
                     //JSONObject jsonArray = response.getJSONObject("pins");
@@ -497,37 +544,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String splash = jsonPin.getString("splash");
                         String description = jsonPin.getString("description");
                         String imagePath = jsonPin.getString("imagePath");
-                        boolean discovered = false;
 
-                        //progressVolley.fetchProgress();
-
-                        Pin newPin = new Pin(x, y, name, splash, description, imagePath, id, discovered);
-                        Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
-                        if (newPin.getDiscovered()) {
-                            Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
-                            Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                    .position(newPin.getPos())
-                                    .title(newPin.getName())
-                                    .snippet(newPin.getDescription())
-                                    .icon(BitmapDescriptorFactory.defaultMarker())
-                            );
-                            assert marker != null;
-                            marker.setTag(newPin);
+                        Pin newPin = new Pin(x, y, name, splash, description, imagePath, id, false);
+                        Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
+                        Marker marker = this.gMap.addMarker(new MarkerOptions()
+                                .position(newPin.getPos())
+                                .title(newPin.getName())
+                                .snippet(newPin.getSplash())
+                                .icon(smallUndiscoveredIcon)
+                                .zIndex(2.0f)
+                                .anchor(0.5f,0.5f)
+                        );
+                        assert marker != null;
+                        marker.setIcon(smallUndiscoveredIcon);
+                        marker.setTag(newPin);
                         }
-                        else //create undiscovered pin
-                        {
-                            Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
-                            Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                    .position(newPin.getPos())
-                                    .title(newPin.getName())
-                                    .snippet(newPin.getDescription())
-                                    .icon(smallUndiscoveredIcon)
-                            );
-                            assert marker != null;
-                            marker.setIcon(smallUndiscoveredIcon);
-                            marker.setTag(newPin);
-                        }
-                    }
                     textView.append("CreatedPins\n");
                 } catch (JSONException e) {
                     Log.e(TAG + "volley", "JSONException: " + e);
@@ -536,59 +567,85 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }, Throwable::printStackTrace);
         mQueue.add(request);
     }
+    /**
+     * @author Aidan Foss
+     * Fills the map with pins that have been discovered
+     */
+    private void fillMapDiscovered() {
+        Log.v(TAG, "fillMapDiscovered() called");
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url+"/users/" + LoginManager.getInstance().getUser().getID() + "/pins", null,
+            response -> {
+                try {
+                    //JSONObject jsonArray = response.getJSONObject("pins");
+                    Log.d(TAG + "volley", "request success");
 
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject jsonPin = response.getJSONObject(i);
+
+                        int id = jsonPin.getInt("id");
+                        double x = jsonPin.getDouble("x");
+                        double y = jsonPin.getDouble("y");
+                        String name = jsonPin.getString("name");
+                        if (name.contains("test") || name.contains("Test")){
+                            continue;
+                        }
+                        String splash = jsonPin.getString("splash");
+                        String description = jsonPin.getString("description");
+                        String imagePath = jsonPin.getString("imagePath");
+
+                        Pin newPin = new Pin(x, y, name, splash, description, imagePath, id, true);
+                        Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
+                        Marker marker = this.gMap.addMarker(new MarkerOptions()
+                                .position(newPin.getPos())
+                                .title(newPin.getName())
+                                .snippet(newPin.getDescription())
+                                .icon(smallDiscoveredIcon)
+                                .zIndex(1.0f)
+                                .anchor(0.5f,0.5f)
+                        );
+                        assert marker != null;
+                        marker.setTag(newPin);
+
+                    }
+                    textView.append("CreatedDiscoveredPins\n");
+                } catch (JSONException e) {
+                    Log.e(TAG + "volley", "JSONException: " + e);
+                    e.printStackTrace();
+                }
+            }, Throwable::printStackTrace);
+        mQueue.add(request);
+    }
+
+    /**
+     * @author Aidan Foss
+     * Fills the map with fog that has not been cleared
+     * I do not need to call fog that has been cleared, as theres no reason to ever display it.
+     */
     private void fillMapFog() {
-        String useURL = url + "/pins";
-        Log.v(TAG, "fillMap() called");
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, useURL, null,
+        Log.v(TAG, "fillMapFog() called");
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/users/" + LoginManager.getInstance().getUser().getID() + "/hasNotCleared", null,
                 response -> {
                     try {
                         //JSONObject jsonArray = response.getJSONObject("pins");
-                        Log.d(TAG + "volley", "request success");
+                        //Log.d(TAG + "volley", "fog request success");
 
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject jsonPin = response.getJSONObject(i);
 
-                            int id = jsonPin.getInt("pId");
+                            int id = jsonPin.getInt("id");
                             double x = jsonPin.getDouble("x");
                             double y = jsonPin.getDouble("y");
-                            String name = jsonPin.getString("name");
-                            String splash = jsonPin.getString("splash");
-                            String description = jsonPin.getString("description");
-                            String imagePath = jsonPin.getString("imagePath");
-                            boolean discovered = false;
+                            //todo fog progress
+                            Pin fogPin = new Pin(x,y,id,true);
+                            //Log.d(TAG + "discover" + "volley", "fog created");
+                            Marker fog = gMap.addMarker(new MarkerOptions().icon(smallFogIcon).position(new LatLng(x,y)).anchor(0.5f,0.5f));
 
-                            //progressVolley.fetchProgress();
-
-                            Pin newPin = new Pin(x, y, name, splash, description,imagePath, id, discovered);
-                            Log.d(TAG + "discover" + "volley", "pin created " + newPin.getDebugDescription());
-                            if (newPin.getDiscovered()) {
-                                Log.v(TAG + "discover", "discovered pin created: " + newPin.getDebugDescription());
-                                Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                        .position(newPin.getPos())
-                                        .title(newPin.getName())
-                                        .snippet(newPin.getDescription())
-                                        .icon(BitmapDescriptorFactory.defaultMarker())
-                                );
-                                assert marker != null;
-                                marker.setTag(newPin);
-                            }
-                            else //create undiscovered pin
-                            {
-                                Log.v(TAG + "discover", "undiscovered pin created: " + newPin.getDebugDescription());
-                                Marker marker = this.gMap.addMarker(new MarkerOptions()
-                                        .position(newPin.getPos())
-                                        .title(newPin.getName())
-                                        .snippet(newPin.getDescription())
-                                        .icon(smallUndiscoveredIcon)
-                                );
-                                assert marker != null;
-                                marker.setIcon(smallUndiscoveredIcon);
-                                Log.e(TAG + "discover", "test");
-                                marker.setTag(newPin);
+                            if (fog != null) {
+                                fogVector.add(fog);
+                                fog.setTag(fogPin);
                             }
                         }
-                        textView.append("CreatedPins\n");
+                        textView.append("CreatedFog\n");
                     } catch (JSONException e) {
                         Log.e(TAG + "volley", "JSONException: " + e);
                         e.printStackTrace();
@@ -673,6 +730,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .title(pin.getName())
                         .snippet(pin.getDescription())
                         .icon(BitmapDescriptorFactory.defaultMarker())
+                        .anchor(0.5f,0.5f)
                 );
                 assert marker != null;
                 marker.setTag(pin);
@@ -714,5 +772,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //for testing, will end up being deprecated
     public void setFusedLocationClient(FusedLocationProviderClient mockFusedLocationClient) {
         fusedLocationClient = mockFusedLocationClient;
+    }
+
+    public void createFogHorizontal(double lat, double longi){
+        for(int i = 0; i<15;i++){
+            pinVolley.getInstance(this).createFog(longi + (0.002 * i), lat, "url", new pinVolley.CreateFogCallback() {
+                @Override
+                public void onSuccess(int idSuccess, LatLng pos) {
+                    Marker fog = gMap.addMarker(new MarkerOptions().icon(smallFogIcon).position(pos).anchor(0.5f,0.5f));
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+
+                }
+            });
+        }
+    }
+    public void createFogFull(double lat, double longi){
+        for(int i = 0; i<30;i++){
+            createFogHorizontal(lat+(-0.002*i), longi);
+        }
     }
 }
