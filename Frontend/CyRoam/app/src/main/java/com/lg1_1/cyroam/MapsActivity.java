@@ -89,9 +89,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //location & locationPermissions things
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
     protected static FusedLocationProviderClient fusedLocationClient;
-    //    private Location lastKnownLocation;
-//    private Boolean locationPermissionGranted;
-//    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     protected LocationRequest locationRequest;
     private LocationCallback locationCallback;
     protected double lat = 0;
@@ -102,11 +99,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker userMarker;
     FrameLayout map;
 
-
-
-    public static void setFusedLocationProviderClient(FusedLocationProviderClient mockFusedLocationClient) {
-        fusedLocationClient = mockFusedLocationClient;
-    }
 
     /**
      * Does multiple things on opening of this activity
@@ -129,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps); //Link to XML
         progressVolley = com.lg1_1.cyroam.volley.progressVolley.getInstance(this);
-        fogVector = new Vector<Marker>();
+        fogVector = new Vector<>();
         //gather extras
         extras = getIntent().getExtras();
 
@@ -182,7 +174,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         /*
-          todo set visibility of buttons and UI based on users permission value.
+           set visibility of buttons and UI based on users permission value.
            If the user has no permissions, only initialize
            buttons related to score and friends
         */
@@ -200,41 +192,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //check users permission value and change function of anything relevant based on that
         switch (LoginManager.getInstance().getPermission()){
             case 0: //basic user
-                //turnOnFog();
                 portalButton.setOnClickListener(v-> {
                     if(portalButton1.getVisibility() == View.INVISIBLE) {
                         portalButton1.setVisibility(View.VISIBLE);
                         portalButton3.setVisibility(View.VISIBLE);
-                        portalButton4.setVisibility(View.VISIBLE);
+                        //portalButton4.setVisibility(View.VISIBLE);
                         portalButton5.setVisibility(View.VISIBLE);
                     } else {
                         portalButton1.setVisibility(View.INVISIBLE);
                         portalButton3.setVisibility(View.INVISIBLE);
-                        portalButton4.setVisibility(View.INVISIBLE);
+                        //portalButton4.setVisibility(View.INVISIBLE);
                         portalButton5.setVisibility(View.INVISIBLE);
                     }
                 });
                 break;
             case 1: //pin creator
-                //turnOnFog();
                 portalButton.setOnClickListener(v-> {
                     if(portalButton1.getVisibility() == View.INVISIBLE) {
                         portalButton1.setVisibility(View.VISIBLE);
                         portalButton3.setVisibility(View.VISIBLE);
                         portalButton2.setVisibility(View.VISIBLE);
-                        portalButton4.setVisibility(View.VISIBLE);
+                        //portalButton4.setVisibility(View.VISIBLE);
                         portalButton5.setVisibility(View.VISIBLE);
                     } else {
                         portalButton1.setVisibility(View.INVISIBLE);
                         portalButton3.setVisibility(View.INVISIBLE);
                         portalButton2.setVisibility(View.INVISIBLE);
-                        portalButton4.setVisibility(View.INVISIBLE);
+                        //portalButton4.setVisibility(View.INVISIBLE);
                         portalButton5.setVisibility(View.INVISIBLE);
                     }
                 });
                 break;
             case 2: //admin
-                //dont turn on fog, admins shouldnt see it
                 portalButton.setOnClickListener(v-> {
                     if(portalButton1.getVisibility() == View.INVISIBLE) {
                         portalButton1.setVisibility(View.VISIBLE);
@@ -276,8 +265,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);
         });
         portalButton5.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
-//            Intent intent = new Intent(MapsActivity.this, settingsActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(MapsActivity.this, SettingsActivity.class);
+            startActivity(intent);
         });
 
 
@@ -294,15 +283,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                     lat = location.getLatitude();
                     lng = location.getLongitude();
-                    //gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
-                    //Log.w(TAG, String.valueOf(location.getLatitude() + "," + location.getLongitude()));
-                    //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     if (userMarker!= null){
                         userMarker.setPosition(latLng);
-//                        userMarker.setIcon();
                     }
 
-                    //Here is
 
                     for(int i=0; i < fogVector.size();i++){
                         Pin inPin = (Pin) fogVector.get(i).getTag();
@@ -314,9 +298,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     com.lg1_1.cyroam.volley.progressVolley.getInstance(MapsActivity.this).clearFog(inPin.getID(), new progressVolley.ClearFogCallback() {
                                         @Override
                                         public void onSuccess(boolean discovered) {
-
+                                            //Log.v(TAG, "success!");
                                         }
-
                                         @Override
                                         public void onFailure(String errorMessage) {
 
@@ -325,7 +308,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     //marker.setPosition(new LatLng(0,0));
                                     fogVector.get(i).setVisible(false);
                                     fogVector.get(i).remove();
-//                                    Log.v(TAG + " clear fog", "Cleared Fog!");
                                 }
                             }
                         }
@@ -333,19 +315,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         };
-
-        //Make Websocket Connection
-//        try {
-//            Log.v("Aidan " + TAG, "trying websocket connection");
-//            aidanClient = new aidanWebSocket(wsurl + "/pins/socket", this);
-//            aidanClient.connect();
-//            //@Nick, todo: add your websocket try here too. Hopefully that works.
-//            //You could also make a similar try/catch right below this one, might be a better idea
-//        } catch (URISyntaxException e) {
-//            Log.e(TAG, "Websocket Error: " + e.toString());
-//            Log.e("Aidan WebSocket", "Websocket Error: " + e.toString());
-//            e.printStackTrace();
-//        }
     }
 
     /**
@@ -367,7 +336,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.setMinZoomPreference(15f);
         googleMap.setMaxZoomPreference(16f);
         gMap.getUiSettings().setAllGesturesEnabled(true); //disables being able to move camera around
-//        gMap.getUiSettings().
         this.gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
 
         this.gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
@@ -381,10 +349,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
-            boolean success = gMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json));
-
+            boolean success = gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
@@ -401,15 +366,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (extras.containsKey("message")) {
                 textView.append(extras.getString("message")+ "\n");
             }
-//            if (extras.containsKey("username")){
-//                user = new User(
-//                        extras.getString("username"),
-//                        extras.getInt("userID"));
-//            }
 
             //create new pin with passed data //pinVector.add(new Pin(extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"), (extras.getString("NAME") + "( " + extras.getDouble("LATITUDE") + ", " + extras.getDouble("LONGITUDE") + ")")));
-//            Pin newPin = new Pin (extras.getDouble("LATITUDE"),extras.getDouble("LONGITUDE"),extras.getString("NAME"),extras.getInt("PINID"));
-//            Marker newMarker = this.gMap.addMarker(new MarkerOptions().position(newPin.getPos()).title(newPin.getName()));
             if (extras.containsKey("discovered")) { //discover response
                 textView.append("Pin with ID " + extras.getInt("pinId") + " discovered: " + extras.getBoolean("discovered")+ "\n");
                 progressVolley.fetchProgress(new progressVolley.VolleyCallbackGet() {
@@ -465,63 +423,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
          * 3) display the pin as activated (change the icon)
          * 4) go to a more detailed screen for the clicked pin
          */
-        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(@NonNull Marker marker) {
-                //1 grab pin ID (creates temporary pin object)
-                Pin clickPin = (Pin) marker.getTag();
-                //2 check if user is close enough and pin clicked is not fog
-                if (clickPin != null && !clickPin.isFog()) {
-                    double tolerance = 0.0025;
-                    if (Math.abs(marker.getPosition().latitude - lat) <= tolerance) {
-                        if (Math.abs(marker.getPosition().longitude - lng) <= tolerance+0.0015) {
-                            //3 send progress update
-                            progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
-                                @Override
-                                public void onSuccess() {
-                                    ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+        gMap.setOnInfoWindowClickListener(marker -> {
+            //1 grab pin ID (creates temporary pin object)
+            Pin clickPin = (Pin) marker.getTag();
+            //2 check if user is close enough and pin clicked is not fog
+            if (clickPin != null && !clickPin.isFog()) {
+                double tolerance = 0.0025;
+                if (Math.abs(marker.getPosition().latitude - lat) <= tolerance) {
+                    if (Math.abs(marker.getPosition().longitude - lng) <= tolerance+0.0015) {
+                        //3 send progress update
+                        progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
+                            @Override
+                            public void onSuccess() {
+                                ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
 
-                                }
+                            }
 
-                                @Override
-                                public void onFailure(String errorMessage) {
-                                    Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
-                                }
-                            });
-                            //3 change the icon on the map
-                            marker.setIcon(smallDiscoveredIcon);
+                            @Override
+                            public void onFailure(String errorMessage) {
+                                Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
+                            }
+                        });
+                        //3 change the icon on the map
+                        marker.setIcon(smallDiscoveredIcon);
 
-                            //4 move to pinInfoScreen
-                            //create intent for more information screen
-                            Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
-                            intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
-                            startActivity(intent);
-                        }
+                        //4 move to pinInfoScreen
+                        //create intent for more information screen
+                        Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
+                        intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
+                        startActivity(intent);
                     }
                 }
             }
         });
-        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(@NonNull LatLng latLng) {
-                gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
-                LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
-                //gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
-//                createFogFull(latLng.latitude, latLng.longitude);
-//                Marker newMarker = gMap.addMarker(new MarkerOptions().position(latLng).icon(smallFogIcon));
-            }
-        });
-//        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(@NonNull Marker marker) {
-//                Pin inPin = (Pin) marker.getTag();
-//
-//
-//                //marker.setIcon(smallDiscoveredIcon);
-//                return false;
-//            }
-//        });
-
+        gMap.setOnMapClickListener(latLng -> gMap.moveCamera(CameraUpdateFactory.zoomTo(15)));
     }
 
     /**
@@ -529,7 +464,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * Fills the map with pins that have not been discovered by the user yet
      */
     private void fillMap() {
-        String useURL = url + "/pins";
         Log.v(TAG, "fillMap() called");
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/users/" + LoginManager.getInstance().getUser().getID() + "/hasNotDiscovered", null,
             response -> {
@@ -544,9 +478,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         double x = jsonPin.getDouble("x");
                         double y = jsonPin.getDouble("y");
                         String name = jsonPin.getString("name");
-//                        if (name.contains("test") || name.contains("Test")){
-//                            continue;
-//                        }
                         String splash = jsonPin.getString("splash");
                         String description = jsonPin.getString("description");
                         String imagePath = jsonPin.getString("imagePath");
@@ -632,8 +563,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url + "/users/" + LoginManager.getInstance().getUser().getID() + "/hasNotCleared", null,
                 response -> {
                     try {
-                        //JSONObject jsonArray = response.getJSONObject("pins");
-                        //Log.d(TAG + "volley", "fog request success");
 
                         for (int i = 0; i < response.length(); i++) {
                             JSONObject jsonPin = response.getJSONObject(i);
@@ -741,7 +670,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 assert marker != null;
                 marker.setTag(pin);
             }
-
             @Override
             public void onFailure(String errorMessage) {
                 textView.append("get request failed for pin ID " + wsPinIdInput + "\n");
@@ -764,40 +692,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 textView.append("This user was added as a friend\n");
                 Log.d("Nick "+ TAG + " Volley Websocket", "FriendAdd Get Req: ");
             }
-
             @Override
             public void onFailure(String errorMessage) {
                 textView.append("This user was unable to be added as a friend\n");
                 Log.e(TAG, "fetchuseraddData error: " + errorMessage);
             }
         });
-
     }
-
-
-    //for testing, will end up being deprecated
-    public void setFusedLocationClient(FusedLocationProviderClient mockFusedLocationClient) {
-        fusedLocationClient = mockFusedLocationClient;
-    }
-
-//    public void createFogHorizontal(double lat, double longi){
-//        for(int i = 0; i<15;i++){
-//            pinVolley.getInstance(this).createFog(longi + (0.002 * i), lat, "url", new pinVolley.CreateFogCallback() {
-//                @Override
-//                public void onSuccess(int idSuccess, LatLng pos) {
-//                    Marker fog = gMap.addMarker(new MarkerOptions().icon(smallFogIcon).position(pos).anchor(0.5f,0.5f));
-//                }
-//
-//                @Override
-//                public void onFailure(String errorMessage) {
-//
-//                }
-//            });
-//        }
-//    }
-//    public void createFogFull(double lat, double longi){
-//        for(int i = 0; i<30;i++){
-//            createFogHorizontal(lat+(-0.002*i), longi);
-//        }
-//    }
 }
