@@ -111,6 +111,9 @@ public class UserController {
 
         for(User user : users){
             String username = user.getUsername();
+            if(user.getStatistics()!=null) {
+                user.setScore(statisticsRepository.findByUser(user).getScore());
+            }
             if(user.getPermissions()>=0) {
                 int score = user.getScore(); // change this to grab amount of pins discovered
                 UserScore userScoreObj = new UserScore(username, score);
