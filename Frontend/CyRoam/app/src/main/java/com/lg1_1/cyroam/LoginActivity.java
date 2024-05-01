@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;  // define username edittext variable
     private EditText passwordEditText;  // define password edittext variable
+    private TextView CyRoamSplash;
     private final boolean confirm = false;
     String output;
     private TextView textView;
@@ -44,8 +45,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);            // link to Login activity XML
 
         /* initialize UI elements */
+
         usernameEditText = findViewById(R.id.editTextUsername);
         passwordEditText = findViewById(R.id.editTextPassword);
+        CyRoamSplash = findViewById(R.id.textViewTitleMainLogin);
+
         // define login button variable
         Button loginButton = findViewById(R.id.loginButton);    // link to login button in the Login activity XML
         // define signup button variable
@@ -80,20 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                 /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                makeStringReq(username, password, new VolleyCallback() {
-                    @Override
-                    public void onSuccess(boolean isTrue) {
-                        Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
-                        intent.putExtra("LoginSuccess", isTrue);
-                        //todo pass username, password, and userID through as well
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onFailure(String errorMessage) {
+                LoginManager.getInstance().logInBypass(username, password, getApplicationContext());
 
-                    }
-                });
+                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                startActivity(intent);
+
                // if(confirm){//if confrim is true
                 /* when login button is pressed, use intent to switch to Login Activity */
                //Intent intent = new Intent(LoginActivity.this, AddFriends.class);
@@ -106,23 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                   //  }
             }
         });
-
-        /* click listener on login button pressed */
-        //loginButton.setOnClickListener(new View.OnClickListener() {
-          //  @Override
-           // public void onClick(View v) {
-
-                /* grab strings from user inputs */
-               // String username = usernameEditText.getText().toString();
-               // String password = passwordEditText.getText().toString();
-
-               // /* when login button is pressed, use intent to switch to Login Activity */
-              //  Intent intent = new Intent(LoginActivity.this, LoginInputActivity.class);
-             //   intent.putExtra("USERNAME", username);  // key-value to pass to the MainActivity
-              //  intent.putExtra("PASSWORD", password);  // key-value to pass to the MainActivity
-               // startActivity(intent);  // go to MainActivity with the key-value data
-            //}
-       // });
 
         /**
          * Brings user to the signup activity.

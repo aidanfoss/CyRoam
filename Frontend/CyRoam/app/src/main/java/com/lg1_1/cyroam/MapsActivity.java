@@ -260,7 +260,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //implement buttons
         portalButton1.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, FriendActivity.class);
+            Intent intent = new Intent(MapsActivity.this, ProfileActivity.class);
+            startActivity(intent);
         });
         portalButton2.setOnClickListener(v -> { //newPinButton
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
@@ -269,10 +270,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             startActivity(intent);  // go to NewPinActivity
         });
         portalButton3.setOnClickListener(v -> { //progress Activity
-//            Intent intent = new Intent(MapsActivity.this, progressActivity.class);
+            Intent intent = new Intent(MapsActivity.this, LeaderBoard.class);
+            startActivity(intent);
         });
         portalButton4.setOnClickListener(v-> {
-            Intent intent = new Intent(MapsActivity.this, LeaderBoard.class);
+            Intent intent = new Intent(MapsActivity.this, AdminUserControl.class);
             startActivity(intent);
         });
         portalButton5.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
@@ -501,7 +503,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 gMap.moveCamera(CameraUpdateFactory.zoomTo(15));
                 LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
                 //gMap.moveCamera(CameraUpdateFactory.newLatLng(centralCampus));
-                createFogFull(latLng.latitude, latLng.longitude);
+//                createFogFull(latLng.latitude, latLng.longitude);
 //                Marker newMarker = gMap.addMarker(new MarkerOptions().position(latLng).icon(smallFogIcon));
             }
         });
@@ -774,24 +776,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fusedLocationClient = mockFusedLocationClient;
     }
 
-    public void createFogHorizontal(double lat, double longi){
-        for(int i = 0; i<15;i++){
-            pinVolley.getInstance(this).createFog(longi + (0.002 * i), lat, "url", new pinVolley.CreateFogCallback() {
-                @Override
-                public void onSuccess(int idSuccess, LatLng pos) {
-                    Marker fog = gMap.addMarker(new MarkerOptions().icon(smallFogIcon).position(pos).anchor(0.5f,0.5f));
-                }
-
-                @Override
-                public void onFailure(String errorMessage) {
-
-                }
-            });
-        }
-    }
-    public void createFogFull(double lat, double longi){
-        for(int i = 0; i<30;i++){
-            createFogHorizontal(lat+(-0.002*i), longi);
-        }
-    }
+//    public void createFogHorizontal(double lat, double longi){
+//        for(int i = 0; i<15;i++){
+//            pinVolley.getInstance(this).createFog(longi + (0.002 * i), lat, "url", new pinVolley.CreateFogCallback() {
+//                @Override
+//                public void onSuccess(int idSuccess, LatLng pos) {
+//                    Marker fog = gMap.addMarker(new MarkerOptions().icon(smallFogIcon).position(pos).anchor(0.5f,0.5f));
+//                }
+//
+//                @Override
+//                public void onFailure(String errorMessage) {
+//
+//                }
+//            });
+//        }
+//    }
+//    public void createFogFull(double lat, double longi){
+//        for(int i = 0; i<30;i++){
+//            createFogHorizontal(lat+(-0.002*i), longi);
+//        }
+//    }
 }
