@@ -15,8 +15,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.lg1_1.cyroam.Managers.LoginManager;
-import com.lg1_1.cyroam.objects.Friend;
 import com.lg1_1.cyroam.NicksAdapters.FriendsListAdapter;
+import com.lg1_1.cyroam.objects.Friend;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,7 +105,7 @@ public class FriendsActivity extends AppCompatActivity {
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FriendsActivity.this, PortalScreenActivity.class);
+                Intent intent = new Intent(FriendsActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -117,6 +117,7 @@ public class FriendsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
 
     }
