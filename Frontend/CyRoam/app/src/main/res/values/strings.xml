@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">AndroidExample</string>
+    <string name="app_name">CyRoam</string>
     <string name="textBoxMapTest">\n</string>
     <string name="opens_the_portal_overlay">opens the Portal overlay</string>
+    <string name="cyroam">CyRoam</string>
 </resources>
