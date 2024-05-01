@@ -8,6 +8,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.lg1_1.cyroam.MainActivity;
 import com.lg1_1.cyroam.Managers.LoginManager;
 import com.lg1_1.cyroam.objects.Pin;
@@ -180,6 +181,44 @@ public class pinVolley {
      */
     public interface DeletePinCallback {
         void onSuccess();
+        void onFailure(String errorMessage);
+    }
+
+    public void createFog(double y, double x, String url, final CreateFogCallback callback){
+        Log.v(TAG, "createFog Called!");
+        JSONObject requestBody = new JSONObject();
+        try{
+            Log.d(TAG + "fog", String.valueOf(x) + " " + String.valueOf(y));
+            requestBody.put("x", x);
+            requestBody.put("y", y);
+            requestBody.put("imagePath", url);
+        } catch (JSONException e){
+            Log.e(TAG, "JSONException" + e.getMessage());
+            e.printStackTrace();
+            callback.onFailure("JSONException" + e.getMessage());
+            return;
+        }
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, BASE_URL + "/fog", requestBody,
+                response -> {
+                    Log.v(TAG, "CREATEFOG RESPONSE: " + response.toString());
+                    try {
+                        int id = response.getInt("id");
+                        //Log.w(TAG, "pinId recieved");
+                        callback.onSuccess(id, new LatLng(x,y));
+                    } catch (JSONException e) {
+                        Log.e(TAG, "JSONException: " + e.getMessage());
+                        e.printStackTrace();
+                        callback.onFailure("JSONException: " + e.getMessage());
+                    }
+                }, error -> {
+            Log.e(TAG, "Error occured: " + error.getMessage());
+            callback.onFailure("Error occured: " + error.getMessage());
+        });
+        queue.add(request);
+    }
+    public interface CreateFogCallback {
+        void onSuccess(int idSuccess, LatLng pos);
         void onFailure(String errorMessage);
     }
 }

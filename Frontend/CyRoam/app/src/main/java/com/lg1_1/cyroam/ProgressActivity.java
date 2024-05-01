@@ -54,7 +54,7 @@ public class ProgressActivity extends AppCompatActivity {
                         int pinId = Integer.parseInt(pinIdString);
                         volley.fetchProgress(new progressVolley.VolleyCallbackGet() {
                             @Override
-                            public void onSuccess(int pinId, int userId, boolean discovered, int progressObjId) {
+                            public void onSuccess(int pinId, int userId, boolean discovered) {
                                 Log.d(TAG, "Pin Discovered: " + discovered);
 
                                 //return to maps activity
