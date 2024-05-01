@@ -1,5 +1,6 @@
 package com.lg1_1.cyroam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +47,8 @@ public class AdminUserControl extends AppCompatActivity {
      */
     private EditText usernameEditText;
 
+    private Button tonext;
+
     private RequestQueue queue;
 
     @Override
@@ -57,6 +60,7 @@ public class AdminUserControl extends AppCompatActivity {
         banbutton =  findViewById(R.id.adminc_BAN_btn);
         promotebutton = findViewById(R.id.Promote_btn);
         usernameEditText = findViewById(R.id.admin2_username_edt);
+        tonext = findViewById(R.id.toLeaderbutton);
 
         promotebutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +74,13 @@ public class AdminUserControl extends AppCompatActivity {
             public void onClick(View v) {
                 String curUsername = usernameEditText.getText().toString();
                 banRequest(curUsername);
+            }
+        });
+        tonext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminUserControl.this, AdminLeaderBoardControl.class);
+                startActivity(intent);
             }
         });
     }
