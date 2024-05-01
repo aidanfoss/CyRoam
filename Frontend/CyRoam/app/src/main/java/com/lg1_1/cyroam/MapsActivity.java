@@ -127,7 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         extras = getIntent().getExtras();
         currentSetting = LoginManager.getInstance().getStyle();
         //if the user isnt logged on, then kick them back to the login screen.
-        LoginManager.getInstance().setUser();
+//        LoginManager.getInstance().setUser();
         if (LoginManager.getInstance().getUser() == null) {
             Intent intent = new Intent(MapsActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -136,7 +136,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //initialize websocketConnections
         try {
             Log.v(TAG, "onCreate Websocket Try");
-            user = LoginManager.getInstance().setUser();
+            if(user==null){
+                user = LoginManager.getInstance().setUser();
+            }
             WebSocketManager.getInstance().openWebSocketConnection(user.getUsername(), this);
         } catch (URISyntaxException e) {
             Log.w(TAG, "onCreate WebSocket Fail");

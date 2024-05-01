@@ -34,19 +34,25 @@ public class LoginManager {
         //get request for score
     }
     public User setUser(){
+        //bossf
+        String username = "bossf"; int permissions = 3; int userID = 1;
+        //applesthe3rd
+        //String username = "applesthe3rd"; int permissions = 2; int userID = 3;
+        //jane
+        //String username = "Jane"; int permissions = 1; int userID = 2;
         //bypass function to ensure always logged into bossf
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("username", "bossf");
+            jsonObject.put("username", username);
             jsonObject.put("isUser", true);
             jsonObject.put("message", "correct");
-            jsonObject.put("userID", 1);
-            jsonObject.put("permissions", 2);
+            jsonObject.put("userID", userID);
+            jsonObject.put("permissions", permissions);
             jsonObject.put("score", 123);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-        user = new User("bossf",1,jsonObject);
+        user = new User(username,userID,jsonObject);
         return user;
     }
 

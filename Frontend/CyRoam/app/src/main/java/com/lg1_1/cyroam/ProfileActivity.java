@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
                             int rank = response.getInt("rank");
                             rankOutput.setText("Rank: " + rank);
                             int forDiscore = response.getInt("fogDiscovered");
-                            fogOutput.setText("Fog Cleared: " + forDiscore + "%");
+                            fogOutput.setText("Fog Cleared: " + forDiscore );
 
                             //int score = Integer.parseInt(friendobj.getString("score"));
 
