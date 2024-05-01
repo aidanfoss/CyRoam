@@ -37,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     //private Button backbuttontoportal;
 
     private Button removeButton;
-
+    private Button darkmodeButton;
     private Button leaderboardPermissionButton;
 
     private TextView OutputText;
@@ -58,7 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
         animationDrawable.start();
 
         //backbuttontoportal = findViewById(R.id.settingsbackbutton);
-        removeButton =  findViewById(R.id.buttonRemoveFriend);
+        removeButton =  findViewById(R.id.removeFriendButton);
+        darkmodeButton = findViewById(R.id.darkModeButton);
         removefriend = findViewById(R.id.textViewRemoveFriend);
         leaderboardPermissionButton = findViewById(R.id.buttonRemoveSelfFromLeaderBoard);
         OutputText = findViewById(R.id.settingScreenOutputText);
@@ -71,7 +72,12 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intent);  // go to SignupActivity
             }
         }); */
-
+        darkmodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginManager.getInstance().setStyle(R.raw.style_json2);
+            }
+        });
 
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
