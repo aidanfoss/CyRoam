@@ -23,6 +23,7 @@ public class Pin {
     private String splash;
     private String imageUrl;
     private boolean discovered; //default to false in each constructor unless told otherwise
+    private boolean isFog;
     //todo add pictures? might be out of scope
 
     /**
@@ -51,6 +52,7 @@ public class Pin {
         this.x = x;
         this.y = y;
         this.name = name;
+        this.isFog = false;
         Log.v(TAG, "Pin With No ID Created, Named: " + name);
         //might be possible to create marker on gmap from here.
         discovered = false;
@@ -69,6 +71,7 @@ public class Pin {
         this.y = y;
         this.name = name;
         this.ID = ID;
+        this.isFog = false;
         Log.v(TAG, "Pin With ID: " + ID + " Created. Named: " + name);
         discovered = false;
     }
@@ -92,7 +95,17 @@ public class Pin {
         this.splash = splash;
         this.discovered = discovered;
         this.imageUrl = imageUrl;
+        this.isFog = false;
         Log.i(TAG, "Pin With ID: " + ID + " Created. Named: " + name + ". Discover Value: " + discovered);
+    }
+
+    public Pin(double x, double y, int id, boolean isFog) {
+        this.x = x;
+        this.y = y;
+        this.ID = id;
+        this.isFog = isFog;
+        this.name = "fog";
+        //Log.v(TAG, "Fog Created with id: " + id);
     }
 
     /**
@@ -119,5 +132,9 @@ public class Pin {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public boolean isFog() {
+        return isFog;
     }
 }

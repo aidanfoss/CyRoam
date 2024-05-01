@@ -44,18 +44,22 @@
         android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/globe"
+        app:fabCustomSize="92dp"
+        app:maxImageSize="65dp"
         android:translationX="100dp"
         android:translationY="-100dp"
         android:visibility="invisible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/portalButton2"
+        app:fabCustomSize="92dp"
+        app:maxImageSize="65dp"
         android:layout_width="92dp"
         android:layout_height="132dp"
         android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
-        android:scaleType="center"
         android:src="@drawable/pluscircle"
         android:translationX="0dp"
         android:translationY="-150dp"
@@ -69,9 +73,14 @@
         android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/profile"
         android:translationX="-100dp"
+
         android:translationY="-100dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:fabCustomSize="92dp"
+        app:maxImageSize="65dp"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/textView2"
