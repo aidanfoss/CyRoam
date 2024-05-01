@@ -24,7 +24,7 @@ public class NickSettingsTest {
         String password = "123";
         String success = "success";
         onView(withId(R.id.textViewRemoveFriend)).perform(typeText(testString));
-        onView(withId(R.id.buttonRemoveFriend)).perform(click());
+        onView(withId(R.id.removeFriendButton)).perform(click());
 
         //onView(withId(R.id.checker)).check(matches(matchesBoolean(true)));
         //onView(withId(R.id.submit)).perform(click());

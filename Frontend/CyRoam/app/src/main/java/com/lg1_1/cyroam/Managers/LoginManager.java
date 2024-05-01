@@ -21,6 +21,7 @@ public class LoginManager {
     private User user; //stores username and ID. likely not useful tbh besides storing username and ID.
     boolean isLoggedIn;
     private int permission;
+    private int style;
 
     /*
     * 0 is basic user
@@ -129,4 +130,11 @@ public class LoginManager {
         return permission;
     }
 
+    public int getStyle() {
+        return style;
+    }
+
+    public void setStyle(int style) {
+        this.style = style;
+    }
 }
