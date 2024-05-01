@@ -1,7 +1,9 @@
 package coms309.Users;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import coms309.Discovery.DiscoveryRepository;
 import coms309.Statistics.Statistics;
+import coms309.Statistics.StatisticsRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,6 +20,11 @@ public class UserController {
     @Autowired
     UserInterface userInterface;
 
+    @Autowired
+    DiscoveryRepository discoveryRepository;
+
+    @Autowired
+    public StatisticsRepository statisticsRepository;
 
     //pottentially connect to friends list but might actually be the other way around
     private String success = "{\"message\":\"success ( :\"}";
@@ -34,6 +41,8 @@ public class UserController {
             schema = @Schema(implementation = User.class)) })
     @GetMapping(path = "/users/{uId}")
     User getUserByUId( @PathVariable int uId){
+
+        //every time this is called update/create statistics row every time this called
 
         return userInterface.findByuId(uId);
     }

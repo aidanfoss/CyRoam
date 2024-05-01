@@ -22,6 +22,13 @@ public class Statistics {
     private User user;
     private int numDiscoveredPins;
 
+    private int rank;
+
+    private int fogDiscovered;
+
+    private int score;
+
+
 
     public Statistics(int numDiscoveredPins) {
         this.numDiscoveredPins = numDiscoveredPins;
@@ -38,14 +45,42 @@ public class Statistics {
         return id;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
-
+    public void setUser(User userc) {
+        this.user=userc;
+        //return user;
+    }
 
     public void setNumDiscoveredPins(int numDiscoveredPins) {
         this.numDiscoveredPins = numDiscoveredPins;
     }
+    public int getNumDiscoveredPins() {
+        return numDiscoveredPins;
+    }
 
+    public int getRank() {
+        return rank;
+    }
 
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getFogDiscovered() {
+        return fogDiscovered;
+    }
+
+    public void setFogDiscovered(int fogDiscovered) {
+        this.fogDiscovered = fogDiscovered;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
