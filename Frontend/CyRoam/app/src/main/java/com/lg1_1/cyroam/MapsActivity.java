@@ -69,7 +69,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Vector<Marker> fogVector;
     private Bundle extras;
     private User user;
-    private final boolean portalOpen = false;
     protected TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
     private BitmapDescriptor bitmapUserIcon;
@@ -78,7 +77,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //define volley classes and requestQueue
     private friendVolley friendVolley;
-    private AddFriends addFriends;
     private progressVolley progressVolley;
     protected RequestQueue mQueue; // define volley request queue
 
@@ -472,29 +470,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onInfoWindowClick(@NonNull Marker marker) {
                 //1 grab pin ID (creates temporary pin object)
                 Pin clickPin = (Pin) marker.getTag();
+                //2 check if user is close enough and pin clicked is not fog
+                if (clickPin != null && !clickPin.isFog()) {
+                    double tolerance = 0.0025;
+                    if (Math.abs(marker.getPosition().latitude - lat) <= tolerance) {
+                        if (Math.abs(marker.getPosition().longitude - lng) <= tolerance+0.0015) {
+                            //3 send progress update
+                            progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
 
-                //2 send progress update
-                if (clickPin != null) {
-                    progressVolley.discoverPin(clickPin.getID(), new progressVolley.VolleyCallback() {
-                        @Override
-                        public void onSuccess() {
-                            ((Pin) Objects.requireNonNull(marker.getTag())).setTrue(); //sets discovery in the pin object inside the tag
+                                }
+
+                                @Override
+                                public void onFailure(String errorMessage) {
+                                    Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
+                                }
+                            });
+                            //3 change the icon on the map
+                            marker.setIcon(smallDiscoveredIcon);
+
+                            //4 move to pinInfoScreen
+                            //create intent for more information screen
+                            Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
+                            intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
+                            startActivity(intent);
                         }
-                        @Override
-                        public void onFailure(String errorMessage) {
-                            Log.e(TAG + " InfoWindowClick ProgressVolley", "Error Discovering Pin onCLick Handler: " + errorMessage);
-                        }
-                    });
+                    }
                 }
-
-                //3 change the icon on the map
-                marker.setIcon(smallDiscoveredIcon);
-
-                //4 move to pinInfoScreen
-                //create intent for more information screen
-                Intent intent = new Intent(MapsActivity.this, PinInformationActivity.class);
-                intent.putExtra("ID", clickPin.getID()); //pass clicked pins ID
-                startActivity(intent);
             }
         });
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
