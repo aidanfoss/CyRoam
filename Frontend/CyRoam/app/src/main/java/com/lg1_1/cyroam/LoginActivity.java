@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
+                LoginManager.getInstance().setStyle(R.raw.style_json);
                 LoginManager.getInstance().logInBypass(username, password, getApplicationContext());
 
                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);

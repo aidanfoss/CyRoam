@@ -68,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final LatLng centralCampus = new LatLng(42.02703247809317, -93.6464125793965);
     Vector<Marker> fogVector;
     private Bundle extras;
+    private int currentSetting;
     private User user;
     protected TextView textView;
     private BitmapDescriptor smallUndiscoveredIcon;
@@ -124,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         fogVector = new Vector<>();
         //gather extras
         extras = getIntent().getExtras();
-
+        currentSetting = LoginManager.getInstance().getStyle();
         //if the user isnt logged on, then kick them back to the login screen.
         LoginManager.getInstance().setUser();
         if (LoginManager.getInstance().getUser() == null) {
@@ -144,11 +145,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //define icons as BitmapDescriptors for the .icon call in Marker Declarations
-        Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 128, 128, false);
+        Bitmap smallUndiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.undiscovered), 96, 96, false);
         smallUndiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallUndiscovered);
         Bitmap userIcon = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.circle), 64, 64, false);
         bitmapUserIcon = BitmapDescriptorFactory.fromBitmap(userIcon);
-        Bitmap smallDiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.discovered), 128, 128, false);
+        Bitmap smallDiscovered = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.discovered), 96, 96, false);
         smallDiscoveredIcon = BitmapDescriptorFactory.fromBitmap(smallDiscovered);
         Bitmap fogIcon = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.fog), 640, 640, false);
         smallFogIcon = BitmapDescriptorFactory.fromBitmap(fogIcon);
@@ -288,6 +289,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
 
+                    if(currentSetting != LoginManager.getInstance().getStyle()){
+                        try {
+                            // Customise the styling of the base map using a JSON object defined
+                            // in a raw resource file.
+                            boolean success = gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(MapsActivity.this, LoginManager.getInstance().getStyle()));
+                            if (!success) {
+                                Log.e(TAG, "Style parsing failed.");
+                            }
+                        } catch (Resources.NotFoundException e) {
+                            Log.e(TAG, "Can't find style. Error: ", e);
+                        }
+                    }
+
                     for(int i=0; i < fogVector.size();i++){
                         Pin inPin = (Pin) fogVector.get(i).getTag();
                         if (inPin != null && inPin.isFog()) {
@@ -349,7 +363,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
-            boolean success = gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
+            boolean success = gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, LoginManager.getInstance().getStyle()));
             if (!success) {
                 Log.e(TAG, "Style parsing failed.");
             }
