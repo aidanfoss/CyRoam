@@ -21,9 +21,13 @@
         android:layout_gravity="bottom|center"
         android:clickable="true"
         android:focusable="true"
+        android:src="@drawable/cog"
         android:translationX="100dp"
         android:translationY="-200dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:fabCustomSize="92dp"
+        app:maxImageSize="65dp"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/portalButton4"
