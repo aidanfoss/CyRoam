@@ -92,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
         friendOutput = findViewById(R.id.friendCollectionTextView23);
         pinOutput = findViewById(R.id.pinTallyTextView23);
         profileBuildReq(id);
-        titlemain.setText("Profile" + "\n"+ curUsername + "\n" + idstring + "\n");
+        titlemain.setText(curUsername + "'s\n" + "Profile" + "\n" + "ID: " + idstring + "\n");
 
     }
 
