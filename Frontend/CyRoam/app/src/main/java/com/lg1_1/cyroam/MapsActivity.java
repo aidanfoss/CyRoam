@@ -189,6 +189,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         FloatingActionButton portalButton3 = findViewById(R.id.portalButton3); //progress
         FloatingActionButton portalButton4 = findViewById(R.id.portalButton4); //leaderboard
         FloatingActionButton portalButton5 = findViewById(R.id.portalButton5); //settings
+        FloatingActionButton portalButton6 = findViewById(R.id.portalButton6);
 
         //check users permission value and change function of anything relevant based on that
         switch (LoginManager.getInstance().getPermission()){
@@ -199,11 +200,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         portalButton3.setVisibility(View.VISIBLE);
                         //portalButton4.setVisibility(View.VISIBLE);
                         portalButton5.setVisibility(View.VISIBLE);
+                        portalButton6.setVisibility(View.VISIBLE);
                     } else {
                         portalButton1.setVisibility(View.INVISIBLE);
                         portalButton3.setVisibility(View.INVISIBLE);
                         //portalButton4.setVisibility(View.INVISIBLE);
                         portalButton5.setVisibility(View.INVISIBLE);
+                        portalButton6.setVisibility(View.INVISIBLE);
                     }
                 });
                 break;
@@ -215,12 +218,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         portalButton2.setVisibility(View.VISIBLE);
                         //portalButton4.setVisibility(View.VISIBLE);
                         portalButton5.setVisibility(View.VISIBLE);
+                        portalButton6.setVisibility(View.VISIBLE);
                     } else {
                         portalButton1.setVisibility(View.INVISIBLE);
                         portalButton3.setVisibility(View.INVISIBLE);
                         portalButton2.setVisibility(View.INVISIBLE);
                         //portalButton4.setVisibility(View.INVISIBLE);
                         portalButton5.setVisibility(View.INVISIBLE);
+                        portalButton6.setVisibility(View.INVISIBLE);
                     }
                 });
                 break;
@@ -232,12 +237,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         portalButton2.setVisibility(View.VISIBLE);
                         portalButton4.setVisibility(View.VISIBLE);
                         portalButton5.setVisibility(View.VISIBLE);
+                        portalButton6.setVisibility(View.VISIBLE);
                     } else {
                         portalButton1.setVisibility(View.INVISIBLE);
                         portalButton3.setVisibility(View.INVISIBLE);
                         portalButton2.setVisibility(View.INVISIBLE);
                         portalButton4.setVisibility(View.INVISIBLE);
                         portalButton5.setVisibility(View.INVISIBLE);
+                        portalButton6.setVisibility(View.INVISIBLE);
                     }
                 });
                 textView.setVisibility(View.VISIBLE);
@@ -267,6 +274,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
         portalButton5.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
             Intent intent = new Intent(MapsActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+        portalButton6.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
+            Intent intent = new Intent(MapsActivity.this, FriendsActivity.class);
             startActivity(intent);
         });
 
