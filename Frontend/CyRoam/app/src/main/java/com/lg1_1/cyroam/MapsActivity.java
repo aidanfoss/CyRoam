@@ -251,7 +251,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //implement buttons
         portalButton1.setOnClickListener(v -> {
-            Intent intent = new Intent(MapsActivity.this, FriendActivity.class);
+            Intent intent = new Intent(MapsActivity.this, FriendsActivity.class);
+            startActivity(intent);
         });
         portalButton2.setOnClickListener(v -> { //newPinButton
             Intent intent = new Intent(MapsActivity.this, NewPinActivity.class);
@@ -259,16 +260,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             intent.putExtra("lng", lng);
             startActivity(intent);  // go to NewPinActivity
         });
-        portalButton3.setOnClickListener(v -> { //progress Activity
-//            Intent intent = new Intent(MapsActivity.this, progressActivity.class);
+        portalButton3.setOnClickListener(v -> { //profile Activity
+           Intent intent = new Intent(MapsActivity.this, ProfileActivity.class);
+                startActivity(intent);
         });
         portalButton4.setOnClickListener(v-> {
             Intent intent = new Intent(MapsActivity.this, LeaderBoard.class);
             startActivity(intent);
         });
         portalButton5.setOnClickListener(v-> { //settings (dark mode, light mode, etc)
-//            Intent intent = new Intent(MapsActivity.this, settingsActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(MapsActivity.this, SettingsActivity.class);
+            startActivity(intent);
         });
 
 
