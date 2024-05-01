@@ -11,12 +11,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.lg1_1.cyroam.objects.Friend;
+import com.lg1_1.cyroam.Managers.LoginManager;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * This shows the Users basic information and basic achievements
@@ -44,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     private TextView friendOutput;
 
+    private TextView titlemain;
+
     private Button backButton;
 
     private RequestQueue queue;
@@ -60,19 +61,46 @@ public class ProfileActivity extends AppCompatActivity {
         animationDrawable.setEnterFadeDuration(2500);
         animationDrawable.setExitFadeDuration(5000);
         animationDrawable.start();
-        rankOutput = findViewById(R.id.rankTextiew);
-        distanceOutput = findViewById(R.id.distanceTextView);
-        //scoreOutput = findViewById(R.id.textViewScoreOutput);
-        //pinOutput = findViewById(R.id.textViewPinsCount);
 
+
+        /**
+         * Set up credientals
+         */
+        String curUsername;
+        int id = 0;
+        String idstring;
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            curUsername = LoginManager.getInstance().getUser().getUsername();
+            id = LoginManager.getInstance().getUser().getID();
+            idstring = Integer.toString(id);
+
+        }
+        else{
+            curUsername = getIntent().getStringExtra("friendName");
+            idstring = getIntent().getStringExtra("friendId");
+            id = Integer.parseInt(idstring);
+            //findfriendsReq(usernamestring);
+        }
+
+        titlemain = findViewById(R.id.profileTitleTextiew);
+
+        rankOutput = findViewById(R.id.rankTextiew);
+        scoreOutput = findViewById(R.id.scoreTextView);
+        distanceOutput = findViewById(R.id.distanceTextView);
+        fogOutput = findViewById(R.id.forExpelledTextView);
+        friendOutput = findViewById(R.id.friendCollectionTextView23);
+        pinOutput = findViewById(R.id.pinTallyTextView23);
+        profileBuildReq(id);
+        titlemain.setText(curUsername + "'s\n" + "Profile" + "\n" + "ID: " + idstring + "\n");
 
     }
 
-    private void findfriendsReq(String curUsername){
-        String url = mainURL + "/friends/" + curUsername;
+    private void profileBuildReq(int id){
+        String url = mainURL + "/Statistics/" + id;
 
         //JsonObjectRequest request = new JsonObjectRequest(
-        JsonArrayRequest request = new JsonArrayRequest(
+        JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
                 url,
                 null,
@@ -84,22 +112,41 @@ public class ProfileActivity extends AppCompatActivity {
                         // List<JSONObject> list = response.getJSONArray("friends");
                         Log.i(TAG, "request success");
                         //outputtext.setText(curUsername + " Friends:\n");
-                        for (int i = 0; i < response.length(); i++){
-                            JSONObject friendObj = response.getJSONObject(i);
 
-                            JSONObject friendUserObj = friendObj.getJSONObject("friendUser");
-                            int userId = friendUserObj.getInt("uId");
-                            String friendUsername = friendUserObj.getString("username");
-                            int score = friendUserObj.getInt("score");
+
+
+                        //JSONObject friendUserObj = friendObj.getJSONObject("statistics");
+                        //int userId = friendUserObj.getInt("uId");
+                        //String friendUsername = friendUserObj.getString("username");
+                            int score = response.getInt("score");
+                            scoreOutput.setText("Score: " + score);
+                            int numPins = response.getInt("numDiscoveredPins");
+                            pinOutput.setText("Pins Discovered: " + numPins + "/" +"100");
+                            int rank = response.getInt("rank");
+                            rankOutput.setText("Rank: " + rank);
+                            int forDiscore = response.getInt("fogDiscovered");
+                            fogOutput.setText("Fog Cleared: " + forDiscore );
+
                             //int score = Integer.parseInt(friendobj.getString("score"));
-                            //output = curUser + " " + friendUser;
-                            Friend free = new Friend(friendUsername, score, userId);
 
-                            //outputtext.append(friendUser + "\n");
-                            Log.i(TAG, friendUsername);
+                            /*
+                            {
+                                    "uId": 1,
+                                    "username": "bossf",
+                                    "password": "123",
+                                    "score": 50,
+                                    "permissions": 2,
+                                    "statistics": {
+                                        "id": 7,
+                                        "numDiscoveredPins": 8,
+                                        "rank": 1,
+                                        "fogDiscovered": 50,
+                                        "score": 50
+                                    }
+                                }
+                             */
 
 
-                        }
 
 
                     }catch (JSONException e){

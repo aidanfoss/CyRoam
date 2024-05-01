@@ -15,6 +15,21 @@
 </androidx.fragment.app.FragmentContainerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/portalButton6"
+        android:layout_width="92dp"
+        android:layout_height="132dp"
+        android:layout_gravity="bottom|center"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/friends"
+        android:translationX="0dp"
+        android:translationY="-250dp"
+        android:visibility="invisible"
+        app:fabCustomSize="92dp"
+        app:maxImageSize="65dp"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/portalButton5"
         android:layout_width="92dp"
         android:layout_height="132dp"

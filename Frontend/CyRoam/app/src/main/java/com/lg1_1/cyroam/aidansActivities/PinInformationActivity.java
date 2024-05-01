@@ -72,10 +72,13 @@ public class PinInformationActivity extends AppCompatActivity implements Comment
                     public void onSuccess(Pin pin) {
                         Log.w(TAG, "Fetch Pin in PinInfoActivity Success: " + pin.getDebugDescription());
                         pinInfo.append("Name: " + pin.getName() + "\n");
-                        pinInfo.append("Description: " + pin.getDescription() + "\n");
-                        pinInfo.append("Latitude: " + pin.getLat() + "\n");
-                        pinInfo.append("Longitude: " + pin.getLong() + "\n");
-
+                        if (!(pin.getDescription()==null)){
+                            pinInfo.append("Description: " + pin.getDescription() + "\n");
+                        }
+                        if (LoginManager.getInstance().getPermission() == 3){
+                            pinInfo.append("Latitude: " + pin.getLat() + "\n");
+                            pinInfo.append("Longitude: " + pin.getLong() + "\n");
+                        }
                         Glide.with(PinInformationActivity.this)
                                 .load(pin.getImageUrl())
                                 .into(imageView);
