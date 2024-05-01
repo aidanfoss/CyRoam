@@ -29,7 +29,7 @@
                 android:layout_marginRight="40dp"
                 android:background="@drawable/background_red_textbox"
                 android:fontFamily="@font/alegreya_sc_bold_italic"
-                android:padding="30dp"
+                android:padding="40dp"
                 android:text="TextView"
                 android:textAlignment="center"
                 android:textColor="@color/white"
@@ -72,13 +72,13 @@
                 android:background="@drawable/backgound_white_textbox"
                 android:drawableLeft="@drawable/baseline_hiking_24"
                 android:gravity="center"
-                android:text="Distance:"
+                android:text="Distance: 1 mile"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/rankingTextView"
+                android:id="@+id/forExpelledTextView"
                 android:layout_width="315dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
@@ -92,20 +92,20 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/pinTextView23"
+                android:id="@+id/friendCollectionTextView23"
                 android:layout_width="315dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
                 android:gravity="center"
-                android:text="Friends collected:"
+                android:text="Friends collected: no friends"
                 android:textAlignment="center"
                 android:drawableLeft="@drawable/baseline_people_24"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
             <TextView
-                android:id="@+id/rankingTextView23"
+                android:id="@+id/pinTallyTextView23"
                 android:layout_width="315dp"
                 android:layout_height="55dp"
                 android:layout_marginLeft="50dp"
@@ -125,11 +125,12 @@
                 android:layout_marginTop="50dp"
                 android:background="@drawable/backgound_white_textbox"
                 android:gravity="center"
-                android:text="Pins collected:"
+                android:text="IJustWantToShowTheScroll:)"
+
                 android:textAlignment="center"
-                android:drawableLeft="@drawable/baseline_location_pin_24"
+
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
 
 

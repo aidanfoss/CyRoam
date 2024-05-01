@@ -11,18 +11,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 /**
  * Signup Activity creates your account and then takes you to
  *@author Nicholas Kirschbaum
@@ -116,16 +110,16 @@ public class SignupActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                test.setText("success");
+                String email_ = "";
                 /* grab strings from user inputs */
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
                 String confirm = confirmEditText.getText().toString();
-                String email_ = email.getText().toString();
+                //email_ = email.getText().toString();
 
                 if (password.equals(confirm)){
                     Toast.makeText(getApplicationContext(), "Signing up", Toast.LENGTH_LONG).show();
-                    makePostReq(password, username, email_);
+                    makePostReq(password, username);
                     Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(intent);
 
@@ -140,10 +134,10 @@ public class SignupActivity extends AppCompatActivity {
      * @author Nicholas Kirschbaum
      * Contacts the server to create a user using the infromation you provided
      */
-    private void makePostReq(String pass, String user, String email){
+    private void makePostReq(String pass, String user){
         String url = mainURL + "/users";
         Log.d(TAG,"post req called " + url);
-        test.setText("success");
+
         // Convert input to JSONObject
         JSONObject userInfo = new JSONObject();
         try{
@@ -166,50 +160,19 @@ public class SignupActivity extends AppCompatActivity {
                 url,
                 //null,
                 userInfo,
-                response -> {
-                    try{
-                        JSONArray jsonArray = response.getJSONArray("friends");
-                        Log.d(TAG, "request success");
-
-
-                       /* for (int i = 0; i < jsonArray.length(); i++){
-                            JSONObject friend = jsonArray.getJSONObject(i);
-
-                            String curUser = friend.getString("curUsername");
-                            String friendUser = friend.getString("friendUsername");
-                           // output = curUser + " " + friendUser;
-                           // outputtext.setText(outputtext.getText() + " " + friendUser);
-                           // Log.i(TAG, output);
-                        }*/
-
-                    }catch (JSONException e){
-                        Log.e(TAG, "JSONException Signup: " + e.getMessage());
-                        e.printStackTrace();
+                    response -> {
+                        Log.d(TAG, "Request successful");
+                        Toast.makeText(getApplicationContext(), "Signup successful! You can now log in.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        // Handle the response as needed
+                    },
+                    error -> {
+                        Log.e(TAG, "Error making POST request: " + error.getMessage());
+                        // Handle error appropriately, e.g., display a message to the user
                     }
-
-                    // output = response.toString();
-
-                },
-                error -> {
-                    Log.e(TAG, error.getMessage());
-                    // tvResponse.setText(error.getMessage());
-                }
         ){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                //                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-                //                headers.put("Content-Type", "application/json");
-                return headers;
-            }
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                //                params.put("param1", "value1");
-                //                params.put("param2", "value2");
-                return params;
-            }
         };
 
         // Adding request to request queue

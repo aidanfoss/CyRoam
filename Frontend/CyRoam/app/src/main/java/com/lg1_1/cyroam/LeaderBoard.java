@@ -66,7 +66,7 @@ public class LeaderBoard extends AppCompatActivity {
         backButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LeaderBoard.this, PortalScreenActivity.class);
+                Intent intent = new Intent(LeaderBoard.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
